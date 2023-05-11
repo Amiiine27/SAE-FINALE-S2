@@ -3,4 +3,4 @@
 <?import javafx.scene.layout.TilePane?>
 
 
-<TilePane fx:id="tilepane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tower_defense.Controleur" />
+<TilePane fx:id="tilepane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tower_defense.Controleur" maxHeight="100.00" minHeight="100.00" minWidth="100.00" maxWidth="100.00"/>

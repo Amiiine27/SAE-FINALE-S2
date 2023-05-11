@@ -19,9 +19,27 @@ public class Controleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrain = new Map();
-        //remplissage();
+        remplissage();
     }
-
+    public void remplissage(){
+        for (int i=0; i<terrain.getYmax(); i++){
+            for (int j=0; j<terrain.getXmax();j++) {
+                int n = terrain.valeurDeLaCase(i, j);
+                ImageView myImageView = new ImageView();
+                URL herbe = getClass().getResource("green.png");
+                Image imgHerbe = new Image(String.valueOf(herbe));
+                URL chemin = getClass().getResource("sand.png");
+                Image imgChemin = new Image(String.valueOf(chemin));
+                if (n == 0){
+                    myImageView.setImage(imgHerbe);
+                }
+                else {
+                    myImageView.setImage(imgChemin);
+                }
+                tilepane.getChildren().add(myImageView);
+            }
+        }
+    }
 
 
 }
