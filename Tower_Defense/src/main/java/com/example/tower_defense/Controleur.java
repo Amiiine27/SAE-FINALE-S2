@@ -26,15 +26,35 @@ public class Controleur implements Initializable {
             for (int j=0; j<terrain.getXmax();j++) {
                 int n = terrain.valeurDeLaCase(i, j);
                 ImageView myImageView = new ImageView();
-                URL herbe = getClass().getResource("green.png");
-                Image imgHerbe = new Image(String.valueOf(herbe));
-                URL chemin = getClass().getResource("sand.png");
+                URL herbeVierge = getClass().getResource("herbeVierge.png");
+                URL herbeLimiteHaut = getClass().getResource("herbeLimiteHaut.png");
+                URL herbeLimiteDroite = getClass().getResource("herbeLimiteDroite.png");
+                URL herbeLimiteBas = getClass().getResource("herbeLimiteBas.png");
+                URL herbeLimiteGauche = getClass().getResource("herbeLimiteGauche.png");
+                URL chemin = getClass().getResource("chemin.png");
+                Image imgHerbeVierge = new Image(String.valueOf(herbeVierge));
                 Image imgChemin = new Image(String.valueOf(chemin));
+                Image imgherbeLimiteHaut = new Image(String.valueOf(herbeLimiteHaut));
+                Image imgherbeLimiteDroite = new Image(String.valueOf(herbeLimiteDroite));
+                Image imgherbeLimiteBas = new Image(String.valueOf(herbeLimiteBas));
+                Image imgherbeLimiteGauche = new Image(String.valueOf(herbeLimiteGauche));
                 if (n == 0){
-                    myImageView.setImage(imgHerbe);
+                    myImageView.setImage(imgHerbeVierge);
                 }
-                else {
+                else if (n == 1){
                     myImageView.setImage(imgChemin);
+                }
+                else if (n == 2){
+                    myImageView.setImage(imgherbeLimiteHaut);
+                }
+                else if (n == 3){
+                    myImageView.setImage(imgherbeLimiteDroite);
+                }
+                else if (n == 4){
+                    myImageView.setImage(imgherbeLimiteBas);
+                }
+                else if (n == 5){
+                    myImageView.setImage(imgherbeLimiteGauche);
                 }
                 tilepane.getChildren().add(myImageView);
             }
