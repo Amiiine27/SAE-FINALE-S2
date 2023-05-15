@@ -11,7 +11,7 @@ import static javafx.application.Application.launch;
 
 public class Main extends Application {
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vue.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vueDeJeu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 220, 260);
         stage.setTitle("Hello!");
         stage.setScene(scene);
