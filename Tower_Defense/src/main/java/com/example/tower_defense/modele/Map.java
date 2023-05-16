@@ -1,5 +1,7 @@
 package com.example.tower_defense.modele;
 
+import java.util.ArrayList;
+
 public class Map {
 
     /*
@@ -13,7 +15,8 @@ public class Map {
      * ATTRIBUTS
      */
     private int[][] quadrillage;
-    private int nbPiratesArrive;
+    private ArrayList<Pirate> piratesArrives;
+    private int nbPiratesArrives;
 
 
     /*
@@ -36,7 +39,8 @@ public class Map {
                 {3, 1, 1, 1, 1, 10, 4, 4, 4, 4, 9},
                 {6, 2, 2, 11, 1, 1, 1, 1, 1, 1, 5}
             };
-        nbPiratesArrive = 0;
+        piratesArrives = new ArrayList<Pirate>();
+        nbPiratesArrives = 0;
     }
 
     public int getYmax(){
@@ -49,5 +53,8 @@ public class Map {
 
     public int valeurDeLaCase(int i, int j){
         return this.quadrillage[i][j];
+    }
+    public void ajouterPirate(Pirate p){
+        piratesArrives.add(p);
     }
 }

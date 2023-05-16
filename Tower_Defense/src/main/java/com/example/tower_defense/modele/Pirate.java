@@ -28,5 +28,8 @@ public class Pirate {
         this.y -= 2;
     }
 
+    public boolean estArrive(){
+        return this.x > 60 && this.x < 80 && this.y > 240 && this.y < 260;
+    }
 
 }
