@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "jap";
+    src: url('../Polices/jap.ttf');
+}
+
+.titre {
+    -fx-font-family: "jap";
+    -fx-font-size: 50px;
+    -fx-text-fill: white;
+}
+
+.sous-titre {
+    -fx-font-family: "jap";
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}
+
+.bouton-image {
+    -fx-background-image: url("../Images/logo.png");
+    -fx-background-size: cover; /* Ajustez la taille de l'image selon vos besoins */
+    -fx-background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    -fx-background-position: center; /* Centre l'image dans le bouton */
+    -fx-padding: 0; /* Supprime le rembourrage autour de l'image */
+    -fx-border-width: 0; /* Supprime les bordures */
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-graphic-text-gap: 0;
+    -fx-text-fill: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+}
+

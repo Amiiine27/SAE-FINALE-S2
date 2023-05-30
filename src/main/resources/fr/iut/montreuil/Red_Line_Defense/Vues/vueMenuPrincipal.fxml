@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.ControleurMP">
+<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.ControleurMP">
    <center>
       <AnchorPane prefHeight="562.0" prefWidth="1000.0">
          <children>
@@ -17,13 +17,13 @@
                   <Image url="@../Images/luffy-shanks.jpg" />
                </image>
             </ImageView>
-            <Label layoutX="370.0" layoutY="122.0" prefHeight="77.0" prefWidth="260.0" text="RED LINE DEFENSE !!">
+            <Label layoutX="262.0" layoutY="120.0" prefHeight="86.0" prefWidth="474.0" styleClass="titre" stylesheets="@../Stylesheet/style.css" text="RED LINE DEFENSE !!">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Button fx:id="lanceur" layoutX="470.0" layoutY="358.0" mnemonicParsing="false" onAction="#onJouerButtonClick" prefHeight="26.0" prefWidth="60.0" text="!" />
-            <Label layoutX="442.0" layoutY="319.0" prefHeight="23.0" prefWidth="116.0" text="Clique ici pour jouer" textAlignment="CENTER" />
+            <Button fx:id="lanceur" layoutX="470.0" layoutY="380.0" mnemonicParsing="false" onAction="#onJouerButtonClick" prefHeight="70.0" prefWidth="70.0" styleClass="bouton-image" stylesheets="@../Stylesheet/style.css" text="!" />
+            <Label layoutX="367.0" layoutY="312.0" prefHeight="27.0" prefWidth="273.0" styleClass="sous-titre" stylesheets="@../Stylesheet/style.css" text="Clique ici pour jouer" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </center>
