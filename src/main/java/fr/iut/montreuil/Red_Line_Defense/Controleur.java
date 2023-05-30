@@ -55,7 +55,7 @@ public class Controleur implements Initializable {
             for (int j=0; j<terrain.getXmax();j++) {
                 int n = terrain.valeurDeLaCase(i, j);
                 ImageView myImageView = new ImageView();
-                URL herbeVierge = getClass().getResource("herbeVierge.png");
+                URL herbeVierge = getClass().getResource("Images/herbeVierge.png");
                 /* URL herbeLimiteHaut = getClass().getResource("herbeLimiteHaut.png");
                 URL herbeLimiteDroite = getClass().getResource("herbeLimiteDroite.png");
                 URL herbeLimiteBas = getClass().getResource("herbeLimiteBas.png");
@@ -68,7 +68,7 @@ public class Controleur implements Initializable {
                 URL herbeAngleHautGauche = getClass().getResource("herbeAngleHautGauche.png");
                 URL herbeAngleBasDroite = getClass().getResource("herbeAngleBasDroite.png");
                 URL herbeAngleBasGauche = getClass().getResource("herbeAngleBasGauche.png"); */
-                URL chemin = getClass().getResource("chemin.png");
+                URL chemin = getClass().getResource("Images/chemin.png");
                 Image imgHerbeVierge = new Image(String.valueOf(herbeVierge));
                 Image imgChemin = new Image(String.valueOf(chemin));
                 /* Image imgHerbeLimiteHaut = new Image(String.valueOf(herbeLimiteHaut));
