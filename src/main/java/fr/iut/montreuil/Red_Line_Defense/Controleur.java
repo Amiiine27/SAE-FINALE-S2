@@ -56,7 +56,7 @@ public class Controleur implements Initializable {
                 int n = terrain.valeurDeLaCase(i, j);
                 ImageView myImageView = new ImageView();
                 URL herbeVierge = getClass().getResource("herbeVierge.png");
-                URL herbeLimiteHaut = getClass().getResource("herbeLimiteHaut.png");
+                /* URL herbeLimiteHaut = getClass().getResource("herbeLimiteHaut.png");
                 URL herbeLimiteDroite = getClass().getResource("herbeLimiteDroite.png");
                 URL herbeLimiteBas = getClass().getResource("herbeLimiteBas.png");
                 URL herbeLimiteGauche = getClass().getResource("herbeLimiteGauche.png");
@@ -67,11 +67,11 @@ public class Controleur implements Initializable {
                 URL herbeAngleHautDroite = getClass().getResource("herbeAngleHautDroite.png");
                 URL herbeAngleHautGauche = getClass().getResource("herbeAngleHautGauche.png");
                 URL herbeAngleBasDroite = getClass().getResource("herbeAngleBasDroite.png");
-                URL herbeAngleBasGauche = getClass().getResource("herbeAngleBasGauche.png");
+                URL herbeAngleBasGauche = getClass().getResource("herbeAngleBasGauche.png"); */
                 URL chemin = getClass().getResource("chemin.png");
                 Image imgHerbeVierge = new Image(String.valueOf(herbeVierge));
                 Image imgChemin = new Image(String.valueOf(chemin));
-                Image imgHerbeLimiteHaut = new Image(String.valueOf(herbeLimiteHaut));
+                /* Image imgHerbeLimiteHaut = new Image(String.valueOf(herbeLimiteHaut));
                 Image imgHerbeLimiteDroite = new Image(String.valueOf(herbeLimiteDroite));
                 Image imgHerbeLimiteBas = new Image(String.valueOf(herbeLimiteBas));
                 Image imgHerbeLimiteGauche = new Image(String.valueOf(herbeLimiteGauche));
@@ -82,7 +82,7 @@ public class Controleur implements Initializable {
                 Image imgHerbeAngleBasGauche = new Image(String.valueOf(herbeAngleBasGauche));
                 Image imgHerbeAngleHautDroite = new Image(String.valueOf(herbeAngleHautDroite));
                 Image imgHerbeAngleHautGauche = new Image(String.valueOf(herbeAngleHautGauche));
-                Image imgHerbeAngleBasDroite = new Image(String.valueOf(herbeAngleBasDroite));
+                Image imgHerbeAngleBasDroite = new Image(String.valueOf(herbeAngleBasDroite));*/
 
                 myImageView.setTranslateX(j * tailleImage);
                 myImageView.setTranslateY(i * tailleImage);
@@ -95,7 +95,7 @@ public class Controleur implements Initializable {
                 else if (n == 1) {
                     myImageView.setImage(imgChemin);
                 }
-                else if (n == 2) {
+                /* else if (n == 2) {
                     myImageView.setImage(imgHerbeLimiteHaut);
                 }
                 else if (n == 3) {
@@ -130,7 +130,7 @@ public class Controleur implements Initializable {
                 }
                 else if (n == 13) {
                     myImageView.setImage(imgHerbeAngleBasDroite);
-                }
+                } */
 
                 centerPane.getChildren().add(myImageView);
             }
