@@ -2,24 +2,29 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.ControleurMP" >
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.ControleurMP">
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane prefHeight="562.0" prefWidth="1000.0">
          <children>
-            <Label layoutX="170.0" layoutY="42.0" prefHeight="77.0" prefWidth="260.0" text="RED LINE DEFENSE !!">
+            <ImageView fitHeight="589.0" fitWidth="1015.0" layoutX="-8.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/luffy-shanks.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="370.0" layoutY="122.0" prefHeight="77.0" prefWidth="260.0" text="RED LINE DEFENSE !!">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <Button fx:id="lanceur" layoutX="270.0" layoutY="242.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="!" onAction="#onJouerButtonClick" />
-            <Label layoutX="251.0" layoutY="200.0" prefHeight="23.0" prefWidth="116.0" text="Clique ici pour jouer" textAlignment="CENTER" />
+            <Button fx:id="lanceur" layoutX="470.0" layoutY="358.0" mnemonicParsing="false" onAction="#onJouerButtonClick" prefHeight="26.0" prefWidth="60.0" text="!" />
+            <Label layoutX="442.0" layoutY="319.0" prefHeight="23.0" prefWidth="116.0" text="Clique ici pour jouer" textAlignment="CENTER" />
          </children>
       </AnchorPane>
    </center>
 </BorderPane>
-

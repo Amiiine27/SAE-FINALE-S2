@@ -23,6 +23,7 @@ public class ControleurMP implements Initializable {
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 840, 480);
         stage.setResizable(false);
+        stage.setTitle("Red Line Defense");
         stage.setScene(scene);
         stage.show();
     }

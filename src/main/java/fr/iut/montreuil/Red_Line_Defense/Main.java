@@ -13,8 +13,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Tower Defense");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("Red Line Defense");
+        primaryStage.setScene(new Scene(root, 1000, 561));
         primaryStage.show();
 
         ControleurMP controleur = loader.getController();
