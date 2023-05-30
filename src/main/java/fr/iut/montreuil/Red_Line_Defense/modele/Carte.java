@@ -1,15 +1,28 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
+import javafx.scene.effect.Light;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+
+import java.util.List;
 
 public class Carte {
 
     private int[][] quadrillage;
+
+
     private ListProperty<Tour> tours;
     private ListProperty<Soldat> soldats;
 
@@ -79,6 +92,8 @@ public class Carte {
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
         };
 
+
+
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         tours = new SimpleListProperty<>(observableListTour);
 
@@ -108,6 +123,9 @@ public class Carte {
     public ObservableList<Soldat> getSoldats() { return this.soldats.get(); }       // Retourne la property qui contient la liste observable
 
 
+
+
+
     public boolean estParcourable(int x, int y) {
         if (x < 0 || y < 0 || x >= quadrillage[0].length || y >= quadrillage.length) {
             // Coordonnées hors des limites de la carte
@@ -117,6 +135,19 @@ public class Carte {
         int valeur = quadrillage[y][x];
         return valeur == 1;
     }
+
+    public void afficherSoldat(Pane centerPane) {
+        Circle soldat = new Circle(5);
+        soldat.setFill(Color.RED);
+
+        // Please provide the appropriate parameters to the Soldat constructor
+        Soldat soldatObj = new Shichibukais(126, 464, 89, 47);
+
+
+    }
+
+
+
 
 
 

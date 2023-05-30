@@ -1,8 +1,10 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.EventHandler;
@@ -17,6 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+
+
+
 
 
 import java.net.URL;
@@ -25,6 +32,8 @@ import java.util.ResourceBundle;
 public class Controleur implements Initializable {
     private Carte terrain;
     private final int tailleImage = 8; // Remplacez cette valeur par la taille réelle de vos images
+
+    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
     @FXML
     private Pane centerPane;
@@ -37,6 +46,7 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrain = new Carte();
         remplissage();
+        gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
     }
 
 
@@ -126,50 +136,32 @@ public class Controleur implements Initializable {
             }
         }
 
-        afficherSoldat();
+        terrain.afficherSoldat(centerPane);
 
 
     }
 
-    public void afficherSoldat() {
-        Circle soldat = new Circle(5);
-        soldat.setFill(Color.RED);
 
-        Shichibukais Boa = new Shichibukais(126, 464); // Nous fixons x à 50.
-
-        // Liaison des propriétés
-        soldat.centerXProperty().bind(Boa.getX0Property());
-        soldat.centerYProperty().bind(Boa.getY0Property());
-
-        centerPane.getChildren().add(soldat);
-
-        // Créer une animation qui déplace Boa de 2px par seconde.
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(1), e -> {
-                    // Nous augmentons y de 2 à chaque seconde.
-                    Boa.getY0Property().set(Boa.getY0Value() - 10);
-                })
-        );
-
-        // Nous voulons que l'animation continue indéfiniment.
-        timeline.setCycleCount(Timeline.INDEFINITE);
-
-        // Commence l'animation.
-        timeline.play();
-    }
 
     @FXML
     public void handleMouseClick(MouseEvent event) {
-
         double clickX = event.getX();
         double clickY = event.getY();
         System.out.println("Coordonnées du clic : X = " + event.getX() + ", Y = " + event.getY());
 
-        int tileX = (int)clickX / tailleImage;
-        int tileY = (int)clickY / tailleImage;
+        int startX = (int) (clickX / tailleImage);
+        int startY = (int) (clickY / tailleImage);
 
-        System.out.println("Tuile concernée : X = " + tileX + ", Y = " + tileY);
+        System.out.println("Tuile de départ : X = " + startX + ", Y = " + startY);
+
+        Rookie rookie = new Rookie(15 * tailleImage, 59 * tailleImage, 89 * tailleImage, 47 * tailleImage);
+        gestionnaireDeDeplacement.deplacerRookie();
     }
+
+
+
+
+
 
 
 

@@ -1,119 +1,115 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.util.*;
 
 public class GestionnaireDeDeplacement {
-    private Carte terrain;
 
-    public GestionnaireDeDeplacement(Carte terrain) {
-        this.terrain = terrain;
+    private Carte carte;
+    private Circle cercle;
+    private int tailleImage;
+    private Pane centerPane;
+
+    public GestionnaireDeDeplacement(Carte carte, int tailleImage, Pane centerPane) {
+        this.carte = carte;
+        this.tailleImage = tailleImage;
+        this.centerPane = centerPane;
+
+        cercle = new Circle(tailleImage / 2, Color.RED);
+        centerPane.getChildren().add(cercle);
     }
 
-    public List<int[][]> trouverChemins(int[][] pointsDepart, int[] pointArrivee) {
-        List<int[][]> chemins = new ArrayList<>();
+    public void deplacerRookie() {
+        int startX = 15;
+        int startY = 59;
 
-        for (int[] pointDepart : pointsDepart) {
-            int[][] chemin = trouverChemin(pointDepart, pointArrivee);
-            if (chemin != null) {
-                chemins.add(chemin);
-            }
+        int destX = 89;
+        int destY = 47;
+
+        List<Point2D> chemin = trouverChemin(startX, startY, destX, destY);
+
+        Timeline timeline = new Timeline();
+        for (int i = 0; i < chemin.size(); i++) {
+            Point2D point = chemin.get(i);
+            double centerX = point.getX() * tailleImage + tailleImage / 2;
+            double centerY = point.getY() * tailleImage + tailleImage / 2;
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5 * i), new KeyValue(cercle.centerXProperty(), centerX),
+                    new KeyValue(cercle.centerYProperty(), centerY));
+            timeline.getKeyFrames().add(keyFrame);
         }
 
-        return chemins;
+        timeline.play();
     }
 
-    private int[][] trouverChemin(int[] pointDepart, int[] pointArrivee) {
-        int[][] distances = new int[terrain.getYmax()][terrain.getXmax()];
-        boolean[][] visite = new boolean[terrain.getYmax()][terrain.getXmax()];
-        int[][] predecesseurs = new int[terrain.getYmax()][terrain.getXmax()];
+    private List<Point2D> trouverChemin(int startX, int startY, int destX, int destY) {
+        List<Point2D> chemin = new ArrayList<>();
+        int[][] distances = new int[carte.getYmax()][carte.getXmax()];
+        boolean[][] visited = new boolean[carte.getYmax()][carte.getXmax()];
 
-        // Initialisation des distances avec une valeur infinie
-        for (int i = 0; i < terrain.getYmax(); i++) {
-            for (int j = 0; j < terrain.getXmax(); j++) {
-                distances[i][j] = Integer.MAX_VALUE;
-            }
-        }
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(startX);
+        queue.offer(startY);
+        visited[startY][startX] = true;
 
-        // Le point de départ a une distance de 0
-        distances[pointDepart[0]][pointDepart[1]] = 0;
+        while (!queue.isEmpty()) {
+            int x = queue.poll();
+            int y = queue.poll();
 
-        // Parcours des cases
-        for (int i = 0; i < terrain.getYmax() * terrain.getXmax(); i++) {
-            int[] caseCourante = obtenirCaseMinDistance(distances, visite);
-
-            if (caseCourante == null) {
-                // Aucune case accessible n'a été trouvée
-                break;
+            if (x == destX && y == destY) {
+                chemin.add(new Point2D(x, y));
+                break;  // Destination reached
             }
 
-            visite[caseCourante[0]][caseCourante[1]] = true;
+            int[] dx = {0, 0, -1, 1};
+            int[] dy = {-1, 1, 0, 0};
 
-            // Vérifier si on a atteint le point d'arrivée
-            if (caseCourante[0] == pointArrivee[0] && caseCourante[1] == pointArrivee[1]) {
-                return reconstruireChemin(predecesseurs, pointDepart, pointArrivee);
-            }
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
 
-            // Récupérer les cases voisines de la case courante
-            List<int[]> casesVoisines = obtenirCasesVoisines(caseCourante);
-
-            for (int[] voisin : casesVoisines) {
-                if (!visite[voisin[0]][voisin[1]] && terrain.estParcourable(voisin[0], voisin[1])) {
-                    int distance = distances[caseCourante[0]][caseCourante[1]] + 1;
-                    if (distance < distances[voisin[0]][voisin[1]]) {
-                        distances[voisin[0]][voisin[1]] = distance;
-                        predecesseurs[voisin[0]][voisin[1]] = caseCourante[0] * terrain.getXmax() + caseCourante[1];
-                    }
+                if (isValidMove(nx, ny) && !visited[ny][nx]) {
+                    queue.offer(nx);
+                    queue.offer(ny);
+                    visited[ny][nx] = true;
+                    distances[ny][nx] = distances[y][x] + 1;
                 }
             }
         }
 
-        return null; // Aucun chemin trouvé
-    }
+        int currentX = destX;
+        int currentY = destY;
 
-    private int[] obtenirCaseMinDistance(int[][] distances, boolean[][] visite) {
-        int minDistance = Integer.MAX_VALUE;
-        int[] caseMinDistance = null;
+        while (currentX != startX || currentY != startY) {
+            int[] dx = {0, 0, -1, 1};
+            int[] dy = {-1, 1, 0, 0};
+            for (int i = 0; i < 4; i++) {
+                int nx = currentX + dx[i];
+                int ny = currentY + dy[i];
 
-        for (int i = 0; i < terrain.getYmax(); i++) {
-            for (int j = 0; j < terrain.getXmax(); j++) {
-                if (!visite[i][j] && distances[i][j] < minDistance) {
-                    minDistance = distances[i][j];
-                    caseMinDistance = new int[]{i, j};
+                if (isValidMove(nx, ny) && distances[ny][nx] == distances[currentY][currentX] - 1) {
+                    chemin.add(new Point2D(nx, ny));
+                    currentX = nx;
+                    currentY = ny;
+                    break;
                 }
             }
         }
 
-        return caseMinDistance;
+        Collections.reverse(chemin);
+        return chemin;
     }
 
-    private List<int[]> obtenirCasesVoisines(int[] position) {
-        List<int[]> voisins = new ArrayList<>();
 
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Haut, bas, gauche, droite
-
-        for (int[] direction : directions) {
-            int x = position[1] + direction[1];
-            int y = position[0] + direction[0];
-
-            if (x >= 0 && x < terrain.getXmax() && y >= 0 && y < terrain.getYmax()) {
-                voisins.add(new int[]{y, x});
-            }
-        }
-
-        return voisins;
-    }
-
-    private int[][] reconstruireChemin(int[][] predecesseurs, int[] pointDepart, int[] pointArrivee) {
-        List<int[]> chemin = new ArrayList<>();
-        int[] position = pointArrivee;
-
-        while (position != null) {
-            chemin.add(0, position);
-            position = new int[]{predecesseurs[position[0]][position[1]] / terrain.getXmax(), predecesseurs[position[0]][position[1]] % terrain.getXmax()};
-        }
-
-        return chemin.toArray(new int[0][]);
+    private boolean isValidMove(int x, int y) {
+        return x >= 0 && x < carte.getXmax() && y >= 0 && y < carte.getYmax() && carte.valeurDeLaCase(y, x) == 1;
     }
 }

@@ -22,7 +22,6 @@ public class Main extends Application {
         ControleurMP controleur = loader.getController();
         controleur.initialize(null, null); // Appeler la méthode initialize du contrôleur après l'affichage de la scène
 
-        Shichibukais Boa = new Shichibukais(40, -270);
     }
 
 
