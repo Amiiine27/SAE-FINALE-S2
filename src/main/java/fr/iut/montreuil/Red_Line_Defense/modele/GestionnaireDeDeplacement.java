@@ -13,41 +13,32 @@ import javafx.util.Duration;
 import java.util.*;
 
 public class GestionnaireDeDeplacement {
-
     private Carte carte;
-    private Circle cercle;
+
     private int tailleImage;
     private Pane centerPane;
+    private List<Point2D> chemin;
 
     public GestionnaireDeDeplacement(Carte carte, int tailleImage, Pane centerPane) {
         this.carte = carte;
         this.tailleImage = tailleImage;
         this.centerPane = centerPane;
 
-        cercle = new Circle(tailleImage / 2, Color.RED);
-        centerPane.getChildren().add(cercle);
+
     }
 
-    public void deplacerRookie() {
+    public List<Point2D> deplacerRookie() {
         int startX = 15;
         int startY = 59;
 
         int destX = 89;
         int destY = 47;
 
-        List<Point2D> chemin = trouverChemin(startX, startY, destX, destY);
+        return trouverChemin(startX, startY, destX, destY);
+    }
 
-        Timeline timeline = new Timeline();
-        for (int i = 0; i < chemin.size(); i++) {
-            Point2D point = chemin.get(i);
-            double centerX = point.getX() * tailleImage + tailleImage / 2;
-            double centerY = point.getY() * tailleImage + tailleImage / 2;
-            KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5 * i), new KeyValue(cercle.centerXProperty(), centerX),
-                    new KeyValue(cercle.centerYProperty(), centerY));
-            timeline.getKeyFrames().add(keyFrame);
-        }
-
-        timeline.play();
+    public List<Point2D> getChemin() {
+        return chemin;
     }
 
     private List<Point2D> trouverChemin(int startX, int startY, int destX, int destY) {

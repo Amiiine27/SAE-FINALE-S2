@@ -3,6 +3,7 @@ package fr.iut.montreuil.Red_Line_Defense;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
+import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import javafx.animation.KeyFrame;
@@ -10,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +30,7 @@ import javafx.scene.paint.Color;
 
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -36,6 +39,7 @@ public class Controleur implements Initializable {
 
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
+    private Animation animation;
     @FXML
     private Pane centerPane;
 
@@ -50,6 +54,8 @@ public class Controleur implements Initializable {
         terrain = new Carte();
         remplissage();
         gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
+        animation = new Animation(centerPane);
+
     }
 
 
@@ -146,6 +152,7 @@ public class Controleur implements Initializable {
 
 
 
+
     @FXML
     public void handleMouseClick(MouseEvent event) {
         double clickX = event.getX();
@@ -158,8 +165,11 @@ public class Controleur implements Initializable {
         System.out.println("Tuile de départ : X = " + startX + ", Y = " + startY);
 
         Rookie rookie = new Rookie(15 * tailleImage, 59 * tailleImage, 89 * tailleImage, 47 * tailleImage);
-        gestionnaireDeDeplacement.deplacerRookie();
+        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie();
+
+        animation.creerAnimation(chemin);
     }
+
 
 
 
