@@ -1,55 +1,26 @@
-package fr.iut.montreuil.Red_Line_Defense;
+package com.example.tower_defense;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
-import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
+import com.example.tower_defense.modele.Map;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
-import javafx.scene.shape.Circle;
-import javafx.scene.paint.Color;
-
-
-
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
-    private Carte terrain;
-    private final int tailleImage = 8; // Remplacez cette valeur par la taille réelle de vos images
-
-    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
-
-    @FXML
-    private Pane centerPane;
-
+    private Map terrain;
     @FXML
     private TilePane tilepane;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        terrain = new Carte();
+        terrain = new Map();
         remplissage();
-        gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
     }
-
-
     public void remplissage(){
         for (int i=0; i<terrain.getYmax(); i++){
             for (int j=0; j<terrain.getXmax();j++) {
@@ -83,11 +54,6 @@ public class Controleur implements Initializable {
                 Image imgHerbeAngleHautDroite = new Image(String.valueOf(herbeAngleHautDroite));
                 Image imgHerbeAngleHautGauche = new Image(String.valueOf(herbeAngleHautGauche));
                 Image imgHerbeAngleBasDroite = new Image(String.valueOf(herbeAngleBasDroite));
-
-                myImageView.setTranslateX(j * tailleImage);
-                myImageView.setTranslateY(i * tailleImage);
-
-
 
                 if (n == 0) {
                     myImageView.setImage(imgHerbeVierge);
@@ -132,48 +98,10 @@ public class Controleur implements Initializable {
                     myImageView.setImage(imgHerbeAngleBasDroite);
                 }
 
-                centerPane.getChildren().add(myImageView);
+                tilepane.getChildren().add(myImageView);
             }
         }
-
-        terrain.afficherSoldat(centerPane);
-
-
     }
-
-
-
-    @FXML
-    public void handleMouseClick(MouseEvent event) {
-
-        double clickX = event.getX();
-        double clickY = event.getY();
-        System.out.println("Coordonnées du clic : X = " + event.getX() + ", Y = " + event.getY());
-
-        int startX = (int) (clickX / tailleImage);
-        int startY = (int) (clickY / tailleImage);
-
-        System.out.println("Tuile de départ : X = " + startX + ", Y = " + startY);
-
-        Rookie rookie = new Rookie(15 * tailleImage, 59 * tailleImage, 89 * tailleImage, 47 * tailleImage);
-
-        gestionnaireDeDeplacement.deplacerRookie();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

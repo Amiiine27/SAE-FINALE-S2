@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.TilePane?>
-
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleur">
     <center>
-        <TilePane fx:id="tilepane" maxHeight="480.00"
-                      minHeight="480.00" minWidth="848.00" maxWidth="848.00"/>
-        <Pane fx:id="centerPane"> </Pane>
+        <TilePane fx:id="tilepane" maxHeight="480.00" minHeight="480.00" minWidth="848.00" maxWidth="848.00">
+            <Pane fx:id="centerPane" onMouseClicked="#handleMouseClick"/>
+        </TilePane>
     </center>
 </BorderPane>
