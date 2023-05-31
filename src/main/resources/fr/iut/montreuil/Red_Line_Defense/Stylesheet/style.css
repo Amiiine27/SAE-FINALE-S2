@@ -40,3 +40,23 @@
     /* Autres styles CSS au survol */
 }
 
+.box {
+    -fx-margin-left: 30px;
+    -fx-margin-top: 20px;
+}
+
+.tour {
+}
+
+.tour:hover {
+    -fx-background-color: transparent; /* Couleur de fond au survol */
+    -fx-text-fill: transparent; /* Couleur du texte au survol */
+    -fx-border-color: transparent; /* Couleur de la bordure au survol */
+    -fx-scale-x: 1.2; /* Facteur d'échelle horizontal au survol */
+    -fx-scale-y: 1.2; /* Facteur d'échelle vertical au survol */
+    /* Autres styles CSS au survol */
+}
+
+.prix {
+    -fx-padding-top: 15px;
+}
