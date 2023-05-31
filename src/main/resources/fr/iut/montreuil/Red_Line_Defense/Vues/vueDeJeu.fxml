@@ -1,65 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.TilePane?>
-
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import org.controlsfx.control.ListActionView?>
 <BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleur">
     <center>
-        <TilePane fx:id="tilepane" maxHeight="480.00"
-                      minHeight="480.00" minWidth="840.00" maxWidth="840.00"/>
-        <Pane fx:id="centerPane"> </Pane>
+        <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
+        <Pane fx:id="centerPane" style="-fx-background-color: blue;"> </Pane>
     </center>
     <right>
-            <VBox>
-                <Label text="VAGUE" textAlignment="CENTER" minWidth="100.00" maxWidth="100.00"/>
-                <Label text="N°" textAlignment="CENTER"/>
+        <VBox prefHeight="480.0" prefWidth="100.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+            <VBox fx:id="vboxVague" prefWidth="100.00" prefHeight="160.00">
+                <Label maxWidth="100.00" minWidth="100.00" style="-fx-font-size: 20px; -fx-alignement: center;" text="   VAGUE" />
+                <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="103.0" text="    N°">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
             </VBox>
+            <VBox fx:id="vboxMoneyCount" prefWidth="100.00" prefHeight="160.00">
+                <Label text="213 B"/>
+            </VBox>
+            <VBox fx:id="vboxKillCount" prefHeight="160.00" prefWidth="100.00">
+                <Label text="Ennemis tués :"/>
+                <Label text="20"/>
+            </VBox>
+        </VBox>
     </right>
     <bottom>
-            <HBox minHeight="100.00" maxHeight="100.00" prefWidth="560.00">
-                <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="120.0" layoutX="17.0" layoutY="8.0" styleClass="box">
-                    <ImageView fitHeight="58.0" fitWidth="48.0"  pickOnBounds="true" preserveRatio="true" styleClass="tour">
+            <HBox maxHeight="100.00" minHeight="100.00" prefWidth="560.00" style="-fx-background-color: green;">
+                <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="100.0" prefWidth="120.0" styleClass="box">
+                    <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
                             <Image url="@../Images/tour.png" />
                         </image>
                     </ImageView>
-                    <Label text="200 B" style="-fx-margin: 10px"/>
+                    <Label style="-fx-margin: 10px" text="200 B" />
                 </VBox>
-                <VBox alignment="BOTTOM_CENTER" prefHeight="80.0" prefWidth="120.0" layoutX="317.0" layoutY="8.0" styleClass="box">
+                <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="48.0"  pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                        <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                             <image>
                                 <Image url="@../Images/tour.png" />
                             </image>
                         </ImageView>
-                        <Label text="400 B"/>
+                        <Label text="400 B" />
                     </children>
                 </VBox>
-                <VBox alignment="BOTTOM_CENTER"  prefHeight="80.0" prefWidth="120.0" layoutX="617.0" layoutY="0.0" styleClass="box">
+                <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="48.0"  pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                        <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                             <image>
                                 <Image url="@../Images/tour.png" />
                             </image>
                         </ImageView>
-                        <Label text="600 B"/>
+                        <Label text="600 B" />
                     </children>
                 </VBox>
-                <VBox alignment="BOTTOM_CENTER"  prefHeight="80.0" prefWidth="120.0" layoutX="917.0" layoutY="8.0" styleClass="box">
+                <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="48.0"  pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                        <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                             <image>
                                 <Image url="@../Images/tour.png" />
                             </image>
                         </ImageView>
-                        <Label text="800 B"/>
+                        <Label text="800 B" />
                     </children>
                 </VBox>
             </HBox>
