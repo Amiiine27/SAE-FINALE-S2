@@ -36,9 +36,9 @@ public class Animation {
         for (int i = 0; i < chemin.size(); i++) {
             Point2D point = chemin.get(i);
 
-            // Ajoutez une petite valeur aléatoire aux coordonnées x et y
-            double randomFactorX = (rand.nextDouble() - 0.5) * tailleImage / 4; // Ajustez cette valeur en fonction de la quantité de variation souhaitée
-            double randomFactorY = (rand.nextDouble() - 0.5) * tailleImage / 4;
+
+            double randomFactorX = (rand.nextDouble() - 1) * tailleImage / 4; // Ajustez la valeur en fonction de la quantité de variation
+            double randomFactorY = (rand.nextDouble() - 1) * tailleImage / 4;
 
             double centerX = point.getX() * tailleImage + tailleImage / 2 + randomFactorX;
             double centerY = point.getY() * tailleImage + tailleImage / 2 + randomFactorY;
