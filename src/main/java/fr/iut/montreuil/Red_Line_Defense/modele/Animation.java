@@ -10,7 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.util.List;
-
+import java.util.Random;
 
 
 public class Animation {
@@ -30,10 +30,19 @@ public class Animation {
         centerPane.getChildren().add(cercle);
 
         Timeline timeline = new Timeline();
+
+        Random rand = new Random();
+
         for (int i = 0; i < chemin.size(); i++) {
             Point2D point = chemin.get(i);
-            double centerX = point.getX() * tailleImage + tailleImage / 2;
-            double centerY = point.getY() * tailleImage + tailleImage / 2;
+
+
+            double randomFactorX = (rand.nextDouble() - 1) * tailleImage / 4; // Ajustez la valeur en fonction de la quantité de variation
+            double randomFactorY = (rand.nextDouble() - 1) * tailleImage / 4;
+
+            double centerX = point.getX() * tailleImage + tailleImage / 2 + randomFactorX;
+            double centerY = point.getY() * tailleImage + tailleImage / 2 + randomFactorY;
+
             KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5 * i),
                     new KeyValue(cercle.centerXProperty(), centerX),
                     new KeyValue(cercle.centerYProperty(), centerY));

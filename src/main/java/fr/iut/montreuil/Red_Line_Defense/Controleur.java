@@ -31,6 +31,7 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -155,17 +156,18 @@ public class Controleur implements Initializable {
 
     @FXML
     public void handleMouseClick(MouseEvent event) {
-        double clickX = event.getX();
-        double clickY = event.getY();
-        System.out.println("Coordonnées du clic : X = " + event.getX() + ", Y = " + event.getY());
+        Random rand = new Random();
+        int[] possibleStartX = {14, 15, 16};
+        int[] possibleDestX = {88, 89, 90};
 
-        int startX = (int) (clickX / tailleImage);
-        int startY = (int) (clickY / tailleImage);
+        int startX = possibleStartX[rand.nextInt(possibleStartX.length)];
+        int startY = 59;  // Supposons que cette valeur est constante.
 
-        System.out.println("Tuile de départ : X = " + startX + ", Y = " + startY);
+        int destX = possibleDestX[rand.nextInt(possibleDestX.length)];
+        int destY = 47;  // Supposons que cette valeur est constante.
 
-        Rookie rookie = new Rookie(15 * tailleImage, 59 * tailleImage, 89 * tailleImage, 47 * tailleImage);
-        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie();
+        Rookie rookie = new Rookie(startX * tailleImage, startY * tailleImage, destX * tailleImage, destY * tailleImage);
+        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie(startX, startY, destX, destY);
 
         animation.creerAnimation(chemin);
     }

@@ -27,13 +27,7 @@ public class GestionnaireDeDeplacement {
 
     }
 
-    public List<Point2D> deplacerRookie() {
-        int startX = 15;
-        int startY = 59;
-
-        int destX = 89;
-        int destY = 47;
-
+    public List<Point2D> deplacerRookie(int startX, int startY, int destX, int destY) {
         return trouverChemin(startX, startY, destX, destY);
     }
 
