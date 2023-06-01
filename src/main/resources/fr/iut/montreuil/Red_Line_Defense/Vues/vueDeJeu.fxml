@@ -14,7 +14,7 @@
 <BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
-        <Pane fx:id="centerPane" onMouseClicked="#handleMouseClick" style="-fx-background-color: blue;"> </Pane>
+        <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: blue;"> </Pane>
     </center>
     <right>
         <VBox prefHeight="480.0" prefWidth="100.0"  BorderPane.alignment="CENTER">
@@ -38,7 +38,7 @@
     <bottom>
         <HBox maxHeight="100.00" minHeight="100.00" prefWidth="560.00">
             <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="100.0" prefWidth="120.0" styleClass="box">
-                <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                     <image>
                         <Image url="@../Images/tour.png" />
                     </image>
@@ -47,7 +47,7 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                    <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                         <image>
                             <Image url="@../Images/tour.png" />
                         </image>
@@ -57,7 +57,7 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                    <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour"  onMouseClicked="#selectionTour">
                         <image>
                             <Image url="@../Images/tour.png" />
                         </image>
@@ -67,7 +67,7 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                    <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                         <image>
                             <Image url="@../Images/tour.png" />
                         </image>

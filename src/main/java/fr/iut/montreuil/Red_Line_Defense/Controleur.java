@@ -1,14 +1,11 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -18,18 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
-import javafx.scene.shape.Circle;
-import javafx.scene.paint.Color;
-
-
-
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -49,6 +38,11 @@ public class Controleur implements Initializable {
     @FXML
     private VBox vboxKillCount, vboxMoneyCount, vboxVague;
 
+    @FXML
+    private ImageView tour200b, tour400b, tour600b, tour800b;
+
+    private String idTourClicked=null;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,7 +50,6 @@ public class Controleur implements Initializable {
         remplissage();
         gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
         animation = new Animation(centerPane);
-
     }
 
 
@@ -97,8 +90,28 @@ public class Controleur implements Initializable {
 
 
     @FXML
-    public void handleMouseClick(MouseEvent event) {
+    public void positionTour(MouseEvent event) {
         Random rand = new Random();
+        double x=event.getX(), y=event.getY();
+        if (this.idTourClicked.equals("tour600b")){
+            ImageView maTour = new ImageView();
+            URL tour = getClass().getResource("Images/tour.png");
+            Image imgTour = new Image(String.valueOf(tour));
+            maTour.setImage(imgTour);
+            maTour.setX(x);
+            maTour.setY(y);
+            centerPane.getChildren().add(maTour);
+        }
+        /* System.out.println(x);
+        System.out.println(y);
+        ArrayList<Double> coordonnees = new ArrayList<Double>();
+        coordonnees.add(x);
+        coordonnees.add(y);
+        return coordonnees; */
+        /* double[] coordinates = new double[] {x, y};
+
+
+
         int[] possibleStartX = {14, 15, 16};
         int[] possibleDestX = {88, 89, 90};
 
@@ -111,7 +124,30 @@ public class Controleur implements Initializable {
         Rookie rookie = new Rookie(startX * tailleImage, startY * tailleImage, destX * tailleImage, destY * tailleImage);
         List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie(startX, startY, destX, destY);
 
-        animation.creerAnimation(chemin);
+        animation.creerAnimation(chemin); */
+
+
+    }
+
+
+    public void selectionTour(MouseEvent event) {
+        /* tour200b.setOnMouseClicked(e -> System.out.println("tour défensive cliquée"));
+        tour400b.setOnMouseClicked(e -> System.out.println("tour mitrailleuse cliquée"));
+        tour600b.setOnMouseClicked(e -> System.out.println("tour sniper cliquée"));
+        tour800b.setOnMouseClicked(e -> System.out.println("tour tête chercheuse cliquée")); *
+
+
+        System.out.println(event.getSource());
+        ImageView imageClique = (ImageView) event.getSource();
+        System.out.println("clic");
+        if (imageClique.getId().equals("tour600b")){
+           terrain.ajouterTour(new TourSniper(positionTour().get(0)));
+        }*/
+
+        ImageView image = (ImageView) event.getSource();
+        String id = image.getId();
+        System.out.println(id);
+        this.idTourClicked=id;
     }
 
 
