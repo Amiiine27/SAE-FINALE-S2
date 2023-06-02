@@ -1,4 +1,6 @@
-package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
+package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.ennemi;
+
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 
 public class Rookie extends Soldat {
 

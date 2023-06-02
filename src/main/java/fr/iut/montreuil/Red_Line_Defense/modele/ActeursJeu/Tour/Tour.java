@@ -1,5 +1,6 @@
-package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
+package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Acteurs;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

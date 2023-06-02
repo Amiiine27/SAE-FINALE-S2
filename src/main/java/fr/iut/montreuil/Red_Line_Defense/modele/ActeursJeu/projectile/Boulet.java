@@ -1,4 +1,5 @@
-package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
+package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.projectile;
+
 
 public class Boulet extends Projectile {
     public Boulet(double x, double y, double xCible, double yCible, double v) {

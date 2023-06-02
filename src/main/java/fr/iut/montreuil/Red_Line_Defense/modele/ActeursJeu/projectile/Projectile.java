@@ -1,4 +1,4 @@
-package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
+package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.projectile;
 
 import javafx.beans.property.DoubleProperty;
 

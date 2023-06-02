@@ -1,8 +1,5 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
@@ -10,7 +7,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -22,9 +18,6 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Controleur implements Initializable {
     private Carte terrain;
