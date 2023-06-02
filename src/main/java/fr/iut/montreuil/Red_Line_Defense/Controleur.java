@@ -18,34 +18,28 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
-
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class Controleur implements Initializable {
+    private static final String TOWER_IMAGE_PATH = "Images/tour.png";
+    private static final String HERBE_VIERGE_IMAGE_PATH = "Images/herbeVierge.png";
+    private static final String CHEMIN_IMAGE_PATH = "Images/chemin.png";
+    private static final String TOWER_MAP_IMAGE_PATH = "Images/tourMap.png";
+    private static final String BAD_CLICK_IMAGE_PATH = "Images/badClic.png";
+    private static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "Images/tour-Surbrillance.png";
+
     private Carte terrain;
-    private final int tailleImage = 8; // Remplacez cette valeur par la taille réelle de vos images
+    private final int tailleImage = 8;
 
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
-
     private Animation animation;
     @FXML
     private Pane centerPane;
-
-    @FXML
-    private TilePane tilepane;
-    @FXML
-    private VBox vboxKillCount, vboxMoneyCount, vboxVague;
-
     @FXML
     private ImageView tour200b, tour400b, tour600b, tour800b;
 
-    private String idTourClicked="0";
-
+    private String idTourClicked = "0";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,225 +49,89 @@ public class Controleur implements Initializable {
         animation = new Animation(centerPane);
     }
 
-
-    public void remplissage(){
-        for (int i=0; i<terrain.getYmax(); i++){
-            for (int j=0; j<terrain.getXmax();j++) {
-                int n = terrain.valeurDeLaCase(i, j);
-                ImageView myImageView = new ImageView();
-                URL herbeVierge = getClass().getResource("Images/herbeVierge.png");
-                URL chemin = getClass().getResource("Images/chemin.png");
-                Image imgHerbeVierge = new Image(String.valueOf(herbeVierge));
-                Image imgChemin = new Image(String.valueOf(chemin));
-
-
-                myImageView.setTranslateX(j * tailleImage);
-                myImageView.setTranslateY(i * tailleImage);
-
-
-
-                if (n == 0) {
-                    myImageView.setImage(imgHerbeVierge);
-                }
-                else if (n == 1) {
-                    myImageView.setImage(imgChemin);
-                }
-
-
-                centerPane.getChildren().add(myImageView);
+    private void remplissage() {
+        for (int i = 0; i < terrain.getYmax(); i++) {
+            for (int j = 0; j < terrain.getXmax(); j++) {
+                centerPane.getChildren().add(createTerrainImageView(i, j));
             }
         }
-
         terrain.afficherSoldat(centerPane);
-
-
     }
 
+    private ImageView createTerrainImageView(int i, int j) {
+        int n = terrain.valeurDeLaCase(i, j);
+        ImageView imageView = new ImageView(getTerrainImage(n));
+        imageView.setTranslateX(j * tailleImage);
+        imageView.setTranslateY(i * tailleImage);
+        return imageView;
+    }
 
-
+    private Image getTerrainImage(int n) {
+        switch (n) {
+            case 1:
+                return loadImage(CHEMIN_IMAGE_PATH);
+            default:
+                return loadImage(HERBE_VIERGE_IMAGE_PATH);
+        }
+    }
 
     @FXML
     public void positionTour(MouseEvent event) {
-        Random rand = new Random();
-        double x=event.getX(), y=event.getY();
-        URL t = getClass().getResource("Images/tour.png");
-        Image simple = new Image(String.valueOf(t));
-        ImageView err = new ImageView();
-        URL s = getClass().getResource("Images/badClic.png");
-        Image bs = new Image(String.valueOf(s));
-        err.setImage(bs);
-        err.setX(x-75);
-        err.setY(y-37.5);
-         if (this.idTourClicked.equals("tour200b")){
-            ImageView maTour = new ImageView();
-            URL tour = getClass().getResource("Images/tourMap.png");
-            Image imgTour = new Image(String.valueOf(tour));
-            maTour.setImage(imgTour);
-            maTour.setX(x-14);
-            maTour.setY(y-17.5);
-            centerPane.getChildren().add(maTour);
-            tour200b.setImage(simple);
+        double x = event.getX();
+        double y = event.getY();
+
+        if (tourPosable(x, y)) {
+            centerPane.getChildren().add(createTourImageView(x, y));
+            resetAllToursToDefault();
+        } else {
+            showErrorMessage(x, y);
         }
-        else if (this.idTourClicked.equals("tour400b")){
-            ImageView maTour = new ImageView();
-            URL tour = getClass().getResource("Images/tourMap.png");
-            Image imgTour = new Image(String.valueOf(tour));
-            maTour.setImage(imgTour);
-            maTour.setX(x-14);
-            maTour.setY(y-17.5);
-            centerPane.getChildren().add(maTour);
-            tour400b.setImage(simple);
-        }
-        else if (this.idTourClicked.equals("tour600b")){
-            ImageView maTour = new ImageView();
-            URL tour = getClass().getResource("Images/tourMap.png");
-            Image imgTour = new Image(String.valueOf(tour));
-            maTour.setImage(imgTour);
-            maTour.setX(x-14);
-            maTour.setY(y-17.5);
-            centerPane.getChildren().add(maTour);
-            tour600b.setImage(simple);
-        }
-        else if (this.idTourClicked.equals("tour800b")){
-            ImageView maTour = new ImageView();
-            URL tour = getClass().getResource("Images/tourMap.png");
-            Image imgTour = new Image(String.valueOf(tour));
-            maTour.setImage(imgTour);
-            maTour.setX(x-14);
-            maTour.setY(y-17.5);
-            centerPane.getChildren().add(maTour);
-            tour800b.setImage(simple);
-        }
-        else {
-             centerPane.getChildren().add(err);
-             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3 ), e -> {
-                 // Fonction à exécuter après 5 secondes
-                 centerPane.getChildren().remove(err);
-             }));
-             timeline.play();
-         }
-
-
-             /*
-             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-             scheduler.schedule(() -> {
-                 // La fonction à exécuter après le délai spécifié
-                 System.out.println("yo");
-                 centerPane.getChildren().remove(err);
-                 System.out.println("fini");
-             }, 3, TimeUnit.SECONDS);
-
-             // Arrêt du scheduler après l'exécution de la fonction
-             scheduler.shutdown();
-         }
-
-              */
-             /*Timer timer = new Timer();
-             TimerTask task = new TimerTask() {
-                 @Override
-                 public void run() {
-                     // La fonction à exécuter après le délai spécifié
-                     centerPane.getChildren().remove(err);
-                 }
-             };
-
-             timer.schedule(task, 3000);
-
-              */
-
-
-        this.idTourClicked="0";
-        /* System.out.println(x);
-        System.out.println(y);
-        ArrayList<Double> coordonnees = new ArrayList<Double>();
-        coordonnees.add(x);
-        coordonnees.add(y);
-        return coordonnees; */
-        /* double[] coordinates = new double[] {x, y};
-
-
-
-        int[] possibleStartX = {14, 15, 16};
-        int[] possibleDestX = {88, 89, 90};
-
-        int startX = possibleStartX[rand.nextInt(possibleStartX.length)];
-        int startY = 59;  // cette valeur est constante.
-
-        int destX = possibleDestX[rand.nextInt(possibleDestX.length)];
-        int destY = 47;  // cette valeur est constante.
-
-        Rookie rookie = new Rookie(startX * tailleImage, startY * tailleImage, destX * tailleImage, destY * tailleImage);
-        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie(startX, startY, destX, destY);
-
-        animation.creerAnimation(chemin); */
-
-
     }
 
+    private ImageView createTourImageView(double x, double y) {
+        ImageView maTour = new ImageView(loadImage(TOWER_MAP_IMAGE_PATH));
+        maTour.setX(x - 14);
+        maTour.setY(y - 17.5);
+        return maTour;
+    }
 
+    private void resetAllToursToDefault() {
+        tour200b.setImage(loadImage(TOWER_IMAGE_PATH));
+        tour400b.setImage(loadImage(TOWER_IMAGE_PATH));
+        tour600b.setImage(loadImage(TOWER_IMAGE_PATH));
+        tour800b.setImage(loadImage(TOWER_IMAGE_PATH));
+    }
+
+    private boolean tourPosable(double x, double y) {
+        int mapX = (int) x / 8;
+        int mapY = (int) y / 8;
+        return mapX < terrain.getXmax() && mapY < terrain.getYmax() && terrain.valeurDeLaCase(mapY, mapX) == 0;
+    }
+
+    private void showErrorMessage(double x, double y) {
+        ImageView errorImageView = createErrorImageView(x, y);
+        centerPane.getChildren().add(errorImageView);
+        new Timeline(new KeyFrame(Duration.seconds(0.3), e -> centerPane.getChildren().remove(errorImageView))).play();
+        this.idTourClicked = "0";
+    }
+
+    private ImageView createErrorImageView(double x, double y) {
+        ImageView err = new ImageView(loadImage(BAD_CLICK_IMAGE_PATH));
+        err.setX(x - 75);
+        err.setY(y - 37.5);
+        return err;
+    }
+
+    @FXML
     public void selectionTour(MouseEvent event) {
-        /* tour200b.setOnMouseClicked(e -> System.out.println("tour défensive cliquée"));
-        tour400b.setOnMouseClicked(e -> System.out.println("tour mitrailleuse cliquée"));
-        tour600b.setOnMouseClicked(e -> System.out.println("tour sniper cliquée"));
-        tour800b.setOnMouseClicked(e -> System.out.println("tour tête chercheuse cliquée")); *
-
-
-        System.out.println(event.getSource());
-        ImageView imageClique = (ImageView) event.getSource();
-        System.out.println("clic");
-        if (imageClique.getId().equals("tour600b")){
-           terrain.ajouterTour(new TourSniper(positionTour().get(0)));
-        }*/
-
         ImageView image = (ImageView) event.getSource();
-        String id = image.getId();
-        System.out.println(id);
-        this.idTourClicked=id;
-        URL ts = getClass().getResource("Images/tour-Surbrillance.png");
-        Image surb = new Image(String.valueOf(ts));
-        URL t = getClass().getResource("Images/tour.png");
-        Image simple = new Image(String.valueOf(t));
-        if (id.equals("tour200b")){
-            tour200b.setImage(surb);
-            tour400b.setImage(simple);
-            tour600b.setImage(simple);
-            tour800b.setImage(simple);
-        }
-        else if (id.equals("tour400b")){
-            tour200b.setImage(simple);
-            tour400b.setImage(surb);
-            tour600b.setImage(simple);
-            tour800b.setImage(simple);
-        }
-        else if (id.equals("tour600b")){
-            tour200b.setImage(simple);
-            tour400b.setImage(simple);
-            tour600b.setImage(surb);
-            tour800b.setImage(simple);
-        }
-        else if (id.equals("tour800b")){
-            tour200b.setImage(simple);
-            tour400b.setImage(simple);
-            tour600b.setImage(simple);
-            tour800b.setImage(surb);
-        }
+        this.idTourClicked = image.getId();
+
+        resetAllToursToDefault();
+        image.setImage(loadImage(HIGHLIGHTED_TOWER_IMAGE_PATH));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private Image loadImage(String path) {
+        return new Image(String.valueOf(getClass().getResource(path)));
+    }
 }

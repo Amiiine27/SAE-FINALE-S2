@@ -126,15 +126,7 @@ public class Carte {
 
 
 
-    public boolean estParcourable(int x, int y) {
-        if (x < 0 || y < 0 || x >= quadrillage[0].length || y >= quadrillage.length) {
-            // Coordonnées hors des limites de la carte
-            return false;
-        }
 
-        int valeur = quadrillage[y][x];
-        return valeur == 1;
-    }
 
     public void afficherSoldat(Pane centerPane) {
         Circle soldat = new Circle(5);
