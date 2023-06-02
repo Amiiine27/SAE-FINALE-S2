@@ -98,13 +98,19 @@ public class Controleur implements Initializable {
         double x=event.getX(), y=event.getY();
         URL t = getClass().getResource("Images/tour.png");
         Image simple = new Image(String.valueOf(t));
+        ImageView err = new ImageView();
+        URL s = getClass().getResource("Images/badClic.png");
+        Image bs = new Image(String.valueOf(s));
+        err.setImage(bs);
+        err.setX(x-75);
+        err.setY(y-37.5);
          if (this.idTourClicked.equals("tour200b")){
             ImageView maTour = new ImageView();
             URL tour = getClass().getResource("Images/tourMap.png");
             Image imgTour = new Image(String.valueOf(tour));
             maTour.setImage(imgTour);
-            maTour.setX(x);
-            maTour.setY(y);
+            maTour.setX(x-14);
+            maTour.setY(y-17.5);
             centerPane.getChildren().add(maTour);
             tour200b.setImage(simple);
         }
@@ -113,8 +119,8 @@ public class Controleur implements Initializable {
             URL tour = getClass().getResource("Images/tourMap.png");
             Image imgTour = new Image(String.valueOf(tour));
             maTour.setImage(imgTour);
-            maTour.setX(x);
-            maTour.setY(y);
+            maTour.setX(x-14);
+            maTour.setY(y-17.5);
             centerPane.getChildren().add(maTour);
             tour400b.setImage(simple);
         }
@@ -123,8 +129,8 @@ public class Controleur implements Initializable {
             URL tour = getClass().getResource("Images/tourMap.png");
             Image imgTour = new Image(String.valueOf(tour));
             maTour.setImage(imgTour);
-            maTour.setX(x);
-            maTour.setY(y);
+            maTour.setX(x-14);
+            maTour.setY(y-17.5);
             centerPane.getChildren().add(maTour);
             tour600b.setImage(simple);
         }
@@ -133,20 +139,14 @@ public class Controleur implements Initializable {
             URL tour = getClass().getResource("Images/tourMap.png");
             Image imgTour = new Image(String.valueOf(tour));
             maTour.setImage(imgTour);
-            maTour.setX(x);
-            maTour.setY(y);
+            maTour.setX(x-14);
+            maTour.setY(y-17.5);
             centerPane.getChildren().add(maTour);
             tour800b.setImage(simple);
         }
         else {
-             ImageView err = new ImageView();
-             URL s = getClass().getResource("Images/badClic.png");
-             Image bs = new Image(String.valueOf(s));
-             err.setImage(bs);
-             err.setX(x);
-             err.setY(y);
              centerPane.getChildren().add(err);
-             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3 ), e -> {
                  // Fonction à exécuter après 5 secondes
                  centerPane.getChildren().remove(err);
              }));
