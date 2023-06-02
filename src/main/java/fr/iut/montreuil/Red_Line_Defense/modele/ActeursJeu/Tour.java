@@ -6,34 +6,34 @@ import javafx.beans.property.SimpleIntegerProperty;
 public abstract class Tour extends Acteurs {
 
 
-    private IntegerProperty X1, Y1; // donne avec l'axe de rotation la direction
+    //private IntegerProperty X1, Y1; // donne avec l'axe de rotation la direction
     private IntegerProperty prix; // prix d'achat de l'acteur
     private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
 
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, int x1, int y1) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix/*,int x1, int y1*/) {
         super(x0, y0, pointsDeVie, degats, defense);
 
-        this.X1 = new SimpleIntegerProperty(x1);
-        this.Y1 = new SimpleIntegerProperty(y1);
+        /*this.X1 = new SimpleIntegerProperty(x1);
+        this.Y1 = new SimpleIntegerProperty(y1);*/
 
         this.prix = new SimpleIntegerProperty(prix);
 
 
-        initialiserLongueur();
+        //initialiserLongueur();
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int x1, int y1) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense/*, int x1, int y1*/) {
         super(x0, y0, pointsDeVie, degats, defense);
 
-        this.X1 = new SimpleIntegerProperty(x1);
-        this.Y1 = new SimpleIntegerProperty(y1);
+        /*this.X1 = new SimpleIntegerProperty(x1);
+        this.Y1 = new SimpleIntegerProperty(y1);*/
 
-        initialiserLongueur();
+       //initialiserLongueur();
 
     }
 
-    public void initialiserLongueur() {
+   /* public void initialiserLongueur() {
 
         // Calculer la distance entre (X0, Y0) et (X1, Y1)
         double deltaX = this.getX1Value() - this.getX0Value();
@@ -63,7 +63,7 @@ public abstract class Tour extends Acteurs {
     // Setter Y1
     public void setY1(int val) { this.Y1.setValue(val); }
 
-
+*/
 
 
 

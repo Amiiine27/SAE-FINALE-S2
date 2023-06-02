@@ -1,37 +1,120 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleDoubleProperty;
 
-public class Projectile extends Acteurs {
+public abstract class Projectile {
+    private double xDépart;
+    private double yDépart;
+    private DoubleProperty x;
+    private DoubleProperty y;
+    private DoubleProperty xCible;
+    private DoubleProperty yCible;
+    private double xDirection;
+    private double yDirection;
+    private double v;//Vitesse de l'obus
 
-    private IntegerProperty X, Y; // Les coordonnées actuelles du projectile
-    private DoubleProperty directionX, directionY; // Les directions de déplacement du projectile
+    public Projectile(double x, double y, double xCible, double yCible, double v) {
 
-    public Projectile(double x, double y, double directionX, double directionY) {
-        super(x, y);
+        this.x = new SimpleDoubleProperty(x);
 
-        // TODO : Définir les directions de déplacement en fonction de la cible ou de
-        this.directionX = new SimpleDoubleProperty(directionX); // exemple
-        this.directionY = new SimpleDoubleProperty(directionY); // exemple
+        this.y = new SimpleDoubleProperty(y);
 
+        xDépart=x;
+
+        yDépart=x;
+
+        this.xCible = new SimpleDoubleProperty(xCible);
+
+        this.yCible = new SimpleDoubleProperty(yCible);
+
+        this.v = v;
+
+        double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
+        this.xDirection = (xCible - x) / distance;
+        this.yDirection = (yCible - y) / distance;
     }
 
-    // Met à jour la position du projectile
-    public void actualiser() {
-        this.setX0(this.getX0Value() + this.getDirectionXValue());
-        this.setY0(this.getY0Value() + this.getDirectionYValue());
+    public abstract void deplacement(double elapsedTime);
+
+    	/*double deltaX = xDirection * v * elapsedTime;
+    	double deltaY = yDirection * v * elapsedTime;
+
+    	if (!(x.getValue().equals(xCible.getValue())) || !(y.getValue().equals(yCible.getValue()))) {
+        	x.setValue(getX() + deltaX);
+        	y.setValue(getY() + deltaY);
+    	}*/
+
+    public double getxCible() {
+        return xCible.get();
     }
 
-    // Les accesseurs
+    public DoubleProperty xCibleProperty() {
+        return xCible;
+    }
 
-    public DoubleProperty getDirectionXProperty() { return this.directionX;}
-    public DoubleProperty getDirectionYProperty() { return this.directionY;}
+    public double getyCible() {
+        return yCible.get();
+    }
 
-    public double getDirectionXValue() { return this.directionX.getValue();}
-    public double getDirectionYValue() { return this.directionY.getValue();}
+    public DoubleProperty yCibleProperty() {
+        return yCible;
+    }
 
-    public void setDirectionX(double valeur) { this.directionX.setValue(valeur); }
-    public void setDirectionY(double valeur) { this.directionY.setValue(valeur); }
+    public double getxDirection() {
+        return xDirection;
+    }
+
+    public double getyDirection() {
+        return yDirection;
+    }
+
+    public double getV() {
+        return v;
+    }
+
+    public DoubleProperty xProperty() {
+        return x;
+    }
+
+    public DoubleProperty yProperty() {
+        return y;
+    }
+
+    public double getX() {
+        return x.getValue();
+    }
+
+    public double getY() {
+        return y.getValue();
+    }
+
+    public void setX(double x) {
+        this.x.set(x);
+    }
+
+    public void setY(double y) {
+        this.y.set(y);
+    }
+
+    public void setxCible(double xCible) {
+        this.xCible.set(xCible);
+    }
+
+    public void setyCible(double yCible) {
+        this.yCible.set(yCible);
+    }
+
+    public void setxDirection(double xDirection) {
+        this.xDirection = xDirection;
+    }
+
+    public void setyDirection(double yDirection) {
+        this.yDirection = yDirection;
+    }
+
+    public void setV(double v) {
+        this.v = v;
+    }
 }
