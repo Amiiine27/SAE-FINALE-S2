@@ -6,6 +6,8 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -15,13 +17,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Controleur implements Initializable {
     private Carte terrain;
@@ -41,7 +44,7 @@ public class Controleur implements Initializable {
     @FXML
     private ImageView tour200b, tour400b, tour600b, tour800b;
 
-    private String idTourClicked=null;
+    private String idTourClicked="0";
 
 
     @Override
@@ -93,15 +96,93 @@ public class Controleur implements Initializable {
     public void positionTour(MouseEvent event) {
         Random rand = new Random();
         double x=event.getX(), y=event.getY();
-        if (this.idTourClicked.equals("tour600b")){
+        URL t = getClass().getResource("Images/tour.png");
+        Image simple = new Image(String.valueOf(t));
+         if (this.idTourClicked.equals("tour200b")){
             ImageView maTour = new ImageView();
-            URL tour = getClass().getResource("Images/tour.png");
+            URL tour = getClass().getResource("Images/tourMap.png");
             Image imgTour = new Image(String.valueOf(tour));
             maTour.setImage(imgTour);
             maTour.setX(x);
             maTour.setY(y);
             centerPane.getChildren().add(maTour);
+            tour200b.setImage(simple);
         }
+        else if (this.idTourClicked.equals("tour400b")){
+            ImageView maTour = new ImageView();
+            URL tour = getClass().getResource("Images/tourMap.png");
+            Image imgTour = new Image(String.valueOf(tour));
+            maTour.setImage(imgTour);
+            maTour.setX(x);
+            maTour.setY(y);
+            centerPane.getChildren().add(maTour);
+            tour400b.setImage(simple);
+        }
+        else if (this.idTourClicked.equals("tour600b")){
+            ImageView maTour = new ImageView();
+            URL tour = getClass().getResource("Images/tourMap.png");
+            Image imgTour = new Image(String.valueOf(tour));
+            maTour.setImage(imgTour);
+            maTour.setX(x);
+            maTour.setY(y);
+            centerPane.getChildren().add(maTour);
+            tour600b.setImage(simple);
+        }
+        else if (this.idTourClicked.equals("tour800b")){
+            ImageView maTour = new ImageView();
+            URL tour = getClass().getResource("Images/tourMap.png");
+            Image imgTour = new Image(String.valueOf(tour));
+            maTour.setImage(imgTour);
+            maTour.setX(x);
+            maTour.setY(y);
+            centerPane.getChildren().add(maTour);
+            tour800b.setImage(simple);
+        }
+        else {
+             ImageView err = new ImageView();
+             URL s = getClass().getResource("Images/badClic.png");
+             Image bs = new Image(String.valueOf(s));
+             err.setImage(bs);
+             err.setX(x);
+             err.setY(y);
+             centerPane.getChildren().add(err);
+             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+                 // Fonction à exécuter après 5 secondes
+                 centerPane.getChildren().remove(err);
+             }));
+             timeline.play();
+         }
+
+
+             /*
+             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+             scheduler.schedule(() -> {
+                 // La fonction à exécuter après le délai spécifié
+                 System.out.println("yo");
+                 centerPane.getChildren().remove(err);
+                 System.out.println("fini");
+             }, 3, TimeUnit.SECONDS);
+
+             // Arrêt du scheduler après l'exécution de la fonction
+             scheduler.shutdown();
+         }
+
+              */
+             /*Timer timer = new Timer();
+             TimerTask task = new TimerTask() {
+                 @Override
+                 public void run() {
+                     // La fonction à exécuter après le délai spécifié
+                     centerPane.getChildren().remove(err);
+                 }
+             };
+
+             timer.schedule(task, 3000);
+
+              */
+
+
+        this.idTourClicked="0";
         /* System.out.println(x);
         System.out.println(y);
         ArrayList<Double> coordonnees = new ArrayList<Double>();
@@ -148,6 +229,34 @@ public class Controleur implements Initializable {
         String id = image.getId();
         System.out.println(id);
         this.idTourClicked=id;
+        URL ts = getClass().getResource("Images/tour-Surbrillance.png");
+        Image surb = new Image(String.valueOf(ts));
+        URL t = getClass().getResource("Images/tour.png");
+        Image simple = new Image(String.valueOf(t));
+        if (id.equals("tour200b")){
+            tour200b.setImage(surb);
+            tour400b.setImage(simple);
+            tour600b.setImage(simple);
+            tour800b.setImage(simple);
+        }
+        else if (id.equals("tour400b")){
+            tour200b.setImage(simple);
+            tour400b.setImage(surb);
+            tour600b.setImage(simple);
+            tour800b.setImage(simple);
+        }
+        else if (id.equals("tour600b")){
+            tour200b.setImage(simple);
+            tour400b.setImage(simple);
+            tour600b.setImage(surb);
+            tour800b.setImage(simple);
+        }
+        else if (id.equals("tour800b")){
+            tour200b.setImage(simple);
+            tour400b.setImage(simple);
+            tour600b.setImage(simple);
+            tour800b.setImage(surb);
+        }
     }
 
 
