@@ -20,7 +20,7 @@
                   <Image url="@../Images/luffy-shanks.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="titre" layoutX="262.0" layoutY="120.0" prefHeight="86.0" prefWidth="474.0" styleClass="titre" stylesheets="@../Stylesheet/style.css" text="RED LINE DEFENSE !!">
+            <Label fx:id="labelTitre" layoutX="262.0" layoutY="120.0" prefHeight="86.0" prefWidth="474.0" styleClass="titre" stylesheets="@../Stylesheet/style.css" text="RED LINE DEFENSE !!">
             </Label>
             <Button fx:id="lanceur" layoutX="470.0" layoutY="380.0" mnemonicParsing="false" onAction="#onJouerButtonClick" prefHeight="70.0" prefWidth="70.0" styleClass="bouton-image" stylesheets="@../Stylesheet/style.css" text="!" />
             <Label fx:id="sousTitre" layoutX="367.0" layoutY="312.0" prefHeight="27.0" prefWidth="273.0" styleClass="sous-titre" stylesheets="@../Stylesheet/style.css" text="Clique ici pour jouer" textAlignment="CENTER" />

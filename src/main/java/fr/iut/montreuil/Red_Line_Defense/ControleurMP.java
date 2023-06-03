@@ -19,6 +19,8 @@ public class ControleurMP implements Initializable {
     private Parent root;
     private Font jap;
 
+    @FXML
+    private Label labelTitre;
 
     @FXML
     private void onJouerButtonClick(ActionEvent event) throws IOException {
@@ -34,9 +36,10 @@ public class ControleurMP implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /* String audioFile = "chemin/vers/votre/fichier/audio.mp3";
-        Media sound = new Media(getClass().getResource(audioFile).toExternalForm());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play(); */
+        // Créez la police que vous voulez utiliser
+        Font fontJap = Font.loadFont(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Polices/jap.ttf").toExternalForm(), 20); // 20 est la taille de la police, changez-la comme vous voulez
+
+        // Appliquer la police à votre label
+        labelTitre.setFont(fontJap);
     }
 }

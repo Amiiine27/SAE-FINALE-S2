@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourMitrailleuse;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
@@ -81,6 +82,7 @@ public class Controleur implements Initializable {
         double y = event.getY();
 
         if (tourPosable(x, y)) {
+            terrain.ajouterTour(new TourMitrailleuse((int) x,(int) y, 0, 0));
             centerPane.getChildren().add(createTourImageView(x, y));
             resetAllToursToDefault();
         } else {
@@ -105,8 +107,21 @@ public class Controleur implements Initializable {
     private boolean tourPosable(double x, double y) {
         int mapX = (int) x / 8;
         int mapY = (int) y / 8;
-        return mapX < terrain.getXmax() && mapY < terrain.getYmax() && terrain.valeurDeLaCase(mapY, mapX) == 0;
+
+        // Vérifier si la case est valide et si elle est libre
+        if (mapX >= 0 && mapX < terrain.getXmax() && mapY >= 0 && mapY < terrain.getYmax() && terrain.valeurDeLaCase(mapY, mapX) == 0) {
+            // Vérifier si aucune tour n'est déjà positionnée sur cette case
+            for (Tour tour : terrain.getTours()) {
+                if (((int)(tour.getX0Value() / 8) == mapX) && ((int)(tour.getY0Value() / 8) == mapY)) {
+                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " ("+ ((int)tour.getX0Value()/8 ) +") " + tour.getY0Value() + " ("+ ((int)tour.getY0Value()/8) + ") ");
+                    return false; // Une tour est déjà positionnée sur cette case
+                }
+            }
+            return true; // La case est libre et aucune tour n'est positionnée dessus
+        }
+        return false; // La case est invalide ou déjà occupée par une tour
     }
+
 
     private void showErrorMessage(double x, double y) {
         ImageView errorImageView = createErrorImageView(x, y);

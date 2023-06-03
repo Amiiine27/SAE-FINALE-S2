@@ -20,7 +20,7 @@ public abstract class Tour extends Acteurs {
         this.prix = new SimpleIntegerProperty(prix);
 
 
-        initialiserLongueur();
+       // initialiserLongueur();
     }
 
     public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int x1, int y1) {
@@ -29,11 +29,11 @@ public abstract class Tour extends Acteurs {
         this.X1 = new SimpleIntegerProperty(x1);
         this.Y1 = new SimpleIntegerProperty(y1);
 
-        initialiserLongueur();
+       //initialiserLongueur();
 
     }
 
-    public void initialiserLongueur() {
+    /* public void initialiserLongueur() {
 
         // Calculer la distance entre (X0, Y0) et (X1, Y1)
         double deltaX = this.getX1Value() - this.getX0Value();
@@ -45,39 +45,68 @@ public abstract class Tour extends Acteurs {
         // Mettre à jour la longueur
         this.setLongueur(nouvelleLongueur);
 
+    } */
+
+
+
+
+
+
+    // Getter X1
+    public int getX1Value() {
+        return this.X1.getValue();
+    }
+
+    public IntegerProperty getX1Property() {
+        return this.X1;
+    }
+
+    // Getter Y1
+    public int getY1Value() {
+        return this.Y1.getValue();
+    }
+
+    public IntegerProperty getY1Property() {
+        return this.Y1;
+    }
+
+    // Getter Prix
+    public int getPrixValue() {
+        return this.prix.getValue();
+    }
+
+    public IntegerProperty getPrixProperty() {
+        return this.prix;
+    }
+
+    // Getter Longueur
+    public int getLongueurValue() {
+        return this.longueur.getValue();
+    }
+
+    public IntegerProperty getLongueurProperty() {
+        return this.longueur;
+    }
+
+    // Setter X1
+    public void setX1Value(int val) {
+        this.X1.setValue(val);
+    }
+
+    // Setter Y1
+    public void setY1Value(int val) {
+        this.Y1.setValue(val);
+    }
+
+    // Setter Prix
+    public void setPrixValue(int val) {
+        this.prix.setValue(val);
+    }
+
+    // Setter Longueur
+    public void setLongueur(int val) {
+        this.longueur.setValue(val);
     }
 
 
-    // Getter x1
-    public int getX1Value() { return this.X1.getValue(); }      // Valeur x1
-    public IntegerProperty getX1Property() { return this.X1; }  // Property x1
-    // Setter X1
-    public void setX1(int val) { this.X1.setValue(val); }
-
-
-
-
-    // Getter y1
-    public int getY1Value() { return this.Y1.getValue(); }      // Valeur y1
-    public IntegerProperty getY1Property() { return this.Y1; }  // Property y1
-    // Setter Y1
-    public void setY1(int val) { this.Y1.setValue(val); }
-
-
-
-
-
-    // Getter Prix
-    public int getPrixValue() { return this.prix.getValue();}
-    public IntegerProperty getPrixProperty() { return this.prix; }
-    // Setter Prix
-    public void setPrixValue(int val) { this.prix.setValue(val); }
-
-
-
-    // Getter Longueur
-    public int getLongueurValue() { return this.longueur.getValue(); }
-    public IntegerProperty getLongueurProperty() { return this.longueur; }
-    // Setter Longueur
-    public void setLongueur(int val) { this.longueur.setValue(val); }
 }
