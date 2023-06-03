@@ -76,19 +76,41 @@ public class Controleur implements Initializable {
         }
     }
 
+
     @FXML
     public void positionTour(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
 
-        if (tourPosable(x, y)) {
-            terrain.ajouterTour(new TourMitrailleuse((int) x,(int) y, 0, 0));
-            centerPane.getChildren().add(createTourImageView(x, y));
-            resetAllToursToDefault();
-        } else {
+        if (idTourClicked.equals("0")) {
+            // Aucune tour sélectionnée, afficher un message d'erreur
             showErrorMessage(x, y);
+        } else {
+            if (tourPosable(x, y)) {
+                switch (idTourClicked) {
+                    case "tour200b":
+                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y, 0, 0));
+                        break;
+                    case "tour400b":
+                        // Faudra faire une tour
+                        break;
+                    case "tour600b":
+                        terrain.ajouterTour(new TourSniper((int) x, (int) y, 0, 0));
+                        break;
+                    case "tour800b":
+                        // Faudra faire une tour
+                        break;
+                }
+                centerPane.getChildren().add(createTourImageView(x, y));
+                resetAllToursToDefault();
+                idTourClicked = "0"; // Réinitialiser la sélection de la tour
+            } else {
+                showErrorMessage(x, y);
+            }
         }
     }
+
+
 
     private ImageView createTourImageView(double x, double y) {
         ImageView maTour = new ImageView(loadImage(TOWER_MAP_IMAGE_PATH));
