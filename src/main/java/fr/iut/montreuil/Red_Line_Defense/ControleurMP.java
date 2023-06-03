@@ -36,10 +36,10 @@ public class ControleurMP implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Créez la police que vous voulez utiliser
+        /*// Créez la police que vous voulez utiliser
         Font fontJap = Font.loadFont(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Polices/jap.ttf").toExternalForm(), 20); // 20 est la taille de la police, changez-la comme vous voulez
 
         // Appliquer la police à votre label
-        labelTitre.setFont(fontJap);
+        labelTitre.setFont(fontJap);*/
     }
 }
