@@ -2,7 +2,9 @@ package fr.iut.montreuil.Red_Line_Defense;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.EcouteSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,20 +31,25 @@ public class Controleur implements Initializable {
     private Animation animation;
 
     private VueTours vueTours;
+
+    private VueSoldats vueSoldats;
     @FXML
     private Pane centerPane;
 
 
-    private String idTourClicked = "0";
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         terrain = new Carte();
         remplissage();
         gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
-        animation = new Animation(centerPane);
         vueTours = new VueTours(terrain, centerPane);
+        animation = new Animation(centerPane);
+        vueSoldats = new VueSoldats(terrain, centerPane); // Déplacer cette ligne après l'initialisation de vueTours et animation
+        new EcouteSoldats(vueSoldats, terrain.getSoldatsProperty());
     }
+
 
     private void remplissage() {
         for (int i = 0; i < terrain.getYmax(); i++) {
