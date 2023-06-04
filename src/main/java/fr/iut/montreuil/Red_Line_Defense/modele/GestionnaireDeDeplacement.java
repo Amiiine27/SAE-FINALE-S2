@@ -1,6 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -17,11 +17,14 @@ public class GestionnaireDeDeplacement {
         this.centerPane = centerPane;
     }
 
-    public List<Point2D> deplacerRookie(int startX, int startY, int destX, int destY) {
-        return trouverChemin(startX, startY, destX, destY);
-    }
 
-    private List<Point2D> trouverChemin(int startX, int startY, int destX, int destY) {
+    public List<Point2D> trouverChemin(Soldat soldat) {
+        int startX = (int) (soldat.getX0Value() /8);
+        int startY = (int) (soldat.getY0Value() /8);
+        int destX = (int) (soldat.getDestinationX() /8);
+        int destY = (int) (soldat.getDestinationY() /8);
+
+
         List<Point2D> chemin = new ArrayList<>();
         int[][] distances = new int[carte.getYmax()][carte.getXmax()];
         boolean[][] visited = new boolean[carte.getYmax()][carte.getXmax()];

@@ -1,6 +1,6 @@
-package fr.iut.montreuil.Red_Line_Defense;
+package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
+import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.EcouteSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
@@ -8,6 +8,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +29,8 @@ public class Controleur implements Initializable {
     private final int tailleImage = 8;
 
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
-    private Animation animation;
+    private GameLoop gameLoop;
+    private  List<Point2D> chemin;
 
     private VueTours vueTours;
 
@@ -44,10 +46,10 @@ public class Controleur implements Initializable {
         terrain = new Carte();
         remplissage();
         gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
+        new EcouteSoldats(terrain, (terrain.getSoldatsProperty()));
+        vueSoldats = new VueSoldats(terrain, centerPane, gestionnaireDeDeplacement);
+        gameLoop = new GameLoop(centerPane, gestionnaireDeDeplacement, vueSoldats, terrain);
         vueTours = new VueTours(terrain, centerPane);
-        animation = new Animation(centerPane);
-        vueSoldats = new VueSoldats(terrain, centerPane); // Déplacer cette ligne après l'initialisation de vueTours et animation
-        new EcouteSoldats(vueSoldats, terrain.getSoldatsProperty());
     }
 
 
@@ -57,7 +59,6 @@ public class Controleur implements Initializable {
                 centerPane.getChildren().add(createTerrainImageView(i, j));
             }
         }
-        terrain.afficherSoldat(centerPane);
     }
 
     private ImageView createTerrainImageView(int i, int j) {
@@ -71,11 +72,12 @@ public class Controleur implements Initializable {
     private Image getTerrainImage(int n) {
         switch (n) {
             case 1:
-                return loadImage(CHEMIN_IMAGE_PATH);
+                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/chemin.png");
             default:
-                return loadImage(HERBE_VIERGE_IMAGE_PATH);
+                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png");
         }
     }
+
 
     public void positionTour(MouseEvent event){
         vueTours.positionTour(event);
@@ -85,9 +87,9 @@ public class Controleur implements Initializable {
         vueTours.selectionTour(event);
     }
 
-
-
     private Image loadImage(String path) {
-        return new Image(String.valueOf(getClass().getResource(path)));
+        return new Image(getClass().getResourceAsStream(path));
+
     }
+
 }

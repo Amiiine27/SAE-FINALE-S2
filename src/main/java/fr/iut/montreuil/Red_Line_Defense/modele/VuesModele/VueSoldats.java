@@ -2,7 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
+import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.EcouteSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
@@ -10,6 +10,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,24 +19,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 
 public class VueSoldats {
 
-    private Map<Soldat, Circle> mapRookiesCercles;
+
+
     private Pane centerPane;
 
+    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
     private Carte terrain;
 
     private int vague = 1;
 
-    public VueSoldats(Carte terrain, Pane centerPane) {
+    public VueSoldats(Carte terrain, Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement) {
         this.terrain = terrain;
         this.centerPane = centerPane;
-        mapRookiesCercles = new HashMap<>();
+        this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
         nouvelleVague();
+
+
     }
 
 
@@ -53,6 +59,12 @@ public class VueSoldats {
 
                 afficherRookie(startX, startY, destX, destY);
                 System.out.println("tour " + i);
+
+                try {
+                    Thread.sleep(3000); // Ça met un délai de 3 sec entre chaque spawn
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -78,7 +90,7 @@ public class VueSoldats {
         Circle soldatRookie = new Circle(startX, startY, 2, Color.BLUE);
         centerPane.getChildren().add(soldatRookie);
 
-        mapRookiesCercles.put(rookie, soldatRookie); // Associer le Rookie à son cercle correspondant dans la HashMap
+        terrain.getMapSoldatsCercles().put(rookie, soldatRookie); // Associer le Rookie à son cercle correspondant dans la HashMap
 
         System.out.println("nouveau soldat");
     }
@@ -108,16 +120,15 @@ public class VueSoldats {
     }
 
 
-    public void placerSoldat(double x, double y) {
-        Circle soldat = new Circle(x, y, 5, Color.RED);
-        centerPane.getChildren().add(soldat);
-    }
+
+
+
 
     public void enleverSoldats() {
         centerPane.getChildren().removeIf(node -> node instanceof Circle && ((Circle) node).getFill() == Color.RED);
     }
 
-    public Map<Soldat, Circle> getMapRookiesCercles(){return this.mapRookiesCercles;}
+
 
 
 

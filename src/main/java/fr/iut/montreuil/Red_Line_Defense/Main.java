@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.ControleurMP;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

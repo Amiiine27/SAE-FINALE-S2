@@ -16,15 +16,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Carte {
 
     private int[][] quadrillage;
 
+    private Map<Soldat, Circle> mapSoldatsCercles;
+
 
     private ListProperty<Tour> tours;
-    private ListProperty<Soldat> soldats;
+    private ListProperty<Soldat> listeSoldats;
 
 
 
@@ -98,7 +102,9 @@ public class Carte {
         tours = new SimpleListProperty<>(observableListTour);
 
         ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
-        soldats = new SimpleListProperty<>(observableListSoldat);
+        listeSoldats = new SimpleListProperty<>(observableListSoldat);
+
+        mapSoldatsCercles = new HashMap<>();
     }
 
 
@@ -117,26 +123,32 @@ public class Carte {
     public ObservableList<Tour> getTours() { return this.tours.get(); }             // Retourne la property qui contient la liste observable
 
     // Methodes Soldats
-    public void ajouterSoldat(Soldat soldat) { this.soldats.add(soldat); }          // Ajouter un Soldat
-    public void supprimerSoldat(Soldat soldat) { this.soldats.remove(soldat); }     // Supprimer un Soldat
-    public ListProperty<Soldat> getSoldatsProperty() { return this.soldats; }       // Retourne la liste observable
-    public ObservableList<Soldat> getSoldats() { return this.soldats.get(); }       // Retourne la property qui contient la liste observable
+    public void ajouterSoldat(Soldat soldat) { this.listeSoldats.add(soldat);}          // Ajouter un Soldat
+
+    public void supprimerSoldat(Soldat soldat) { this.listeSoldats.remove(soldat); }     // Supprimer un Soldat
+    public ListProperty<Soldat> getSoldatsProperty() { return this.listeSoldats; }       // Retourne la liste observable
+    public ObservableList<Soldat> getSoldats() { return this.listeSoldats.get(); }       // Retourne la property qui contient la liste observable
+
+    public Map<Soldat, Circle> getMapSoldatsCercles(){return this.mapSoldatsCercles;}
 
 
-
-
-
-
-
-    public void afficherSoldat(Pane centerPane) {
-        Circle soldat = new Circle(5);
-        soldat.setFill(Color.RED);
-
-        // Please provide the appropriate parameters to the Soldat constructor
-        Soldat soldatObj = new Shichibukais(126, 464, 89, 47);
-
-
+    public Circle getAssociatedCircle(Soldat soldat) {
+        return mapSoldatsCercles.get(soldat);
     }
+
+    public Soldat getAssociatedSoldat(Circle circle) {
+        for (Map.Entry<Soldat, Circle> entry : mapSoldatsCercles.entrySet()) {
+            if (entry.getValue().equals(circle)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+
+
+
+
 
 
 

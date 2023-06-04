@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import org.controlsfx.control.ListActionView?>
-<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleur">
+<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
         <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: blue;"> </Pane>

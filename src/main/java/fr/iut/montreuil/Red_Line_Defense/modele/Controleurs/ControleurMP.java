@@ -1,4 +1,4 @@
-package fr.iut.montreuil.Red_Line_Defense;
+package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

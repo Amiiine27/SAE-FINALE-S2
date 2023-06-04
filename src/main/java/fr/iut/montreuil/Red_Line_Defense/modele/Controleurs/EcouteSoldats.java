@@ -3,7 +3,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
+import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import javafx.beans.property.ListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
@@ -14,13 +14,16 @@ import java.util.Map;
 
 public class EcouteSoldats {
 
-    private VueSoldats vueSoldats;
+
 
     private ListProperty<Soldat> listeSoldat;
 
-    public EcouteSoldats(VueSoldats vueSoldats, ListProperty<Soldat> listeSoldat) {
-        this.vueSoldats = vueSoldats;
+    private Carte terrain;
+
+    public EcouteSoldats(Carte terrain, ListProperty<Soldat> listeSoldat) {
+        this.terrain = terrain;
         this.listeSoldat = listeSoldat;
+        ajouterEcouteurSurSoldat();
     }
 
     public void ajouterEcouteurSurSoldat() {
@@ -39,9 +42,11 @@ public class EcouteSoldats {
                             soldat.getY0Property().addListener((observable, oldValue, newValue) -> {
                                 miseAJourSpriteSoldat(soldat, (int) soldat.getX0Value(), newValue.intValue());
                             });
+
                         }
 
                     } else if (change.wasRemoved()) {
+
 
                         List<? extends Soldat> soldatsSupprimes = change.getRemoved();
 
@@ -52,13 +57,15 @@ public class EcouteSoldats {
                     }
                 }
             }
+
         });
+
     }
 
     private void miseAJourSpriteSoldat(Soldat soldat, int x, int y) {
-        if (soldat instanceof Rookie) {
+        if (soldat instanceof Soldat) {
 
-            Map<Soldat, Circle> mapRookiesCercles = vueSoldats.getMapRookiesCercles(); //  la HashMap des Rookies et leurs cercles
+            Map<Soldat, Circle> mapRookiesCercles = terrain.getMapSoldatsCercles(); //  la HashMap des Rookies et leurs cercles
 
             Rookie rookie = (Rookie) soldat;
             Circle cercleRookie = mapRookiesCercles.get(rookie); // Récup le cercle correspondant au Rookie

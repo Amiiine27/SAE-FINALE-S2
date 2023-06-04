@@ -60,6 +60,9 @@ public abstract class Acteurs {
             // y0
             public void setY0(double val) { this.Y0.setValue(val); }
 
+            public void setPosition( double posX, double posY ) { this.X0.setValue(posX);
+                                                            this.Y0.setValue(posY);}
+
 
 
     // _________________________________________________________________________________________________________________

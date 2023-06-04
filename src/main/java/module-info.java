@@ -5,4 +5,6 @@ module com.example.tower_defense {
 
     opens fr.iut.montreuil.Red_Line_Defense to javafx.fxml;
     exports fr.iut.montreuil.Red_Line_Defense;
+    exports fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
+    opens fr.iut.montreuil.Red_Line_Defense.modele.Controleurs to javafx.fxml;
 }

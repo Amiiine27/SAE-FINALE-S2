@@ -48,4 +48,6 @@ public abstract class Soldat extends Acteurs {
     public double getDestinationY() {  return this.destinationY;
     }
 
+
+
 }
