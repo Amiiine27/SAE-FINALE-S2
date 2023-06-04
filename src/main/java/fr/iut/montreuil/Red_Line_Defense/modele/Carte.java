@@ -1,8 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.ennemi.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.Tour;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+
 
 public class Carte {
 

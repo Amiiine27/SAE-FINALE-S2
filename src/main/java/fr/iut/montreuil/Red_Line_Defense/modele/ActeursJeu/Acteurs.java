@@ -9,12 +9,12 @@ public abstract class Acteurs {
 
 
     private DoubleProperty X0, Y0; // position de l'axe de rotation
-    private IntegerProperty pointsDeVie, degats; // les noms parlent d'eux meme
+    private IntegerProperty pointsDeVie;
     private IntegerProperty defense; // pourcentage de réduction des dégats
 
 
 
-    public Acteurs(double x0, double y0, int pointsDeVie, int degats, int defense) {
+    public Acteurs(double x0, double y0, int pointsDeVie, int defense) {
 
         // Coordonnées
         this.X0 = new SimpleDoubleProperty(x0);
@@ -23,7 +23,6 @@ public abstract class Acteurs {
 
         // Statistiques
         this.pointsDeVie = new SimpleIntegerProperty(pointsDeVie);
-        this.degats = new SimpleIntegerProperty(degats);
         this.defense = new SimpleIntegerProperty(defense);
 
 
@@ -43,11 +42,11 @@ public abstract class Acteurs {
 
         // Getters
             // x0
-            public double getX0Value() { return this.X0.getValue(); }      // Valeur x0
+            public double getX() { return this.X0.getValue(); }      // Valeur x0
             public DoubleProperty getX0Property() { return this.X0; }  // Property x0
 
             // y0
-            public double getY0Value() { return this.Y0.getValue(); }      // Valeur y0
+            public double getY() { return this.Y0.getValue(); }      // Valeur y0
             public DoubleProperty getY0Property() { return this.Y0; }  // Property y0
 
 
@@ -72,8 +71,7 @@ public abstract class Acteurs {
             public IntegerProperty getPointsDeVieProperty() { return this.pointsDeVie; }
 
             // Degats
-            public int getDegatValue() { return this.degats.getValue(); }
-            public IntegerProperty getDegatsProperty() { return this.degats; }
+
 
             // Defense
             public int getDefenseValue() { return this.defense.getValue();}
@@ -87,7 +85,7 @@ public abstract class Acteurs {
             public void setPointsDeVieValue(int val) { this.pointsDeVie.setValue(val); }
 
             // Degats
-            public void setDegatsValue(int val) { this.degats.setValue(val); }
+
 
             // Defense
             public void setDefenseValue(int val) { this.defense.setValue(val); }
