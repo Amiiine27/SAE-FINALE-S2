@@ -26,12 +26,27 @@ public class Projectile extends Acteurs {
 
     // Les accesseurs
 
-    public DoubleProperty getDirectionXProperty() { return this.directionX;}
-    public DoubleProperty getDirectionYProperty() { return this.directionY;}
+    public DoubleProperty getDirectionXProperty() {
+        return this.directionX;
+    }
 
-    public double getDirectionXValue() { return this.directionX.getValue();}
-    public double getDirectionYValue() { return this.directionY.getValue();}
+    public DoubleProperty getDirectionYProperty() {
+        return this.directionY;
+    }
 
-    public void setDirectionX(double valeur) { this.directionX.setValue(valeur); }
-    public void setDirectionY(double valeur) { this.directionY.setValue(valeur); }
+    public double getDirectionXValue() {
+        return this.directionX.getValue();
+    }
+
+    public double getDirectionYValue() {
+        return this.directionY.getValue();
+    }
+
+    public void setDirectionX(double valeur) {
+        this.directionX.setValue(valeur);
+    }
+
+    public void setDirectionY(double valeur) {
+        this.directionY.setValue(valeur);
+    }
 }

@@ -10,17 +10,27 @@ public class Joueur {
 
 
     public Joueur(String nomJ) {
-            this.nomJoueur = nomJ;
-            this.soldeJoueur = new SimpleIntegerProperty(500);
+        this.nomJoueur = nomJ;
+        this.soldeJoueur = new SimpleIntegerProperty(500);
     }
 
-    public String getNomJoueur() { return nomJoueur; }
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
 
-    public IntegerProperty getSoldeJoueurProperty() { return soldeJoueur; }
+    public IntegerProperty getSoldeJoueurProperty() {
+        return soldeJoueur;
+    }
 
-    public int getSoldeJoueurValue() { return soldeJoueur.getValue(); }
+    public int getSoldeJoueurValue() {
+        return soldeJoueur.getValue();
+    }
 
-    public void crediterSolde(int val) { this.soldeJoueur.setValue( this.soldeJoueur.getValue() + val); }
+    public void crediterSolde(int val) {
+        this.soldeJoueur.setValue(this.soldeJoueur.getValue() + val);
+    }
 
-    public void debiterSolde(int val) { this.soldeJoueur.setValue( this.soldeJoueur.getValue() - val); }
+    public void debiterSolde(int val) {
+        this.soldeJoueur.setValue(this.soldeJoueur.getValue() - val);
+    }
 }

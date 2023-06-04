@@ -1,31 +1,16 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
-import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.EcouteSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
 public class VueSoldats {
-
 
 
     private Pane centerPane;
@@ -40,46 +25,25 @@ public class VueSoldats {
         this.centerPane = centerPane;
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
         nouvelleVague();
-
-
     }
 
 
     public void nouvelleVague() {
 
         if (vague == 1) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 7; i++) {
                 int[] randomSelection = randomSelection();
                 int startX = randomSelection[0] * 8;
-                int startY = 59 * 8;
+                int startY = randomSelection[1] * 8;
 
-                int destX = randomSelection[1] * 8;
-                int destY = 47 * 8;
+                int destX = randomSelection[2] * 8;
+                int destY = randomSelection[3] * 8;
 
 
                 afficherRookie(startX, startY, destX, destY);
-                System.out.println("tour " + i);
-
-                try {
-                    Thread.sleep(3000); // Ça met un délai de 3 sec entre chaque spawn
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
 
-
-
-        /*System.out.println("Tuile de départ : X = " + startX + ", Y = " + startY);
-        int destX = possibleDestX[rand.nextInt(possibleDestX.length)];
-        int destY = 47;  // Supposons que cette valeur est constante.
-
-        Rookie rookie = new Rookie(15 * tailleImage, 59 * tailleImage, 89 * tailleImage, 47 * tailleImage);
-        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie();
-        Rookie rookie = new Rookie(startX * tailleImage, startY * tailleImage, destX * tailleImage, destY * tailleImage);
-        List<Point2D> chemin = gestionnaireDeDeplacement.deplacerRookie(startX, startY, destX, destY);
-
-        animation.creerAnimation(chemin);*/
     }
 
 
@@ -87,50 +51,49 @@ public class VueSoldats {
         Rookie rookie = new Rookie((int) startX, (int) startY, (int) destX, (int) destY);
         terrain.ajouterSoldat(rookie);
 
-        Circle soldatRookie = new Circle(startX, startY, 2, Color.BLUE);
-        centerPane.getChildren().add(soldatRookie);
+        Circle cercleSoldat = new Circle(startX, startY, 4, Color.BLUE);
 
-        terrain.getMapSoldatsCercles().put(rookie, soldatRookie); // Associer le Rookie à son cercle correspondant dans la HashMap
+        terrain.getMapSoldatsCercles().put(rookie, cercleSoldat); // Associer le Rookie à son cercle correspondant dans la HashMap
+        centerPane.getChildren().add(cercleSoldat);
 
-        System.out.println("nouveau soldat");
     }
-
-
-
-
 
 
     public int[] randomSelection() {
+        int[] resultat = new int[4];
 
-            int[] resultat = new int[2];
+        int[][] possibleStartPositions = {
+                {14, 59},
+                {15, 59},
+                {16, 59},
+                {2, 27},
+                {2, 28},
+                {2, 29}
+        };
 
-            int[] possibleStartX = {14, 15, 16}; // startY = 59
-            int[] possibleDestX = {88, 89, 90}; // destY = 47
+        int[][] possibleDestPositions = {
+                {88, 47},
+                {89, 47},
+                {90, 47}
+        };
 
-            Random random = new Random();
+        Random random = new Random();
 
-            int randomStartX = possibleStartX[random.nextInt(possibleStartX.length)];
-            int randomDestX = possibleDestX[random.nextInt(possibleDestX.length)];
+        int[] randomStartPosition = possibleStartPositions[random.nextInt(possibleStartPositions.length)];
+        int[] randomDestPosition = possibleDestPositions[random.nextInt(possibleDestPositions.length)];
 
-            resultat[0] = randomStartX;
-            resultat[1] = randomDestX;
+        resultat[0] = randomStartPosition[0];
+        resultat[1] = randomStartPosition[1];
+        resultat[2] = randomDestPosition[0];
+        resultat[3] = randomDestPosition[1];
 
-            return resultat;
-
+        return resultat;
     }
-
-
-
-
 
 
     public void enleverSoldats() {
         centerPane.getChildren().removeIf(node -> node instanceof Circle && ((Circle) node).getFill() == Color.RED);
     }
-
-
-
-
 
 
 }

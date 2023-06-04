@@ -1,7 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import javafx.beans.property.ListProperty;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class EcouteSoldats {
-
 
 
     private ListProperty<Soldat> listeSoldat;
@@ -63,21 +61,14 @@ public class EcouteSoldats {
     }
 
     private void miseAJourSpriteSoldat(Soldat soldat, int x, int y) {
-        if (soldat instanceof Soldat) {
+        Map<Soldat, Circle> mapSoldatsCercles = terrain.getMapSoldatsCercles();
+        Circle cercleSoldat = mapSoldatsCercles.get(soldat);
 
-            Map<Soldat, Circle> mapRookiesCercles = terrain.getMapSoldatsCercles(); //  la HashMap des Rookies et leurs cercles
-
-            Rookie rookie = (Rookie) soldat;
-            Circle cercleRookie = mapRookiesCercles.get(rookie); // Récup le cercle correspondant au Rookie
-
-            if (cercleRookie != null) {
-                // Mettre à jour les coordonnées du cercle du Rookie modifié
-                cercleRookie.setCenterX(x);
-                cercleRookie.setCenterY(y);
-            }
+        if (cercleSoldat != null) {
+            cercleSoldat.setCenterX(x);
+            cercleSoldat.setCenterY(y);
         }
     }
-
 
 
 }

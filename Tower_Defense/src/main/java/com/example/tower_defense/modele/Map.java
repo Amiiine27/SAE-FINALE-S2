@@ -38,23 +38,24 @@ public class Map {
                 {3, 1, 10, 4, 4, 9, 0, 0, 0, 0, 0},
                 {3, 1, 1, 1, 1, 10, 4, 4, 4, 4, 9},
                 {6, 2, 2, 11, 1, 1, 1, 1, 1, 1, 5}
-            };
+        };
         piratesArrives = new ArrayList<Pirate>();
         nbPiratesArrives = 0;
     }
 
-    public int getYmax(){
+    public int getYmax() {
         return this.quadrillage.length;
     }
 
-    public int getXmax(){
+    public int getXmax() {
         return this.quadrillage[0].length;
     }
 
-    public int valeurDeLaCase(int i, int j){
+    public int valeurDeLaCase(int i, int j) {
         return this.quadrillage[i][j];
     }
-    public void ajouterPirate(Pirate p){
+
+    public void ajouterPirate(Pirate p) {
         piratesArrives.add(p);
     }
 }

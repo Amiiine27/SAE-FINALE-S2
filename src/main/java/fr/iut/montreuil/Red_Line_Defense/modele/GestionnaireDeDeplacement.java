@@ -19,10 +19,10 @@ public class GestionnaireDeDeplacement {
 
 
     public List<Point2D> trouverChemin(Soldat soldat) {
-        int startX = (int) (soldat.getX0Value() /8);
-        int startY = (int) (soldat.getY0Value() /8);
-        int destX = (int) (soldat.getDestinationX() /8);
-        int destY = (int) (soldat.getDestinationY() /8);
+        int startX = (int) (soldat.getX0Value() / 8);
+        int startY = (int) (soldat.getY0Value() / 8);
+        int destX = (int) (soldat.getDestinationX() / 8);
+        int destY = (int) (soldat.getDestinationY() / 8);
 
 
         List<Point2D> chemin = new ArrayList<>();

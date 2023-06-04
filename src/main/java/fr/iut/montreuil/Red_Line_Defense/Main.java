@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
@@ -21,10 +25,5 @@ public class Main extends Application {
         ControleurMP controleur = loader.getController();
         controleur.initialize(null, null); // Appeler la méthode initialize du contrôleur après l'affichage de la scène
 
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

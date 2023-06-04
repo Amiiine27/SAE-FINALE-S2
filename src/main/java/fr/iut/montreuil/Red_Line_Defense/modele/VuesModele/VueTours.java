@@ -26,14 +26,10 @@ public class VueTours {
     public static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour-surbrillance.png";
 
 
-
-
-
     private Carte terrain;
 
     @FXML
     private Pane centerPane;
-
 
 
     private String idTourClicked = "0";
@@ -47,6 +43,8 @@ public class VueTours {
     public void positionTour(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
+
+        System.out.println("x" + x + " y" + y);
 
         if (idTourClicked.equals("0")) {
             // Aucune tour sélectionnée, afficher un message d'erreur
@@ -77,14 +75,12 @@ public class VueTours {
     }
 
 
-
     private ImageView createTourImageView(double x, double y) {
         ImageView maTour = new ImageView(loadImage(TOWER_MAP_IMAGE_PATH));
         maTour.setX(x - 14);
         maTour.setY(y - 17.5);
         return maTour;
     }
-
 
 
     private boolean tourPosable(double x, double y) {
@@ -95,8 +91,8 @@ public class VueTours {
         if (mapX >= 0 && mapX < terrain.getXmax() && mapY >= 0 && mapY < terrain.getYmax() && terrain.valeurDeLaCase(mapY, mapX) == 0) {
             // Vérifier si aucune tour n'est déjà positionnée sur cette case
             for (Tour tour : terrain.getTours()) {
-                if (((int)(tour.getX0Value() / 8) == mapX) && ((int)(tour.getY0Value() / 8) == mapY)) {
-                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " ("+ ((int)tour.getX0Value()/8 ) +") " + tour.getY0Value() + " ("+ ((int)tour.getY0Value()/8) + ") ");
+                if (((int) (tour.getX0Value() / 8) == mapX) && ((int) (tour.getY0Value() / 8) == mapY)) {
+                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
                     return false; // Une tour est déjà positionnée sur cette case
                 }
             }

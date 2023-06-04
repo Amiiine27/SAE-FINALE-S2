@@ -21,9 +21,10 @@ public class Controleur implements Initializable {
         terrain = new Map();
         remplissage();
     }
-    public void remplissage(){
-        for (int i=0; i<terrain.getYmax(); i++){
-            for (int j=0; j<terrain.getXmax();j++) {
+
+    public void remplissage() {
+        for (int i = 0; i < terrain.getYmax(); i++) {
+            for (int j = 0; j < terrain.getXmax(); j++) {
                 int n = terrain.valeurDeLaCase(i, j);
                 ImageView myImageView = new ImageView();
                 URL herbeVierge = getClass().getResource("herbeVierge.png");
@@ -57,44 +58,31 @@ public class Controleur implements Initializable {
 
                 if (n == 0) {
                     myImageView.setImage(imgHerbeVierge);
-                }
-                else if (n == 1) {
+                } else if (n == 1) {
                     myImageView.setImage(imgChemin);
-                }
-                else if (n == 2) {
+                } else if (n == 2) {
                     myImageView.setImage(imgHerbeLimiteHaut);
-                }
-                else if (n == 3) {
+                } else if (n == 3) {
                     myImageView.setImage(imgHerbeLimiteDroite);
-                }
-                else if (n == 4) {
+                } else if (n == 4) {
                     myImageView.setImage(imgHerbeLimiteBas);
-                }
-                else if (n == 5) {
+                } else if (n == 5) {
                     myImageView.setImage(imgHerbeLimiteGauche);
-                }
-                else if (n == 6) {
+                } else if (n == 6) {
                     myImageView.setImage(imgHerbeCoinHautDroite);
-                }
-                else if (n == 7) {
+                } else if (n == 7) {
                     myImageView.setImage(imgHerbeCoinHautGauche);
-                }
-                else if (n == 8) {
+                } else if (n == 8) {
                     myImageView.setImage(imgHerbeCoinBasDroite);
-                }
-                else if (n == 9) {
+                } else if (n == 9) {
                     myImageView.setImage(imgHerbeCoinBasGauche);
-                }
-                else if (n == 10) {
+                } else if (n == 10) {
                     myImageView.setImage(imgHerbeAngleBasGauche);
-                }
-                else if (n == 11) {
+                } else if (n == 11) {
                     myImageView.setImage(imgHerbeAngleHautDroite);
-                }
-                else if (n == 12) {
+                } else if (n == 12) {
                     myImageView.setImage(imgHerbeAngleHautGauche);
-                }
-                else if (n == 13) {
+                } else if (n == 13) {
                     myImageView.setImage(imgHerbeAngleBasDroite);
                 }
 

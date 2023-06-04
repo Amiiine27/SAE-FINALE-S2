@@ -6,12 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-public abstract class ToursOffensives extends Tour{
+public abstract class ToursOffensives extends Tour {
 
     private IntegerProperty cadence; // La cadence est la capacité de Tirs par minute
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
-    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense,int prix, int x1, int y1, int cadence) {
+    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, int x1, int y1, int cadence) {
         super(x0, y0, pointsDeVie, degats, defense, prix, x1, y1);
 
         this.cadence = new SimpleIntegerProperty(cadence);
@@ -50,7 +50,7 @@ public abstract class ToursOffensives extends Tour{
         double dy = this.getY1Value() - this.getY0Value();
 
         // Calculer la distance entre les deux points
-        double distance = Math.sqrt(dx*dx + dy*dy);
+        double distance = Math.sqrt(dx * dx + dy * dy);
 
         // Calcul du vecteur unitaire
         double directionX = dx / distance;
@@ -71,7 +71,7 @@ public abstract class ToursOffensives extends Tour{
         double dy = this.getY1Value() - this.getY0Value();
 
         // Calculer la distance entre les deux points
-        double distance = Math.sqrt(dx*dx + dy*dy);
+        double distance = Math.sqrt(dx * dx + dy * dy);
 
         // Normaliser la différence pour obtenir un vecteur unitaire
         double directionX = dx / distance;

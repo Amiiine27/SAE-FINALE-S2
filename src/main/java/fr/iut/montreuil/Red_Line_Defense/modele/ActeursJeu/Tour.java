@@ -20,7 +20,7 @@ public abstract class Tour extends Acteurs {
         this.prix = new SimpleIntegerProperty(prix);
 
 
-       // initialiserLongueur();
+        // initialiserLongueur();
     }
 
     public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int x1, int y1) {
@@ -29,7 +29,7 @@ public abstract class Tour extends Acteurs {
         this.X1 = new SimpleIntegerProperty(x1);
         this.Y1 = new SimpleIntegerProperty(y1);
 
-       //initialiserLongueur();
+        //initialiserLongueur();
 
     }
 
@@ -48,13 +48,14 @@ public abstract class Tour extends Acteurs {
     } */
 
 
-
-
-
-
     // Getter X1
     public int getX1Value() {
         return this.X1.getValue();
+    }
+
+    // Setter X1
+    public void setX1Value(int val) {
+        this.X1.setValue(val);
     }
 
     public IntegerProperty getX1Property() {
@@ -66,6 +67,11 @@ public abstract class Tour extends Acteurs {
         return this.Y1.getValue();
     }
 
+    // Setter Y1
+    public void setY1Value(int val) {
+        this.Y1.setValue(val);
+    }
+
     public IntegerProperty getY1Property() {
         return this.Y1;
     }
@@ -73,6 +79,11 @@ public abstract class Tour extends Acteurs {
     // Getter Prix
     public int getPrixValue() {
         return this.prix.getValue();
+    }
+
+    // Setter Prix
+    public void setPrixValue(int val) {
+        this.prix.setValue(val);
     }
 
     public IntegerProperty getPrixProperty() {
@@ -86,21 +97,6 @@ public abstract class Tour extends Acteurs {
 
     public IntegerProperty getLongueurProperty() {
         return this.longueur;
-    }
-
-    // Setter X1
-    public void setX1Value(int val) {
-        this.X1.setValue(val);
-    }
-
-    // Setter Y1
-    public void setY1Value(int val) {
-        this.Y1.setValue(val);
-    }
-
-    // Setter Prix
-    public void setPrixValue(int val) {
-        this.prix.setValue(val);
     }
 
     // Setter Longueur

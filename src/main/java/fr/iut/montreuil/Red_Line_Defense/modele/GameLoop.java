@@ -8,15 +8,12 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GameLoop {
-    private  Carte terrain;
+    private Carte terrain;
     private Timeline timeline;
     private Pane centerPane;
     private int tailleImage = 8;
@@ -25,40 +22,45 @@ public class GameLoop {
 
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
-
-    public GameLoop(Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement, VueSoldats vueSoldats, Carte terrain) {
+    public GameLoop(Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement,
+                    VueSoldats vueSoldats, Carte terrain) {
         this.centerPane = centerPane;
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.timeline = new Timeline();
         creerAnimation();
+        timeline.play();
+
+        System.out.println("1");
     }
 
     public void creerAnimation() {
-        deplacerSoldats(terrain);
-        timeline.play();
-    }
-
-    public void deplacerSoldats(Carte terrain) {
-
         ObservableList<Soldat> listeSoldats = terrain.getSoldats();
 
+        System.out.println("2");
 
         for (Soldat soldat : listeSoldats) {
             List<Point2D> chemin = gestionnaireDeDeplacement.trouverChemin(soldat);
 
-            for (int i = 0; i < chemin.size(); i++) {
+            System.out.println("3");
+
+            double dureeTotale = 0.5 * chemin.size(); // Durée totale de l'animation en secondes
+
+            for (int i = 0; i < chemin.size() - 1; i++) {
+                System.out.println("4");
                 Point2D point = chemin.get(i);
+                Duration duree = Duration.seconds(dureeTotale * i / chemin.size());
 
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5 * i),
-                        event -> {
-                            soldat.setPosition(point.getX() * tailleImage, point.getY() * tailleImage);
-                        });
+                KeyValue keyValueX = new KeyValue(soldat.getX0Property(), point.getX() * tailleImage);
+                KeyValue keyValueY = new KeyValue(soldat.getY0Property(), point.getY() * tailleImage);
 
+                KeyFrame keyFrame = new KeyFrame(duree, keyValueX, keyValueY);
                 timeline.getKeyFrames().add(keyFrame);
+                System.out.println("5");
             }
-        }
 
+            System.out.println("6");
+        }
     }
 }

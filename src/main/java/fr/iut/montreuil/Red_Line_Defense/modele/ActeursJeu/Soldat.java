@@ -1,7 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 
-
 public abstract class Soldat extends Acteurs {
 
     private boolean ennemi;
@@ -40,14 +39,16 @@ public abstract class Soldat extends Acteurs {
 
     public int valeurGagnee() {
 
-       return this.valeur;
+        return this.valeur;
     }
 
-    public double getDestinationX() {  return this.destinationX;
-    }
-    public double getDestinationY() {  return this.destinationY;
+    public double getDestinationX() {
+        return this.destinationX;
     }
 
+    public double getDestinationY() {
+        return this.destinationY;
+    }
 
 
 }

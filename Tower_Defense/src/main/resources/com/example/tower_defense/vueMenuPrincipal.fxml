@@ -7,18 +7,21 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tower_defense.ControleurMP">
-   <center>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="170.0" layoutY="42.0" prefHeight="77.0" prefWidth="260.0" text="RED LINE DEFENSE !!">
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Label>
-            <Button fx:id="lanceur" layoutX="270.0" layoutY="242.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="!" />
-            <Label layoutX="251.0" layoutY="200.0" prefHeight="23.0" prefWidth="116.0" text="Clique ici pour jouer" textAlignment="CENTER" />
-         </children>
-      </AnchorPane>
-   </center>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19"
+            fx:controller="com.example.tower_defense.ControleurMP">
+    <center>
+        <AnchorPane prefHeight="400.0" prefWidth="600.0">
+            <children>
+                <Label layoutX="170.0" layoutY="42.0" prefHeight="77.0" prefWidth="260.0" text="RED LINE DEFENSE !!">
+                    <font>
+                        <Font size="28.0"/>
+                    </font>
+                </Label>
+                <Button fx:id="lanceur" layoutX="270.0" layoutY="242.0" mnemonicParsing="false" prefHeight="26.0"
+                        prefWidth="60.0" text="!"/>
+                <Label layoutX="251.0" layoutY="200.0" prefHeight="23.0" prefWidth="116.0" text="Clique ici pour jouer"
+                       textAlignment="CENTER"/>
+            </children>
+        </AnchorPane>
+    </center>
 </BorderPane>

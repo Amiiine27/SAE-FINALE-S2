@@ -2,6 +2,7 @@ package com.example.tower_defense;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,9 +27,9 @@ public class ControleurMP implements Initializable {
     private Stage stage;
     private Parent root;
 
-    public void switchSceneDeJeu(ActionEvent event) throws IOException{
+    public void switchSceneDeJeu(ActionEvent event) throws IOException {
         // root = FXMLLoader.Load(getClass().getResource("vueDeJeu.fxml"));
-        
+
     }
 
     @Override

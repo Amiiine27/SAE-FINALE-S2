@@ -1,8 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
-import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.EcouteSoldats;
+import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
@@ -15,22 +14,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
-
-    private static final String HERBE_VIERGE_IMAGE_PATH = "Images/herbeVierge.png";
-    private static final String CHEMIN_IMAGE_PATH = "Images/chemin.png";
-
-
-
-
-    private Carte terrain;
     private final int tailleImage = 8;
-
+    private Carte terrain;
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
     private GameLoop gameLoop;
-    private  List<Point2D> chemin;
+    private List<Point2D> chemin;
 
     private VueTours vueTours;
 
@@ -39,17 +31,32 @@ public class Controleur implements Initializable {
     private Pane centerPane;
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("Lancement ...");
+
+        System.out.println("Création de la carte ...");
         terrain = new Carte();
+
+        System.out.println("Remplissage de la carte ...");
         remplissage();
+
+        System.out.println("Initialisation du Gestionnaire De Deplacements ...");
         gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
+
+        System.out.println("Ajouts des Listeners Soldats ...");
         new EcouteSoldats(terrain, (terrain.getSoldatsProperty()));
+
+        System.out.println("Affichage des Soldats ...");
         vueSoldats = new VueSoldats(terrain, centerPane, gestionnaireDeDeplacement);
+
+        System.out.println("Initialisation de la GameLoop ...");
         gameLoop = new GameLoop(centerPane, gestionnaireDeDeplacement, vueSoldats, terrain);
+
+        System.out.println("Intialisation des tours ...");
         vueTours = new VueTours(terrain, centerPane);
+
+        System.out.println("Fin !");
     }
 
 
@@ -79,11 +86,11 @@ public class Controleur implements Initializable {
     }
 
 
-    public void positionTour(MouseEvent event){
+    public void positionTour(MouseEvent event) {
         vueTours.positionTour(event);
     }
 
-    public void selectionTour(MouseEvent event){
+    public void selectionTour(MouseEvent event) {
         vueTours.selectionTour(event);
     }
 
