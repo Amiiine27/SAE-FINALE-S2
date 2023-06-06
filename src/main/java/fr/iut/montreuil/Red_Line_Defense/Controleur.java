@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
@@ -98,6 +99,8 @@ public class Controleur implements Initializable {
             maTour.setImage(imgTour);
             maTour.setX(x);
             maTour.setY(y);
+            Tour tourM =new Tour(x,y,200,25,100);
+            terrain.ajouterTour(tourM);
             centerPane.getChildren().add(maTour);
             tour200b.setImage(simple);
         }
