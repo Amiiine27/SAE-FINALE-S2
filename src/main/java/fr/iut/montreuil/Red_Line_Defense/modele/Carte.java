@@ -3,6 +3,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.ennemi.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.projectile.Projectile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ public class Carte {
 
     private ListProperty<Tour> tours;
     private ListProperty<Soldat> soldats;
+
+    private ListProperty<Projectile> projectiles;
 
 
 
@@ -117,7 +120,13 @@ public class Carte {
     public ListProperty<Soldat> getSoldatsProperty() { return this.soldats; }       // Retourne la liste observable
     public ObservableList<Soldat> getSoldats() { return this.soldats.get(); }       // Retourne la property qui contient la liste observable
 
+    public void ajouterProjectile(Projectile projectile){ this.projectiles.add(projectile);}
 
+    public void supprimerProjectile(Projectile projectile) { this.projectiles.remove(projectile);}
+
+    public ListProperty<Projectile> getProjectilesProperty(){ return this.projectiles;}
+
+    public ObservableList<Projectile> getProjectiles(){return this.projectiles.get();}
 
 
 

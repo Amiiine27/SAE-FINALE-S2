@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -11,6 +12,8 @@ public abstract class Acteurs {
     private DoubleProperty X0, Y0; // position de l'axe de rotation
     private IntegerProperty pointsDeVie;
     private IntegerProperty defense; // pourcentage de réduction des dégats
+
+    protected Carte terrain;
 
 
 
@@ -24,6 +27,8 @@ public abstract class Acteurs {
         // Statistiques
         this.pointsDeVie = new SimpleIntegerProperty(pointsDeVie);
         this.defense = new SimpleIntegerProperty(defense);
+
+        //this.terrain=terrain;
 
 
     }

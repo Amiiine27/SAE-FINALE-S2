@@ -1,9 +1,13 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour.TourOffensif;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.ennemi.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.modele.Animation;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -14,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 
@@ -99,7 +105,7 @@ public class Controleur implements Initializable {
             maTour.setImage(imgTour);
             maTour.setX(x);
             maTour.setY(y);
-            Tour tourM =new Tour(x,y,200,25,100);
+            Tour tourM = new TourOffensif(x,y,200,25,100);
             terrain.ajouterTour(tourM);
             centerPane.getChildren().add(maTour);
             tour200b.setImage(simple);
@@ -256,20 +262,23 @@ public class Controleur implements Initializable {
     }
 
 
+    public void animationTest(){
 
+        Circle cercle = new Circle(10);
+        Soldat ennemiTest = new Rookie(200,200,800,0);
+        cercle.centerXProperty().bind(ennemiTest.getX0Property());
+        cercle.centerYProperty().bind(ennemiTest.getY0Property());
+        centerPane.getChildren().add(cercle);
+        terrain.ajouterSoldat(ennemiTest);
+        AnimationTimer timer = new AnimationTimer() {
+            private long lastUpdate = 0;
 
+            @Override
+            public void handle(long now) {
+                ennemiTest.deplacer(800,0);
+            }
+        };
+        timer.start();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    }
