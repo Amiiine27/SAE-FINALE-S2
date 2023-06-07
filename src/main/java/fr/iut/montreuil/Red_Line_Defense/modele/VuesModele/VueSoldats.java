@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import javafx.scene.layout.Pane;
@@ -24,39 +25,50 @@ public class VueSoldats {
         this.terrain = terrain;
         this.centerPane = centerPane;
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
-        nouvelleVague();
+    }
+
+    public Soldat afficherSoldat(double startX, double startY) {
+        Soldat s = new Rookie((int) startX, (int) startY, 89, 47);
+        terrain.ajouterSoldat(s);
+        System.out.println("Soldat créé et ajouté au terrain : " + s);
+
+        Circle cercleSoldat = new Circle(4, Color.DARKORCHID);
+        System.out.println("Cercle créé pour le soldat : " + cercleSoldat);
+
+        cercleSoldat.centerXProperty().bind(s.getX0Property());
+        cercleSoldat.centerYProperty().bind(s.getY0Property());
+
+        centerPane.getChildren().add(cercleSoldat);
+        System.out.println("Cercle ajouté au pane. Total des cercles : " + centerPane.getChildren().size());
+
+        return s;
     }
 
 
-    public void nouvelleVague() {
 
-        if (vague == 1) {
-            for (int i = 0; i < 7; i++) {
+
+
+    public Soldat nouvelleVague() {
+
                 int[] randomSelection = randomSelection();
                 int startX = randomSelection[0] * 8;
                 int startY = randomSelection[1] * 8;
 
-                int destX = randomSelection[2] * 8;
-                int destY = randomSelection[3] * 8;
+                Soldat soldat = afficherSoldat(startX, startY);
 
 
-                afficherRookie(startX, startY, destX, destY);
-            }
+
+                return soldat;
+
+
+            // Après avoir créé tous les soldats, calculez le chemin pour eux.
+            // Assume que destX et destY sont les coordonnées de la destination.
+
+
         }
 
-    }
 
 
-    public void afficherRookie(double startX, double startY, double destX, double destY) {
-        Rookie rookie = new Rookie((int) startX, (int) startY, (int) destX, (int) destY);
-        terrain.ajouterSoldat(rookie);
-
-        Circle cercleSoldat = new Circle(startX, startY, 4, Color.BLUE);
-
-        terrain.getMapSoldatsCercles().put(rookie, cercleSoldat); // Associer le Rookie à son cercle correspondant dans la HashMap
-        centerPane.getChildren().add(cercleSoldat);
-
-    }
 
 
     public int[] randomSelection() {
@@ -72,9 +84,7 @@ public class VueSoldats {
         };
 
         int[][] possibleDestPositions = {
-                {88, 47},
-                {89, 47},
-                {90, 47}
+                {89, 47}
         };
 
         Random random = new Random();
@@ -91,9 +101,6 @@ public class VueSoldats {
     }
 
 
-    public void enleverSoldats() {
-        centerPane.getChildren().removeIf(node -> node instanceof Circle && ((Circle) node).getFill() == Color.RED);
-    }
 
 
 }

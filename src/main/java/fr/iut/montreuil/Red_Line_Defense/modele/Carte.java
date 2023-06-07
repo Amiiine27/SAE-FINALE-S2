@@ -15,9 +15,6 @@ public class Carte {
 
     private int[][] quadrillage;
 
-    private Map<Soldat, Circle> mapSoldatsCercles;
-
-
     private ListProperty<Tour> tours;
     private ListProperty<Soldat> listeSoldats;
 
@@ -93,7 +90,7 @@ public class Carte {
         ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
         listeSoldats = new SimpleListProperty<>(observableListSoldat);
 
-        mapSoldatsCercles = new HashMap<>();
+
     }
 
 
@@ -147,23 +144,7 @@ public class Carte {
         return this.listeSoldats.get();
     }       // Retourne la property qui contient la liste observable
 
-    public Map<Soldat, Circle> getMapSoldatsCercles() {
-        return this.mapSoldatsCercles;
-    }
 
-
-    public Circle getAssociatedCircle(Soldat soldat) {
-        return mapSoldatsCercles.get(soldat);
-    }
-
-    public Soldat getAssociatedSoldat(Circle circle) {
-        for (Map.Entry<Soldat, Circle> entry : mapSoldatsCercles.entrySet()) {
-            if (entry.getValue().equals(circle)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
 
 
 }

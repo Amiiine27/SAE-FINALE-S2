@@ -8,61 +8,70 @@ import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
-    private final int tailleImage = 8;
+    private static final int TAILLE_IMAGE = 8;
+
+    @FXML
+    private Button lancerButton;
+
     private Carte terrain;
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
     private GameLoop gameLoop;
-    private List<Point2D> chemin;
-
     private VueTours vueTours;
-
     private VueSoldats vueSoldats;
+
     @FXML
     private Pane centerPane;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Lancement ...");
-
-        System.out.println("Création de la carte ...");
-        terrain = new Carte();
-
-        System.out.println("Remplissage de la carte ...");
-        remplissage();
-
-        System.out.println("Initialisation du Gestionnaire De Deplacements ...");
-        gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, tailleImage, centerPane);
-
-        System.out.println("Ajouts des Listeners Soldats ...");
-        new EcouteSoldats(terrain, (terrain.getSoldatsProperty()));
-
-        System.out.println("Affichage des Soldats ...");
-        vueSoldats = new VueSoldats(terrain, centerPane, gestionnaireDeDeplacement);
-
-        System.out.println("Initialisation de la GameLoop ...");
-        gameLoop = new GameLoop(centerPane, gestionnaireDeDeplacement, vueSoldats, terrain);
-
-        System.out.println("Intialisation des tours ...");
-        vueTours = new VueTours(terrain, centerPane);
-
-        System.out.println("Fin !");
+        initializeCarte();
+        initializeGestionnaireDeDeplacement();
     }
 
+    private void initializeCarte() {
+        terrain = new Carte();
+        remplissage();
+    }
+
+    @FXML
+    private void lancerTours() {
+        initializeVueTours();
+        initializeVueSoldats();
+        initializeGameLoop();
+    }
+
+    private void initializeGestionnaireDeDeplacement() {
+        gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, TAILLE_IMAGE, centerPane);
+    }
+
+    private void initializeVueTours() {
+        vueTours = new VueTours(terrain, centerPane);
+    }
+
+    private void initializeVueSoldats() {
+        vueSoldats = new VueSoldats(terrain, centerPane, gestionnaireDeDeplacement);
+    }
+
+    private void initializeGameLoop() {
+        gameLoop = new GameLoop(centerPane, gestionnaireDeDeplacement, vueSoldats, terrain);
+    }
 
     private void remplissage() {
-        for (int i = 0; i < terrain.getYmax(); i++) {
-            for (int j = 0; j < terrain.getXmax(); j++) {
+        int xmax = terrain.getXmax();
+        int ymax = terrain.getYmax();
+
+        for (int i = 0; i < ymax; i++) {
+            for (int j = 0; j < xmax; j++) {
                 centerPane.getChildren().add(createTerrainImageView(i, j));
             }
         }
@@ -71,8 +80,8 @@ public class Controleur implements Initializable {
     private ImageView createTerrainImageView(int i, int j) {
         int n = terrain.valeurDeLaCase(i, j);
         ImageView imageView = new ImageView(getTerrainImage(n));
-        imageView.setTranslateX(j * tailleImage);
-        imageView.setTranslateY(i * tailleImage);
+        imageView.setTranslateX(j * TAILLE_IMAGE);
+        imageView.setTranslateY(i * TAILLE_IMAGE);
         return imageView;
     }
 
@@ -85,7 +94,6 @@ public class Controleur implements Initializable {
         }
     }
 
-
     public void positionTour(MouseEvent event) {
         vueTours.positionTour(event);
     }
@@ -96,7 +104,5 @@ public class Controleur implements Initializable {
 
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));
-
     }
-
 }

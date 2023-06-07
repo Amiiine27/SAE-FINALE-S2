@@ -1,4 +1,7 @@
+/*
+
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
+
 
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
@@ -72,3 +75,4 @@ public class EcouteSoldats {
 
 
 }
+*/

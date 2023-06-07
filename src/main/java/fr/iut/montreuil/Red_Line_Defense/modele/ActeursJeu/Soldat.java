@@ -1,12 +1,20 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 
+import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+import javafx.geometry.Point2D;
+
+import java.util.List;
+
 public abstract class Soldat extends Acteurs {
 
     private boolean ennemi;
     private int vieInitiale;
 
     private double destinationX, destinationY;
+
+    private List<Point2D> chemin;
+    private int pathPosition = 0;
 
     private int valeur; // valeur du soldat, permet de déterminer combien le joueur gagne en le tuant
 
@@ -25,17 +33,7 @@ public abstract class Soldat extends Acteurs {
         this.destinationY = destinationY;
     }
 
-    public void deplacer(int deltaX, int deltaY) {
 
-        // Calcul nouvelles coordonnées
-        double newX = this.getX0Value() + deltaX;
-        double newY = this.getY0Value() + deltaY;
-
-
-        // Mettre à jour les coordonnées de l'acteur
-        setX0(newX);
-        setY0(newY);
-    }
 
     public int valeurGagnee() {
 
@@ -49,6 +47,7 @@ public abstract class Soldat extends Acteurs {
     public double getDestinationY() {
         return this.destinationY;
     }
+
 
 
 }

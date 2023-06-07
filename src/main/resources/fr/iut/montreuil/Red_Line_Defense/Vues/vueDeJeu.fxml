@@ -21,6 +21,9 @@
                         <Font size="20.0"/>
                     </font>
                 </Label>
+
+                <Button fx:id="lancerButton" text="Lancer" onAction="#lancerTours"/>
+
             </VBox>
             <VBox fx:id="vboxMoneyCount" prefWidth="100.00" prefHeight="160.00">
                 <Label text="213 B"/>
@@ -32,8 +35,8 @@
         </VBox>
     </right>
     <bottom>
-        <HBox maxHeight="100.00" minHeight="100.00" prefWidth="560.00">
-            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="100.0" prefWidth="120.0"
+        <HBox maxHeight="80.00" minHeight="80.00" prefWidth="560.00">
+            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="90.0" prefWidth="120.0"
                   styleClass="box">
                 <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"
                            styleClass="tour" onMouseClicked="#selectionTour">

@@ -13,6 +13,9 @@ import javafx.util.Duration;
 import java.util.List;
 
 public class GameLoop {
+
+    private int indexSoldat = 0;
+    private List<Soldat> soldats;
     private Carte terrain;
     private Timeline timeline;
     private Pane centerPane;
@@ -29,38 +32,29 @@ public class GameLoop {
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.timeline = new Timeline();
+        this.soldats = terrain.getSoldats();
         creerAnimation();
-        timeline.play();
 
-        System.out.println("1");
     }
 
     public void creerAnimation() {
-        ObservableList<Soldat> listeSoldats = terrain.getSoldats();
-
-        System.out.println("2");
-
-        for (Soldat soldat : listeSoldats) {
-            List<Point2D> chemin = gestionnaireDeDeplacement.trouverChemin(soldat);
-
-            System.out.println("3");
-
-            double dureeTotale = 0.5 * chemin.size(); // Durée totale de l'animation en secondes
-
-            for (int i = 0; i < chemin.size() - 1; i++) {
-                System.out.println("4");
-                Point2D point = chemin.get(i);
-                Duration duree = Duration.seconds(dureeTotale * i / chemin.size());
-
-                KeyValue keyValueX = new KeyValue(soldat.getX0Property(), point.getX() * tailleImage);
-                KeyValue keyValueY = new KeyValue(soldat.getY0Property(), point.getY() * tailleImage);
-
-                KeyFrame keyFrame = new KeyFrame(duree, keyValueX, keyValueY);
-                timeline.getKeyFrames().add(keyFrame);
-                System.out.println("5");
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), event -> {  // 60 FPS
+                Soldat s = vueSoldats.nouvelleVague();
+            for (Soldat soldat: soldats){
+                gestionnaireDeDeplacement.deplacerSoldat(soldat);
             }
-
-            System.out.println("6");
-        }
+        });
+        this.timeline.getKeyFrames().add(keyFrame);
+        this.timeline.setCycleCount(Timeline.INDEFINITE);
+        this.timeline.play();
     }
+
+
+
+
+
+
+
+
 }
+

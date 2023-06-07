@@ -11,42 +11,35 @@ public class GestionnaireDeDeplacement {
     private int tailleImage;
     private Pane centerPane;
 
+
+    private int[][] distances;  // Ajout d'un tableau de distances
+
     public GestionnaireDeDeplacement(Carte carte, int tailleImage, Pane centerPane) {
         this.carte = carte;
         this.tailleImage = tailleImage;
         this.centerPane = centerPane;
+        this.distances = new int[carte.getYmax()][carte.getXmax()];  // Initialisation du tableau de distances
+        calculerChemin(89, 47);
     }
 
 
-    public List<Point2D> trouverChemin(Soldat soldat) {
-        int startX = (int) (soldat.getX0Value() / 8);
-        int startY = (int) (soldat.getY0Value() / 8);
-        int destX = (int) (soldat.getDestinationX() / 8);
-        int destY = (int) (soldat.getDestinationY() / 8);
+    public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
 
+        System.out.println("Calcul du chemin ");
 
-        List<Point2D> chemin = new ArrayList<>();
-        int[][] distances = new int[carte.getYmax()][carte.getXmax()];
         boolean[][] visited = new boolean[carte.getYmax()][carte.getXmax()];
 
         Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(startX);
-        queue.offer(startY);
-        visited[startY][startX] = true;
+        queue.offer(destX);
+        queue.offer(destY);
+        visited[destY][destX] = true;
 
         int[] dx = {0, 0, -1, 1};
         int[] dy = {-1, 1, 0, 0};
-        Point2D point = new Point2D(0, 0);
 
         while (!queue.isEmpty()) {
             int x = queue.poll();
             int y = queue.poll();
-
-            if (x == destX && y == destY) {
-                point = new Point2D(x, y);
-                chemin.add(point);
-                break;  // Destination reached
-            }
 
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
@@ -61,29 +54,40 @@ public class GestionnaireDeDeplacement {
             }
         }
 
-        int currentX = destX;
-        int currentY = destY;
+        System.out.println("Calcul du chemin OK ");
+    }
 
-        while (currentX != startX || currentY != startY) {
-            for (int i = 0; i < 4; i++) {
-                int nx = currentX + dx[i];
-                int ny = currentY + dy[i];
+    public void deplacerSoldat(Soldat soldat) {
+        int startX = (int) (soldat.getX0Value() / tailleImage);
+        int startY = (int) (soldat.getY0Value() / tailleImage);
 
-                if (isValidMove(nx, ny) && distances[ny][nx] == distances[currentY][currentX] - 1) {
-                    point = new Point2D(nx, ny);
-                    chemin.add(point);
-                    currentX = nx;
-                    currentY = ny;
-                    break;
-                }
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {-1, 1, 0, 0};
+
+        int nextX = startX;
+        int nextY = startY;
+        int minDistance = Integer.MAX_VALUE;
+
+
+        for (int i = 0; i < 4; i++) {
+            int nx = startX + dx[i];
+            int ny = startY + dy[i];
+
+
+            if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
+                nextX = nx;
+                nextY = ny;
+                minDistance = distances[ny][nx];
             }
         }
 
-        Collections.reverse(chemin);
-        return chemin;
+
+        soldat.setX0(nextX * tailleImage);
+        soldat.setY0(nextY * tailleImage);
     }
 
     private boolean isValidMove(int x, int y) {
-        return x >= 0 && x < carte.getXmax() && y >= 0 && y < carte.getYmax() && carte.valeurDeLaCase(y, x) == 1;
+        return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && carte.valeurDeLaCase(y, x) == 1;
     }
 }
+
