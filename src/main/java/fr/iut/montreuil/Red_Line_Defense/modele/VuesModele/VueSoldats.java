@@ -56,8 +56,6 @@ public class VueSoldats {
 
                 Soldat soldat = afficherSoldat(startX, startY);
 
-
-
                 return soldat;
 
 
