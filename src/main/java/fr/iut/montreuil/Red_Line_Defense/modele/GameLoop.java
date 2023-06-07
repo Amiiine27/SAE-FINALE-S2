@@ -38,7 +38,7 @@ public class GameLoop {
     }
 
     public void creerAnimation() {
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.01), event -> {  // 60 FPS
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {  // 60 FPS
                 Soldat s = vueSoldats.nouvelleVague();
             for (Soldat soldat: soldats){
                 gestionnaireDeDeplacement.deplacerSoldat(soldat);
