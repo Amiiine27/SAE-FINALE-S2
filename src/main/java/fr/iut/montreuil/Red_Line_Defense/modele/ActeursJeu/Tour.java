@@ -33,6 +33,10 @@ public abstract class Tour extends Acteurs {
 
     }
 
+    public Tour(double x0, double y0, int pv){
+        super(x0, y0, pv);
+    }
+
     /* public void initialiserLongueur() {
 
         // Calculer la distance entre (X0, Y0) et (X1, Y1)
