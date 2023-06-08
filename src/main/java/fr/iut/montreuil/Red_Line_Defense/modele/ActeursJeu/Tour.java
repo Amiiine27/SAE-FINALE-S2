@@ -104,5 +104,7 @@ public abstract class Tour extends Acteurs {
         this.longueur.setValue(val);
     }
 
-
+    public boolean estEnVie(){
+        return this.getPointsDeVieValue()>0;
+    }
 }
