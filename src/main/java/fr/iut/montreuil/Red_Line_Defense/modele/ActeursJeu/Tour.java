@@ -107,4 +107,5 @@ public abstract class Tour extends Acteurs {
     public boolean estEnVie(){
         return this.getPointsDeVieValue()>0;
     }
+
 }

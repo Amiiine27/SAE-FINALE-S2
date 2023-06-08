@@ -35,6 +35,12 @@ public abstract class Acteurs {
         this.Y0 = new SimpleDoubleProperty(y0);
     }
 
+    public Acteurs(double x0, double y0, int pv){
+        this.X0 = new SimpleDoubleProperty(x0);
+        this.Y0 = new SimpleDoubleProperty(y0);
+        this.pointsDeVie = new SimpleIntegerProperty(pv);
+    }
+
     // ______________________ GETTERS ET SETTERS ________________________________________________________________________
 
 
