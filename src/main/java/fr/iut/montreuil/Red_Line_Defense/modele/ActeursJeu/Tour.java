@@ -112,4 +112,8 @@ public abstract class Tour extends Acteurs {
         return this.getPointsDeVieValue()>0;
     }
 
+    public void subitDegat(int v){
+        this.setPointsDeVieValue(this.getPointsDeVieValue()-v);
+    }
+
 }
