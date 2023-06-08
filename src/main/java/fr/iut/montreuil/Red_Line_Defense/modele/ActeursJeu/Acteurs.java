@@ -11,6 +11,7 @@ public abstract class Acteurs {
     private DoubleProperty X0, Y0; // position de l'axe de rotation
     private IntegerProperty pointsDeVie, degats; // les noms parlent d'eux meme
     private IntegerProperty defense; // pourcentage de réduction des dégats
+    private int rayon;
 
 
     public Acteurs(double x0, double y0, int pointsDeVie, int degats, int defense) {
@@ -35,10 +36,12 @@ public abstract class Acteurs {
         this.Y0 = new SimpleDoubleProperty(y0);
     }
 
-    public Acteurs(double x0, double y0, int pv){
+    public Acteurs(double x0, double y0, int pv, int rayon){
         this.X0 = new SimpleDoubleProperty(x0);
         this.Y0 = new SimpleDoubleProperty(y0);
         this.pointsDeVie = new SimpleIntegerProperty(pv);
+        this.rayon = rayon;
+
     }
 
     // ______________________ GETTERS ET SETTERS ________________________________________________________________________

@@ -33,8 +33,8 @@ public abstract class Tour extends Acteurs {
 
     }
 
-    public Tour(double x0, double y0, int pv){
-        super(x0, y0, pv);
+    public Tour(double x0, double y0, int pv, int rayon){
+        super(x0, y0, rayon, pv);
     }
 
     /* public void initialiserLongueur() {
