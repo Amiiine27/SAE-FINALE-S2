@@ -34,8 +34,8 @@ public class VueTours {
 
     private String idTourClicked = "0";
 
-    public VueTours(Carte terrrain, Pane centerPane) {
-        this.terrain = terrrain;
+    public VueTours(Carte terrain, Pane centerPane) {
+        this.terrain = terrain;
         this.centerPane = centerPane;
     }
 
@@ -53,13 +53,13 @@ public class VueTours {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
                     case "tour200b":
-                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y, 0, 0));
+                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y,terrain));
                         break;
                     case "tour400b":
                         // Faudra faire une tour
                         break;
                     case "tour600b":
-                        terrain.ajouterTour(new TourSniper((int) x, (int) y, 0, 0));
+                        terrain.ajouterTour(new TourSniper((int) x, (int) y,terrain));
                         break;
                     case "tour800b":
                         // Faudra faire une tour
