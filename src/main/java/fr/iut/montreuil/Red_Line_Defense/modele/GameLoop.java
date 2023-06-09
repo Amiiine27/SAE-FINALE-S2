@@ -16,7 +16,7 @@ public class GameLoop {
 
     private int indexSoldat = 0;
     private List<Soldat> soldats;
-    private Carte terrain;
+    private Environnement terrain;
     private Timeline timeline;
     private Pane centerPane;
     private int tailleImage = 8;
@@ -26,7 +26,7 @@ public class GameLoop {
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
     public GameLoop(Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement,
-                    VueSoldats vueSoldats, Carte terrain) {
+                    VueSoldats vueSoldats, Environnement terrain) {
         this.centerPane = centerPane;
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
         this.vueSoldats = vueSoldats;
@@ -36,23 +36,11 @@ public class GameLoop {
        creerAnimation();
     }
 
-    public void creerAnimationCreationSoldats() {
-        KeyFrame keyFrame1 = new KeyFrame(Duration.seconds(5), event -> {  // Créer un nouveau soldat toutes les 5 secondes
-            Soldat s = vueSoldats.nouvelleVague();
-        });
-        Timeline timelineCreation = new Timeline();
-        timelineCreation.getKeyFrames().add(keyFrame1);
-        timelineCreation.setCycleCount(Timeline.INDEFINITE);
-        timelineCreation.play();
-
-
-    }
 
     public void creerAnimation() {
-        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.8), event -> {  // Déplacer les soldats toutes les secondes
-            for (Soldat soldat: soldats){
-                gestionnaireDeDeplacement.deplacerSoldat(soldat);
-            }
+
+        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.5), event -> {  // Déplacer les soldats toutes les secondes
+            terrain.unTour();
         });
         Timeline timelineDeplacement = new Timeline();
         timelineDeplacement.getKeyFrames().add(keyFrame2);

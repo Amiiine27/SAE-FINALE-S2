@@ -7,14 +7,14 @@ import javafx.scene.layout.Pane;
 import java.util.*;
 
 public class GestionnaireDeDeplacement {
-    private Carte carte;
+    private Environnement carte;
     private int tailleImage;
     private Pane centerPane;
 
 
     private int[][] distances;  // Ajout d'un tableau de distances
 
-    public GestionnaireDeDeplacement(Carte carte, int tailleImage, Pane centerPane) {
+    public GestionnaireDeDeplacement(Environnement carte, int tailleImage, Pane centerPane) {
         this.carte = carte;
         this.tailleImage = tailleImage;
         this.centerPane = centerPane;

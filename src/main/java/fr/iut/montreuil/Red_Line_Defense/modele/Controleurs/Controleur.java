@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
@@ -23,7 +24,9 @@ public class Controleur implements Initializable {
     @FXML
     private Button lancerButton;
 
-    private Carte terrain;
+    private EcouteSoldats ecouteSoldats;
+
+    private Environnement terrain;
     private GestionnaireDeDeplacement gestionnaireDeDeplacement;
     private GameLoop gameLoop;
     private VueTours vueTours;
@@ -34,19 +37,25 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeCarte();
+        initializeEnvironnement();
         initializeGestionnaireDeDeplacement();
         initializeVueTours();
+        initializeVueSoldats();
+        terrain.setVueSoldats(vueSoldats);
+        initializeEcouteSoldats();
     }
 
-    private void initializeCarte() {
-        terrain = new Carte(gestionnaireDeDeplacement, vueSoldats);
+    private void initializeEcouteSoldats(){
+        ecouteSoldats = new EcouteSoldats(terrain);
+    }
+
+    private void initializeEnvironnement() {
+        terrain = new Environnement(gestionnaireDeDeplacement);
         remplissage();
     }
 
     @FXML
     private void lancerTours() {
-        initializeVueSoldats();
         initializeGameLoop();
     }
 
@@ -59,7 +68,8 @@ public class Controleur implements Initializable {
     }
 
     private void initializeVueSoldats() {
-        vueSoldats = new VueSoldats(terrain, centerPane, gestionnaireDeDeplacement);
+
+        vueSoldats = new VueSoldats(centerPane, gestionnaireDeDeplacement);
     }
 
     private void initializeGameLoop() {

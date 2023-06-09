@@ -1,19 +1,17 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
-public class Carte {
+public class Environnement {
 
     private int[][] quadrillage;
 
@@ -30,7 +28,7 @@ public class Carte {
     private int nbreSpawns = 10;
 
 
-    public Carte(GestionnaireDeDeplacement gestionnaireDeDeplacement, VueSoldats vueSoldats) {
+    public Environnement(GestionnaireDeDeplacement gestionnaireDeDeplacement) {
         quadrillage = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -103,12 +101,9 @@ public class Carte {
 
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
 
-        this.vueSoldat = vueSoldats;
+        this.vueSoldat = null;
 
     }
-
-
-
 
 
     public void unTour(){
@@ -125,16 +120,97 @@ public class Carte {
     }
 
     public void apparitionSoldat(){
-        reloadNbreSpawns();
-
-        for (int i = 0; (i < nbreSpawns + 1); i++) {
-            vueSoldat.nouveauSpawnSoldat(1);
+        System.out.println("HA");
+        if (( nbrTours % 10 == 0)) {
+            System.out.println("Ho");
+            nouveauSpawnSoldat(1);
         }
     }
 
+
+    public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
+        Soldat s = selectionSoldat(typeSoldat, startX, startY);
+
+        listeSoldats.add(s);
+        System.out.println("Soldat créé et ajouté au terrain : " + s);
+
+        return s;
+    }
+
+    public Soldat selectionSoldat(int typeSoldat, double startX, double startY) {
+
+        Soldat s;
+
+        switch(typeSoldat) {
+            case 1:
+                s = new Rookie((int) startX, (int) startY, 89, 47);
+                break;
+            case 2:
+                s = new SuperNova((int) startX, (int) startY, 89, 47);
+                break;
+            case 3:
+                s = new Shichibukais((int) startX, (int) startY, 89, 47);
+                break;
+            default:
+                s = new Rookie((int) startX, (int) startY, 89, 47);
+        }
+
+        return s;
+    }
+
+
+    public Soldat nouveauSpawnSoldat(int typeSoldat) {
+
+        int[] randomSelection = randomSelection();
+        int startX = randomSelection[0] * 8;
+        int startY = randomSelection[1] * 8;
+
+        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
+        return soldat;
+    }
+
+
+    public int[] randomSelection() {
+        int[] resultat = new int[4];
+
+        int[][] possibleStartPositions = {
+                {14, 59},
+                {15, 59},
+                {16, 59},
+                {2, 27},
+                {2, 28},
+                {2, 29}
+        };
+
+        int[][] possibleDestPositions = {
+                {89, 47}
+        };
+
+        Random random = new Random();
+
+        int[] randomStartPosition = possibleStartPositions[random.nextInt(possibleStartPositions.length)];
+        int[] randomDestPosition = possibleDestPositions[random.nextInt(possibleDestPositions.length)];
+
+        resultat[0] = randomStartPosition[0];
+        resultat[1] = randomStartPosition[1];
+        resultat[2] = randomDestPosition[0];
+        resultat[3] = randomDestPosition[1];
+
+        return resultat;
+    }
+
+    public VueSoldats getVueSoldats() {
+        return vueSoldat;
+    }
+
+    public void setVueSoldats(VueSoldats v) {
+        this.vueSoldat = v;
+    }
     public void reloadNbreSpawns(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
     }
+
+
 
 
 

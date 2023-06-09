@@ -4,7 +4,8 @@ package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourMitrailleuse;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class VueTours {
     public static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour-surbrillance.png";
 
 
-    private Carte terrain;
+    private Environnement terrain;
 
     @FXML
     private Pane centerPane;
@@ -34,7 +35,7 @@ public class VueTours {
 
     private String idTourClicked = "0";
 
-    public VueTours(Carte terrrain, Pane centerPane) {
+    public VueTours(Environnement terrrain, Pane centerPane) {
         this.terrain = terrrain;
         this.centerPane = centerPane;
     }
