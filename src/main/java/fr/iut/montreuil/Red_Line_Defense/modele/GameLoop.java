@@ -59,15 +59,4 @@ public class GameLoop {
         timelineDeplacement.setCycleCount(Timeline.INDEFINITE);
         timelineDeplacement.play();
     }
-
-
-
-
-
-
-
-
-
-
 }
-

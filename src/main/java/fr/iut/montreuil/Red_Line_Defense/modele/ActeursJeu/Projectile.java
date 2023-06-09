@@ -18,8 +18,6 @@ public abstract class Projectile {
 
     private int degats;
 
-    VueProjectile vue;
-
     public Projectile(double x, double y, double xCible, double yCible, double v, int degats) {
 
         this.x = new SimpleDoubleProperty(x);
@@ -44,10 +42,6 @@ public abstract class Projectile {
     }
 
     public abstract void deplacement(double elapsedTime);
-
-    public void Agit(){
-        vue.animationDeplacement(this);
-    }
 
     	/*double deltaX = xDirection * v * elapsedTime;
     	double deltaY = yDirection * v * elapsedTime;

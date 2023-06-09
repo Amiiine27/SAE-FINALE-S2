@@ -70,12 +70,10 @@ public abstract class ToursOffensives extends Tour {
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
                 }
                 else {
                     Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
                 }
                 try {//Méthode permettant d'implémenter une cadence de tir
                     Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
