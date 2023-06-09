@@ -31,25 +31,26 @@ public class GameLoop {
         this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
-        this.timeline = new Timeline();
         this.soldats = terrain.getSoldats();
         creerAnimationCreationSoldats();
-        creerAnimationDeplacementSoldats();
+
+       creerAnimationDeplacementSoldats();
     }
 
     public void creerAnimationCreationSoldats() {
         KeyFrame keyFrame1 = new KeyFrame(Duration.seconds(5), event -> {  // Créer un nouveau soldat toutes les 5 secondes
             Soldat s = vueSoldats.nouvelleVague();
-            soldats.add(s);
         });
         Timeline timelineCreation = new Timeline();
         timelineCreation.getKeyFrames().add(keyFrame1);
         timelineCreation.setCycleCount(Timeline.INDEFINITE);
         timelineCreation.play();
+
+
     }
 
     public void creerAnimationDeplacementSoldats() {
-        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.01), event -> {  // Déplacer les soldats toutes les secondes
+        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.8), event -> {  // Déplacer les soldats toutes les secondes
             for (Soldat soldat: soldats){
                 gestionnaireDeDeplacement.deplacerSoldat(soldat);
             }

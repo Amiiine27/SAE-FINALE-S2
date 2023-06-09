@@ -36,6 +36,7 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeCarte();
         initializeGestionnaireDeDeplacement();
+        initializeVueTours();
     }
 
     private void initializeCarte() {
@@ -45,7 +46,6 @@ public class Controleur implements Initializable {
 
     @FXML
     private void lancerTours() {
-        initializeVueTours();
         initializeVueSoldats();
         initializeGameLoop();
     }

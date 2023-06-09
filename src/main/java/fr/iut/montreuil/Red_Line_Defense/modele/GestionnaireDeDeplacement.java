@@ -1,12 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import java.util.*;
 
@@ -72,9 +68,11 @@ public class GestionnaireDeDeplacement {
         int nextY = startY;
         int minDistance = Integer.MAX_VALUE;
 
+
         for (int i = 0; i < 4; i++) {
             int nx = startX + dx[i];
             int ny = startY + dy[i];
+
 
             if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
                 nextX = nx;
@@ -83,19 +81,9 @@ public class GestionnaireDeDeplacement {
             }
         }
 
-        // Créez une animation pour déplacer le soldat
-        Timeline timeline = new Timeline();
-        timeline.getKeyFrames().addAll(
-                new KeyFrame(Duration.ZERO,
-                        new KeyValue(soldat.getX0Property(), soldat.getX0Value()),
-                        new KeyValue(soldat.getY0Property(), soldat.getY0Value())
-                ),
-                new KeyFrame(Duration.seconds(0.3),
-                        new KeyValue(soldat.getX0Property(), nextX * tailleImage),
-                        new KeyValue(soldat.getY0Property(), nextY * tailleImage)
-                )
-        );
-        timeline.play();
+
+        soldat.setX0(nextX * tailleImage);
+        soldat.setY0(nextY * tailleImage);
     }
 
     private boolean isValidMove(int x, int y) {
