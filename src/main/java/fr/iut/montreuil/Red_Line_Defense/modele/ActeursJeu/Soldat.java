@@ -34,7 +34,7 @@ public abstract class Soldat extends Acteurs {
     }
 
     public boolean estVivant(){
-        return true;
+        return this.getPointsDeVieValue()>0;
     }
 
 
