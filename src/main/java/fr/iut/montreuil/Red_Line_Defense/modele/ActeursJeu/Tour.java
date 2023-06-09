@@ -97,4 +97,7 @@ public abstract class Tour extends Acteurs {
         return null;
     }
 
+
+
+    public abstract void agit();
 }

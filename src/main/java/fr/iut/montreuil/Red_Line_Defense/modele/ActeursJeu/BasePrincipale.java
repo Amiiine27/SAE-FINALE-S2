@@ -12,5 +12,8 @@ public class BasePrincipale extends Tour {
         super(x0, y0, 10000, 0, 5,terrain);
     }
 
-
+    @Override
+    public void agit() {
+        setPointsDeVieValue(getPointsDeVieValue()-1);
+    }
 }

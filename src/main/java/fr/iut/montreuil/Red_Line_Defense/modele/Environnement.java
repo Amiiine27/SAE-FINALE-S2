@@ -151,6 +151,13 @@ public class Environnement {
         }
     }
 
+    public void actionTours(){
+        if(!listeTours.isEmpty()){
+            for (Tour t : listeTours){
+                t.agit();
+            }
+        }
+    }
     public void verificationMorts(){
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {

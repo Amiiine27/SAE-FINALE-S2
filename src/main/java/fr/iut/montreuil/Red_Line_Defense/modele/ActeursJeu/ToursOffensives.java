@@ -14,12 +14,15 @@ public abstract class ToursOffensives extends Tour {
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
     private int vitesseProjectile;
-    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Environnement terrain,int cadence,int vitesse) {
+
+    private double portée;
+    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Environnement terrain,int cadence,int vitesse,double portée) {
         super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
 
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
         this.vitesseProjectile=vitesse;
+        this.portée=portée;
 
         // Ajout des Listeners pour mettre à jour la direction si la position change
 
@@ -52,7 +55,9 @@ public abstract class ToursOffensives extends Tour {
     }
 
 
-
+    public void agit(){
+        tirer();
+    }
 
     public int getCadence() {
         return cadence.getValue();
@@ -68,15 +73,18 @@ public abstract class ToursOffensives extends Tour {
         if (s!=null){
             while(s.estVivant()) {
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
+                    System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
                     getTerrain().ajouterProjectile(p);
                     p.Agit();
                 }
                 else {
+                    System.out.println("armement...");
                     Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
                     getTerrain().ajouterProjectile(p);
                     p.Agit();
                 }
+                System.out.println("feu");
                 try {//Méthode permettant d'implémenter une cadence de tir
                     Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
                 } catch (InterruptedException e) {
