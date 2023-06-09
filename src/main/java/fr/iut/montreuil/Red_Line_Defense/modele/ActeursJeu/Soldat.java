@@ -34,8 +34,7 @@ public abstract class Soldat extends Acteurs {
     }
 
 
-    public int valeurGagnee() {
-
+    public int getValeurGagnee() {
         return this.valeur;
     }
 

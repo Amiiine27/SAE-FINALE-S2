@@ -27,6 +27,8 @@ public class Controleur implements Initializable {
 
     private EcouteSoldats ecouteSoldats;
 
+    private EcouteTours ecouteTours;
+
     private Environnement terrain;
 
     private GameLoop gameLoop;
@@ -42,12 +44,13 @@ public class Controleur implements Initializable {
         initializeVueTours();
         initializeVueSoldats();
         terrain.setVueSoldats(vueSoldats);
-        initializeEcouteSoldats();
     }
 
     private void initializeEcouteSoldats(){
         ecouteSoldats = new EcouteSoldats(terrain);
     }
+
+    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
 
     private void initializeEnvironnement() {
         terrain = new Environnement();
@@ -63,11 +66,12 @@ public class Controleur implements Initializable {
 
     private void initializeVueTours() {
         vueTours = new VueTours(terrain, centerPane);
+        initializeEcouteTours();
     }
 
     private void initializeVueSoldats() {
-
         vueSoldats = new VueSoldats(centerPane);
+        initializeEcouteSoldats();
     }
 
     private void initializeGameLoop() {

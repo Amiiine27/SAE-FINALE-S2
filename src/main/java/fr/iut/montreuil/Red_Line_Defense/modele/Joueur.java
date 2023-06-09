@@ -11,7 +11,8 @@ public class Joueur {
 
     public Joueur(String nomJ) {
         this.nomJoueur = nomJ;
-        this.soldeJoueur = new SimpleIntegerProperty(500);
+        this.soldeJoueur = new SimpleIntegerProperty(1000);
+        ajouterListenerSoldeJoueur();
     }
 
     public String getNomJoueur() {
@@ -22,6 +23,17 @@ public class Joueur {
         return soldeJoueur;
     }
 
+    public void ajouterListenerSoldeJoueur(){
+        soldeJoueur.addListener((observable, oldValue, newValue) -> {
+            if ((newValue.intValue()) <= 0) {
+                soldeJoueur.setValue(0);
+                System.out.println("Vous etes pauvre");
+            }
+            System.out.println("Nouveau Solde: " + soldeJoueur.getValue());
+
+        });
+
+    }
     public int getSoldeJoueurValue() {
         return soldeJoueur.getValue();
     }

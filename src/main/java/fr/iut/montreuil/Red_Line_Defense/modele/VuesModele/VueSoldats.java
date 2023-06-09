@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -40,8 +41,24 @@ public class VueSoldats {
 
     }
 
+    public void supprCercleSoldats(Soldat s) {
+
+    }
+
     public Map<Soldat, Circle> getHashMap(){
         return this.hashMapSoldatsCercles;
+    }
+
+    public Circle getCircleForSoldat(Soldat soldat) {
+        return this.hashMapSoldatsCercles.get(soldat);
+    }
+    public Soldat getSoldatForCircle(Circle circle) {
+        for (Map.Entry<Soldat, Circle> entry : this.hashMapSoldatsCercles.entrySet()) {
+            if (Objects.equals(circle, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
 }

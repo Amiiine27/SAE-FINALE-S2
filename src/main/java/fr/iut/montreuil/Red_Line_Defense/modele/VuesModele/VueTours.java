@@ -1,10 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourLanceMissile;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourMitrailleuse;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -54,7 +51,7 @@ public class VueTours {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
                     case "tour200b":
-                        //Faut faire une tour classique
+                        terrain.ajouterTour(new ToursDeffensives((int) x,(int) y, terrain));
                         break;
                     case "tour400b":
                         terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y,terrain));

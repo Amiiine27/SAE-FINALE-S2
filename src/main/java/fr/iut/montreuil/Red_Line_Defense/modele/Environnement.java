@@ -18,6 +18,9 @@ public class Environnement {
     private int[][] quadrillage;
 
     private IntegerProperty vague;
+    private ListProperty<Projectile> listeProjectiles;
+    private ListProperty<Tour> listeTours;
+    private ListProperty<Soldat> listeSoldats;
 
 
     private int nbrTours = 0;
@@ -26,9 +29,7 @@ public class Environnement {
 
     private int[][] distances;
 
-    private ListProperty<Projectile> listeProjectiles;
-    private ListProperty<Tour> listeTours;
-    private ListProperty<Soldat> listeSoldats;
+
     private VueSoldats vueSoldat;
 
     private int nbreSpawns = 10;
@@ -120,6 +121,10 @@ public class Environnement {
     }
 
 
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- TOUR DE JEU ---------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
     public void unTour(){
 
         verificationMorts();
@@ -150,12 +155,32 @@ public class Environnement {
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
                 if (soldat.getPointsDeVieValue() < 0) {
-                    getSoldats().remove(soldat);
-                    listeSoldats.remove(getCircleForSoldat(soldat));
+                    supprimerSoldat(soldat);
+                    vueSoldat.supprCercleSoldats(soldat);
+                    joueur.crediterSolde(soldat.getValeurGagnee());
                 }
             }
         }
     }
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- SPAWN SOLDATS ---------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
+    public Soldat nouveauSpawnSoldat(int typeSoldat) {
+
+        int[] randomSelection = randomSelection();
+        int startX = randomSelection[0] * 8;
+        int startY = randomSelection[1] * 8;
+
+        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
+        return soldat;
+    }
+
+
 
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
@@ -165,6 +190,8 @@ public class Environnement {
 
         return s;
     }
+
+
 
     public Soldat selectionSoldat(int typeSoldat, double startX, double startY) {
 
@@ -187,16 +214,6 @@ public class Environnement {
         return s;
     }
 
-
-    public Soldat nouveauSpawnSoldat(int typeSoldat) {
-
-        int[] randomSelection = randomSelection();
-        int startX = randomSelection[0] * 8;
-        int startY = randomSelection[1] * 8;
-
-        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
-        return soldat;
-    }
 
 
     public int[] randomSelection() {
@@ -228,25 +245,59 @@ public class Environnement {
         return resultat;
     }
 
+
+
     public VueSoldats getVueSoldats() {
         return vueSoldat;
     }
 
+
+
     public void setVueSoldats(VueSoldats v) {
         this.vueSoldat = v;
     }
-    public void reloadNbreSpawns(){
+
+
+
+    public void reloadNbreSpawnsSoldats(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
     }
 
+
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- VAGUE ------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
     public void setVague(int i){ this.vague.set(i);}
 
+
+
     public IntegerProperty getVagueProperty() { return this.vague; }
+
 
     public int getVagueValue() { return this.vague.getValue(); }
 
 
-//     FONCTIONS DE DEPLACEMENTS
+    private void ajouterListenerVague(){
+        this.vague.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Vague numéro " + newValue.intValue());
+            joueur.crediterSolde(50); // Chaque Vague le Joueur Gagne 50 Berrys
+        });
+    }
+
+
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- DEPLACEMENTS ET BFS ----------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
 
     public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
 
@@ -282,6 +333,7 @@ public class Environnement {
         System.out.println("Calcul du chemin OK ");
     }
 
+
     public void deplacerSoldat(Soldat soldat) {
         int startX = (int) (soldat.getX0Value() / 8);
         int startY = (int) (soldat.getY0Value() / 8);
@@ -311,26 +363,28 @@ public class Environnement {
         soldat.setY0(nextY * 8);
     }
 
+
     private boolean isValidMove(int x, int y) {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 
-    private void ajouterListenerVague(){
-        this.vague.addListener((observable, oldValue, newValue) -> {
-            System.out.println("Vague numéro " + newValue);
-            joueur.crediterSolde(50); // Chaque Vague le Joueur Gagne 50 Berrys
-        });
-    }
 
 
 
 
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- LISTE PROJECTILES ------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
 
     public void ajouterProjectile(Projectile projectile){ this.listeProjectiles.add(projectile);}
 
+
     public void supprimerProjectile(Projectile projectile) { this.listeProjectiles.remove(projectile);}
 
+
     public ListProperty<Projectile> getProjectilesProperty(){ return this.listeProjectiles;}
+
 
     public ObservableList<Projectile> getProjectiles(){return this.listeProjectiles.get();}
 
@@ -338,15 +392,10 @@ public class Environnement {
 
 
 
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- MAP DE JEU -------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-    // ----------------------------------------------------------------
-
-    // Getters Map
     public int getYmax() {
         return this.quadrillage.length;
     }
@@ -360,7 +409,11 @@ public class Environnement {
     }
 
 
-    // Methodes Tours
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- LISTE TOURS ------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
+
     public void ajouterTour(Tour tour) {
         this.listeTours.add(tour);
     }                    // Ajouter une tour
@@ -377,7 +430,11 @@ public class Environnement {
         return this.listeTours.get();
     }             // Retourne la property qui contient la liste observable
 
-    // Methodes Soldats
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- LISTE SOLDATS ----------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
     public void ajouterSoldat(Soldat soldat) {
         this.listeSoldats.add(soldat);
     }          // Ajouter un Soldat
@@ -396,19 +453,18 @@ public class Environnement {
 
 
 
-    public Map<Soldat, Circle> getHashMap(){
-        return vueSoldat.getHashMap();
-    }
-    public Circle getCircleForSoldat(Soldat soldat) {
-        return vueSoldat.getHashMap().get(soldat);
-    }
-    public Soldat getSoldatForCircle(Circle circle) {
-        for (Map.Entry<Soldat, Circle> entry : getHashMap().entrySet()) {
-            if (Objects.equals(circle, entry.getValue())) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
 
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- JOUEUR --------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
+
+    public Joueur getJoueur() {return this.joueur;}
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- FIN --------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
 }
