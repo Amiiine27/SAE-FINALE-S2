@@ -1,9 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 
 public abstract class Acteurs {
 
@@ -68,6 +67,9 @@ public abstract class Acteurs {
         return this.Y0;
     }  // Property y0
 
+    public int getRayon() {
+        return rayon;
+    }
 
     // Setters
     // x0
@@ -145,5 +147,26 @@ public abstract class Acteurs {
         this.setPointsDeVieValue(nouvelleVie);
     }
 
+    // _________________________________________________________________________________________________________________
+    // Calculs range
+    /*public Soldat estDansMaRange(ObservableList<Soldat> soldats){
+        //double distance = Math.sqrt(Math.pow(a.getX0Value()-this.getX0Value(), 2) +  Math.pow(a.getY0Value()-this.getY0Value(), 2));
+        //return distance <= this.rayon;
+        for (Soldat s : soldats){
+            if (Math.abs(this.getX0Value()-s.getX0Value()) + (Math.abs(this.getY0Value()-s.getY0Value())) <= this.getRayon()){
+                return s;
+            }
+        }
+        return null;
 
+    } */
+
+        public boolean estSoldatDansPortee(Soldat soldat, double x, double y) {
+            Point2D coordSoldat = new Point2D(soldat.getX0Value(), soldat.getY0Value());
+            Point2D coordPortee = new Point2D(x, y);
+
+            double distance = coordSoldat.distance(coordPortee);
+
+            return distance <= this.getRayon();
+        }
 }

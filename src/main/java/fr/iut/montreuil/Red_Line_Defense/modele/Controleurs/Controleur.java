@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
@@ -32,6 +33,8 @@ public class Controleur implements Initializable {
     @FXML
     private Pane centerPane;
 
+    private BasePrincipale basePrincipale;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeCarte();
@@ -48,6 +51,10 @@ public class Controleur implements Initializable {
         initializeVueTours();
         initializeVueSoldats();
         initializeGameLoop();
+    }
+
+    private void initializeBasePrincipale() {
+        basePrincipale = new BasePrincipale();
     }
 
     private void initializeGestionnaireDeDeplacement() {

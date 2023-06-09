@@ -11,11 +11,18 @@ public class BasePrincipale extends Tour {
     // elle a une position x, une position y et une nombre de point de vie
 
 
-    public BasePrincipale(double x, double y){
-        super(x, y, 10000);
+    public BasePrincipale(){
+        super(102, 467, 10000, 24);
     }
+
+
 
     public void perdPointsDeVie(){
-
+        for(Soldat s : terrain.getSoldats()) {
+            if (this.estSoldatDansPortee(s, this.getX0Value(), this.getY0Value())) {
+                System.out.println("Pv de la base :" + this.getPointsDeVieValue());
+            }
+        }
     }
+
 }
