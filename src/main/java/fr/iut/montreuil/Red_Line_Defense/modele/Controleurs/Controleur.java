@@ -4,6 +4,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueBasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
@@ -29,6 +30,7 @@ public class Controleur implements Initializable {
     private GameLoop gameLoop;
     private VueTours vueTours;
     private VueSoldats vueSoldats;
+    private VueBasePrincipale vb;
 
     @FXML
     private Pane centerPane;
@@ -39,6 +41,7 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeCarte();
         initializeGestionnaireDeDeplacement();
+        initializeBasePrincipale();
     }
 
     private void initializeCarte() {
@@ -55,6 +58,8 @@ public class Controleur implements Initializable {
 
     private void initializeBasePrincipale() {
         basePrincipale = new BasePrincipale();
+        vb = new VueBasePrincipale(centerPane);
+        vb.afficherBasePrincipale(basePrincipale);
     }
 
     private void initializeGestionnaireDeDeplacement() {

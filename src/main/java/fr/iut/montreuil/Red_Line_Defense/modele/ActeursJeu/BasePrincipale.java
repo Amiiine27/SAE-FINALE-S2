@@ -12,17 +12,21 @@ public class BasePrincipale extends Tour {
 
 
     public BasePrincipale(){
-        super(102, 467, 10000, 24);
+        super(711, 342, 10000, 24);
     }
 
 
 
     public void perdPointsDeVie(){
         for(Soldat s : terrain.getSoldats()) {
-            if (this.estSoldatDansPortee(s, this.getX0Value(), this.getY0Value())) {
+            if (this.estDansMaRange(s)) {
                 System.out.println("Pv de la base :" + this.getPointsDeVieValue());
             }
         }
+    }
+
+    public void verifieDansRange(Soldat s){
+
     }
 
 }

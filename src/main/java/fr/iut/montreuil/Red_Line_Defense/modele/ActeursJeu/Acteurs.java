@@ -161,12 +161,10 @@ public abstract class Acteurs {
 
     } */
 
-        public boolean estSoldatDansPortee(Soldat soldat, double x, double y) {
-            Point2D coordSoldat = new Point2D(soldat.getX0Value(), soldat.getY0Value());
-            Point2D coordPortee = new Point2D(x, y);
-
-            double distance = coordSoldat.distance(coordPortee);
-
-            return distance <= this.getRayon();
+    public boolean estDansMaRange(Soldat s){
+        if (Math.abs(this.getX0Value()-s.getX0Value())<=this.getRayon() && Math.abs(this.getY0Value()-s.getY0Value())<=this.getRayon()){
+            return true;
         }
+        else return false;
+    }
 }
