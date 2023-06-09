@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import javafx.beans.property.DoubleProperty;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -16,6 +17,8 @@ public abstract class Projectile {
     private double v;//Vitesse de l'obus
 
     private int degats;
+
+    VueProjectile vue;
 
     public Projectile(double x, double y, double xCible, double yCible, double v, int degats) {
 
@@ -41,6 +44,10 @@ public abstract class Projectile {
     }
 
     public abstract void deplacement(double elapsedTime);
+
+    public void Agit(){
+        vue.animationDeplacement(this);
+    }
 
     	/*double deltaX = xDirection * v * elapsedTime;
     	double deltaY = yDirection * v * elapsedTime;

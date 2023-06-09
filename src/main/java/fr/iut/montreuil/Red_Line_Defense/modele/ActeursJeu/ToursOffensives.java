@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -66,8 +67,16 @@ public abstract class ToursOffensives extends Tour {
         Soldat s=ennemiÀPorter();
         if (s!=null){
             while(s.estVivant()) {
-                Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile ,getDegatValue());
-                getTerrain().ajouterProjectile(p);
+                if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
+                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    getTerrain().ajouterProjectile(p);
+                    p.Agit();
+                }
+                else {
+                    Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    getTerrain().ajouterProjectile(p);
+                    p.Agit();
+                }
                 try {//Méthode permettant d'implémenter une cadence de tir
                     Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
                 } catch (InterruptedException e) {
