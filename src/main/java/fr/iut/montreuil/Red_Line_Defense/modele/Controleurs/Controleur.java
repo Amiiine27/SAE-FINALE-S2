@@ -40,7 +40,7 @@ public class Controleur implements Initializable {
     }
 
     private void initializeCarte() {
-        terrain = new Carte();
+        terrain = new Carte(gestionnaireDeDeplacement, vueSoldats);
         remplissage();
     }
 

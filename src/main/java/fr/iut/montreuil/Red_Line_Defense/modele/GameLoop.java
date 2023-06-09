@@ -32,9 +32,8 @@ public class GameLoop {
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.soldats = terrain.getSoldats();
-        creerAnimationCreationSoldats();
 
-       creerAnimationDeplacementSoldats();
+       creerAnimation();
     }
 
     public void creerAnimationCreationSoldats() {
@@ -49,7 +48,7 @@ public class GameLoop {
 
     }
 
-    public void creerAnimationDeplacementSoldats() {
+    public void creerAnimation() {
         KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.8), event -> {  // Déplacer les soldats toutes les secondes
             for (Soldat soldat: soldats){
                 gestionnaireDeDeplacement.deplacerSoldat(soldat);

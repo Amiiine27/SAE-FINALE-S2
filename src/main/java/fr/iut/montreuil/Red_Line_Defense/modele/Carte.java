@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -9,17 +10,27 @@ import javafx.collections.ObservableList;
 import javafx.scene.shape.Circle;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Carte {
 
     private int[][] quadrillage;
 
+    private int vague = 1;
+
+    private int nbrTours = 0;
+
+    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
+
     private ListProperty<Tour> tours;
     private ListProperty<Soldat> listeSoldats;
+    private VueSoldats vueSoldat;
+
+    private int nbreSpawns = 10;
 
 
-    public Carte() {
+    public Carte(GestionnaireDeDeplacement gestionnaireDeDeplacement, VueSoldats vueSoldats) {
         quadrillage = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -90,8 +101,58 @@ public class Carte {
         ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
         listeSoldats = new SimpleListProperty<>(observableListSoldat);
 
+        this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
+
+        this.vueSoldat = vueSoldats;
 
     }
+
+
+
+
+
+    public void unTour(){
+
+        apparitionSoldat();
+
+        if (!listeSoldats.isEmpty()) {
+            for (Soldat soldat : listeSoldats) {
+                gestionnaireDeDeplacement.deplacerSoldat(soldat);
+            }
+        }
+
+        nbrTours++;
+    }
+
+    public void apparitionSoldat(){
+        reloadNbreSpawns();
+
+        for (int i = 0; (i < nbreSpawns + 1); i++) {
+            vueSoldat.nouveauSpawnSoldat(1);
+        }
+    }
+
+    public void reloadNbreSpawns(){
+        this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // ----------------------------------------------------------------
