@@ -1,7 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 
-import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
+
 import javafx.geometry.Point2D;
 
 import java.util.List;

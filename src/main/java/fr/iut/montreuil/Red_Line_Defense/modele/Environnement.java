@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Random;
 
 public class Environnement {
@@ -19,7 +21,9 @@ public class Environnement {
 
     private int nbrTours = 0;
 
-    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
+
+
+    private int[][] distances;
 
     private ListProperty<Tour> tours;
     private ListProperty<Soldat> listeSoldats;
@@ -28,7 +32,7 @@ public class Environnement {
     private int nbreSpawns = 10;
 
 
-    public Environnement(GestionnaireDeDeplacement gestionnaireDeDeplacement) {
+    public Environnement() {
         quadrillage = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -99,9 +103,9 @@ public class Environnement {
         ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
         listeSoldats = new SimpleListProperty<>(observableListSoldat);
 
-        this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
 
-        this.vueSoldat = null;
+        this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
+        calculerChemin(89, 47);
 
     }
 
@@ -112,7 +116,7 @@ public class Environnement {
 
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
-                gestionnaireDeDeplacement.deplacerSoldat(soldat);
+                deplacerSoldat(soldat);
             }
         }
 
@@ -208,6 +212,78 @@ public class Environnement {
     }
     public void reloadNbreSpawns(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
+    }
+
+
+
+
+//     FONCTIONS DE DEPLACEMENTS
+
+    public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
+
+        System.out.println("Calcul du chemin ");
+
+        boolean[][] visited = new boolean[getYmax()][getXmax()];
+
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(destX);
+        queue.offer(destY);
+        visited[destY][destX] = true;
+
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {-1, 1, 0, 0};
+
+        while (!queue.isEmpty()) {
+            int x = queue.poll();
+            int y = queue.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if (isValidMove(nx, ny) && !visited[ny][nx]) {
+                    queue.offer(nx);
+                    queue.offer(ny);
+                    visited[ny][nx] = true;
+                    distances[ny][nx] = distances[y][x] + 1;
+                }
+            }
+        }
+
+        System.out.println("Calcul du chemin OK ");
+    }
+
+    public void deplacerSoldat(Soldat soldat) {
+        int startX = (int) (soldat.getX0Value() / 8);
+        int startY = (int) (soldat.getY0Value() / 8);
+
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {-1, 1, 0, 0};
+
+        int nextX = startX;
+        int nextY = startY;
+        int minDistance = Integer.MAX_VALUE;
+
+
+        for (int i = 0; i < 4; i++) {
+            int nx = startX + dx[i];
+            int ny = startY + dy[i];
+
+
+            if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
+                nextX = nx;
+                nextY = ny;
+                minDistance = distances[ny][nx];
+            }
+        }
+
+
+        soldat.setX0(nextX * 8);
+        soldat.setY0(nextY * 8);
+    }
+
+    private boolean isValidMove(int x, int y) {
+        return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 
 

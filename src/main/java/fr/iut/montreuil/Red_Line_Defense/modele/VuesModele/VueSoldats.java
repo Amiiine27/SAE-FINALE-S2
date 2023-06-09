@@ -5,7 +5,6 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.SuperNova;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -17,14 +16,13 @@ public class VueSoldats {
 
 
     private Pane centerPane;
-    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
 
 
 
-    public VueSoldats(Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement) {
+
+    public VueSoldats(Pane centerPane) {
         this.centerPane = centerPane;
-        this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
     }
 
     public void ajtCercleSoldats(Soldat s) {

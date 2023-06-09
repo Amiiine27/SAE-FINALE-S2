@@ -3,7 +3,6 @@ package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
-import fr.iut.montreuil.Red_Line_Defense.modele.GestionnaireDeDeplacement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
@@ -27,7 +26,7 @@ public class Controleur implements Initializable {
     private EcouteSoldats ecouteSoldats;
 
     private Environnement terrain;
-    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
+
     private GameLoop gameLoop;
     private VueTours vueTours;
     private VueSoldats vueSoldats;
@@ -37,8 +36,7 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeEnvironnement();
-        initializeGestionnaireDeDeplacement();
+        initializeEnvironnement();;
         initializeVueTours();
         initializeVueSoldats();
         terrain.setVueSoldats(vueSoldats);
@@ -50,7 +48,7 @@ public class Controleur implements Initializable {
     }
 
     private void initializeEnvironnement() {
-        terrain = new Environnement(gestionnaireDeDeplacement);
+        terrain = new Environnement();
         remplissage();
     }
 
@@ -59,9 +57,7 @@ public class Controleur implements Initializable {
         initializeGameLoop();
     }
 
-    private void initializeGestionnaireDeDeplacement() {
-        gestionnaireDeDeplacement = new GestionnaireDeDeplacement(terrain, TAILLE_IMAGE, centerPane);
-    }
+
 
     private void initializeVueTours() {
         vueTours = new VueTours(terrain, centerPane);
@@ -69,11 +65,11 @@ public class Controleur implements Initializable {
 
     private void initializeVueSoldats() {
 
-        vueSoldats = new VueSoldats(centerPane, gestionnaireDeDeplacement);
+        vueSoldats = new VueSoldats(centerPane);
     }
 
     private void initializeGameLoop() {
-        gameLoop = new GameLoop(centerPane, gestionnaireDeDeplacement, vueSoldats, terrain);
+        gameLoop = new GameLoop(centerPane, vueSoldats, terrain);
     }
 
     private void remplissage() {

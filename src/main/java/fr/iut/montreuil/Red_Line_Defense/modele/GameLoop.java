@@ -23,12 +23,11 @@ public class GameLoop {
 
     private VueSoldats vueSoldats;
 
-    private GestionnaireDeDeplacement gestionnaireDeDeplacement;
 
-    public GameLoop(Pane centerPane, GestionnaireDeDeplacement gestionnaireDeDeplacement,
+    public GameLoop(Pane centerPane,
                     VueSoldats vueSoldats, Environnement terrain) {
         this.centerPane = centerPane;
-        this.gestionnaireDeDeplacement = gestionnaireDeDeplacement;
+
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.soldats = terrain.getSoldats();
