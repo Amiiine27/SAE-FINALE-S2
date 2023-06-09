@@ -1,5 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -11,17 +13,16 @@ public abstract class ToursOffensives extends Tour {
     private IntegerProperty cadence; // La cadence est la capacité de Tirs par minute
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
-    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, int x1, int y1, int cadence) {
-        super(x0, y0, pointsDeVie, degats, defense, prix, x1, y1);
+    private int vitesseProjectile;
+    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Carte terrain,int cadence,int vitesse) {
+        super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
 
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
+        this.vitesseProjectile=vitesse;
 
         // Ajout des Listeners pour mettre à jour la direction si la position change
-        this.getX0Property().addListener((obs, oldVal, newVal) -> updateDirection());
-        this.getY0Property().addListener((obs, oldVal, newVal) -> updateDirection());
-        this.getX1Property().addListener((obs, oldVal, newVal) -> updateDirection());
-        this.getY1Property().addListener((obs, oldVal, newVal) -> updateDirection());
+
 
         // Listener pour la liste de projectiles
         this.projectiles.addListener((ListChangeListener.Change<? extends Projectile> c) -> {
@@ -40,53 +41,48 @@ public abstract class ToursOffensives extends Tour {
             }
         });
     }
-
-
     // Tire un projectile et l'ajoute à la liste
-    public void tirer() {
 
-        // Calculer la différence en x et y
-        double dx = this.getX1Value() - this.getX0Value();
-        double dy = this.getY1Value() - this.getY0Value();
-
-        // Calculer la distance entre les deux points
-        double distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Calcul du vecteur unitaire
-        double directionX = dx / distance;
-        double directionY = dy / distance;
-
-
-        // Crée un nouveau projectile à la position de la tour
-        Projectile nouveauProjectile = new Projectile(this.getX0Value(), this.getY0Value(), dx, dy);
-
-        // Ajoute le nouveau projectile à la liste
-        this.projectiles.add(nouveauProjectile);
-    }
 
     // Méthode pour mettre à jour la direction
-    private void updateDirection() {
-        // Calculer la différence en x et y
-        double dx = this.getX1Value() - this.getX0Value();
-        double dy = this.getY1Value() - this.getY0Value();
-
-        // Calculer la distance entre les deux points
-        double distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Normaliser la différence pour obtenir un vecteur unitaire
-        double directionX = dx / distance;
-        double directionY = dy / distance;
-
-        // Mettre à jour la direction dans tous les projectiles
-        for (Projectile projectile : this.projectiles) {
-            projectile.setDirectionX(directionX);
-            projectile.setDirectionY(directionY);
-        }
-    }
 
     // Accesseur pour les projectiles
     public ObservableList<Projectile> getProjectiles() {
         return this.projectiles;
     }
 
+
+
+
+    public int getCadence() {
+        return cadence.getValue();
+    }
+
+    public IntegerProperty cadenceProperty() {
+        return cadence;
+    }
+
+
+    public void tirer(){
+        Soldat s=ennemiÀPorter();
+        if (s!=null){
+            while(s.estVivant()) {
+                if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
+                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    getTerrain().ajouterProjectile(p);
+                    p.Agit();
+                }
+                else {
+                    Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    getTerrain().ajouterProjectile(p);
+                    p.Agit();
+                }
+                try {//Méthode permettant d'implémenter une cadence de tir
+                    Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

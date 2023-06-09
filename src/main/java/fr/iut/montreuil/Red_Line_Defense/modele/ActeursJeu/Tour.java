@@ -1,33 +1,36 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Tour extends Acteurs {
-
-
-    private IntegerProperty X1, Y1; // donne avec l'axe de rotation la direction
     private IntegerProperty prix; // prix d'achat de l'acteur
     private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
 
+    private Carte terrain;
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, int x1, int y1) {
+    private double portée;
+
+    public double getPortée() {
+        return portée;
+    }
+
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Carte terrain) {
         super(x0, y0, pointsDeVie, degats, defense);
 
-        this.X1 = new SimpleIntegerProperty(x1);
-        this.Y1 = new SimpleIntegerProperty(y1);
-
         this.prix = new SimpleIntegerProperty(prix);
+
+        this.terrain = terrain;
 
 
         // initialiserLongueur();
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int x1, int y1) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Carte terrain) {
         super(x0, y0, pointsDeVie, degats, defense);
 
-        this.X1 = new SimpleIntegerProperty(x1);
-        this.Y1 = new SimpleIntegerProperty(y1);
+        this.terrain = terrain;
 
         //initialiserLongueur();
 
@@ -49,32 +52,7 @@ public abstract class Tour extends Acteurs {
 
 
     // Getter X1
-    public int getX1Value() {
-        return this.X1.getValue();
-    }
 
-    // Setter X1
-    public void setX1Value(int val) {
-        this.X1.setValue(val);
-    }
-
-    public IntegerProperty getX1Property() {
-        return this.X1;
-    }
-
-    // Getter Y1
-    public int getY1Value() {
-        return this.Y1.getValue();
-    }
-
-    // Setter Y1
-    public void setY1Value(int val) {
-        this.Y1.setValue(val);
-    }
-
-    public IntegerProperty getY1Property() {
-        return this.Y1;
-    }
 
     // Getter Prix
     public int getPrixValue() {
@@ -104,5 +82,19 @@ public abstract class Tour extends Acteurs {
         this.longueur.setValue(val);
     }
 
+    public Carte getTerrain() {
+        return terrain;
+    }
+
+    public Soldat ennemiÀPorter() {
+        for (Soldat s : this.terrain.getSoldats()) {
+            if (s.estVivant()) {
+                if (((this.getY0Value() - getPortée()) <= s.getY0Value() && s.getY0Value() <= this.getY0Value() + getPortée()) && ((this.getX0Value() - getPortée()) <= s.getX0Value() && s.getX0Value() <= this.getX0Value() + getPortée())) {
+                    return s;
+                }
+            }
+        }
+        return null;
+    }
 
 }

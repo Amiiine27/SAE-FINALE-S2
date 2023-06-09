@@ -28,6 +28,10 @@ public abstract class Soldat extends Acteurs {
         this.destinationY = destinationY;
     }
 
+    public boolean estVivant(){
+        return true;
+    }
+
 
 
 
