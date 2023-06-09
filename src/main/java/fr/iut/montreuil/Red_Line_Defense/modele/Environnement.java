@@ -2,26 +2,27 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 public class Environnement {
 
     private int[][] quadrillage;
 
-    private int vague = 1;
+    private IntegerProperty vague;
+
 
     private int nbrTours = 0;
 
-
+    private Joueur joueur ;
 
     private int[][] distances;
 
@@ -96,6 +97,9 @@ public class Environnement {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
+        this.joueur = new Joueur("Ayoub");
+
+        this.vague = new SimpleIntegerProperty(1);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         tours = new SimpleListProperty<>(observableListTour);
@@ -106,6 +110,8 @@ public class Environnement {
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
+
+        ajouterListenerVague();
 
     }
 
@@ -125,7 +131,7 @@ public class Environnement {
 
     public void apparitionSoldat(){
         System.out.println("HA");
-        if (( nbrTours % 10 == 0)) {
+        if (( nbrTours % 10 == 0) && (listeSoldats.get().size() < ( nbreSpawns + 1))) {
             System.out.println("Ho");
             nouveauSpawnSoldat(1);
         }
@@ -214,7 +220,11 @@ public class Environnement {
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
     }
 
+    public void setVague(int i){ this.vague.set(i);}
 
+    public IntegerProperty getVagueProperty() { return this.vague; }
+
+    public int getVagueValue() { return this.vague.getValue(); }
 
 
 //     FONCTIONS DE DEPLACEMENTS
@@ -286,10 +296,12 @@ public class Environnement {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 
-
-
-
-
+    private void ajouterListenerVague(){
+        this.vague.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Vague numéro " + newValue);
+            joueur.crediterSolde(50); // Chaque Vague le Joueur Gagne 50 Berrys
+        });
+    }
 
 
 
@@ -359,5 +371,19 @@ public class Environnement {
 
 
 
+    public Map<Soldat, Circle> getHashMap(){
+        return vueSoldat.getHashMap();
+    }
+    public Circle getCircleForSoldat(Soldat soldat) {
+        return vueSoldat.getHashMap().get(soldat);
+    }
+    public Soldat getSoldatForCircle(Circle circle) {
+        for (Map.Entry<Soldat, Circle> entry : getHashMap().entrySet()) {
+            if (Objects.equals(circle, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
 
 }

@@ -9,6 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -17,8 +19,7 @@ public class VueSoldats {
 
     private Pane centerPane;
 
-
-
+    private Map<Soldat, Circle> hashMapSoldatsCercles = new HashMap<>();
 
 
     public VueSoldats(Pane centerPane) {
@@ -29,12 +30,18 @@ public class VueSoldats {
         Circle cercleSoldat = new Circle(4, Color.DARKORCHID);
         System.out.println("Cercle créé pour le soldat : " + cercleSoldat);
 
+        hashMapSoldatsCercles.put(s, cercleSoldat);
+
         cercleSoldat.centerXProperty().bind(s.getX0Property());
         cercleSoldat.centerYProperty().bind(s.getY0Property());
 
         centerPane.getChildren().add(cercleSoldat);
         System.out.println("Cercle ajouté au pane. Total des cercles : " + centerPane.getChildren().size());
 
+    }
+
+    public Map<Soldat, Circle> getHashMap(){
+        return this.hashMapSoldatsCercles;
     }
 
 }

@@ -22,6 +22,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1000, 561));
         primaryStage.show();
 
+
         ControleurMP controleur = loader.getController();
         controleur.initialize(null, null); // Appeler la méthode initialize du contrôleur après l'affichage de la scène
 

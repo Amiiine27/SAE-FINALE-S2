@@ -3,6 +3,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
+import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
     private static final int TAILLE_IMAGE = 8;
+
 
     @FXML
     private Button lancerButton;

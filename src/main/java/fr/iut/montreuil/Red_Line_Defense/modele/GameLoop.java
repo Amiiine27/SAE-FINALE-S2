@@ -14,20 +14,15 @@ import java.util.List;
 
 public class GameLoop {
 
-    private int indexSoldat = 0;
     private List<Soldat> soldats;
     private Environnement terrain;
-    private Timeline timeline;
     private Pane centerPane;
     private int tailleImage = 8;
-
     private VueSoldats vueSoldats;
 
 
-    public GameLoop(Pane centerPane,
-                    VueSoldats vueSoldats, Environnement terrain) {
+    public GameLoop(Pane centerPane, VueSoldats vueSoldats, Environnement terrain) {
         this.centerPane = centerPane;
-
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.soldats = terrain.getSoldats();
@@ -37,7 +32,6 @@ public class GameLoop {
 
 
     public void creerAnimation() {
-
         KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.5), event -> {  // Déplacer les soldats toutes les secondes
             terrain.unTour();
         });
