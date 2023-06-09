@@ -36,12 +36,6 @@ public class EcouteSoldats {
                             terrain.getVueSoldats().ajtCercleSoldats(soldat);
                         }
 
-                        for (Soldat soldat : addedSoldiers) {
-                            if (soldat.getPointsDeVieValue() < 0){
-                                terrain.getSoldats().remove(soldat);
-                                listeSoldat.remove(terrain.getCircleForSoldat(soldat));
-                            }
-                        }
                     }
                 }
             }

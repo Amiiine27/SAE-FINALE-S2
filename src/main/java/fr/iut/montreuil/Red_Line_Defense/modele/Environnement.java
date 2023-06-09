@@ -122,13 +122,10 @@ public class Environnement {
 
     public void unTour(){
 
+        verificationMorts();
         apparitionSoldat();
+        deplacementSoldat();
 
-        if (!listeSoldats.isEmpty()) {
-            for (Soldat soldat : listeSoldats) {
-                deplacerSoldat(soldat);
-            }
-        }
 
         nbrTours++;
     }
@@ -141,6 +138,24 @@ public class Environnement {
         }
     }
 
+    public void deplacementSoldat(){
+        if (!listeSoldats.isEmpty()) {
+            for (Soldat soldat : listeSoldats) {
+                deplacerSoldat(soldat);
+            }
+        }
+    }
+
+    public void verificationMorts(){
+        if (!listeSoldats.isEmpty()) {
+            for (Soldat soldat : listeSoldats) {
+                if (soldat.getPointsDeVieValue() < 0) {
+                    getSoldats().remove(soldat);
+                    listeSoldats.remove(getCircleForSoldat(soldat));
+                }
+            }
+        }
+    }
 
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
