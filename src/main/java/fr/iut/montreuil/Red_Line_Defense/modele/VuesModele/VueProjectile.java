@@ -1,7 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Projectile;
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;

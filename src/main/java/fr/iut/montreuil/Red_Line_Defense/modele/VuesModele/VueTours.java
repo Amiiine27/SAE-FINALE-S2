@@ -2,9 +2,9 @@ package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourLanceMissile;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourMitrailleuse;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.TourSniper;
-import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -35,8 +35,8 @@ public class VueTours {
 
     private String idTourClicked = "0";
 
-    public VueTours(Environnement terrrain, Pane centerPane) {
-        this.terrain = terrrain;
+    public VueTours(Environnement terrain, Pane centerPane) {
+        this.terrain = terrain;
         this.centerPane = centerPane;
     }
 
@@ -54,16 +54,16 @@ public class VueTours {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
                     case "tour200b":
-                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y, 0, 0));
+                        //Faut faire une tour classique
                         break;
                     case "tour400b":
-                        // Faudra faire une tour
+                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y,terrain));
                         break;
                     case "tour600b":
-                        terrain.ajouterTour(new TourSniper((int) x, (int) y, 0, 0));
+                        terrain.ajouterTour(new TourSniper((int) x, (int) y,terrain));
                         break;
                     case "tour800b":
-                        // Faudra faire une tour
+                        terrain.ajouterTour(new TourLanceMissile((int)x,(int)y,terrain));
                         break;
                 }
                 centerPane.getChildren().add(createTourImageView(x, y));

@@ -1,6 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -8,7 +8,7 @@ public abstract class Tour extends Acteurs {
     private IntegerProperty prix; // prix d'achat de l'acteur
     private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
 
-    private Carte terrain;
+    private Environnement terrain;
 
     private double portée;
 
@@ -16,7 +16,7 @@ public abstract class Tour extends Acteurs {
         return portée;
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Carte terrain) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Environnement terrain) {
         super(x0, y0, pointsDeVie, degats, defense);
 
         this.prix = new SimpleIntegerProperty(prix);
@@ -27,7 +27,7 @@ public abstract class Tour extends Acteurs {
         // initialiserLongueur();
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Carte terrain) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Environnement terrain) {
         super(x0, y0, pointsDeVie, degats, defense);
 
         this.terrain = terrain;
@@ -82,7 +82,7 @@ public abstract class Tour extends Acteurs {
         this.longueur.setValue(val);
     }
 
-    public Carte getTerrain() {
+    public Environnement getTerrain() {
         return terrain;
     }
 

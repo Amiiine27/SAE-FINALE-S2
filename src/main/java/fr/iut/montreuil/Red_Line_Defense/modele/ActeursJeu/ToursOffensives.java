@@ -1,6 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Carte;
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,7 +14,7 @@ public abstract class ToursOffensives extends Tour {
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
     private int vitesseProjectile;
-    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Carte terrain,int cadence,int vitesse) {
+    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Environnement terrain,int cadence,int vitesse) {
         super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
 
         this.cadence = new SimpleIntegerProperty(cadence);

@@ -26,7 +26,8 @@ public class Environnement {
 
     private int[][] distances;
 
-    private ListProperty<Tour> tours;
+    private ListProperty<Projectile> listeProjectiles;
+    private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
     private VueSoldats vueSoldat;
 
@@ -102,10 +103,13 @@ public class Environnement {
         this.vague = new SimpleIntegerProperty(1);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
-        tours = new SimpleListProperty<>(observableListTour);
+        listeTours = new SimpleListProperty<>(observableListTour);
 
         ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
         listeSoldats = new SimpleListProperty<>(observableListSoldat);
+
+        ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
+        listeProjectiles = new SimpleListProperty<>(projectileObservableList);
 
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
@@ -307,7 +311,13 @@ public class Environnement {
 
 
 
+    public void ajouterProjectile(Projectile projectile){ this.listeProjectiles.add(projectile);}
 
+    public void supprimerProjectile(Projectile projectile) { this.listeProjectiles.remove(projectile);}
+
+    public ListProperty<Projectile> getProjectilesProperty(){ return this.listeProjectiles;}
+
+    public ObservableList<Projectile> getProjectiles(){return this.listeProjectiles.get();}
 
 
 
@@ -337,19 +347,19 @@ public class Environnement {
 
     // Methodes Tours
     public void ajouterTour(Tour tour) {
-        this.tours.add(tour);
+        this.listeTours.add(tour);
     }                    // Ajouter une tour
 
     public void supprimerTour(Tour tour) {
-        this.tours.remove(tour);
+        this.listeTours.remove(tour);
     }               // Supprimer une tour
 
     public ListProperty<Tour> getToursProperty() {
-        return this.tours;
+        return this.listeTours;
     }             // Retourne la liste observable
 
     public ObservableList<Tour> getTours() {
-        return this.tours.get();
+        return this.listeTours.get();
     }             // Retourne la property qui contient la liste observable
 
     // Methodes Soldats
