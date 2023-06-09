@@ -82,6 +82,10 @@ public abstract class Tour extends Acteurs {
         this.longueur.setValue(val);
     }
 
+    public Carte getTerrain() {
+        return terrain;
+    }
+
     public Soldat ennemiÀPorter() {
         for (Soldat s : this.terrain.getSoldats()) {
             if (s.estVivant()) {
@@ -91,7 +95,6 @@ public abstract class Tour extends Acteurs {
             }
         }
         return null;
-
-
     }
+
 }

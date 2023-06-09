@@ -12,12 +12,13 @@ public abstract class ToursOffensives extends Tour {
     private IntegerProperty cadence; // La cadence est la capacité de Tirs par minute
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
-
-    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Carte terrain,int cadence) {
+    private int vitesseProjectile;
+    public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Carte terrain,int cadence,int vitesse) {
         super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
 
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
+        this.vitesseProjectile=vitesse;
 
         // Ajout des Listeners pour mettre à jour la direction si la position change
 
@@ -40,7 +41,7 @@ public abstract class ToursOffensives extends Tour {
         });
     }
     // Tire un projectile et l'ajoute à la liste
-    public abstract void tirer();
+
 
     // Méthode pour mettre à jour la direction
 
@@ -58,5 +59,21 @@ public abstract class ToursOffensives extends Tour {
 
     public IntegerProperty cadenceProperty() {
         return cadence;
+    }
+
+
+    public void tirer(){
+        Soldat s=ennemiÀPorter();
+        if (s!=null){
+            while(s.estVivant()) {
+                Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile ,getDegatValue());
+                getTerrain().ajouterProjectile(p);
+                try {//Méthode permettant d'implémenter une cadence de tir
+                    Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

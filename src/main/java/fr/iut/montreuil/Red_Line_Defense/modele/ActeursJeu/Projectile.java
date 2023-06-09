@@ -15,7 +15,9 @@ public abstract class Projectile {
     private double yDirection;
     private double v;//Vitesse de l'obus
 
-    public Projectile(double x, double y, double xCible, double yCible, double v) {
+    private int degats;
+
+    public Projectile(double x, double y, double xCible, double yCible, double v, int degats) {
 
         this.x = new SimpleDoubleProperty(x);
 
@@ -23,13 +25,15 @@ public abstract class Projectile {
 
         xDépart=x;
 
-        yDépart=x;
+        yDépart=y;
 
         this.xCible = new SimpleDoubleProperty(xCible);
 
         this.yCible = new SimpleDoubleProperty(yCible);
 
         this.v = v;
+
+        this.degats = degats;
 
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
