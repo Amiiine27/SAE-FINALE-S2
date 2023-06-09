@@ -130,6 +130,7 @@ public class Environnement {
         verificationMorts();
         apparitionSoldat();
         deplacementSoldat();
+        actionTours();
 
 
         nbrTours++;
@@ -153,8 +154,10 @@ public class Environnement {
 
     public void actionTours(){
         if(!listeTours.isEmpty()){
+            System.out.println("tour action");
             for (Tour t : listeTours){
                 t.agit();
+                System.out.println("tour à agit");
             }
         }
     }

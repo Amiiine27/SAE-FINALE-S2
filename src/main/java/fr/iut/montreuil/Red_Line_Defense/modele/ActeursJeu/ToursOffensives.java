@@ -70,8 +70,11 @@ public abstract class ToursOffensives extends Tour {
 
     public void tirer(){
         Soldat s=ennemiÀPorter();
+        System.out.println("a");
         if (s!=null){
+            System.out.println("b");
             while(s.estVivant()) {
+                System.out.println("c");
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
                     System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
@@ -92,5 +95,6 @@ public abstract class ToursOffensives extends Tour {
                 }
             }
         }
+        System.out.println("fin");
     }
 }

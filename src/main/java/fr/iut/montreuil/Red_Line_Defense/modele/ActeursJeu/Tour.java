@@ -4,6 +4,8 @@ import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.List;
+
 public abstract class Tour extends Acteurs {
     private IntegerProperty prix; // prix d'achat de l'acteur
     private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
@@ -87,17 +89,26 @@ public abstract class Tour extends Acteurs {
     }
 
     public Soldat ennemiÀPorter() {
-        for (Soldat s : this.terrain.getSoldats()) {
-            if (s.estVivant()) {
-                if (((this.getY0Value() - getPortée()) <= s.getY0Value() && s.getY0Value() <= this.getY0Value() + getPortée()) && ((this.getX0Value() - getPortée()) <= s.getX0Value() && s.getX0Value() <= this.getX0Value() + getPortée())) {
-                    return s;
+        System.out.println("entrer fonction");
+            for (Soldat s : terrain.getSoldats()) {
+                System.out.println("entrer boucle");
+                if (s.estVivant()) {
+                    System.out.println("vivant");
+                    double distanceX = Math.abs(s.getX0Value() - getX0Value());
+                    double distanceY = Math.abs(s.getY0Value() - getY0Value());
+                    double distanceTotale = distanceX + distanceY;
+                    System.out.println(distanceTotale);
+                    if (distanceTotale <= portée) {
+                        System.out.println("bonne portée");
+                        return s;
+                    }
                 }
             }
+            return null;
         }
-        return null;
-    }
 
 
 
-    public abstract void agit();
+
+        public abstract void agit();
 }
