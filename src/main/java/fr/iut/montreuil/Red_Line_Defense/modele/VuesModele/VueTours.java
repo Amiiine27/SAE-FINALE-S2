@@ -25,6 +25,8 @@ public class VueTours {
     public static final String BAD_CLICK_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/badClic.png";
     public static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour-surbrillance.png";
 
+    public static final String CLIC_CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/errChemin.png";
+
 
     private Environnement terrain;
 
@@ -78,8 +80,6 @@ public class VueTours {
                 centerPane.getChildren().add(createTourImageView(x, y));
 
                 idTourClicked = "0"; // Réinitialiser la sélection de la tour
-            } else {
-                showErrorMessage(x, y);
             }
         }
     }
@@ -98,15 +98,20 @@ public class VueTours {
         int mapY = (int) y / 8;
 
         // Vérifier si la case est valide et si elle est libre
-        if (mapX >= 0 && mapX < terrain.getXmax() && mapY >= 0 && mapY < terrain.getYmax() && terrain.valeurDeLaCase(mapY, mapX) == 0) {
-            // Vérifier si aucune tour n'est déjà positionnée sur cette case
-            for (Tour tour : terrain.getTours()) {
-                if (((int) (tour.getX0Value() / 8) == mapX) && ((int) (tour.getY0Value() / 8) == mapY)) {
-                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
-                    return false; // Une tour est déjà positionnée sur cette case
+        if (terrain.valeurDeLaCase(mapY, mapX) == 1){
+            showErrorCheminMessage(x, y);
+        }
+        else {
+            if (mapX >= 0 && mapX < terrain.getXmax() && mapY >= 0 && mapY < terrain.getYmax()) {
+                // Vérifier si aucune tour n'est déjà positionnée sur cette case
+                for (Tour tour : terrain.getTours()) {
+                    if (((int) (tour.getX0Value() / 8) == mapX) && ((int) (tour.getY0Value() / 8) == mapY)) {
+                        System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
+                        return false; // Une tour est déjà positionnée sur cette case
+                    }
                 }
+                return true; // La case est libre et aucune tour n'est positionnée dessus
             }
-            return true; // La case est libre et aucune tour n'est positionnée dessus
         }
         return false; // La case est invalide ou déjà occupée par une tour
     }
@@ -121,6 +126,19 @@ public class VueTours {
 
     private ImageView createErrorImageView(double x, double y) {
         ImageView err = new ImageView(loadImage(BAD_CLICK_IMAGE_PATH));
+        err.setX(x - 75);
+        err.setY(y - 37.5);
+        return err;
+    }
+    private void showErrorCheminMessage(double x, double y) {
+        ImageView errorImageView = createCheminErrorMessage(x, y);
+        centerPane.getChildren().add(errorImageView);
+        new Timeline(new KeyFrame(Duration.seconds(0.3), e -> centerPane.getChildren().remove(errorImageView))).play();
+        this.idTourClicked = "0";
+    }
+
+    private ImageView createCheminErrorMessage(double x, double y) {
+        ImageView err = new ImageView(loadImage(CLIC_CHEMIN_IMAGE_PATH));
         err.setX(x - 75);
         err.setY(y - 37.5);
         return err;
