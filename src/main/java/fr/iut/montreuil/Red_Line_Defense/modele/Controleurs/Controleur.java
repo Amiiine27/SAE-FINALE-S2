@@ -1,9 +1,11 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueBasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.fxml.FXML;
@@ -49,12 +51,19 @@ public class Controleur implements Initializable {
     @FXML
     HBox hboxMoneyCount;
 
+    private BasePrincipale bp;
+
+    private VueBasePrincipale VBP;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeEnvironnement();;
         initializeVueTours();
         initializeVueSoldats();
         initializeImageBerry();
+        initializeBasePrincipale();
+        initializeVueBasePrincipale();
+        VBP.afficherBase(bp);
         terrain.setVueSoldats(vueSoldats);
         solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString());
     }
@@ -81,7 +90,13 @@ public class Controleur implements Initializable {
         initializeGameLoop();
     }
 
+    private void initializeBasePrincipale(){
+        bp = new BasePrincipale(700, 335, terrain);
+    }
 
+    private void initializeVueBasePrincipale(){
+        VBP = new VueBasePrincipale(centerPane);
+    }
 
     private void initializeVueTours() {
         vueTours = new VueTours(terrain, centerPane);

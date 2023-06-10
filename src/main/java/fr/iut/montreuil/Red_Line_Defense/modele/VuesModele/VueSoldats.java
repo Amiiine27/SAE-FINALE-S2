@@ -5,6 +5,8 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.SuperNova;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,6 +54,10 @@ public class VueSoldats {
         System.out.println("Skin créé pour le soldat : " + skin);
 
         hashMapSoldatsSkin.put(s, skin);
+        //DoubleProperty x = new SimpleDoubleProperty(12);
+        s.setX0(s.getX0Value()- 12);
+        s.setY0(s.getY0Value()- 15);
+        //DoubleProperty y = new SimpleDoubleProperty(15);
 
         skin.xProperty().bind(s.getX0Property());
         skin.yProperty().bind(s.getY0Property());
