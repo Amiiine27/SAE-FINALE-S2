@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.io.InputStream;
@@ -51,16 +53,26 @@ public class VueTours {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
                     case "tour200b":
-                        terrain.ajouterTour(new ToursDeffensives((int) x,(int) y, terrain));
+                        ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
+                        terrain.ajouterTour(td);
+                        td.afficherPortee(centerPane);
                         break;
+
                     case "tour400b":
-                        terrain.ajouterTour(new TourMitrailleuse((int) x, (int) y,terrain));
+                        TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
+                        terrain.ajouterTour(tm);
+                        tm.afficherPortee(centerPane);
                         break;
+
                     case "tour600b":
-                        terrain.ajouterTour(new TourSniper((int) x, (int) y,terrain));
+                        TourSniper ts = new TourSniper((int) x, (int) y,terrain);
+                        terrain.ajouterTour(ts);
+                        ts.afficherPortee(centerPane);
                         break;
                     case "tour800b":
-                        terrain.ajouterTour(new TourLanceMissile((int)x,(int)y,terrain));
+                        TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
+                        terrain.ajouterTour(tlm);
+                        tlm.afficherPortee(centerPane);
                         break;
                 }
                 centerPane.getChildren().add(createTourImageView(x, y));

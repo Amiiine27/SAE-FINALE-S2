@@ -44,6 +44,7 @@ public class Controleur implements Initializable {
         initializeVueTours();
         initializeVueSoldats();
         terrain.setVueSoldats(vueSoldats);
+
     }
 
     private void initializeEcouteSoldats(){

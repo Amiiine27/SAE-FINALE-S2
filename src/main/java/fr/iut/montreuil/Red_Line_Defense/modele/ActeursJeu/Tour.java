@@ -3,6 +3,9 @@ package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.util.List;
 
@@ -12,18 +15,20 @@ public abstract class Tour extends Acteurs {
 
     private Environnement terrain;
 
-    private double portée;
+    private double portee;
 
     public double getPortée() {
-        return portée;
+        return portee;
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Environnement terrain) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Environnement terrain, double portee) {
         super(x0, y0, pointsDeVie, degats, defense);
 
         this.prix = new SimpleIntegerProperty(prix);
 
         this.terrain = terrain;
+
+        this.portee = portee;
 
 
         // initialiserLongueur();
@@ -98,7 +103,7 @@ public abstract class Tour extends Acteurs {
                     double distanceY = Math.abs(s.getY0Value() - getY0Value());
                     double distanceTotale = distanceX + distanceY;
                     System.out.println(distanceTotale);
-                    if (distanceTotale <= portée) {
+                    if (distanceTotale <= portee) {
                         System.out.println("bonne portée");
                         return s;
                     }
@@ -106,6 +111,13 @@ public abstract class Tour extends Acteurs {
             }
             return null;
         }
+    public void afficherPortee(Pane p){
+        Circle c = new Circle(this.getX0Value(), this.getY0Value(), this.getPortée());
+        c.setStroke(Color.GREY);
+        c.setFill(Color.TRANSPARENT);
+        p.getChildren().add(c);
+        System.out.println("portée affichée");
+    }
 
 
 

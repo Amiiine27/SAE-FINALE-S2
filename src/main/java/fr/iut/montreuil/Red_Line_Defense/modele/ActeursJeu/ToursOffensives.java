@@ -14,15 +14,12 @@ public abstract class ToursOffensives extends Tour {
     private ObservableList<Projectile> projectiles; // Liste de tous les projectiles actuellement tirés par la tour
 
     private int vitesseProjectile;
-
-    private double portée;
     public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Environnement terrain,int cadence,int vitesse,double portée) {
-        super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
+        super(x0, y0, pointsDeVie, degats, defense, prix, terrain, portée);
 
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
         this.vitesseProjectile=vitesse;
-        this.portée=portée;
 
         // Ajout des Listeners pour mettre à jour la direction si la position change
 
