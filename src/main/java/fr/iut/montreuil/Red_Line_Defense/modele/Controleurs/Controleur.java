@@ -14,7 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,18 +43,30 @@ public class Controleur implements Initializable {
     @FXML
     Label solde;
 
+    @FXML
+    ImageView berry;
+
+    @FXML
+    HBox hboxMoneyCount;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeEnvironnement();;
         initializeVueTours();
         initializeVueSoldats();
+        initializeImageBerry();
         terrain.setVueSoldats(vueSoldats);
-        solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString("Berrys : %s"));
-
+        solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString());
     }
 
     private void initializeEcouteSoldats(){
         ecouteSoldats = new EcouteSoldats(terrain);
+    }
+
+    private void initializeImageBerry(){
+        berry = new ImageView(getBerryImage());
+        System.out.println("imageView ajt");
+        hboxMoneyCount.getChildren().add(berry);
     }
 
     private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
@@ -109,6 +123,9 @@ public class Controleur implements Initializable {
             default:
                 return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png");
         }
+    }
+    private Image getBerryImage() {
+                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berry.png");
     }
 
     public void positionTour(MouseEvent event) {

@@ -25,9 +25,10 @@
                 <Button fx:id="lancerButton" text="Lancer" onAction="#lancerTours"/>
 
             </VBox>
-            <VBox fx:id="vboxMoneyCount" prefWidth="100.00" prefHeight="160.00">
-                <Label fx:id="solde"/>
-            </VBox>
+            <HBox fx:id="hboxMoneyCount" prefWidth="100.00" prefHeight="160.00" alignment="CENTER">
+                <Label fx:id="solde" style="-fx-font-size: 20px;"/>
+                <ImageView fx:id="berry"/>
+            </HBox>
             <VBox fx:id="vboxKillCount" prefHeight="160.00" prefWidth="100.00">
                 <Label text="Ennemis tués :"/>
                 <Label text="20"/>
