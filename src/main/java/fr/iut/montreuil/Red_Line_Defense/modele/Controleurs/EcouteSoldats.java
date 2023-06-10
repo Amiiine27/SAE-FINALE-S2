@@ -33,7 +33,7 @@ public class EcouteSoldats {
                     if (c.wasAdded()) {
                         List<? extends Soldat> addedSoldiers = c.getAddedSubList();
                         for (Soldat soldat : addedSoldiers) {
-                            terrain.getVueSoldats().ajtCercleSoldats(soldat);
+                            terrain.getVueSoldats().ajouterSkinSoldat(soldat);
                         }
 
                     }

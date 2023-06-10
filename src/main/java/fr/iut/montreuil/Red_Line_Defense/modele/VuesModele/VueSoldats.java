@@ -5,6 +5,9 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.SuperNova;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
+import javafx.scene.control.Skin;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,12 +23,13 @@ public class VueSoldats {
 
     private Pane centerPane;
 
-    private Map<Soldat, Circle> hashMapSoldatsCercles = new HashMap<>();
+    private Map<Soldat, ImageView> hashMapSoldatsSkin = new HashMap<>();
 
 
     public VueSoldats(Pane centerPane) {
         this.centerPane = centerPane;
     }
+    /*
 
     public void ajtCercleSoldats(Soldat s) {
         Circle cercleSoldat = new Circle(4, Color.DARKORCHID);
@@ -41,20 +45,44 @@ public class VueSoldats {
 
     }
 
+     */
+
+    public void ajouterSkinSoldat(Soldat s) {
+        ImageView skin  = creerImageSoldat();
+        System.out.println("Skin créé pour le soldat : " + skin);
+
+        hashMapSoldatsSkin.put(s, skin);
+
+        skin.xProperty().bind(s.getX0Property());
+        skin.yProperty().bind(s.getY0Property());
+
+        centerPane.getChildren().add(skin);
+        System.out.println("Skin ajouté au pane. Total des cercles : " + centerPane.getChildren().size());
+
+    }
+    public ImageView creerImageSoldat() {
+        ImageView img = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif"));
+        return img;
+    }
+
+    private Image loadImage(String path) {
+        return new Image(getClass().getResourceAsStream(path));
+    }
+
     public void supprCercleSoldats(Soldat s) {
 
     }
 
-    public Map<Soldat, Circle> getHashMap(){
-        return this.hashMapSoldatsCercles;
+    public Map<Soldat, ImageView> getHashMap(){
+        return this.hashMapSoldatsSkin;
     }
 
-    public Circle getCircleForSoldat(Soldat soldat) {
-        return this.hashMapSoldatsCercles.get(soldat);
+    public ImageView getCircleForSoldat(Soldat soldat) {
+        return this.hashMapSoldatsSkin.get(soldat);
     }
-    public Soldat getSoldatForCircle(Circle circle) {
-        for (Map.Entry<Soldat, Circle> entry : this.hashMapSoldatsCercles.entrySet()) {
-            if (Objects.equals(circle, entry.getValue())) {
+    public Soldat getSoldatForCircle(ImageView i) {
+        for (Map.Entry<Soldat, ImageView> entry : this.hashMapSoldatsSkin.entrySet()) {
+            if (Objects.equals(i, entry.getValue())) {
                 return entry.getKey();
             }
         }
