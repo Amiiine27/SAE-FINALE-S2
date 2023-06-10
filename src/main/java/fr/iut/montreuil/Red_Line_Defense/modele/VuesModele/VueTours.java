@@ -26,6 +26,7 @@ public class VueTours {
     public static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour-surbrillance.png";
 
     public static final String CLIC_CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/errChemin.png";
+    public static final String CLIC_NO_MONEY_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/noMoney.png";
 
 
     private Environnement terrain;
@@ -51,6 +52,9 @@ public class VueTours {
         if (idTourClicked.equals("0")) {
             // Aucune tour sélectionnée, afficher un message d'erreur
             showErrorMessage(x, y);
+        } else if (terrain.getJoueur().getSoldeJoueurValue()<=0)  {
+            showErrorMoneyMessage(x, y);
+
         } else {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
@@ -126,6 +130,19 @@ public class VueTours {
 
     private ImageView createErrorImageView(double x, double y) {
         ImageView err = new ImageView(loadImage(BAD_CLICK_IMAGE_PATH));
+        err.setX(x - 75);
+        err.setY(y - 37.5);
+        return err;
+    }
+    private void showErrorMoneyMessage(double x, double y) {
+        ImageView errorImageView = createMoneyErrorImageView(x, y);
+        centerPane.getChildren().add(errorImageView);
+        new Timeline(new KeyFrame(Duration.seconds(0.3), e -> centerPane.getChildren().remove(errorImageView))).play();
+        this.idTourClicked = "0";
+    }
+
+    private ImageView createMoneyErrorImageView(double x, double y) {
+        ImageView err = new ImageView(loadImage(CLIC_NO_MONEY_PATH));
         err.setX(x - 75);
         err.setY(y - 37.5);
         return err;
