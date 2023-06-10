@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,6 +38,8 @@ public class Controleur implements Initializable {
 
     @FXML
     private Pane centerPane;
+    @FXML
+    Label solde;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,6 +47,7 @@ public class Controleur implements Initializable {
         initializeVueTours();
         initializeVueSoldats();
         terrain.setVueSoldats(vueSoldats);
+        solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString("Berrys : %s"));
 
     }
 
