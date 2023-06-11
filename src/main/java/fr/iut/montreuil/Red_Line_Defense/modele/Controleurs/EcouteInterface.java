@@ -26,6 +26,7 @@ public class EcouteInterface {
         this.joueur = terrain.getJoueur();
         this.vague = terrain.getVagueProperty();
         ajouterEcouteurSolde();
+        ajouterEcouteurEnnemisTues();
         ajouterListenerVague();
     }
 
@@ -35,6 +36,16 @@ public class EcouteInterface {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 terrain.getVueInterface().getSolde().setText(String.valueOf(newValue));
+            }
+        });
+    }
+
+    public void ajouterEcouteurEnnemisTues() {
+
+        this.terrain.getEnnemisTuesProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                terrain.getVueInterface().getEnnemisTues().setText(String.valueOf(newValue));
             }
         });
     }

@@ -20,6 +20,9 @@ public class Environnement {
     private int[][] quadrillage;
 
     private IntegerProperty vague;
+
+    private IntegerProperty ennemisTues;
+
     private ListProperty<Projectile> listeProjectiles;
     private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
@@ -38,6 +41,30 @@ public class Environnement {
 
 
     public Environnement(Joueur joueur) {
+        initQuadrillage();
+
+        this.joueur = joueur;
+
+        this.vague = new SimpleIntegerProperty(1);
+        this.ennemisTues = new SimpleIntegerProperty(0);
+
+        ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
+        listeTours = new SimpleListProperty<>(observableListTour);
+
+        ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
+        listeSoldats = new SimpleListProperty<>(observableListSoldat);
+
+        ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
+        listeProjectiles = new SimpleListProperty<>(projectileObservableList);
+
+
+        this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
+        calculerChemin(89, 47);
+
+
+    }
+
+    public void initQuadrillage() {
         quadrillage = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -100,27 +127,7 @@ public class Environnement {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
-
-        this.joueur = joueur;
-
-        this.vague = new SimpleIntegerProperty(1);
-
-        ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
-        listeTours = new SimpleListProperty<>(observableListTour);
-
-        ObservableList<Soldat> observableListSoldat = FXCollections.observableArrayList();
-        listeSoldats = new SimpleListProperty<>(observableListSoldat);
-
-        ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
-        listeProjectiles = new SimpleListProperty<>(projectileObservableList);
-
-
-        this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
-        calculerChemin(89, 47);
-
-
     }
-
 
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- TOUR DE JEU ---------------------------------------------------------------
@@ -128,9 +135,10 @@ public class Environnement {
 
     public void unTour(){
 
-        verificationMorts();
+
         apparitionSoldat();
         deplacementSoldat();
+        verificationMorts();
         // actionTours();
 
 
@@ -164,10 +172,11 @@ public class Environnement {
     public void verificationMorts(){
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
-                if (soldat.getPointsDeVieValue() < 0) {
+                if (soldat.getPointsDeVieValue() <= 0) {
+                    vueSoldat.supprSkinSoldats(soldat);
                     supprimerSoldat(soldat);
-                    vueSoldat.supprCercleSoldats(soldat);
                     joueur.crediterSolde(soldat.getValeurGagnee());
+                    ennemisTues.add(1);
                 }
             }
         }
@@ -284,11 +293,17 @@ public class Environnement {
 
     public void setVague(int i){ this.vague.set(i);}
 
-
     public IntegerProperty getVagueProperty() { return this.vague; }
 
-
     public int getVagueValue() { return this.vague.getValue(); }
+
+    public void setEnnemisTues(int ennemisTues) {
+        this.ennemisTues.set(ennemisTues);
+    }
+
+    public IntegerProperty getEnnemisTuesProperty() { return this.ennemisTues;}
+
+    public int getEnnemisTuesValue() { return this.ennemisTues.getValue(); }
 
     public void setVueInterface(VueInterface v) { this.vueInterface = v;}
 

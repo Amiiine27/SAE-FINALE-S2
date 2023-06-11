@@ -21,22 +21,23 @@ public class VueInterface {
 
     HBox hboxMoneyCount;
 
+    Label ennemisTues;
+
     private Button lancerButton, test;
 
 
 
 
 
-    public VueInterface(Environnement terrain, HBox hboxMoneyCount, Button lancerButton, Button test, Label solde, ImageView berry) {
+    public VueInterface(Environnement terrain, HBox hboxMoneyCount, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues) {
         solde.setText(String.valueOf(terrain.getJoueur().getSoldeJoueurValue()));
         this.hboxMoneyCount = hboxMoneyCount;
         this.lancerButton = lancerButton;
         this.test = test;
         this.solde = solde;
         this.berry = berry;
+        this.ennemisTues = ennemisTues;
         initializeImageBerry();
-
-
     }
 
     private void initializeImageBerry() {
@@ -71,6 +72,14 @@ public class VueInterface {
 
     public Label getSolde() {
         return solde;
+    }
+
+    public Label getEnnemisTues(){
+        return ennemisTues;
+    }
+
+    public void setEnnemisTues(Label ennemisTues) {
+        this.ennemisTues = ennemisTues;
     }
 
     public void setSolde(Label solde) {

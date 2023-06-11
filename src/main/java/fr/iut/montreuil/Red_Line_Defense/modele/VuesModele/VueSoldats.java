@@ -31,23 +31,8 @@ public class VueSoldats {
     public VueSoldats(Pane centerPane) {
         this.centerPane = centerPane;
     }
-    /*
 
-    public void ajtCercleSoldats(Soldat s) {
-        Circle cercleSoldat = new Circle(4, Color.DARKORCHID);
-        System.out.println("Cercle créé pour le soldat : " + cercleSoldat);
 
-        hashMapSoldatsCercles.put(s, cercleSoldat);
-
-        cercleSoldat.centerXProperty().bind(s.getX0Property());
-        cercleSoldat.centerYProperty().bind(s.getY0Property());
-
-        centerPane.getChildren().add(cercleSoldat);
-        System.out.println("Cercle ajouté au pane. Total des cercles : " + centerPane.getChildren().size());
-
-    }
-
-     */
 
     public void ajouterSkinSoldat(Soldat s) {
         ImageView skin  = creerImageSoldat();
@@ -63,7 +48,7 @@ public class VueSoldats {
         skin.yProperty().bind(s.getY0Property());
 
         centerPane.getChildren().add(skin);
-        System.out.println("Skin ajouté au pane. Total des cercles : " + centerPane.getChildren().size());
+        System.out.println("  Skin ajouté au pane. Total des cercles  ");
 
     }
     public ImageView creerImageSoldat() {
@@ -75,18 +60,18 @@ public class VueSoldats {
         return new Image(getClass().getResourceAsStream(path));
     }
 
-    public void supprCercleSoldats(Soldat s) {
-
+    public void supprSkinSoldats(Soldat s) {
+        centerPane.getChildren().remove(getSkinForSoldat(s));
     }
 
     public Map<Soldat, ImageView> getHashMap(){
         return this.hashMapSoldatsSkin;
     }
 
-    public ImageView getCircleForSoldat(Soldat soldat) {
+    public ImageView getSkinForSoldat(Soldat soldat) {
         return this.hashMapSoldatsSkin.get(soldat);
     }
-    public Soldat getSoldatForCircle(ImageView i) {
+    public Soldat getSoldatForSkin(ImageView i) {
         for (Map.Entry<Soldat, ImageView> entry : this.hashMapSoldatsSkin.entrySet()) {
             if (Objects.equals(i, entry.getValue())) {
                 return entry.getKey();

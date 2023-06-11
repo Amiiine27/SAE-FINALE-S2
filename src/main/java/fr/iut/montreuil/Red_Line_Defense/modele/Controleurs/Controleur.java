@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
@@ -21,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -28,6 +30,9 @@ public class Controleur implements Initializable {
 
     @FXML
     private Pane centerPane;
+
+    @FXML
+    private Label ennemisTues;
 
     @FXML
     Label solde;
@@ -76,7 +81,7 @@ public class Controleur implements Initializable {
     }
 
     private void initializeVueInterface(){
-        vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry );
+        vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry, ennemisTues );
         initializeEcouteInterface();
     }
 
@@ -135,12 +140,16 @@ public class Controleur implements Initializable {
         }
     }
     @FXML
-    public void testPv(ActionEvent event){
-
-        bp.testPv();
-        for (Tour t : this.terrain.getTours()) {
-            t.setPointsDeVieValue(t.getPointsDeVieValue()-10);
-            System.out.println(t.getPointsDeVieValue());
+    public void testPv(ActionEvent event) {
+        System.out.println("TEST");
+        Random rand = new Random();
+        for (Soldat s : this.terrain.getSoldats()) {
+            // Generate a random number between 0 and 3 (inclusive)
+            int chance = rand.nextInt(4);
+            if (chance == 0) {
+                s.setPointsDeVieValue(0);
+                System.out.println("MORT");
+            }
         }
     }
 
