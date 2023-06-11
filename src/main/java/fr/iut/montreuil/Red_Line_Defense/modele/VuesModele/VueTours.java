@@ -53,10 +53,11 @@ public class VueTours {
         double x = event.getX();
         double y = event.getY();
         DoubleProperty progression = new SimpleDoubleProperty(1.0);;
-        ProgressBar hpb = creerBarreDeVie(progression);
+        ProgressBar hpb = creerBarreDeVie(progression, x, y);
+
         System.out.println("x" + x + " y" + y);
-        StackPane stackPane = new StackPane();
-        stackPane.setPadding(new Insets(10));
+        //StackPane stackPane = new StackPane();
+        //stackPane.setPadding(new Insets(10));
 
         if (idTourClicked.equals("0")) {
             // Aucune tour sélectionnée, afficher un message d'erreur
@@ -77,36 +78,46 @@ public class VueTours {
                         TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
                         terrain.ajouterTour(tm);
                         tm.afficherPortee(centerPane);
+                        progression.bind(Bindings.divide(tm.getPointsDeVieProperty(), 100.0));
                         break;
 
                     case "tour600b":
                         TourSniper ts = new TourSniper((int) x, (int) y,terrain);
                         terrain.ajouterTour(ts);
                         ts.afficherPortee(centerPane);
+                        progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), 100.0));
                         break;
                     case "tour800b":
                         TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
                         terrain.ajouterTour(tlm);
                         tlm.afficherPortee(centerPane);
+                        progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), 100.0));
                         break;
                 }
                 ImageView i = createTourImageView(x, y);
-                afficherBarreDeVie(stackPane, i, hpb);
-                centerPane.getChildren().add(stackPane);
+                //afficherBarreDeVie(stackPane, i, hpb);
+                centerPane.getChildren().addAll(i, hpb);
 
                 idTourClicked = "0"; // Réinitialiser la sélection de la tour
             }
         }
     }
 
-    public ProgressBar creerBarreDeVie(DoubleProperty d){
+    public ProgressBar creerBarreDeVie(DoubleProperty d, double x, double y){
         ProgressBar hpBarre = new ProgressBar();
         hpBarre.progressProperty().bind(d);
+        //hpBarre.setPadding(new Insets(2));
+        hpBarre.setLayoutX(x-25);
+        hpBarre.setLayoutY(y-10-17.5);
+        hpBarre.setPrefHeight(10);
+        hpBarre.setPrefWidth(50);
         return hpBarre;
     }
-    public void afficherBarreDeVie(StackPane s, ImageView i, ProgressBar p){
+    /*public void afficherBarreDeVie(StackPane s, ImageView i, ProgressBar p){
         s.getChildren().addAll(i, p);
     }
+
+     */
 
 
     private ImageView createTourImageView(double x, double y) {
