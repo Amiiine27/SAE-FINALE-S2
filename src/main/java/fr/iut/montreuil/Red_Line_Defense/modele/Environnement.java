@@ -176,7 +176,8 @@ public class Environnement {
                     vueSoldat.supprSkinSoldats(soldat);
                     supprimerSoldat(soldat);
                     joueur.crediterSolde(soldat.getValeurGagnee());
-                    ennemisTues.add(1);
+                    ennemisTues.setValue(ennemisTues.getValue() + 1);
+                    System.out.println("Ennemi bien tué");
                 }
             }
         }
