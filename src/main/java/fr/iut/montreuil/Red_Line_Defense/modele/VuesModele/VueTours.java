@@ -114,11 +114,7 @@ public class VueTours {
         hpBarre.setPrefWidth(50);
         return hpBarre;
     }
-    /*public void afficherBarreDeVie(StackPane s, ImageView i, ProgressBar p){
-        s.getChildren().addAll(i, p);
-    }
 
-     */
 
 
     private ImageView createTourImageView(double x, double y) {
@@ -133,24 +129,36 @@ public class VueTours {
         int mapX = (int) x / 8;
         int mapY = (int) y / 8;
 
+        // La position de départ pour la vérification de l'entourage
+        int startX = mapX - 3;
+        int startY = mapY - 3;
+
         // Vérifier si la case est valide et si elle est libre
         if (terrain.valeurDeLaCase(mapY, mapX) == 1){
             showErrorCheminMessage(x, y);
         }
         else {
             if (mapX >= 0 && mapX < terrain.getXmax() && mapY >= 0 && mapY < terrain.getYmax()) {
-                // Vérifier si aucune tour n'est déjà positionnée sur cette case
-                for (Tour tour : terrain.getTours()) {
-                    if (((int) (tour.getX0Value() / 8) == mapX) && ((int) (tour.getY0Value() / 8) == mapY)) {
-                        System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
-                        return false; // Une tour est déjà positionnée sur cette case
+                // Vérifier si aucune tour n'est déjà positionnée sur cette case ou sur les cases entourant celle-ci
+                for (int i = startX; i <= startX + 6; i++) {
+                    for (int j = startY; j <= startY + 6; j++) {
+                        if (i >= 0 && i < terrain.getXmax() && j >= 0 && j < terrain.getYmax()) {
+                            for (Tour tour : terrain.getTours()) {
+                                if (((int) (tour.getX0Value() / 8) == i) && ((int) (tour.getY0Value() / 8) == j)) {
+                                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
+                                    return false; // Une tour est déjà positionnée sur cette case ou sur une case entourante
+                                }
+                            }
+                        }
                     }
                 }
-                return true; // La case est libre et aucune tour n'est positionnée dessus
+                return true; // La case et ses cases environnantes sont libres et aucune tour n'est positionnée dessus
             }
         }
-        return false; // La case est invalide ou déjà occupée par une tour
+        return false; // La case est invalide ou déjà occupée par une tour ou une case environnante est occupée par une tour
     }
+
+
 
 
     private void showErrorMessage(double x, double y) {

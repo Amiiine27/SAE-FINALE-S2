@@ -65,7 +65,6 @@ public class Controleur implements Initializable {
         initializeImageBerry();
         initializeBasePrincipale();
         initializeVueBasePrincipale();
-        VBP.afficherBase(bp);
         terrain.setVueSoldats(vueSoldats);
         solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString());
     }
@@ -98,6 +97,7 @@ public class Controleur implements Initializable {
 
     private void initializeVueBasePrincipale(){
         VBP = new VueBasePrincipale(centerPane);
+        VBP.afficherBase(bp);
     }
 
     private void initializeVueTours() {

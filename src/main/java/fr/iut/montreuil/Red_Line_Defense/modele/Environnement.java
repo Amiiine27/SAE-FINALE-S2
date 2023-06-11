@@ -131,16 +131,15 @@ public class Environnement {
         verificationMorts();
         apparitionSoldat();
         deplacementSoldat();
-        actionTours();
+        // actionTours();
 
 
         nbrTours++;
     }
 
     public void apparitionSoldat(){
-        System.out.println("HA");
         if (( nbrTours % 10 == 0) && (listeSoldats.get().size() < ( nbreSpawns + 1))) {
-            System.out.println("Ho");
+            System.out.println("Un nouveau Soldat Apparait !");
             nouveauSpawnSoldat(1);
         }
     }
