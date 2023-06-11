@@ -3,16 +3,15 @@ package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueBasePrincipale;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,22 +26,9 @@ import java.util.ResourceBundle;
 public class Controleur implements Initializable {
     private static final int TAILLE_IMAGE = 8;
 
-
-    @FXML
-    private Button lancerButton, test;
-
-    private EcouteSoldats ecouteSoldats;
-
-    private EcouteTours ecouteTours;
-
-    private Environnement terrain;
-
-    private GameLoop gameLoop;
-    private VueTours vueTours;
-    private VueSoldats vueSoldats;
-
     @FXML
     private Pane centerPane;
+
     @FXML
     Label solde;
 
@@ -53,36 +38,61 @@ public class Controleur implements Initializable {
     @FXML
     HBox hboxMoneyCount;
 
-    private BasePrincipale bp;
+    @FXML
+    private Button lancerButton, test;
 
-    private VueBasePrincipale VBP;
+    private Joueur joueur;
+    private VueInterface vueInterface;
+
+    private EcouteSoldats ecouteSoldats;
+    private EcouteTours ecouteTours;
+
+    private EcouteInterface ecouteInterface;
+
+    private Environnement terrain;
+    private GameLoop gameLoop;
+    private VueTours vueTours;
+    private VueSoldats vueSoldats;
+
+    private BasePrincipale bp;
+    private VueBasePrincipale vueBasePrincipale;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeEnvironnement();;
+        initializeJoueur();
+        initializeEnvironnement();
         initializeVueTours();
         initializeVueSoldats();
-        initializeImageBerry();
+        initializeVueInterface();
         initializeBasePrincipale();
         initializeVueBasePrincipale();
+
         terrain.setVueSoldats(vueSoldats);
-        solde.textProperty().bind(terrain.getJoueur().getSoldeJoueurProperty().asString());
+        terrain.setVueInterface(vueInterface);
+    }
+
+    private void initializeJoueur(){
+        this.joueur = new Joueur("Ayoub");
+    }
+
+    private void initializeVueInterface(){
+        vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry );
+        initializeEcouteInterface();
+    }
+
+    private void initializeEcouteInterface(){
+        ecouteInterface = new EcouteInterface(terrain);
     }
 
     private void initializeEcouteSoldats(){
         ecouteSoldats = new EcouteSoldats(terrain);
     }
 
-    private void initializeImageBerry(){
-        berry = new ImageView(getBerryImage());
-        System.out.println("imageView ajt");
-        hboxMoneyCount.getChildren().add(berry);
-    }
 
     private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
 
     private void initializeEnvironnement() {
-        terrain = new Environnement();
+        terrain = new Environnement(joueur);
         remplissage();
     }
 
@@ -96,8 +106,8 @@ public class Controleur implements Initializable {
     }
 
     private void initializeVueBasePrincipale(){
-        VBP = new VueBasePrincipale(centerPane);
-        VBP.afficherBase(bp);
+        vueBasePrincipale = new VueBasePrincipale(centerPane);
+        vueBasePrincipale.afficherBase(bp);
     }
 
     private void initializeVueTours() {
@@ -150,9 +160,7 @@ public class Controleur implements Initializable {
                 return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png");
         }
     }
-    private Image getBerryImage() {
-                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berry.png");
-    }
+
 
     public void positionTour(MouseEvent event) {
         vueTours.positionTour(event);

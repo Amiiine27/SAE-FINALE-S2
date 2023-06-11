@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -30,13 +31,13 @@ public class Environnement {
 
     private int[][] distances;
 
-
+    private VueInterface vueInterface;
     private VueSoldats vueSoldat;
 
     private int nbreSpawns = 10;
 
 
-    public Environnement() {
+    public Environnement(Joueur joueur) {
         quadrillage = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -100,7 +101,7 @@ public class Environnement {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        this.joueur = new Joueur("Ayoub");
+        this.joueur = joueur;
 
         this.vague = new SimpleIntegerProperty(1);
 
@@ -117,7 +118,6 @@ public class Environnement {
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
 
-        ajouterListenerVague();
 
     }
 
@@ -279,11 +279,10 @@ public class Environnement {
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
-    //------------------------------------------------------- VAGUE ------------------------------------------------------------------
+    //------------------------------------------------------- INTERFACE ------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
     public void setVague(int i){ this.vague.set(i);}
-
 
 
     public IntegerProperty getVagueProperty() { return this.vague; }
@@ -291,13 +290,12 @@ public class Environnement {
 
     public int getVagueValue() { return this.vague.getValue(); }
 
+    public void setVueInterface(VueInterface v) { this.vueInterface = v;}
 
-    private void ajouterListenerVague(){
-        this.vague.addListener((observable, oldValue, newValue) -> {
-            System.out.println("Vague numéro " + newValue.intValue());
-            joueur.crediterSolde(50); // Chaque Vague le Joueur Gagne 50 Berrys
-        });
-    }
+    public VueInterface getVueInterface() { return this.vueInterface;}
+
+
+
 
 
 
