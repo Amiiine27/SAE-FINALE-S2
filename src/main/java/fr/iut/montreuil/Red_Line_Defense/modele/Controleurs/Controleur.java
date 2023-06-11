@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
@@ -8,6 +9,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueBasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
@@ -28,7 +30,7 @@ public class Controleur implements Initializable {
 
 
     @FXML
-    private Button lancerButton;
+    private Button lancerButton, test;
 
     private EcouteSoldats ecouteSoldats;
 
@@ -120,6 +122,15 @@ public class Controleur implements Initializable {
             for (int j = 0; j < xmax; j++) {
                 centerPane.getChildren().add(createTerrainImageView(i, j));
             }
+        }
+    }
+    @FXML
+    public void testPv(ActionEvent event){
+
+        bp.testPv();
+        for (Tour t : this.terrain.getTours()) {
+            t.setPointsDeVieValue(t.getPointsDeVieValue()-10);
+            System.out.println(t.getPointsDeVieValue());
         }
     }
 

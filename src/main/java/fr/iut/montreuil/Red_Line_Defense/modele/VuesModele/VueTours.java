@@ -71,27 +71,28 @@ public class VueTours {
                         ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
                         terrain.ajouterTour(td);
                         td.afficherPortee(centerPane);
-                        progression.bind(Bindings.divide(td.getPointsDeVieProperty(), 100.0));
+                        //hpb.setProgress();
+                        progression.bind(Bindings.divide(td.getPointsDeVieProperty(), (double) td.getPointsDeVieValue()));
                         break;
 
                     case "tour400b":
                         TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
                         terrain.ajouterTour(tm);
                         tm.afficherPortee(centerPane);
-                        progression.bind(Bindings.divide(tm.getPointsDeVieProperty(), 100.0));
+                        progression.bind(Bindings.divide(tm.getPointsDeVieProperty(), (double) tm.getPointsDeVieValue()));
                         break;
 
                     case "tour600b":
                         TourSniper ts = new TourSniper((int) x, (int) y,terrain);
                         terrain.ajouterTour(ts);
                         ts.afficherPortee(centerPane);
-                        progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), 100.0));
+                        progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), (double) ts.getPointsDeVieValue()));
                         break;
                     case "tour800b":
                         TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
                         terrain.ajouterTour(tlm);
                         tlm.afficherPortee(centerPane);
-                        progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), 100.0));
+                        progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), (double) tlm.getPointsDeVieValue()));
                         break;
                 }
                 ImageView i = createTourImageView(x, y);
@@ -107,8 +108,8 @@ public class VueTours {
         ProgressBar hpBarre = new ProgressBar();
         hpBarre.progressProperty().bind(d);
         //hpBarre.setPadding(new Insets(2));
-        hpBarre.setLayoutX(x-25);
-        hpBarre.setLayoutY(y-10-17.5);
+        hpBarre.setLayoutX(x-25); // moitié de l'image
+        hpBarre.setLayoutY(y-10-17.5); //10 pixels au dessus + la moitié de l'image
         hpBarre.setPrefHeight(10);
         hpBarre.setPrefWidth(50);
         return hpBarre;

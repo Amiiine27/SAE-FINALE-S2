@@ -32,6 +32,7 @@
             <VBox fx:id="vboxKillCount" prefHeight="160.00" prefWidth="100.00">
                 <Label text="Ennemis tués :"/>
                 <Label text="20"/>
+                <Button fx:id="test" onAction="#testPv" text="TEST"/>
             </VBox>
         </VBox>
     </right>

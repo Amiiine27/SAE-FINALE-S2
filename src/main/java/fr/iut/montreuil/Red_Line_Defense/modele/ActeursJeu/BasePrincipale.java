@@ -22,6 +22,10 @@ public class BasePrincipale extends Tour {
         System.out.println("---pv base : " + this.getPointsDeVieValue());
     }
 
+    public void testPv() {
+        this.setPointsDeVieValue(this.getPointsDeVieValue()-1000);
+    }
+
     /*public void afficherPorteeB(Pane p){
         double rayon = this.getPortée()+30;
         Circle c = new Circle(this.getX0Value(), this.getY0Value(), rayon);
