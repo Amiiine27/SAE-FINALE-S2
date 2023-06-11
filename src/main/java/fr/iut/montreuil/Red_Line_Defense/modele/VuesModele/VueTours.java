@@ -5,11 +5,17 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -46,15 +52,17 @@ public class VueTours {
     public void positionTour(MouseEvent event) {
         double x = event.getX();
         double y = event.getY();
-
+        DoubleProperty progression = new SimpleDoubleProperty(1.0);;
+        ProgressBar hpb = creerBarreDeVie(progression);
         System.out.println("x" + x + " y" + y);
+        StackPane stackPane = new StackPane();
+        stackPane.setPadding(new Insets(10));
 
         if (idTourClicked.equals("0")) {
             // Aucune tour sélectionnée, afficher un message d'erreur
             showErrorMessage(x, y);
         } else if (terrain.getJoueur().getSoldeJoueurValue()<=0)  {
             showErrorMoneyMessage(x, y);
-
         } else {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
@@ -62,6 +70,7 @@ public class VueTours {
                         ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
                         terrain.ajouterTour(td);
                         td.afficherPortee(centerPane);
+                        progression.bind(Bindings.divide(td.getPointsDeVieProperty(), 100.0));
                         break;
 
                     case "tour400b":
@@ -81,11 +90,22 @@ public class VueTours {
                         tlm.afficherPortee(centerPane);
                         break;
                 }
-                centerPane.getChildren().add(createTourImageView(x, y));
+                ImageView i = createTourImageView(x, y);
+                afficherBarreDeVie(stackPane, i, hpb);
+                centerPane.getChildren().add(stackPane);
 
                 idTourClicked = "0"; // Réinitialiser la sélection de la tour
             }
         }
+    }
+
+    public ProgressBar creerBarreDeVie(DoubleProperty d){
+        ProgressBar hpBarre = new ProgressBar();
+        hpBarre.progressProperty().bind(d);
+        return hpBarre;
+    }
+    public void afficherBarreDeVie(StackPane s, ImageView i, ProgressBar p){
+        s.getChildren().addAll(i, p);
     }
 
 
