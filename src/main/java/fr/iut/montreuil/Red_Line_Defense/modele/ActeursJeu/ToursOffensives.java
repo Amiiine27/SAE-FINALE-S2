@@ -15,14 +15,14 @@ public abstract class ToursOffensives extends Tour {
 
     private int vitesseProjectile;
 
-    private double portée;
+
     public ToursOffensives(int x0, int y0, int pointsDeVie, int degats, int defense, int prix,Environnement terrain,int cadence,int vitesse,double portée) {
-        super(x0, y0, pointsDeVie, degats, defense,prix, terrain);
+        super(x0, y0, pointsDeVie, degats, defense,prix, terrain,portée);
 
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
         this.vitesseProjectile=vitesse;
-        this.portée=portée;
+
 
         // Ajout des Listeners pour mettre à jour la direction si la position change
 
@@ -71,28 +71,35 @@ public abstract class ToursOffensives extends Tour {
     public void tirer(){
         Soldat s=ennemiÀPorter();
         System.out.println("a");
+        int i =0;
         if (s!=null){
             System.out.println("b");
-            while(s.estVivant()) {
+            if(s.estVivant() && estÀporter(s)) {
                 System.out.println("c");
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
                     System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    System.out.println("ajout");
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
+                    System.out.println("ajout bon");
                 }
                 else {
-                    System.out.println("armement...");
+                    System.out.println("armement...M");
                     Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    System.out.println("ajout M");
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
+                    System.out.println("ajout bonM");
                 }
                 System.out.println("feu");
-                try {//Méthode permettant d'implémenter une cadence de tir
-                    Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
+                /*try {//Méthode permettant d'implémenter une cadence de tir
+
+                    Thread.sleep(1000L*getCadence());
+                    System.out.println("ORAN c nul");
+                    // Pause l'exécution du programme pendant une seconde
                 } catch (InterruptedException e) {
+                    System.out.println("ORAN");
                     e.printStackTrace();
-                }
+                }*/
             }
         }
         System.out.println("fin");

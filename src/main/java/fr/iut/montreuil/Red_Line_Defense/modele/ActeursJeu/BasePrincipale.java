@@ -9,7 +9,7 @@ public class BasePrincipale extends Tour {
 
 
     public BasePrincipale(int x0, int y0, Environnement terrain) {
-        super(x0, y0, 10000, 0, 5,terrain);
+        super(x0, y0, 10000, 0, 5,terrain,0);
     }
 
     @Override

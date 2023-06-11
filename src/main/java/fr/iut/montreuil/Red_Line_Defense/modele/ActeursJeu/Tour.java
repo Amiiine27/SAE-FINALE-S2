@@ -18,22 +18,24 @@ public abstract class Tour extends Acteurs {
         return portée;
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Environnement terrain) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, int prix, Environnement terrain,double portée) {
         super(x0, y0, pointsDeVie, degats, defense);
 
         this.prix = new SimpleIntegerProperty(prix);
 
         this.terrain = terrain;
 
+        this.portée=portée;
+
 
         // initialiserLongueur();
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Environnement terrain) {
+    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Environnement terrain,double portée) {
         super(x0, y0, pointsDeVie, degats, defense);
 
         this.terrain = terrain;
-
+        this.portée = portée;
         //initialiserLongueur();
 
     }
@@ -107,6 +109,17 @@ public abstract class Tour extends Acteurs {
             return null;
         }
 
+        public boolean estÀporter(Soldat s){
+
+            double distanceX = Math.abs(s.getX0Value() - getX0Value());
+            double distanceY = Math.abs(s.getY0Value() - getY0Value());
+            double distanceTotale = distanceX + distanceY;
+            System.out.println(distanceTotale);
+            if (distanceTotale <= portée) {
+                return true;
+            }
+            return false;
+    }
 
 
 

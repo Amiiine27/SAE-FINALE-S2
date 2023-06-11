@@ -1,15 +1,15 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.*;
 
@@ -31,6 +31,8 @@ public class Environnement {
 
 
     private VueSoldats vueSoldat;
+
+    private VueProjectile vueProjectile;
 
     private int nbreSpawns = 10;
 
@@ -118,6 +120,8 @@ public class Environnement {
 
         ajouterListenerVague();
 
+
+
     }
 
 
@@ -125,15 +129,19 @@ public class Environnement {
     //------------------------------------------------------- TOUR DE JEU ---------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void unTour(){
+    public void unTourSoldat(){
 
         verificationMorts();
         apparitionSoldat();
         deplacementSoldat();
-        actionTours();
-
-
         nbrTours++;
+    }
+
+    public void unTourTours(){
+
+    actionTours();
+    actionProjectiles();
+
     }
 
     public void apparitionSoldat(){
@@ -158,6 +166,13 @@ public class Environnement {
             for (Tour t : listeTours){
                 t.agit();
                 System.out.println("tour à agit");
+            }
+        }
+    }
+    public void actionProjectiles(){
+        if(!listeTours.isEmpty()){
+            for(Projectile p : listeProjectiles){
+               vueProjectile.animationDeplacement(p);
             }
         }
     }
