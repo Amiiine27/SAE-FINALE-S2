@@ -6,10 +6,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueBasePrincipale;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,6 +56,8 @@ public class Controleur implements Initializable {
     private VueTours vueTours;
     private VueSoldats vueSoldats;
 
+    private VueProjectile vueProjectile;
+
     private BasePrincipale bp;
     private VueBasePrincipale vueBasePrincipale;
 
@@ -71,9 +70,11 @@ public class Controleur implements Initializable {
         initializeVueInterface();
         initializeBasePrincipale();
         initializeVueBasePrincipale();
+        initializeVueProjectile();
 
         terrain.setVueSoldats(vueSoldats);
         terrain.setVueInterface(vueInterface);
+        terrain.setVueProjectile((vueProjectile));
     }
 
     private void initializeJoueur(){
@@ -95,6 +96,8 @@ public class Controleur implements Initializable {
 
 
     private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
+
+
 
     private void initializeEnvironnement() {
         terrain = new Environnement(joueur);
@@ -123,6 +126,9 @@ public class Controleur implements Initializable {
     private void initializeVueSoldats() {
         vueSoldats = new VueSoldats(centerPane);
         initializeEcouteSoldats();
+    }
+    private void initializeVueProjectile(){
+        vueProjectile = new VueProjectile(centerPane);
     }
 
     private void initializeGameLoop() {

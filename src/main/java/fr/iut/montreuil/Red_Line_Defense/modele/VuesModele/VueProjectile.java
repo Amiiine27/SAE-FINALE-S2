@@ -22,6 +22,7 @@ public class VueProjectile {
         circle.setFill(Color.BLACK);
         circle.centerXProperty().bind(p.xProperty());
         circle.centerYProperty().bind(p.yProperty());
+        centerPane.getChildren().add(circle);
         AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;

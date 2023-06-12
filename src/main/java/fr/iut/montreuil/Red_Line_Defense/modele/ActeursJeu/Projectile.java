@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import javafx.beans.property.DoubleProperty;
 
@@ -15,6 +16,8 @@ public abstract class Projectile {
     private double xDirection;
     private double yDirection;
     private double v;//Vitesse de l'obus
+
+    private Environnement terrain;
 
     private int degats;
 
@@ -45,8 +48,27 @@ public abstract class Projectile {
 
     public abstract void deplacement(double elapsedTime);
 
-    public void Agit(){
-        vue.animationDeplacement(this);
+    public void Agit(VueProjectile v){
+
+        v.animationDeplacement(this);
+    }
+
+    public Soldat ennemiÀPorter() {
+        for (Soldat s : terrain.getSoldats()) {
+            System.out.println("entrer boucle");
+            if (s.estVivant()) {
+                System.out.println("vivant");
+                double distanceX = Math.abs(s.getX0Value() - getX());
+                double distanceY = Math.abs(s.getY0Value() - getY());
+                double distanceTotale = distanceX + distanceY;
+                System.out.println(distanceTotale);
+                if (distanceTotale <= 20) {
+                    System.out.println("bonne portée");
+                    return s;
+                }
+            }
+        }
+        return null;
     }
 
     	/*double deltaX = xDirection * v * elapsedTime;
@@ -127,5 +149,9 @@ public abstract class Projectile {
 
     public void setV(double v) {
         this.v = v;
+    }
+
+    public void setTerrain(Environnement e){
+        this.terrain=e;
     }
 }

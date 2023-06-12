@@ -69,27 +69,19 @@ public abstract class ToursOffensives extends Tour {
         Soldat s=ennemiÀPorter();
         System.out.println("a");
         if (s!=null){
-            System.out.println("b");
-            while(s.estVivant()) {
+            if(s.estVivant()) {
                 System.out.println("c");
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
                     System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
                 }
                 else {
                     System.out.println("armement...");
-                    Missile p= new Missile(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s);
                     getTerrain().ajouterProjectile(p);
-                    p.Agit();
                 }
                 System.out.println("feu");
-                try {//Méthode permettant d'implémenter une cadence de tir
-                    Thread.sleep(1000L*getCadence()); // Pause l'exécution du programme pendant une seconde
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
         System.out.println("fin");

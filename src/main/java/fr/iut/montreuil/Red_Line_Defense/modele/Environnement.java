@@ -2,7 +2,9 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -36,6 +38,7 @@ public class Environnement {
 
     private VueInterface vueInterface;
     private VueSoldats vueSoldat;
+    private VueProjectile vueProjectile;
 
     private int nbreSpawns = 10;
 
@@ -139,8 +142,8 @@ public class Environnement {
         apparitionSoldat();
         deplacementSoldat();
         verificationMorts();
-        // actionTours();
-
+        actionTours(nbrTours);
+        actionProjectiles();
 
         nbrTours++;
     }
@@ -160,14 +163,26 @@ public class Environnement {
         }
     }
 
-    public void actionTours(){
+    public void actionTours(int n){
         if(!listeTours.isEmpty()){
             System.out.println("tour action");
             for (Tour t : listeTours){
+            if(((t instanceof TourSniper ) && n%6==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%10==0))) {
                 t.agit();
                 System.out.println("tour à agit");
             }
+            }
         }
+    }
+
+    private void actionProjectiles(){
+        if(!listeProjectiles.isEmpty()){
+            System.out.println("tour action");
+            for (Projectile p : listeProjectiles){
+                vueProjectile.animationDeplacement(p);
+                System.out.println("Action Projectile");
+            }
+    }
     }
     public void verificationMorts(){
         if (!listeSoldats.isEmpty()) {
@@ -277,7 +292,13 @@ public class Environnement {
         this.vueSoldat = v;
     }
 
+    public VueProjectile getVueProjectile(){
+        return vueProjectile;
+    }
 
+    public void setVueProjectile(VueProjectile v){
+        this.vueProjectile=v;
+    }
 
     public void reloadNbreSpawnsSoldats(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);

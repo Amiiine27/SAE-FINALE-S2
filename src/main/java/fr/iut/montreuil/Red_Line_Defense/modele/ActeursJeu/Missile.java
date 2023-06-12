@@ -4,21 +4,23 @@ package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 
 public class Missile extends Projectile {
-    public Missile(double x, double y, double xCible, double yCible, double v, int degats) {
-        super(x, y, xCible, yCible, v, degats );
+    private Soldat s;
+    public Missile(double x, double y, double v, int degats,Soldat s) {
+        super(x, y, s.getX0Value(), s.getY0Value(), v, degats);
+        this.s=s;
     }
 
     public void deplacement(double elapsedTime) {
         double deltaX = getxDirection() * getV() * elapsedTime;
         double deltaY = getyDirection() * getV() * elapsedTime;
 
-        if (!(getX()==getxCible()) || (getY()==getyCible())) {
+        if (!(getX()==s.getX0Value()) || (getY()==s.getY0Value())) {
             setX(getX() + deltaX);
             setY(getY() + deltaY);
         }
-        double distance = Math.sqrt(Math.pow(getxCible() - getX(), 2) + Math.pow(getyCible() - getY(), 2));
-        setxDirection((getxCible()- getX())/ distance);
-        setyDirection((getyCible()- getY()) / distance);
+        double distance = Math.sqrt(Math.pow(s.getX0Value() - getX(), 2) + Math.pow(s.getY0Value() - getY(), 2));
+        setxDirection((s.getX0Value()- getX())/ distance);
+        setyDirection((s.getY0Value()- getY()) / distance);
     }
 }
 
