@@ -24,13 +24,17 @@ import java.io.InputStream;
 
 public class VueTours {
 
-    public static final String TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour.png";
     public static final String HERBE_VIERGE_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png";
     public static final String CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/chemin.png";
-    public static final String TOWER_MAP_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tourMap.png";
     public static final String BAD_CLICK_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/badClic.png";
-    public static final String HIGHLIGHTED_TOWER_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/tour-surbrillance.png";
-
+    public static final String MAP_TOUR_SORCIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sorcierPosable.png"; // Mitrallieuse
+    public static final String MAP_TOUR_SNIPER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sniperPosable.png"; // Sniper
+    public static final String MAP_TOUR_MORTIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/mortierPosable.png"; // Teleguidée
+    public static final String MAP_TOUR_ENFER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/enferPosable.png"; // Ralentis
+    public static final String MENU_TOUR_SORCIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/sorcierPosable.png"; // Mitrallieuse
+    public static final String MENU_TOUR_SNIPER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/sniperPosable.png"; // Sniper
+    public static final String MENU_TOUR_MORTIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/mortierPosable.png"; // Teleguidée
+    public static final String MENU_TOUR_ENFER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/enferPosable.png"; // Ralentis
     public static final String CLIC_CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/errChemin.png";
     public static final String CLIC_NO_MONEY_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/noMoney.png";
 
@@ -56,26 +60,29 @@ public class VueTours {
         ProgressBar hpb = creerBarreDeVie(progression, x, y);
 
         System.out.println("x" + x + " y" + y);
+        ImageView i = new ImageView();
         //StackPane stackPane = new StackPane();
         //stackPane.setPadding(new Insets(10));
 
         if (idTourClicked.equals("0")) {
-            // Aucune tour sélectionnée, afficher un message d'erreur
+            // Aucune tour sélectionnée, afficher ce message d'erreur
             showErrorMessage(x, y);
         } else if (terrain.getJoueur().getSoldeJoueurValue()<=0)  {
+            // Message d'erreur en cas de clic sans avoir le solde necéssaire
             showErrorMoneyMessage(x, y);
         } else {
             if (tourPosable(x, y)) {
                 switch (idTourClicked) {
                     case "tour200b":
+                        i = createTourImageView(x, y, MAP_TOUR_ENFER_PATH);
                         ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
                         terrain.ajouterTour(td);
                         td.afficherPortee(centerPane);
-                        //hpb.setProgress();
                         progression.bind(Bindings.divide(td.getPointsDeVieProperty(), (double) td.getPointsDeVieValue()));
                         break;
 
                     case "tour400b":
+                        i = createTourImageView(x, y, MAP_TOUR_SORCIER_PATH);
                         TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
                         terrain.ajouterTour(tm);
                         tm.afficherPortee(centerPane);
@@ -83,19 +90,20 @@ public class VueTours {
                         break;
 
                     case "tour600b":
+                        i = createTourImageView(x, y, MAP_TOUR_SNIPER_PATH);
                         TourSniper ts = new TourSniper((int) x, (int) y,terrain);
                         terrain.ajouterTour(ts);
                         ts.afficherPortee(centerPane);
                         progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), (double) ts.getPointsDeVieValue()));
                         break;
                     case "tour800b":
+                        i = createTourImageView(x, y, MAP_TOUR_MORTIER_PATH);
                         TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
                         terrain.ajouterTour(tlm);
                         tlm.afficherPortee(centerPane);
                         progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), (double) tlm.getPointsDeVieValue()));
                         break;
                 }
-                ImageView i = createTourImageView(x, y);
                 //afficherBarreDeVie(stackPane, i, hpb);
                 centerPane.getChildren().addAll(i, hpb);
 
@@ -109,7 +117,7 @@ public class VueTours {
         hpBarre.progressProperty().bind(d);
         //hpBarre.setPadding(new Insets(2));
         hpBarre.setLayoutX(x-25); // moitié de l'image
-        hpBarre.setLayoutY(y-10-17.5); //10 pixels au dessus + la moitié de l'image
+        hpBarre.setLayoutY(y-10-22); //10 pixels au dessus + la moitié de l'image
         hpBarre.setPrefHeight(10);
         hpBarre.setPrefWidth(50);
         return hpBarre;
@@ -117,8 +125,8 @@ public class VueTours {
 
 
 
-    private ImageView createTourImageView(double x, double y) {
-        ImageView maTour = new ImageView(loadImage(TOWER_MAP_IMAGE_PATH));
+    private ImageView createTourImageView(double x, double y, String path) {
+        ImageView maTour = new ImageView(loadImage(path));
         maTour.setX(x - 14);
         maTour.setY(y - 17.5);
         return maTour;
@@ -207,7 +215,7 @@ public class VueTours {
         this.idTourClicked = image.getId();
 
 
-        image.setImage(loadImage(HIGHLIGHTED_TOWER_IMAGE_PATH));
+        //image.setImage(loadImage(HIGHLIGHTED_TOWER_IMAGE_PATH));
     }
 
     private Image loadImage(String path) {
