@@ -47,26 +47,26 @@ public class VueSoldats {
         ImageView skin = hashMapSoldatsSkin.get(soldat);
         switch (directionIndex) {
             case 0:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif"));
                 System.out.println("HAUT");
                 break;
             case 1:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/logo.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/logo.png"));
                 System.out.println("BAS");
                 break;
             case 2:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/luffy-shanks.jpg"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/luffy-shanks.jpg"));
                 System.out.println("GAUCHE");
                 break;
             case 3:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/tour.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sniperPosable.png"));
                 System.out.println("DROITE");
                 break;
         }
     }
 
     public ImageView creerImageSoldat() {
-        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif");
+        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif");
         ImageView img = new ImageView(image);
         img.setFitWidth(image.getWidth() / 2);
         img.setFitHeight(image.getHeight() / 2);

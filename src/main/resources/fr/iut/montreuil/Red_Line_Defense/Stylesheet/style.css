@@ -16,7 +16,7 @@
 }
 
 .bouton-image {
-    -fx-background-image: url("../Images/logo.png");
+    -fx-background-image: url("../Images/ComposantesMenuPrincipal/logo.png");
     -fx-background-size: cover; /* Ajustez la taille de l'image selon vos besoins */
     -fx-background-repeat: no-repeat; /* Empêche la répétition de l'image */
     -fx-background-position: center; /* Centre l'image dans le bouton */

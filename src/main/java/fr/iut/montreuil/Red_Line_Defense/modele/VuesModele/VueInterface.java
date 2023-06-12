@@ -1,8 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -66,10 +64,10 @@ public class VueInterface {
     }
 
     private Image getBerryImage() {
-        return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berry.png");
+        return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/AccessoiresInterface/berry.png");
     }
     private Image getBerryPrixImage() {
-        return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berryPrix.png");
+        return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/AccessoiresInterface/berryPrix.png");
     }
 
 

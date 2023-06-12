@@ -2,7 +2,6 @@ package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Tour;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
@@ -171,9 +170,9 @@ public class Controleur implements Initializable {
     private Image getTerrainImage(int n) {
         switch (n) {
             case 1:
-                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/chemin.png");
+                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/chemin.png");
             default:
-                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png");
+                return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/herbeVierge.png");
         }
     }
 

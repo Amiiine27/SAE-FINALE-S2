@@ -44,7 +44,7 @@ public class VueBasePrincipale {
     }
 
     public ImageView creerImageBP() {
-        ImageView img = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/bp.png"));
+        ImageView img = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/BasePrincipale.png"));
         return img;
     }
 

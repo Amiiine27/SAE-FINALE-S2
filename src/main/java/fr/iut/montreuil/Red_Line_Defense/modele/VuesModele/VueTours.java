@@ -9,24 +9,20 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.io.InputStream;
 
 public class VueTours {
 
-    public static final String HERBE_VIERGE_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/herbeVierge.png";
-    public static final String CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/chemin.png";
-    public static final String BAD_CLICK_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/badClic.png";
+    public static final String HERBE_VIERGE_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/herbeVierge.png";
+    public static final String CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/chemin.png";
+    public static final String BAD_CLICK_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ErrorMessages/badClic.png";
     public static final String MAP_TOUR_SORCIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sorcierPosable.png"; // Mitrallieuse
     public static final String MAP_TOUR_SNIPER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sniperPosable.png"; // Sniper
     public static final String MAP_TOUR_MORTIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/mortierPosable.png"; // Teleguidée
@@ -35,8 +31,8 @@ public class VueTours {
     public static final String MENU_TOUR_SNIPER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/sniperPosable.png"; // Sniper
     public static final String MENU_TOUR_MORTIER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/mortierPosable.png"; // Teleguidée
     public static final String MENU_TOUR_ENFER_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/TourMenu/enferPosable.png"; // Ralentis
-    public static final String CLIC_CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/errChemin.png";
-    public static final String CLIC_NO_MONEY_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/noMoney.png";
+    public static final String CLIC_CHEMIN_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ErrorMessages/errChemin.png";
+    public static final String CLIC_NO_MONEY_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ErrorMessages/noMoney.png";
 
 
     private Environnement terrain;

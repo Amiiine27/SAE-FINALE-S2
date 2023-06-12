@@ -19,7 +19,7 @@
                 <ImageView fitHeight="589.0" fitWidth="1015.0" layoutX="-8.0" layoutY="-1.0" pickOnBounds="true"
                            preserveRatio="true">
                     <image>
-                        <Image url="@../Images/luffy-shanks.jpg"/>
+                        <Image url="@../Images/ComposantesMenuPrincipal/luffy-shanks.jpg"/>
                     </image>
                 </ImageView>
                 <Label fx:id="labelTitre" layoutX="262.0" layoutY="120.0" prefHeight="86.0" prefWidth="474.0"
