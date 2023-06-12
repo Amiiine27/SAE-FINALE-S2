@@ -127,8 +127,8 @@ public class VueTours {
 
     private ImageView createTourImageView(double x, double y, String path) {
         ImageView maTour = new ImageView(loadImage(path));
-        maTour.setX(x - 14);
-        maTour.setY(y - 17.5);
+        maTour.setX(x - 15);
+        maTour.setY(y - 22);
         return maTour;
     }
 
