@@ -167,7 +167,7 @@ public class Environnement {
         if(!listeTours.isEmpty()){
             System.out.println("tour action");
             for (Tour t : listeTours){
-            if(((t instanceof TourSniper ) && n%6==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%10==0))) {
+            if(((t instanceof TourSniper ) && n%18==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%12==0))) {
                 t.agit();
                 System.out.println("tour à agit");
             }
