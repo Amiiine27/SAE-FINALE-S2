@@ -35,10 +35,10 @@ public class Controleur implements Initializable {
     Label solde;
 
     @FXML
-    ImageView berry;
+    ImageView berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
 
     @FXML
-    HBox hboxMoneyCount;
+    HBox hboxMoneyCount, prix200b, prix800b, prix600b, prix400b;
 
     @FXML
     private Button lancerButton, test;
@@ -82,7 +82,8 @@ public class Controleur implements Initializable {
     }
 
     private void initializeVueInterface(){
-        vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry, ennemisTues );
+        vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry, ennemisTues, prix200b, prix800b, prix600b, prix400b,
+                berryBot200b, berryBot400b, berryBot600b, berryBot800b);
         initializeEcouteInterface();
     }
 

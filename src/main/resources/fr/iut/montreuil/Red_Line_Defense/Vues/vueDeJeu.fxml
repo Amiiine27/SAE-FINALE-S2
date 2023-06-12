@@ -44,10 +44,13 @@
                 <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"
                            styleClass="tour" onMouseClicked="#selectionTour">
                     <image>
-                        <Image url="@../Images/tour.png"/>
+                        <Image url="@../Images/ToursMenu/enferMenu.png"/>
                     </image>
                 </ImageView>
-                <Label style="-fx-margin: 10px" text="200 B"/>
+                <HBox fx:id="prix200b" alignment="CENTER">
+                    <Label style="-fx-margin: 10px" text="200 "/>
+                    <ImageView fx:id="berryBot200b"/>
+                </HBox>
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
                   styleClass="box">
@@ -55,10 +58,13 @@
                     <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
                                preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                         <image>
-                            <Image url="@../Images/tour.png"/>
+                            <Image url="@../Images/ToursMenu/sorcierMenu.png"/>
                         </image>
                     </ImageView>
-                    <Label text="400 B"/>
+                    <HBox fx:id="prix400b" alignment="CENTER">
+                        <Label style="-fx-margin: 10px" text="400 "/>
+                        <ImageView fx:id="berryBot400b"/>
+                    </HBox>
                 </children>
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0"
@@ -67,10 +73,13 @@
                     <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
                                preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                         <image>
-                            <Image url="@../Images/tour.png"/>
+                            <Image url="@../Images/ToursMenu/sniperMenu.png"/>
                         </image>
                     </ImageView>
-                    <Label text="600 B"/>
+                    <HBox fx:id="prix600b" alignment="CENTER">
+                        <Label style="-fx-margin: 10px" text="600 "/>
+                        <ImageView fx:id="berryBot600b"/>
+                    </HBox>
                 </children>
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
@@ -79,10 +88,13 @@
                     <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
                                preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
                         <image>
-                            <Image url="@../Images/tour.png"/>
+                            <Image url="@../Images/ToursMenu/mortierMenu.png"/>
                         </image>
                     </ImageView>
-                    <Label text="800 B"/>
+                    <HBox fx:id="prix800b" alignment="CENTER">
+                        <Label style="-fx-margin: 10px" text="800 "/>
+                        <ImageView fx:id="berryBot800b"/>
+                    </HBox>
                 </children>
             </VBox>
         </HBox>

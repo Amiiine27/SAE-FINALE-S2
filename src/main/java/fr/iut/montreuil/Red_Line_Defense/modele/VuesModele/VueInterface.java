@@ -16,10 +16,10 @@ public class VueInterface {
     Label solde;
 
 
-    ImageView berry;
+    ImageView berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
 
 
-    HBox hboxMoneyCount;
+    HBox hboxMoneyCount, prix200b, prix800b, prix600b, prix400b;
 
     Label ennemisTues;
 
@@ -29,7 +29,8 @@ public class VueInterface {
 
 
 
-    public VueInterface(Environnement terrain, HBox hboxMoneyCount, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues) {
+    public VueInterface(Environnement terrain, HBox hboxMoneyCount, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues,
+                        HBox prix200b, HBox prix400b, HBox prix600b, HBox prix800b, ImageView berryBot200b, ImageView berryBot600b, ImageView berryBot400b, ImageView berryBot800b) {
         solde.setText(String.valueOf(terrain.getJoueur().getSoldeJoueurValue()));
         this.hboxMoneyCount = hboxMoneyCount;
         this.lancerButton = lancerButton;
@@ -37,17 +38,41 @@ public class VueInterface {
         this.solde = solde;
         this.berry = berry;
         this.ennemisTues = ennemisTues;
+        this.prix200b = prix200b;
+        this.prix400b = prix400b;
+        this.prix600b = prix600b;
+        this.prix800b = prix800b;
+        this.berryBot200b = berryBot200b;
+        this.berryBot400b = berryBot400b;
+        this.berryBot600b = berryBot600b;
+        this.berryBot800b = berryBot800b;
         initializeImageBerry();
     }
 
     private void initializeImageBerry() {
         berry = new ImageView(getBerryImage());
         hboxMoneyCount.getChildren().add(berry);
+        berryBot200b = new ImageView(getBerryPrixImage());
+        prix200b.getChildren().add(berryBot200b);
+        berryBot400b = new ImageView(getBerryPrixImage());
+        prix400b.getChildren().add(berryBot400b);
+
+        berryBot600b = new ImageView(getBerryPrixImage());
+        prix600b.getChildren().add(berryBot600b);
+
+        berryBot800b = new ImageView(getBerryPrixImage());
+        prix800b.getChildren().add(berryBot800b);
+
     }
 
     private Image getBerryImage() {
         return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berry.png");
     }
+    private Image getBerryPrixImage() {
+        return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/berryPrix.png");
+    }
+
+
 
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));
