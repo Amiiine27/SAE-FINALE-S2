@@ -43,7 +43,7 @@ public class VueProjectile {
         blast.xProperty().bind(p.xProperty());
         blast.yProperty().bind(p.yProperty());*/
 
-        centerPane.getChildren().addAll(bouleDeFeu); // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici sinon tu fais plusieurs fonctions
+        centerPane.getChildren().addAll(bouleDeFeu); // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
         AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
