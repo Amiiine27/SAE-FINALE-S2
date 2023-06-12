@@ -1,23 +1,13 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.SuperNova;
-import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 
 public class VueSoldats {
@@ -39,20 +29,48 @@ public class VueSoldats {
         System.out.println("Skin créé pour le soldat : " + skin);
 
         hashMapSoldatsSkin.put(s, skin);
-        //DoubleProperty x = new SimpleDoubleProperty(12);
-        s.setX0(s.getX0Value()- 12);
-        s.setY0(s.getY0Value()- 15);
-        //DoubleProperty y = new SimpleDoubleProperty(15);
+
+        // Centrer l'image en ajustant x et y
+        double halfWidth = (skin.getImage().getWidth() / 2.0) ;
+        double halfHeight = (skin.getImage().getHeight() / 2.0);
+        s.setX0(s.getX0Value() - halfWidth);
+        s.setY0(s.getY0Value() - halfHeight);
 
         skin.xProperty().bind(s.getX0Property());
         skin.yProperty().bind(s.getY0Property());
 
         centerPane.getChildren().add(skin);
         System.out.println("  Skin ajouté au pane. Total des cercles  ");
-
     }
+
+    public void mettreAJourSkin(int directionIndex, Soldat soldat) {
+        ImageView skin = hashMapSoldatsSkin.get(soldat);
+        switch (directionIndex) {
+            case 0:
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif"));
+                System.out.println("HAUT");
+                break;
+            case 1:
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/logo.png"));
+                System.out.println("BAS");
+                break;
+            case 2:
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/luffy-shanks.jpg"));
+                System.out.println("GAUCHE");
+                break;
+            case 3:
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/tour.png"));
+                System.out.println("DROITE");
+                break;
+        }
+    }
+
     public ImageView creerImageSoldat() {
-        ImageView img = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif"));
+        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/versLeHaut.gif");
+        ImageView img = new ImageView(image);
+        img.setFitWidth(image.getWidth() / 2);
+        img.setFitHeight(image.getHeight() / 2);
+        img.setPreserveRatio(true);
         return img;
     }
 

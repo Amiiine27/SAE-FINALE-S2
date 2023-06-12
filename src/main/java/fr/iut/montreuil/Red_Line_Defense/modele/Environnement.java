@@ -390,24 +390,26 @@ public class Environnement {
         int nextY = startY;
         int minDistance = Integer.MAX_VALUE;
 
+        int directionIndex = -1;  // Nouveau : index de la direction choisie
 
         for (int i = 0; i < 4; i++) {
             int nx = startX + dx[i];
             int ny = startY + dy[i];
 
-
             if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
                 nextX = nx;
                 nextY = ny;
                 minDistance = distances[ny][nx];
+                directionIndex = i;  // Mettre à jour l'index de la direction
             }
         }
 
+        vueSoldat.mettreAJourSkin(directionIndex, soldat);
 
         soldat.setX0(nextX * 8);
         soldat.setY0(nextY * 8);
-    }
 
+    }
 
     private boolean isValidMove(int x, int y) {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
