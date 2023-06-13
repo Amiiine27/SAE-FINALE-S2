@@ -179,7 +179,11 @@ public class Environnement {
         if(!listeProjectiles.isEmpty()){
             System.out.println("tour action");
             for (Projectile p : listeProjectiles){
-                p.Agit(vueProjectile);
+                for ()
+                if(p.isTouche()){
+                    supprimerProjectile(p);
+                }
+                p.deplacement();
                 System.out.println("Action Projectile");
 
             }

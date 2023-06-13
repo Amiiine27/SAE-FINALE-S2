@@ -24,7 +24,7 @@ public class VueProjectile {
     public VueProjectile(Pane centerPane){
         this.centerPane=centerPane;
     }
-    public void animationDeplacement(Projectile p){
+    public void CreationSprite(Projectile p){
         /*Circle circle = new Circle(7);
         circle.setFill(Color.BLACK);
         circle.centerXProperty().bind(p.xProperty());
@@ -42,9 +42,9 @@ public class VueProjectile {
         /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
         blast.xProperty().bind(p.xProperty());
         blast.yProperty().bind(p.yProperty());*/
-
+        bouleDeFeu.setId();
         centerPane.getChildren().addAll(bouleDeFeu); // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
-        AnimationTimer timer = new AnimationTimer() {
+        /*AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
 
@@ -65,7 +65,7 @@ public class VueProjectile {
             }
         };
 
-        timer.start();
+        timer.start();*/
     }
 
     private Image loadImage(String path) {

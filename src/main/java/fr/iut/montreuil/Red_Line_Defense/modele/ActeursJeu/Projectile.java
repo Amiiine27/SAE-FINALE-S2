@@ -25,6 +25,10 @@ public abstract class Projectile {
 
     private boolean touche;
 
+    private String id;
+
+    public static int compteur =1;
+
     public Projectile(double x, double y, double xCible, double yCible, double v, int degats,Environnement terrain) {
 
         this.x = new SimpleDoubleProperty(x);
@@ -44,22 +48,16 @@ public abstract class Projectile {
         this.degats = degats;
         touche = false;
         this.terrain=terrain;
+        this.id=
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
         this.yDirection = (yCible - y) / distance;
     }
 
-    public abstract void deplacement(double elapsedTime);
+    public abstract void deplacement();
 
     public boolean isTouche() {
         return touche;
-    }
-
-    public void Agit(VueProjectile v){
-        v.animationDeplacement(this);
-        if (ennemiÀPorter()){
-            touche = true;
-        }
     }
 
     public boolean ennemiÀPorter() {
