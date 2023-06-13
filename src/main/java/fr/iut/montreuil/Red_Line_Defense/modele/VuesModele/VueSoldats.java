@@ -44,7 +44,7 @@ public class VueSoldats {
         ImageView skin = hashMapSoldatsSkin.get(soldat);
         switch (directionIndex) {
             case 0:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/up.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/haut.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
@@ -52,7 +52,7 @@ public class VueSoldats {
                 System.out.println("HAUT");
                 break;
             case 1:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/down.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/down.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
@@ -60,7 +60,7 @@ public class VueSoldats {
                 System.out.println("BAS");
                 break;
             case 2:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/left.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/left.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
@@ -68,7 +68,7 @@ public class VueSoldats {
                 System.out.println("GAUCHE");
                 break;
             case 3:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/right.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/right.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
@@ -79,7 +79,7 @@ public class VueSoldats {
     }
 
     public ImageView creerImageSoldat() {
-        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/up.gif");
+        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/haut.gif");
         ImageView img = new ImageView(image);
         img.setFitWidth(30);
         img.setFitHeight(30);

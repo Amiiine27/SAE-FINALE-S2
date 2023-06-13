@@ -8,7 +8,13 @@
 <BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
-        <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: blue;" />
+        <ImageView preserveRatio="true">
+            <image>
+                <Image url="@../Images/ElementsCarte/map.png" />
+            </image>
+        </ImageView>
+        <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: transparent;" />
+
     </center>
     <right>
         <VBox prefHeight="480.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -76,17 +82,22 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
-                        <image>
-                            <Image url="@../Images/ToursMenu/mortierMenu.png" />
-                        </image>
-                    </ImageView>
-                    <HBox fx:id="prix800b" alignment="CENTER">
-                        <Label style="-fx-margin: 10px" text="800 " />
-                        <ImageView fx:id="berryBot800b" />
-                    </HBox>
+                        <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
+                            <image>
+                                <Image url="@../Images/ToursMenu/mortierMenu.png" />
+                            </image>
+                        </ImageView>
+                        <HBox fx:id="prix800b" alignment="CENTER">
+                            <Label style="-fx-margin: 10px" text="800 " />
+                            <ImageView fx:id="berryBot800b" />
+                        </HBox>
                 </children>
             </VBox>
+            <ImageView fx:id="gif" preserveRatio="true" fitHeight="80.0" fitWidth="560.0">
+                <image>
+                    <Image url="@../Images/AccessoiresInterface/gif-crop.gif" />
+                </image>
+            </ImageView>
         </HBox>
     </bottom>
 </BorderPane>

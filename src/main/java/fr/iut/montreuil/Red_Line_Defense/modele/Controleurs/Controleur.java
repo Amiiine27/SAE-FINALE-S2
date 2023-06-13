@@ -35,7 +35,7 @@ public class Controleur implements Initializable {
     Label solde;
 
     @FXML
-    ImageView berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
+    ImageView map, berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
 
     @FXML
     HBox hboxMoneyCount, prix200b, prix800b, prix600b, prix400b;
@@ -64,7 +64,7 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
         initializeJoueur();
         initializeEnvironnement();
         initializeVueTours();
@@ -111,7 +111,7 @@ public class Controleur implements Initializable {
 
     private void initializeEnvironnement() {
         terrain = new Environnement(joueur);
-        remplissage();
+        //remplissage();
     }
 
     @FXML
