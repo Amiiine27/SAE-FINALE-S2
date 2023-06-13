@@ -79,6 +79,10 @@ public abstract class Tour extends Acteurs {
         return this.prix;
     }
 
+    public void infligerDegats(int val){
+        this.setPointsDeVieValue(this.getPointsDeVieValue() - val);
+    }
+
     // Getter Longueur
     public int getLongueurValue() {
         return this.longueur.getValue();
