@@ -55,7 +55,7 @@ public class VueTours {
         DoubleProperty progression = new SimpleDoubleProperty(1.0);;
         ProgressBar hpb = creerBarreDeVie(progression, x, y);
 
-        System.out.println("x" + x + " y" + y);
+        System.out.println("x " + (int)(x/8) + " y " +(int) (y/8));
         ImageView i = new ImageView();
         //StackPane stackPane = new StackPane();
         //stackPane.setPadding(new Insets(10));

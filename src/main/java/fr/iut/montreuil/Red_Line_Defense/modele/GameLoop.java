@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -18,6 +19,8 @@ public class GameLoop {
     private Environnement terrain;
     private Pane centerPane;
     private int tailleImage = 8;
+
+    private Timeline timelineDeplacement;
     private VueSoldats vueSoldats;
 
 
@@ -26,8 +29,9 @@ public class GameLoop {
         this.vueSoldats = vueSoldats;
         this.terrain = terrain;
         this.soldats = terrain.getSoldats();
+        timelineDeplacement = new Timeline();
 
-       creerAnimation();
+        creerAnimation();
     }
 
 
@@ -35,18 +39,22 @@ public class GameLoop {
         KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.17), event -> {  // Déplacer les soldats toutes les secondes
             terrain.unTour();
         });
-        Timeline timelineDeplacement = new Timeline();
+
         timelineDeplacement.getKeyFrames().add(keyFrame2);
         timelineDeplacement.setCycleCount(Timeline.INDEFINITE);
-        timelineDeplacement.play();
     }
 
+    public void lancerTimeline(){
+        if (timelineDeplacement.getStatus() != Animation.Status.RUNNING)
+            timelineDeplacement.play();
+    }
 
+    public void pauseTimeline(){
+        if (timelineDeplacement.getStatus() == Animation.Status.RUNNING)
+            timelineDeplacement.pause();
+    }
 
-
-
-
-
+    public Timeline getTimeline(){  return timelineDeplacement;}
 
 
 

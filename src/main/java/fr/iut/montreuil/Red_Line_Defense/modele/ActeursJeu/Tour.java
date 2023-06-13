@@ -17,6 +17,10 @@ public abstract class Tour extends Acteurs {
 
     private double portee;
 
+    public Tour(int x0, int y0, int pointsDeVie) {
+        super(x0, y0, pointsDeVie);
+    }
+
     public double getPortée() {
         return portee;
     }

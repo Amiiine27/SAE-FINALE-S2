@@ -1,5 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
+import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
+import fr.iut.montreuil.Red_Line_Defense.modele.Inputs.Inputs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,17 +24,25 @@ public class ControleurMP implements Initializable {
     @FXML
     private Label labelTitre;
 
+
+
     @FXML
     private void onJouerButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDeJeu.fxml"));
         root = loader.load();
+        Controleur controleur = loader.getController(); // Retrieve the controller instance
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 940, 560); // Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
         stage.show();
+
+        controleur.initializeInputs();
     }
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

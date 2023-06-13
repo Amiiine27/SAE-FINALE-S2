@@ -1,18 +1,25 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
+import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class BasePrincipale extends Tour {
 
 
     // C'est la base principale, celle qu'il faudra defendre des soldats ennemis et qui sera en bout de course
 
+    Set<Point2D> zone;
 
-    public BasePrincipale(int x0, int y0, Environnement terrain) {
-        super(x0, y0, 10000, 0, 0,0, terrain, 8*2); // 2 tiles de portéé
+    public BasePrincipale(int x0, int y0) {
+        super(x0, y0, 10000); // 2 tiles de portéé
+         zone = new HashSet<>();
+         initializeZone();
     }
 
     @Override
@@ -20,6 +27,18 @@ public class BasePrincipale extends Tour {
 
         setPointsDeVieValue(this.getPointsDeVieValue()-this.porteeBP().getDegatValue());
         System.out.println("---pv base : " + this.getPointsDeVieValue());
+    }
+
+    private void initializeZone(){
+        for (int x = 88; x <= 90; x++) {
+            for (int y = 47; y <= 49; y++) {
+                zone.add(new Point2D(x, y));
+            }
+        }
+    }
+
+    public Set<Point2D> getZone(){
+        return zone;
     }
 
     public void testPv() {

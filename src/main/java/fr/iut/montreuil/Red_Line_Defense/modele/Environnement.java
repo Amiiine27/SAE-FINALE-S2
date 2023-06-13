@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
+import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
@@ -11,6 +12,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -59,6 +61,7 @@ public class Environnement {
 
         ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
         listeProjectiles = new SimpleListProperty<>(projectileObservableList);
+
 
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
@@ -201,6 +204,8 @@ public class Environnement {
 
 
 
+
+
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- SPAWN SOLDATS ---------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -234,16 +239,16 @@ public class Environnement {
 
         switch(typeSoldat) {
             case 1:
-                s = new Rookie((int) startX, (int) startY, 89, 47);
+                s = new Rookie((int) startX, (int) startY, 89, 49);
                 break;
             case 2:
-                s = new SuperNova((int) startX, (int) startY, 89, 47);
+                s = new SuperNova((int) startX, (int) startY, 89, 49);
                 break;
             case 3:
-                s = new Shichibukais((int) startX, (int) startY, 89, 47);
+                s = new Shichibukais((int) startX, (int) startY, 89, 49);
                 break;
             default:
-                s = new Rookie((int) startX, (int) startY, 89, 47);
+                s = new Rookie((int) startX, (int) startY, 89, 49);
         }
 
         return s;

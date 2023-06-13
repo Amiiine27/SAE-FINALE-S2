@@ -4,6 +4,7 @@ import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
+import fr.iut.montreuil.Red_Line_Defense.modele.Inputs.Inputs;
 import fr.iut.montreuil.Red_Line_Defense.modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.*;
 import javafx.event.ActionEvent;
@@ -50,6 +51,8 @@ public class Controleur implements Initializable {
 
     private EcouteInterface ecouteInterface;
 
+    private Inputs inputs;
+
     private Environnement terrain;
     private GameLoop gameLoop;
     private VueTours vueTours;
@@ -57,27 +60,34 @@ public class Controleur implements Initializable {
 
     private VueProjectile vueProjectile;
 
-    private BasePrincipale bp;
     private VueBasePrincipale vueBasePrincipale;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         initializeJoueur();
         initializeEnvironnement();
         initializeVueTours();
         initializeVueSoldats();
+        initializeGameLoop();
         initializeVueInterface();
-        initializeBasePrincipale();
         initializeVueBasePrincipale();
         initializeVueProjectile();
+
 
         terrain.setVueSoldats(vueSoldats);
         terrain.setVueInterface(vueInterface);
         terrain.setVueProjectile((vueProjectile));
+
+        //initializeInputs();
     }
 
     private void initializeJoueur(){
         this.joueur = new Joueur("Ayoub");
+    }
+
+    public void initializeInputs(){
+        inputs = new Inputs(gameLoop, centerPane.getScene());
     }
 
     private void initializeVueInterface(){
@@ -106,16 +116,12 @@ public class Controleur implements Initializable {
 
     @FXML
     private void lancerTours() {
-        initializeGameLoop();
+        gameLoop.lancerTimeline();
     }
 
-    private void initializeBasePrincipale(){
-        bp = new BasePrincipale(700, 335, terrain);
-    }
 
     private void initializeVueBasePrincipale(){
         vueBasePrincipale = new VueBasePrincipale(centerPane);
-        vueBasePrincipale.afficherBase(bp);
     }
 
     private void initializeVueTours() {
@@ -174,6 +180,10 @@ public class Controleur implements Initializable {
             default:
                 return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/herbeVierge.png");
         }
+    }
+
+    public GameLoop getGameLoop() {
+        return gameLoop;
     }
 
 
