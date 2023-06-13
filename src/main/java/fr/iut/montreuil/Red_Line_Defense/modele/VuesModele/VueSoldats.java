@@ -49,7 +49,6 @@ public class VueSoldats {
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
                 skin.setTranslateY(-15);
-                System.out.println("HAUT");
                 break;
             case 1:
                 skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/down.gif"));
@@ -57,7 +56,6 @@ public class VueSoldats {
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
                 skin.setTranslateY(-15);
-                System.out.println("BAS");
                 break;
             case 2:
                 skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/left.gif"));
@@ -65,7 +63,6 @@ public class VueSoldats {
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
                 skin.setTranslateY(-15);
-                System.out.println("GAUCHE");
                 break;
             case 3:
                 skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/right.gif"));
@@ -73,7 +70,6 @@ public class VueSoldats {
                 skin.setFitHeight(30);
                 skin.setTranslateX(-15); // Ajout de cette ligne
                 skin.setTranslateY(-15);
-                System.out.println("DROITE");
                 break;
         }
     }

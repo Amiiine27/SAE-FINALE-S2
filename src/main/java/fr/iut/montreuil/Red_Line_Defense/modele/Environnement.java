@@ -2,10 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.modele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.*;
 import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueInterface;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueSoldats;
-import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueTours;
+import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -41,6 +38,8 @@ public class Environnement {
     private VueInterface vueInterface;
     private VueSoldats vueSoldat;
     private VueProjectile vueProjectile;
+
+    private VueBasePrincipale vueBasePrincipale;
 
     private int nbreSpawns = 10;
 
@@ -148,6 +147,7 @@ public class Environnement {
         verificationMorts();
         actionTours(nbrTours);
         actionProjectiles();
+        actionBasePrincipale();
 
         nbrTours++;
     }
@@ -165,6 +165,10 @@ public class Environnement {
                 deplacerSoldat(soldat);
             }
         }
+    }
+
+    public void actionBasePrincipale(){
+        vueBasePrincipale.actionBasePrincipale(listeSoldats);
     }
 
     public void actionTours(int n){
@@ -189,18 +193,19 @@ public class Environnement {
     }
     }
     public void verificationMorts(){
-        if (!listeSoldats.isEmpty()) {
-            for (Soldat soldat : listeSoldats) {
-                if (soldat.getPointsDeVieValue() <= 0) {
-                    vueSoldat.supprSkinSoldats(soldat);
-                    supprimerSoldat(soldat);
-                    joueur.crediterSolde(soldat.getValeurGagnee());
-                    ennemisTues.setValue(ennemisTues.getValue() + 1);
-                    System.out.println("Ennemi bien tué");
-                }
+        Iterator<Soldat> iterator = listeSoldats.iterator();
+        while (iterator.hasNext()) {
+            Soldat soldat = iterator.next();
+            if (soldat.getPointsDeVieValue() <= 0) {
+                vueSoldat.supprSkinSoldats(soldat);
+                iterator.remove(); // Supprimer l'élément de la liste en utilisant l'itérateur
+                joueur.crediterSolde(soldat.getValeurGagnee());
+                ennemisTues.setValue(ennemisTues.getValue() + 1);
+                System.out.println("Ennemi bien tué");
             }
         }
     }
+
 
 
 
@@ -525,6 +530,14 @@ public class Environnement {
 
 
     public Joueur getJoueur() {return this.joueur;}
+
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- BASE PRINCIPALE --------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
+
+    public void setVueBasePrincipale(VueBasePrincipale vueBasePrincipale){
+        this.vueBasePrincipale = vueBasePrincipale;
+    }
 
 
 

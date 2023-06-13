@@ -49,6 +49,8 @@ public class Controleur implements Initializable {
     private EcouteSoldats ecouteSoldats;
     private EcouteTours ecouteTours;
 
+    private EcouteBasePrincipale ecouteBasePrincipale;
+
     private EcouteInterface ecouteInterface;
 
     private Inputs inputs;
@@ -78,6 +80,7 @@ public class Controleur implements Initializable {
         terrain.setVueSoldats(vueSoldats);
         terrain.setVueInterface(vueInterface);
         terrain.setVueProjectile((vueProjectile));
+        terrain.setVueBasePrincipale(vueBasePrincipale);
 
         //initializeInputs();
     }
@@ -122,7 +125,10 @@ public class Controleur implements Initializable {
 
     private void initializeVueBasePrincipale(){
         vueBasePrincipale = new VueBasePrincipale(centerPane);
+        initializeEcouteBasePrincipale();
     }
+
+    private void initializeEcouteBasePrincipale(){ ecouteBasePrincipale = new EcouteBasePrincipale(vueBasePrincipale);}
 
     private void initializeVueTours() {
         vueTours = new VueTours(terrain, centerPane);

@@ -21,6 +21,8 @@ public class VueBasePrincipale {
 
     private BasePrincipale basePrincipale;
 
+    private ProgressBar barreDeVieBasePrincipale;
+
     public VueBasePrincipale(Pane p) {
         this.p = p;
         basePrincipale = new BasePrincipale(700, 335);
@@ -34,11 +36,10 @@ public class VueBasePrincipale {
         img.setLayoutY(basePrincipale.getY0Value()-50);
 
         DoubleProperty progression = new SimpleDoubleProperty(1.0);;
-        ProgressBar hpb = creerBarreDeVie(progression, basePrincipale.getX0Value(), basePrincipale.getY0Value());
-        DoubleProperty hp = new SimpleDoubleProperty(basePrincipale.getPointsDeVieValue());
-        progression.bind(Bindings.divide(basePrincipale.getPointsDeVieProperty(), (double) basePrincipale.getPointsDeVieValue()));
+        barreDeVieBasePrincipale = creerBarreDeVie(progression, basePrincipale.getX0Value(), basePrincipale.getY0Value());
 
-        p.getChildren().addAll(img, hpb);
+
+        p.getChildren().addAll(img, barreDeVieBasePrincipale);
     }
 
     public ProgressBar creerBarreDeVie(DoubleProperty d, double x, double y){
@@ -52,11 +53,17 @@ public class VueBasePrincipale {
         return hpBarre;
     }
 
+    public ProgressBar getBarreDeVieBasePrincipale(){
+        return barreDeVieBasePrincipale;
+    }
+
     public void actionBasePrincipale(ListProperty<Soldat> listeSoldats){
-        for (Soldat s: listeSoldats) {
-            Point2D positionSoldat = new Point2D(s.getX0Value(), s.getY0Value());
+        for (Soldat s: listeSoldats.getValue()) {
+            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
             if (basePrincipale.getZone().contains(positionSoldat)) {
                 System.out.println("Soldat Arrivé devant le chateau");
+                basePrincipale.infligerDegats(300);
+                s.setPointsDeVieValue(-1);
             }
         }
     }
@@ -68,6 +75,14 @@ public class VueBasePrincipale {
 
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));
+    }
+
+    public BasePrincipale getBasePrincipale() {
+        return basePrincipale;
+    }
+
+    public int getPointsDeVieBasePrincipale(){
+        return basePrincipale.getPointsDeVieValue();
     }
 
 }
