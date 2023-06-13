@@ -50,6 +50,8 @@ public class Controleur implements Initializable {
 
     private EcouteInterface ecouteInterface;
 
+    private EcouteProjectiles ecouteProjectiles;
+
     private Environnement terrain;
     private GameLoop gameLoop;
     private VueTours vueTours;
@@ -129,6 +131,11 @@ public class Controleur implements Initializable {
     }
     private void initializeVueProjectile(){
         vueProjectile = new VueProjectile(centerPane);
+        initializeEcouteProjectiles();
+    }
+
+    private void initializeEcouteProjectiles(){
+        ecouteProjectiles =new EcouteProjectiles(terrain,centerPane);
     }
 
     private void initializeGameLoop() {

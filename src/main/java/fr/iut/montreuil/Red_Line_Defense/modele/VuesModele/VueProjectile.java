@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Projectile;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
@@ -59,6 +60,23 @@ public class VueProjectile {
 
 
                     p.deplacement(elapsedTime);
+                    Soldat s=p.ennemiÀPorter();
+                    if(s!=null){
+                        System.out.println("Touche ! suppression confirmée");
+                        p.getTerrain().supprimerProjectile(p);
+                        s.setPointsDeVieValue(s.getPointsDeVieValue()-p.getDegats());
+                        stop();
+
+                    }
+                    System.out.println("x"+p.getX());
+                    System.out.println("y"+p.getY());
+
+                    System.out.println(p.getId());
+                    if(p.getX()>840 || (p.getX()<=0 ||(p.getY()>480||p.getY()<=0))){
+                        System.out.println("suppression confirmée");
+                        p.getTerrain().supprimerProjectile(p);
+                        stop();
+                    }
 
 
                 }

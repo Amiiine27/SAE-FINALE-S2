@@ -12,8 +12,8 @@ public class Missile extends Projectile {
     }
 
     public void deplacement(double elapsedTime) {
-        double deltaX = getxDirection() * getV()*elapsedTime;
-        double deltaY = getyDirection() * getV()*elapsedTime;
+        double deltaX = getxDirection() * getV()* elapsedTime;
+        double deltaY = getyDirection() * getV()* elapsedTime;
 
         if (!(getX()==s.getX0Value()) || (getY()==s.getY0Value())) {
             setX(getX() + deltaX);

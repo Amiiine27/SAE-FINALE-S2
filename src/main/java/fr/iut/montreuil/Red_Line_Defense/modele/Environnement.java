@@ -143,7 +143,7 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
-
+        System.out.println("nbr projectile:"+getProjectiles().size());
 
         nbrTours++;
     }

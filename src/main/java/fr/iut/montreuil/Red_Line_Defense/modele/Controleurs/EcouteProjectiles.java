@@ -37,7 +37,7 @@ public class EcouteProjectiles {
                 if (change.wasRemoved()) {
                     {
                         for (int i = change.getRemoved().size() - 1; i >= 0; i--) {
-                            Projectile projectile= (Projectile) change.getRemoved().get(i);
+                            Projectile projectile= change.getRemoved().get(i);
                             Node n = centerPane.lookup("#" + projectile.getId());
                             centerPane.getChildren().remove(n);
                 }
