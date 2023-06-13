@@ -1,12 +1,13 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu;
 
 
+import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.modele.VuesModele.VueProjectile;
 
 public class Missile extends Projectile {
     private Soldat s;
-    public Missile(double x, double y, double v, int degats,Soldat s) {
-        super(x, y, s.getX0Value(), s.getY0Value(), v, degats);
+    public Missile(double x, double y, double v, int degats, Soldat s, Environnement terrain) {
+        super(x, y, s.getX0Value(), s.getY0Value(), v, degats,terrain);
         this.s=s;
     }
 

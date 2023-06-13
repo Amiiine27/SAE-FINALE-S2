@@ -179,8 +179,9 @@ public class Environnement {
         if(!listeProjectiles.isEmpty()){
             System.out.println("tour action");
             for (Projectile p : listeProjectiles){
-                vueProjectile.animationDeplacement(p);
+                p.Agit(vueProjectile);
                 System.out.println("Action Projectile");
+
             }
     }
     }

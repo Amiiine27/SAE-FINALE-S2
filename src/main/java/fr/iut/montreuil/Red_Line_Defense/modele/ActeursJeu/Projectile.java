@@ -21,9 +21,11 @@ public abstract class Projectile {
 
     private int degats;
 
-    VueProjectile vue;
+    private VueProjectile vue;
 
-    public Projectile(double x, double y, double xCible, double yCible, double v, int degats) {
+    private boolean touche;
+
+    public Projectile(double x, double y, double xCible, double yCible, double v, int degats,Environnement terrain) {
 
         this.x = new SimpleDoubleProperty(x);
 
@@ -40,7 +42,8 @@ public abstract class Projectile {
         this.v = v;
 
         this.degats = degats;
-
+        touche = false;
+        this.terrain=terrain;
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
         this.yDirection = (yCible - y) / distance;
@@ -48,12 +51,18 @@ public abstract class Projectile {
 
     public abstract void deplacement(double elapsedTime);
 
-    public void Agit(VueProjectile v){
-
-        v.animationDeplacement(this);
+    public boolean isTouche() {
+        return touche;
     }
 
-    public Soldat ennemiÀPorter() {
+    public void Agit(VueProjectile v){
+        v.animationDeplacement(this);
+        if (ennemiÀPorter()){
+            touche = true;
+        }
+    }
+
+    public boolean ennemiÀPorter() {
         for (Soldat s : terrain.getSoldats()) {
             System.out.println("entrer boucle");
             if (s.estVivant()) {
@@ -64,11 +73,11 @@ public abstract class Projectile {
                 System.out.println(distanceTotale);
                 if (distanceTotale <= 20) {
                     System.out.println("bonne portée");
-                    return s;
+                    return true;
                 }
             }
         }
-        return null;
+        return false;
     }
 
     	/*double deltaX = xDirection * v * elapsedTime;

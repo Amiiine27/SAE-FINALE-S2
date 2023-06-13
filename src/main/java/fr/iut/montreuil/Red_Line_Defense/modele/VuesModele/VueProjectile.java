@@ -58,6 +58,7 @@ public class VueProjectile {
 
                     p.deplacement(elapsedTime);
 
+
                 }
 
                 lastUpdate = now;

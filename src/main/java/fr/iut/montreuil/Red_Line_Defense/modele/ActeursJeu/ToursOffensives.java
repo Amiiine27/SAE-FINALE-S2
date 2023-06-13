@@ -73,12 +73,12 @@ public abstract class ToursOffensives extends Tour {
                 System.out.println("c");
                 if(this instanceof TourSniper || this instanceof TourMitrailleuse) {
                     System.out.println("armement...");
-                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue());
+                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
                     getTerrain().ajouterProjectile(p);
                 }
                 else {
                     System.out.println("armement...");
-                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s);
+                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s,getTerrain());
                     getTerrain().ajouterProjectile(p);
                 }
                 System.out.println("feu");
