@@ -221,7 +221,7 @@ public class Environnement {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
 
         listeSoldats.add(s);
-        System.out.println("Soldat créé et ajouté au terrain : " + s);
+        System.out.println("Soldat créé et ajouté au terrain : X :" + s.getX0Value()/8 + " Y :" + s.getY0Value()/8);
 
         return s;
     }
@@ -264,7 +264,7 @@ public class Environnement {
         };
 
         int[][] possibleDestPositions = {
-                {89, 47}
+                {89, 49}
         };
 
         Random random = new Random();

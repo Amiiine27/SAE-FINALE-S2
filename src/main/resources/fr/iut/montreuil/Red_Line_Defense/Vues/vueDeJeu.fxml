@@ -39,7 +39,7 @@
     </right>
     <bottom>
         <HBox maxHeight="80.00" minHeight="80.00" prefWidth="560.00">
-            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="90.0" prefWidth="120.0"
+            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
                   styleClass="box">
                 <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"
                            styleClass="tour" onMouseClicked="#selectionTour">
@@ -52,7 +52,7 @@
                     <ImageView fx:id="berryBot200b"/>
                 </HBox>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
+            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0"
                   styleClass="box">
                 <children>
                     <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
@@ -77,7 +77,7 @@
                         </image>
                     </ImageView>
                     <HBox fx:id="prix600b" alignment="CENTER">
-                        <Label style="-fx-margin: 10px" text="600 "/>
+                        <Label style="-fx-margin: 10px" text="600"/>
                         <ImageView fx:id="berryBot600b"/>
                     </HBox>
                 </children>

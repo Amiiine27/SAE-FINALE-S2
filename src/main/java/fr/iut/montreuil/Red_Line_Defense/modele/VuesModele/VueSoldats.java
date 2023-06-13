@@ -30,11 +30,8 @@ public class VueSoldats {
 
         hashMapSoldatsSkin.put(s, skin);
 
-        // Centrer l'image en ajustant x et y
-        double halfWidth = (skin.getImage().getWidth() / 2.0) ;
-        double halfHeight = (skin.getImage().getHeight() / 2.0);
-        s.setX0(s.getX0Value() - halfWidth);
-        s.setY0(s.getY0Value() - halfHeight);
+        s.setX0(s.getX0Value());
+        s.setY0(s.getY0Value());
 
         skin.xProperty().bind(s.getX0Property());
         skin.yProperty().bind(s.getY0Property());
@@ -50,24 +47,32 @@ public class VueSoldats {
                 skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/up.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("HAUT");
                 break;
             case 1:
-                skin.setImage(loadImage("fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/down.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/down.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("BAS");
                 break;
             case 2:
-                skin.setImage(loadImage("fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/left.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/left.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("GAUCHE");
                 break;
             case 3:
-                skin.setImage(loadImage("fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/right.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/right.gif"));
                 skin.setFitWidth(30);
                 skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("DROITE");
                 break;
         }
@@ -78,6 +83,8 @@ public class VueSoldats {
         ImageView img = new ImageView(image);
         img.setFitWidth(30);
         img.setFitHeight(30);
+        img.setTranslateX(-15); // Ajout de cette ligne
+        img.setTranslateY(-15);
         img.setPreserveRatio(true);
         return img;
     }
