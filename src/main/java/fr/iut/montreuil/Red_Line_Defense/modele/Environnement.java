@@ -143,7 +143,7 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
-        actionProjectiles();
+
 
         nbrTours++;
     }
@@ -175,20 +175,7 @@ public class Environnement {
         }
     }
 
-    private void actionProjectiles(){
-        if(!listeProjectiles.isEmpty()){
-            System.out.println("tour action");
-            for (Projectile p : listeProjectiles){
-                for ()
-                if(p.isTouche()){
-                    supprimerProjectile(p);
-                }
-                p.deplacement();
-                System.out.println("Action Projectile");
 
-            }
-    }
-    }
     public void verificationMorts(){
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {

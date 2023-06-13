@@ -48,13 +48,14 @@ public abstract class Projectile {
         this.degats = degats;
         touche = false;
         this.terrain=terrain;
-        this.id=
+        this.id=("id:"+compteur);
+        compteur++;
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
         this.yDirection = (yCible - y) / distance;
     }
 
-    public abstract void deplacement();
+    public abstract void deplacement(double elapsedTime);
 
     public boolean isTouche() {
         return touche;
@@ -156,6 +157,10 @@ public abstract class Projectile {
 
     public void setV(double v) {
         this.v = v;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setTerrain(Environnement e){

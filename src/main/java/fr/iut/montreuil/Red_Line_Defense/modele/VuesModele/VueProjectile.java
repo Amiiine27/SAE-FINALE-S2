@@ -34,6 +34,7 @@ public class VueProjectile {
         ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
         bouleDeFeu.xProperty().bind(p.xProperty());
         bouleDeFeu.yProperty().bind(p.yProperty());
+        System.out.println("Création Sprite projectile");
 
         /*ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
         bombe.xProperty().bind(p.xProperty());
@@ -42,9 +43,10 @@ public class VueProjectile {
         /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
         blast.xProperty().bind(p.xProperty());
         blast.yProperty().bind(p.yProperty());*/
-        bouleDeFeu.setId();
-        centerPane.getChildren().addAll(bouleDeFeu); // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
-        /*AnimationTimer timer = new AnimationTimer() {
+        bouleDeFeu.setId(p.getId());
+        centerPane.getChildren().addAll(bouleDeFeu);
+        System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
+        AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
 
@@ -65,7 +67,12 @@ public class VueProjectile {
             }
         };
 
-        timer.start();*/
+        timer.start();
+        System.out.println("animation projectile");
+    }
+
+    public Pane getCenterPane() {
+        return centerPane;
     }
 
     private Image loadImage(String path) {
