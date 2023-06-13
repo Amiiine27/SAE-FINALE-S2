@@ -30,11 +30,8 @@ public class VueSoldats {
 
         hashMapSoldatsSkin.put(s, skin);
 
-        // Centrer l'image en ajustant x et y
-        double halfWidth = (skin.getImage().getWidth() / 2.0) ;
-        double halfHeight = (skin.getImage().getHeight() / 2.0);
-        s.setX0(s.getX0Value() - halfWidth);
-        s.setY0(s.getY0Value() - halfHeight);
+        s.setX0(s.getX0Value());
+        s.setY0(s.getY0Value());
 
         skin.xProperty().bind(s.getX0Property());
         skin.yProperty().bind(s.getY0Property());
@@ -47,29 +44,47 @@ public class VueSoldats {
         ImageView skin = hashMapSoldatsSkin.get(soldat);
         switch (directionIndex) {
             case 0:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/up.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("HAUT");
                 break;
             case 1:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/logo.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/down.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("BAS");
                 break;
             case 2:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/luffy-shanks.jpg"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/left.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("GAUCHE");
                 break;
             case 3:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sniperPosable.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/right.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
+                skin.setTranslateX(-15); // Ajout de cette ligne
+                skin.setTranslateY(-15);
                 System.out.println("DROITE");
                 break;
         }
     }
 
     public ImageView creerImageSoldat() {
-        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif");
+        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnages/Violet/up.gif");
         ImageView img = new ImageView(image);
-        img.setFitWidth(image.getWidth() / 2);
-        img.setFitHeight(image.getHeight() / 2);
+        img.setFitWidth(30);
+        img.setFitHeight(30);
+        img.setTranslateX(-15); // Ajout de cette ligne
+        img.setTranslateY(-15);
         img.setPreserveRatio(true);
         return img;
     }
