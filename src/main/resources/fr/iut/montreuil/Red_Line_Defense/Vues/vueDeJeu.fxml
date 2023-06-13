@@ -3,97 +3,87 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Stylesheet/style.css"
-            xmlns="http://javafx.com/javafx/19"
-            fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
+<?import javafx.scene.text.*?>
+
+<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
     <center>
-        <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00"/>
-        <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: blue;"></Pane>
+        <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
+        <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: blue;" />
     </center>
     <right>
         <VBox prefHeight="480.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <VBox fx:id="vboxVague" prefWidth="100.00" prefHeight="160.00">
-                <Label maxWidth="100.00" minWidth="100.00" style="-fx-font-size: 20px; -fx-alignement: center;"
-                       text="   VAGUE"/>
+            <VBox fx:id="vboxVague" prefHeight="160.00" prefWidth="100.00">
+                <Label maxWidth="100.00" minWidth="100.00" style="-fx-font-size: 20px; -fx-alignement: center;" text="   VAGUE" />
                 <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="103.0" text="    N°">
                     <font>
-                        <Font size="20.0"/>
+                        <Font size="20.0" />
                     </font>
                 </Label>
 
-                <Button fx:id="lancerButton" text="Lancer" onAction="#lancerTours"/>
+                <Button fx:id="lancerButton" onAction="#lancerTours" text="Lancer" />
 
             </VBox>
-            <HBox fx:id="hboxMoneyCount" prefWidth="100.00" prefHeight="160.00" alignment="CENTER">
-                <Label fx:id="solde" style="-fx-font-size: 20px;"/>
-                <ImageView fx:id="berry"/>
+            <HBox fx:id="hboxMoneyCount" alignment="TOP_RIGHT" prefHeight="160.00" prefWidth="100.0">
+                <Label fx:id="solde" style="-fx-font-size: 20px;" />
+                <ImageView fx:id="berry" />
             </HBox>
             <VBox fx:id="vboxKillCount" prefHeight="160.00" prefWidth="100.00">
-                <Label text="Ennemis tués :"/>
-                <Label fx:id="ennemisTues" style="-fx-font-size: 20px;"/>
-                <Button fx:id="test" onAction="#testPv" text="TEST"/>
+                <Label text="Ennemis tués :" />
+                <Label fx:id="ennemisTues" style="-fx-font-size: 20px;" />
+                <Button fx:id="test" onAction="#testPv" text="TEST" />
             </VBox>
 
         </VBox>
     </right>
     <bottom>
         <HBox maxHeight="80.00" minHeight="80.00" prefWidth="560.00">
-            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
-                  styleClass="box">
-                <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true"
-                           styleClass="tour" onMouseClicked="#selectionTour">
+            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
+                <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                     <image>
-                        <Image url="@../Images/ToursMenu/enferMenu.png"/>
+                        <Image url="@../Images/ToursMenu/enferMenu.png" />
                     </image>
                 </ImageView>
                 <HBox fx:id="prix200b" alignment="CENTER">
-                    <Label style="-fx-margin: 10px" text="200 "/>
-                    <ImageView fx:id="berryBot200b"/>
+                    <Label style="-fx-margin: 10px" text="200 " />
+                    <ImageView fx:id="berryBot200b" />
                 </HBox>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0"
-                  styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
-                               preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
+                    <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
-                            <Image url="@../Images/ToursMenu/sorcierMenu.png"/>
+                            <Image url="@../Images/ToursMenu/sorcierMenu.png" />
                         </image>
                     </ImageView>
                     <HBox fx:id="prix400b" alignment="CENTER">
-                        <Label style="-fx-margin: 10px" text="400 "/>
-                        <ImageView fx:id="berryBot400b"/>
+                        <Label style="-fx-margin: 10px" text="400 " />
+                        <ImageView fx:id="berryBot400b" />
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0"
-                  styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
-                               preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
+                    <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
-                            <Image url="@../Images/ToursMenu/sniperMenu.png"/>
+                            <Image url="@../Images/ToursMenu/sniperMenu.png" />
                         </image>
                     </ImageView>
                     <HBox fx:id="prix600b" alignment="CENTER">
-                        <Label style="-fx-margin: 10px" text="600"/>
-                        <ImageView fx:id="berryBot600b"/>
+                        <Label style="-fx-margin: 10px" text="600" />
+                        <ImageView fx:id="berryBot600b" />
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0"
-                  styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
                 <children>
-                    <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" pickOnBounds="true"
-                               preserveRatio="true" styleClass="tour" onMouseClicked="#selectionTour">
+                    <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
-                            <Image url="@../Images/ToursMenu/mortierMenu.png"/>
+                            <Image url="@../Images/ToursMenu/mortierMenu.png" />
                         </image>
                     </ImageView>
                     <HBox fx:id="prix800b" alignment="CENTER">
-                        <Label style="-fx-margin: 10px" text="800 "/>
-                        <ImageView fx:id="berryBot800b"/>
+                        <Label style="-fx-margin: 10px" text="800 " />
+                        <ImageView fx:id="berryBot800b" />
                     </HBox>
                 </children>
             </VBox>
