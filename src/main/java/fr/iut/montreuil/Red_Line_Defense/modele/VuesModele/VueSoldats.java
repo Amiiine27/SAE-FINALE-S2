@@ -47,29 +47,37 @@ public class VueSoldats {
         ImageView skin = hashMapSoldatsSkin.get(soldat);
         switch (directionIndex) {
             case 0:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/up.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
                 System.out.println("HAUT");
                 break;
             case 1:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/logo.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/Violet/down.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
                 System.out.println("BAS");
                 break;
             case 2:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/luffy-shanks.jpg"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/Violet/left.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
                 System.out.println("GAUCHE");
                 break;
             case 3:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/sniperPosable.png"));
+                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/Violet/right.gif"));
+                skin.setFitWidth(30);
+                skin.setFitHeight(30);
                 System.out.println("DROITE");
                 break;
         }
     }
 
     public ImageView creerImageSoldat() {
-        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/versLeHaut.gif");
+        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/up.gif");
         ImageView img = new ImageView(image);
-        img.setFitWidth(image.getWidth() / 2);
-        img.setFitHeight(image.getHeight() / 2);
+        img.setFitWidth(30);
+        img.setFitHeight(30);
         img.setPreserveRatio(true);
         return img;
     }
