@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.VuesModele;
 
 import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Projectile;
+import fr.iut.montreuil.Red_Line_Defense.modele.ActeursJeu.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.modele.Environnement;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
@@ -24,7 +25,7 @@ public class VueProjectile {
     public VueProjectile(Pane centerPane){
         this.centerPane=centerPane;
     }
-    public void animationDeplacement(Projectile p){
+    public void CreationSprite(Projectile p){
         /*Circle circle = new Circle(7);
         circle.setFill(Color.BLACK);
         circle.centerXProperty().bind(p.xProperty());
@@ -34,6 +35,7 @@ public class VueProjectile {
         ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
         bouleDeFeu.xProperty().bind(p.xProperty());
         bouleDeFeu.yProperty().bind(p.yProperty());
+        System.out.println("Création Sprite projectile");
 
         /*ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
         bombe.xProperty().bind(p.xProperty());
@@ -42,8 +44,9 @@ public class VueProjectile {
         /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
         blast.xProperty().bind(p.xProperty());
         blast.yProperty().bind(p.yProperty());*/
-
-        centerPane.getChildren().addAll(bouleDeFeu); // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
+        bouleDeFeu.setId(p.getId());
+        centerPane.getChildren().addAll(bouleDeFeu);
+        System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
         AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
@@ -57,6 +60,24 @@ public class VueProjectile {
 
 
                     p.deplacement(elapsedTime);
+                    Soldat s=p.ennemiÀPorter();
+                    if(s!=null){
+                        System.out.println("Touche ! suppression confirmée");
+                        p.getTerrain().supprimerProjectile(p);
+                        s.setPointsDeVieValue(s.getPointsDeVieValue()-p.getDegats());
+                        stop();
+
+                    }
+                    System.out.println("x"+p.getX());
+                    System.out.println("y"+p.getY());
+
+                    System.out.println(p.getId());
+                    if(p.getX()>840 || (p.getX()<=0 ||(p.getY()>480||p.getY()<=0))){
+                        System.out.println("suppression confirmée");
+                        p.getTerrain().supprimerProjectile(p);
+                        stop();
+                    }
+
 
                 }
 
@@ -65,6 +86,11 @@ public class VueProjectile {
         };
 
         timer.start();
+        System.out.println("animation projectile");
+    }
+
+    public Pane getCenterPane() {
+        return centerPane;
     }
 
     private Image loadImage(String path) {

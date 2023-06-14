@@ -19,11 +19,23 @@ public abstract class Projectile {
 
     private Environnement terrain;
 
+    public Environnement getTerrain() {
+        return terrain;
+    }
+
     private int degats;
 
-    VueProjectile vue;
+    private VueProjectile vue;
 
-    public Projectile(double x, double y, double xCible, double yCible, double v, int degats) {
+    private String id;
+
+    public static int compteur =1;
+
+    public int getDegats() {
+        return degats;
+    }
+
+    public Projectile(double x, double y, double xCible, double yCible, double v, int degats, Environnement terrain) {
 
         this.x = new SimpleDoubleProperty(x);
 
@@ -40,7 +52,9 @@ public abstract class Projectile {
         this.v = v;
 
         this.degats = degats;
-
+        this.terrain=terrain;
+        this.id=("p"+compteur);
+        compteur++;
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
         this.yDirection = (yCible - y) / distance;
@@ -48,21 +62,16 @@ public abstract class Projectile {
 
     public abstract void deplacement(double elapsedTime);
 
-    public void Agit(VueProjectile v){
-
-        v.animationDeplacement(this);
-    }
-
     public Soldat ennemiÀPorter() {
         for (Soldat s : terrain.getSoldats()) {
-            System.out.println("entrer boucle");
+            System.out.println("entrer for");
             if (s.estVivant()) {
                 System.out.println("vivant");
                 double distanceX = Math.abs(s.getX0Value() - getX());
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
-                if (distanceTotale <= 20) {
+                if (distanceTotale <= 10) {
                     System.out.println("bonne portée");
                     return s;
                 }
@@ -149,6 +158,10 @@ public abstract class Projectile {
 
     public void setV(double v) {
         this.v = v;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setTerrain(Environnement e){

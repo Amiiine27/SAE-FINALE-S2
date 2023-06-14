@@ -146,8 +146,8 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
-        actionProjectiles();
         actionBasePrincipale();
+        System.out.println("nbr projectile:"+getProjectiles().size());
 
         nbrTours++;
     }
@@ -183,15 +183,7 @@ public class Environnement {
         }
     }
 
-    private void actionProjectiles(){
-        if(!listeProjectiles.isEmpty()){
-            System.out.println("tour action");
-            for (Projectile p : listeProjectiles){
-                vueProjectile.animationDeplacement(p);
-                System.out.println("Action Projectile");
-            }
-    }
-    }
+
     public void verificationMorts(){
         Iterator<Soldat> iterator = listeSoldats.iterator();
         while (iterator.hasNext()) {
