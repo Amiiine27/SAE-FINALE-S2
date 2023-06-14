@@ -33,7 +33,7 @@ public class GameLoop {
 
 
     public void creerAnimation() {
-        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.17), event -> {  // Déplacer les soldats toutes les secondes
+        KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.17), event -> {
             terrain.unTour();
         });
 

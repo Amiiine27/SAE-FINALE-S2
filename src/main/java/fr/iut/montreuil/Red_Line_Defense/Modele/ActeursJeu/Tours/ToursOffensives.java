@@ -24,30 +24,14 @@ public abstract class ToursOffensives extends Tour {
         this.projectiles = FXCollections.observableArrayList();
         this.vitesseProjectile=vitesse;
 
-        // Ajout des Listeners pour mettre à jour la direction si la position change
 
 
-        // Listener pour la liste de projectiles
-        this.projectiles.addListener((ListChangeListener.Change<? extends Projectile> c) -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    for (Projectile p : c.getAddedSubList()) {
-                        System.out.println("Projectile ajouté : " + p);
-                        // Ici, vous pouvez ajouter le code pour ajouter le projectile à la vue
-                    }
-                } else if (c.wasRemoved()) {
-                    for (Projectile p : c.getRemoved()) {
-                        System.out.println("Projectile supprimé : " + p);
-                        // Ici, vous pouvez ajouter le code pour supprimer le projectile de la vue
-                    }
-                }
-            }
-        });
+
     }
-    // Tire un projectile et l'ajoute à la liste
 
 
-    // Méthode pour mettre à jour la direction
+
+
 
     // Accesseur pour les projectiles
     public ObservableList<Projectile> getProjectiles() {
@@ -70,23 +54,17 @@ public abstract class ToursOffensives extends Tour {
 
     public void tirer(){
         Soldat s=ennemiÀPorter();
-        System.out.println("a");
         if (s!=null){
             if(s.estVivant()) {
-                System.out.println("c");
                 if(this instanceof TourMitrailleuse) {
-                    System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
                     getTerrain().ajouterProjectile(p);
                 }
                 else {
-                    System.out.println("armement...");
                     Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s,getTerrain());
                     getTerrain().ajouterProjectile(p);
                 }
-                System.out.println("feu");
             }
         }
-        System.out.println("fin");
     }
 }

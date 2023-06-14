@@ -151,7 +151,6 @@ public class Environnement {
         verificationMorts();
         actionTours(nbrTours);
         actionBasePrincipale();
-        System.out.println("nbr projectile:"+getProjectiles().size());
 
         nbrTours++;
     }
@@ -177,11 +176,9 @@ public class Environnement {
 
     public void actionTours(int n){
         if(!listeTours.isEmpty()){
-            System.out.println("tour action");
             for (Tour t : listeTours){
             if(((t instanceof TourSniper) && n%18==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%12==0))) {
                 t.agit();
-                System.out.println("tour à agit");
             }
             }
         }

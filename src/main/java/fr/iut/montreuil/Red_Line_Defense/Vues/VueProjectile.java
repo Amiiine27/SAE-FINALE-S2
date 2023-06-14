@@ -31,7 +31,7 @@ public class VueProjectile {
         ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
         bouleDeFeu.xProperty().bind(p.xProperty());
         bouleDeFeu.yProperty().bind(p.yProperty());
-        System.out.println("Création Sprite projectile");
+
 
         /*ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
         bombe.xProperty().bind(p.xProperty());
@@ -42,7 +42,7 @@ public class VueProjectile {
         blast.yProperty().bind(p.yProperty());*/
         bouleDeFeu.setId(p.getId());
         centerPane.getChildren().addAll(bouleDeFeu);
-        System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
+       // apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
         AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
@@ -58,7 +58,6 @@ public class VueProjectile {
                     p.deplacement(elapsedTime);
                     Soldat s=p.ennemiÀPorter();
                     if(s!=null){
-                        System.out.println("Touche ! suppression confirmée");
                         p.getTerrain().supprimerProjectile(p);
                         s.setPointsDeVieValue(s.getPointsDeVieValue()-p.getDegats());
                         stop();
@@ -69,7 +68,6 @@ public class VueProjectile {
 
                     System.out.println(p.getId());
                     if(p.getX()>840 || (p.getX()<=0 ||(p.getY()>480||p.getY()<=0))){
-                        System.out.println("suppression confirmée");
                         p.getTerrain().supprimerProjectile(p);
                         stop();
                     }
@@ -82,7 +80,6 @@ public class VueProjectile {
         };
 
         timer.start();
-        System.out.println("animation projectile");
     }
 
     public Pane getCenterPane() {
