@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>Tower_Defense</artifactId>
+    <groupId>fr.iut.montreuil.Red_Line_Defense</groupId>
+    <artifactId>Red_Line_Defense</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Tower_Defense</name>
+    <name>Red_Line_Defense</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,11 +53,9 @@
             <artifactId>media</artifactId>
             <version>0.3.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
-        <directory>config</directory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
