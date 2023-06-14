@@ -17,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.Random;
@@ -29,16 +31,21 @@ public class Controleur implements Initializable {
     private Pane centerPane;
 
     @FXML
-    private Label ennemisTues;
+    private Label ennemisTues, pointVieBase;
 
     @FXML
     Label solde;
 
     @FXML
-    ImageView map, berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
+    ImageView wpp, berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
+
+    @FXML
+    StackPane stackpane;
 
     @FXML
     HBox hboxMoneyCount, prix200b, prix800b, prix600b, prix400b;
+    @FXML
+    VBox vboxRight;
 
     @FXML
     private Button lancerButton, test;
@@ -95,7 +102,7 @@ public class Controleur implements Initializable {
 
     private void initializeVueInterface(){
         vueInterface = new VueInterface(terrain, hboxMoneyCount, lancerButton, test, solde, berry, ennemisTues, prix200b, prix800b, prix600b, prix400b,
-                berryBot200b, berryBot400b, berryBot600b, berryBot800b);
+                berryBot200b, berryBot400b, berryBot600b, berryBot800b, vboxRight, wpp, stackpane);
         initializeEcouteInterface();
     }
 

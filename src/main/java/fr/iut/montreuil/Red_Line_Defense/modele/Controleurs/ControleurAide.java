@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControleurMP implements Initializable {
+public class ControleurAide implements Initializable {
     private Stage stage;
     private Parent root;
     private Font jap;
@@ -29,23 +28,9 @@ public class ControleurMP implements Initializable {
 
     @FXML
     private void onJouerButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDeJeu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPRincipal.fxml"));
         root = loader.load();
-        Controleur controleur = loader.getController(); // Retrieve the controller instance
-        stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Red Line Defense");
-        stage.setScene(scene);
-        stage.show();
-
-        controleur.initializeInputs();
-    }
-    @FXML
-    private void onAideButtonClick(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueAide.fxml"));
-        root = loader.load();
-        ControleurAide controleur = loader.getController(); // Retrieve the controller instance
+        ControleurMP controleur = loader.getController(); // Retrieve the controller instance
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1000, 561);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas

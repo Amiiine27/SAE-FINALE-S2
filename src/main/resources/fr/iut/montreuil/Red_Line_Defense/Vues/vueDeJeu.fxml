@@ -8,42 +8,32 @@
 <BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
-        <ImageView preserveRatio="true">
-            <image>
-                <Image url="@../Images/ElementsCarte/map.png" />
-            </image>
-        </ImageView>
         <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: transparent;" />
 
     </center>
     <right>
-        <VBox prefHeight="480.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <VBox fx:id="vboxVague" prefHeight="160.00" prefWidth="100.00">
-                <Label maxWidth="100.00" minWidth="100.00" style="-fx-font-size: 20px; -fx-alignement: center;" text="   VAGUE" />
-                <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="103.0" text="    N°">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Label>
-
-                <Button fx:id="lancerButton" onAction="#lancerTours" text="Lancer" />
+            <VBox fx:id="vboxRight" prefHeight="480.0" minHeight="480.0" maxHeight="480.0" minWidth="100.0" maxWidth="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <StackPane fx:id="stackpane" prefHeight="480.0" minHeight="480.0" maxHeight="480.0" minWidth="100.0" maxWidth="100.0" prefWidth="100.0">
+                    <ImageView fx:id="wpp" />
+                    <Label fx:id="solde" style="-fx-font-size: 20px; -fx-font-color: white;" translateX="12" translateY="18">
+                        <font>
+                            <Font name="System Bold" size="12" />
+                        </font>
+                    </Label>
+                    <Label fx:id="ennemisTues" style="-fx-font-size: 20px; -fx-font-color: white;" translateX="12" translateY="-50">
+                        <font>
+                            <Font name="System Bold" size="12" />
+                        </font>
+                    </Label>
+                    <Button fx:id="test" onAction="#testPv" text="TEST" translateY="225" translateX="25" />
+                    <Button fx:id="lancerButton" onAction="#lancerTours" text="Lancer" translateY="225" translateX="-26"/>
+                </StackPane>
 
             </VBox>
-            <HBox fx:id="hboxMoneyCount" alignment="TOP_RIGHT" prefHeight="160.00" prefWidth="100.0">
-                <Label fx:id="solde" style="-fx-font-size: 20px;" />
-                <ImageView fx:id="berry" />
-            </HBox>
-            <VBox fx:id="vboxKillCount" prefHeight="160.00" prefWidth="100.00">
-                <Label text="Ennemis tués :" />
-                <Label fx:id="ennemisTues" style="-fx-font-size: 20px;" />
-                <Button fx:id="test" onAction="#testPv" text="TEST" />
-            </VBox>
-
-        </VBox>
     </right>
     <bottom>
         <HBox maxHeight="80.00" minHeight="80.00" prefWidth="560.00">
-            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
                 <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                     <image>
                         <Image url="@../Images/ToursMenu/enferMenu.png" />
@@ -54,7 +44,7 @@
                     <ImageView fx:id="berryBot200b" />
                 </HBox>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0" styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
                 <children>
                     <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
@@ -67,7 +57,7 @@
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
                 <children>
                     <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
@@ -80,7 +70,7 @@
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box">
+            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
                 <children>
                         <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                             <image>
