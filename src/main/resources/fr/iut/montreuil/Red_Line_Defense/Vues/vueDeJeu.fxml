@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.Controleur">
+<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleurs.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
         <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: transparent;" />

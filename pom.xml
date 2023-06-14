@@ -53,11 +53,7 @@
             <artifactId>media</artifactId>
             <version>0.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>androidx.media</groupId>
-            <artifactId>media</artifactId>
-            <version>1.7.0-alpha01</version>
-        </dependency>
+
     </dependencies>
 
     <build>

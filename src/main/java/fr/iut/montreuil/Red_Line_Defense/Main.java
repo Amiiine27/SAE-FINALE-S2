@@ -1,6 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.Controleurs.ControleurMP;
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurMP;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
-
-import java.io.File;
 
 public class Main extends Application {
     public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
