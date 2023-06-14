@@ -28,7 +28,7 @@ public class ControleurMP implements Initializable {
 
 
     @FXML
-    private void onJouerButtonClick(ActionEvent event) throws IOException {
+    private void onJouerButtonClick(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDeJeu.fxml"));
         root = loader.load();
         Controleur controleur = loader.getController(); // Retrieve the controller instance

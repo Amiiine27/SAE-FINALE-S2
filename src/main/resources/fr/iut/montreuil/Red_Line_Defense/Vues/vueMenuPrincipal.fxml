@@ -15,7 +15,9 @@
                         <Image url="@../Images/ComposantesMenuPrincipal/luffy-shanks.jpg" />
                     </image>
                 </ImageView>
-                <Button fx:id="lanceur" layoutX="317.0" layoutY="345.0" mnemonicParsing="false" onAction="#onJouerButtonClick" prefHeight="109.0" prefWidth="109.0" styleClass="bouton-image" stylesheets="@../Stylesheet/style.css" />
+                <ImageView fx:id="lancerButton" fitHeight="109" fitWidth="109" layoutX="317.0" layoutY="345.0" onMouseClicked="#onJouerButtonClick" styleClass="tour">
+                    <Image url="@../Images/ComposantesMenuPrincipal/luffy.gif" />
+                </ImageView>
                 <ImageView fx:id="aide" fitHeight="109" fitWidth="109" layoutX="569.0" layoutY="345.0" onMouseClicked="#onAideButtonClick" styleClass="tour">
                     <Image url="@../Images/ComposantesMenuPrincipal/usopp.gif" />
                 </ImageView>
