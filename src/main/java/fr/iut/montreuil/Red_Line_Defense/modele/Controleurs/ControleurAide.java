@@ -1,7 +1,5 @@
 package fr.iut.montreuil.Red_Line_Defense.modele.Controleurs;
 
-import fr.iut.montreuil.Red_Line_Defense.modele.GameLoop;
-import fr.iut.montreuil.Red_Line_Defense.modele.Inputs.Inputs;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,14 +13,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ControleurAide implements Initializable {
     private Stage stage;
     private Parent root;
     private Font jap;
+    private boolean isWindowClosed=false;
+    public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
+    public static final String AUDIO_WE_ARE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening.mp3";
 
     @FXML
     private Label labelTitre;
+
 
 
 

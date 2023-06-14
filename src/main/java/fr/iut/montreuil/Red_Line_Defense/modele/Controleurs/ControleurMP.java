@@ -9,14 +9,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.Clipboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import fr.iut.montreuil.Red_Line_Defense.Main;
 public class ControleurMP implements Initializable {
     private Stage stage;
     private Parent root;
@@ -24,6 +29,10 @@ public class ControleurMP implements Initializable {
 
     @FXML
     private Label labelTitre;
+    private MediaPlayer mediaPlayerJeu, mediaPlayerAide;
+    private Media mediaJeu, mediaAide;
+    public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
+    public static final String AUDIO_OST_AIDE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostAide.mp3";
 
 
 
@@ -37,7 +46,10 @@ public class ControleurMP implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        stage.show();
+        mediaJeu = new Media(getClass().getResource(AUDIO_OST_JEU_PATH).toString());
+        mediaPlayerJeu = new MediaPlayer(mediaJeu);
+        mediaPlayerJeu.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayerJeu.play();
 
         controleur.initializeInputs();
     }
@@ -51,18 +63,15 @@ public class ControleurMP implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
+        /*mediaAide = new Media(getClass().getResource(AUDIO_OST_AIDE_PATH).toString());
+        mediaPlayerAide = new MediaPlayer(mediaAide);
+        mediaPlayerAide.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayerAide.play();*/
         stage.show();
     }
-
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*// Créez la police que vous voulez utiliser
-        Font fontJap = Font.loadFont(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Polices/jap.ttf").toExternalForm(), 20); // 20 est la taille de la police, changez-la comme vous voulez
 
-        // Appliquer la police à votre label
-        labelTitre.setFont(fontJap);*/
+
     }
 }
