@@ -47,7 +47,7 @@ public class VueProjectile {
         bouleDeFeu.setId(p.getId());
         centerPane.getChildren().addAll(bouleDeFeu);
         System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
-        AnimationTimer timer = new AnimationTimer() {
+       AnimationTimer timer = new AnimationTimer() {
 
             private long lastUpdate = 0;
 
@@ -63,8 +63,10 @@ public class VueProjectile {
                     Soldat s=p.ennemiÀPorter();
                     if(s!=null){
                         System.out.println("Touche ! suppression confirmée");
-                        p.getTerrain().supprimerProjectile(p);
+
                         s.setPointsDeVieValue(s.getPointsDeVieValue()-p.getDegats());
+                        p.getTerrain().verificationMorts();
+                        p.getTerrain().supprimerProjectile(p);
                         stop();
 
                     }

@@ -176,6 +176,7 @@ public class Environnement {
     }
 
 
+
     public void verificationMorts(){
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
