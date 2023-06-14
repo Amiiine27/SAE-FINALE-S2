@@ -30,7 +30,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Red Line Defense");
-        primaryStage.setScene(new Scene(root, 1000, 561));
+        primaryStage.setScene(new Scene(root, 940, 560));
         mediaOpening = new Media(getClass().getResource(AUDIO_OPENING_PATH).toString());
         mediaPlayerOpening = new MediaPlayer(mediaOpening);
         mediaPlayerOpening.play();
