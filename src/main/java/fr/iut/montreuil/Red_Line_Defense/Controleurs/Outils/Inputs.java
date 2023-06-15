@@ -4,11 +4,14 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.GameLoop;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -21,6 +24,7 @@ public class Inputs {
     private GameLoop gameLoop;
     private Scene scene;
     private Pane pausePane;
+    public final static String PAUSE_IMAGE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/ComposantesMenuPrincipal/pause.png";
 
     public Inputs(GameLoop gameLoop, Scene scene) {
         this.gameLoop = gameLoop;
@@ -52,16 +56,19 @@ public class Inputs {
 
     private void preparePauseStage() {
         // Création d'un label avec le texte "PAUSE"
-        Label pauseLabel = new Label("PAUSE");
-        pauseLabel.setTextFill(Color.RED);
-        pauseLabel.setStyle("-fx-font-size: 64px;");
+        Image image = loadImage(PAUSE_IMAGE_PATH);
+        ImageView img = new ImageView(image);
 
         // Création d'un layout avec un fond semi-transparent
-        pausePane = new StackPane(pauseLabel);
+        pausePane = new StackPane(img);
         pausePane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.8);"); // Fond noir semi-transparent
         pausePane.setVisible(false); // Initially invisible
 
         pausePane.prefWidthProperty().bind(scene.widthProperty());
         pausePane.prefHeightProperty().bind(scene.heightProperty());
     }
+    private Image loadImage(String path) {
+        return new Image(getClass().getResourceAsStream(path));
+    }
+
 }

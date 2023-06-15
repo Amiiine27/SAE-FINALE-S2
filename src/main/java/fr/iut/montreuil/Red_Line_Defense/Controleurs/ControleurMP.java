@@ -58,10 +58,6 @@ public class ControleurMP implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        /*mediaAide = new Media(getClass().getResource(AUDIO_OST_AIDE_PATH).toString());
-        mediaPlayerAide = new MediaPlayer(mediaAide);
-        mediaPlayerAide.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayerAide.play();*/
         stage.show();
     }
     @Override

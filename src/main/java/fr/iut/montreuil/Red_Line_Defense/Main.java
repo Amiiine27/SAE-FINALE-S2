@@ -21,9 +21,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void shutDownMediaplayer() {
-        mediaPlayerOpening.stop();
-    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -35,8 +33,6 @@ public class Main extends Application {
         mediaPlayerOpening = new MediaPlayer(mediaOpening);
         mediaPlayerOpening.play();
         primaryStage.show();
-
-
 
         ControleurMP controleur = loader.getController();
         controleur.initialize(null, null); // Appeler la méthode initialize du contrôleur après l'affichage de la scène
