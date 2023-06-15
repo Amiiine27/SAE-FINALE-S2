@@ -26,8 +26,6 @@ public abstract class Projectile {
 
     private int degats;
 
-    private VueProjectile vue;
-
     private String id;
 
     public static int compteur =1;
