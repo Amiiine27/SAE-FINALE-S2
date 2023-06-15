@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Vues;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import javafx.animation.AnimationTimer;
@@ -27,21 +28,24 @@ public class VueProjectile {
         circle.centerXProperty().bind(p.xProperty());
         circle.centerYProperty().bind(p.yProperty());
         */
-
-        ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
-        bouleDeFeu.xProperty().bind(p.xProperty());
-        bouleDeFeu.yProperty().bind(p.yProperty());
-        System.out.println("Création Sprite projectile");
-
-        /*ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
+        if(p instanceof Boulet) {
+            ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
+            bouleDeFeu.xProperty().bind(p.xProperty());
+            bouleDeFeu.yProperty().bind(p.yProperty());
+            bouleDeFeu.setId(p.getId());
+            centerPane.getChildren().addAll(bouleDeFeu);
+        }
+        else {
+        ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
         bombe.xProperty().bind(p.xProperty());
-        bombe.yProperty().bind(p.yProperty());*/
-
+        bombe.yProperty().bind(p.yProperty());
+        bombe.setId(p.getId());
+        centerPane.getChildren().addAll(bombe);
+        }
         /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
         blast.xProperty().bind(p.xProperty());
         blast.yProperty().bind(p.yProperty());*/
-        bouleDeFeu.setId(p.getId());
-        centerPane.getChildren().addAll(bouleDeFeu);
+
         System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
         AnimationTimer timer = new AnimationTimer() {
 

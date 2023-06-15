@@ -19,9 +19,11 @@ public class Missile extends Projectile {
             setX(getX() + deltaX);
             setY(getY() + deltaY);
         }
-        double distance = Math.sqrt(Math.pow(s.getX0Value() - getX(), 2) + Math.pow(s.getY0Value() - getY(), 2));
-        setxDirection((s.getX0Value()- getX())/ distance);
-        setyDirection((s.getY0Value()- getY()) / distance);
+        if(s.estVivant()) {
+            double distance = Math.sqrt(Math.pow(s.getX0Value() - getX(), 2) + Math.pow(s.getY0Value() - getY(), 2));
+            setxDirection((s.getX0Value() - getX()) / distance);
+            setyDirection((s.getY0Value() - getY()) / distance);
+        }
     }
 }
 
