@@ -145,7 +145,6 @@ public class Environnement {
 
     public void unTour(){
 
-
         apparitionSoldat();
         deplacementSoldat();
         verificationMorts();
@@ -186,6 +185,7 @@ public class Environnement {
             }
         }
     }
+
 
 
     public void verificationMorts(){

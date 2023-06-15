@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
+import fr.iut.montreuil.Red_Line_Defense.Vues.VueProjectile;
 import javafx.beans.property.ListProperty;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ public class EcouteProjectiles {
                 if (change.wasAdded()) {
                     List<? extends Projectile> addedProjectiles = change.getAddedSubList();
                     for (Projectile projectile : addedProjectiles) {
-                        terrain.getVueProjectile().CreationSprite(projectile);
+                        VueProjectile vue = new VueProjectile(centerPane,projectile);
                     }
                 }
                 if (change.wasRemoved()) {

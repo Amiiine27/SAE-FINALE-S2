@@ -149,7 +149,6 @@ public class Controleur implements Initializable {
         initializeEcouteSoldats();
     }
     private void initializeVueProjectile(){
-        vueProjectile = new VueProjectile(centerPane);
         initializeEcouteProjectiles();
     }
 

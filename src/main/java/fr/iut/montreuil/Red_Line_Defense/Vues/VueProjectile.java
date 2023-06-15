@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+
 public class VueProjectile {
 
     @FXML
@@ -19,8 +21,9 @@ public class VueProjectile {
     public final static String BLAST_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/blast.png";
 
 
-    public VueProjectile(Pane centerPane){
+    public VueProjectile(Pane centerPane,Projectile p){
         this.centerPane=centerPane;
+        CreationSprite(p);
     }
     public void CreationSprite(Projectile p){
         /*Circle circle = new Circle(7);
@@ -53,35 +56,30 @@ public class VueProjectile {
 
             @Override
             public void handle(long now) {
-                if (lastUpdate > 0) {
+                if (lastUpdate > 0 && !(p.isTouché())) {
 
 
                     double elapsedTime = (now - lastUpdate) / 1000000000.0;
 
-
+                    Soldat s = p.ennemiÀPorter();
+                    if (s != null) {
+                        System.out.println("FEUUUU");
+                        p.getTerrain().supprimerProjectile(p);
+                        s.setPointsDeVieValue(s.getPointsDeVieValue() - p.getDegats());
+                        p.setTouché(true);
+                    }
+                    if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {
+                        System.out.println("DEHORS");
+                        p.getTerrain().supprimerProjectile(p);
+                        p.setTouché(true);
+                    }
                     p.deplacement(elapsedTime);
-                    Soldat s=p.ennemiÀPorter();
-                    if(s!=null){
-                        System.out.println("Touche ! suppression confirmée");
-                        p.getTerrain().supprimerProjectile(p);
-                        s.setPointsDeVieValue(s.getPointsDeVieValue()-p.getDegats());
-                        stop();
-
-                    }
-                    System.out.println("x"+p.getX());
-                    System.out.println("y"+p.getY());
-
-                    System.out.println(p.getId());
-                    if(p.getX()>840 || (p.getX()<=0 ||(p.getY()>480||p.getY()<=0))){
-                        System.out.println("suppression confirmée");
-                        p.getTerrain().supprimerProjectile(p);
-                        stop();
-                    }
-
-
                 }
 
-                lastUpdate = now;
+
+
+
+         lastUpdate = now;
             }
         };
 

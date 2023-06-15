@@ -19,6 +19,7 @@ public abstract class Projectile {
     private double v;//Vitesse de l'obus
 
     private Environnement terrain;
+    private boolean touché;
 
     public Environnement getTerrain() {
         return terrain;
@@ -29,10 +30,6 @@ public abstract class Projectile {
     private String id;
 
     public static int compteur =1;
-
-    public int getDegats() {
-        return degats;
-    }
 
     public Projectile(double x, double y, double xCible, double yCible, double v, int degats, Environnement terrain) {
 
@@ -54,9 +51,18 @@ public abstract class Projectile {
         this.terrain=terrain;
         this.id=("p"+compteur);
         compteur++;
+        touché=false;
         double distance = Math.sqrt(Math.pow(xCible - x, 2) + Math.pow(yCible - y, 2));
         this.xDirection = (xCible - x) / distance;
         this.yDirection = (yCible - y) / distance;
+    }
+
+    public boolean isTouché() {
+        return touché;
+    }
+
+    public void setTouché(boolean touché) {
+        this.touché = touché;
     }
 
     public abstract void deplacement(double elapsedTime);
@@ -70,7 +76,7 @@ public abstract class Projectile {
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
-                if (distanceTotale <= 10) {
+                if (distanceTotale <= 20) {
                     System.out.println("bonne portée");
                     return s;
                 }
@@ -165,5 +171,8 @@ public abstract class Projectile {
 
     public void setTerrain(Environnement e){
         this.terrain=e;
+    }
+    public int getDegats() {
+        return degats;
     }
 }

@@ -74,7 +74,7 @@ public abstract class ToursOffensives extends Tour {
         if (s!=null){
             if(s.estVivant()) {
                 System.out.println("c");
-                if(this instanceof TourMitrailleuse) {
+                if(this instanceof TourMitrailleuse || this instanceof TourSniper) {
                     System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
                     getTerrain().ajouterProjectile(p);
