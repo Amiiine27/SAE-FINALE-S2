@@ -17,16 +17,6 @@ import java.util.ResourceBundle;
 public class ControleurAide implements Initializable {
     private Stage stage;
     private Parent root;
-    private Font jap;
-    private boolean isWindowClosed=false;
-    public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
-    public static final String AUDIO_WE_ARE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening.mp3";
-
-    @FXML
-    private Label labelTitre;
-
-
-
 
     @FXML
     private void onJouerButtonClick(ActionEvent event) throws IOException {
@@ -46,10 +36,5 @@ public class ControleurAide implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*// Créez la police que vous voulez utiliser
-        Font fontJap = Font.loadFont(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Polices/jap.ttf").toExternalForm(), 20); // 20 est la taille de la police, changez-la comme vous voulez
-
-        // Appliquer la police à votre label
-        labelTitre.setFont(fontJap);*/
     }
 }

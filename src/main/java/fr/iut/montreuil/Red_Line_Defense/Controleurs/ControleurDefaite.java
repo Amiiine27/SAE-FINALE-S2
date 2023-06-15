@@ -17,16 +17,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControleurMP implements Initializable {
+public class ControleurDefaite implements Initializable {
     private Stage stage;
     private Parent root;
-
-    @FXML
-    private Label labelTitre;
-    private MediaPlayer mediaPlayerJeu, mediaPlayerAide;
-    private Media mediaJeu, mediaAide;
+    private MediaPlayer mediaPlayerJeu;
+    private Media mediaJeu;
     public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
-    public static final String AUDIO_OST_AIDE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostAide.mp3";
 
 
 
@@ -48,7 +44,7 @@ public class ControleurMP implements Initializable {
         controleur.initializeInputs();
     }
     @FXML
-    private void onAideButtonClick(MouseEvent event) throws IOException {
+    private void onMenuPrincipalClick(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueAide.fxml"));
         root = loader.load();
         ControleurAide controleur = loader.getController(); // Retrieve the controller instance

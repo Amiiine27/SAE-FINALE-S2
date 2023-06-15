@@ -12,7 +12,7 @@
             <children>
                 <ImageView fitHeight="589.0" fitWidth="1015.0" layoutX="-8.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../Images/ComposantesMenuPrincipal/luffy-shanks.jpg" />
+                        <Image url="@../Images/ComposantesMenuPrincipal/luffy-shanks.png" />
                     </image>
                 </ImageView>
                 <ImageView fx:id="lancerButton" fitHeight="109" fitWidth="109" layoutX="317.0" layoutY="345.0" onMouseClicked="#onJouerButtonClick" styleClass="tour">
