@@ -54,6 +54,7 @@ public class VueProjectile {
 
             private long lastUpdate = 0;
 
+
             @Override
             public void handle(long now) {
                 if (lastUpdate > 0 && !(p.isTouché())) {
@@ -75,11 +76,15 @@ public class VueProjectile {
                     }
                     p.deplacement(elapsedTime);
                 }
+                else if(p.isTouché()){
+                    stop();
+                }
 
 
 
 
          lastUpdate = now;
+
             }
         };
 
