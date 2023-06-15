@@ -11,7 +11,7 @@ public class EcouteInterface {
     private Joueur joueur;
     private Environnement terrain;
 
-    // Assuming vague is a property in Joueur
+
     private IntegerProperty vague;
 
     public EcouteInterface(Environnement terrain) {
