@@ -36,7 +36,6 @@ public class Inputs {
         pausePane.resize(scene.getWidth(), scene.getHeight());
         pauseDuJeu();
 
-
     }
 
     private void pauseDuJeu(){

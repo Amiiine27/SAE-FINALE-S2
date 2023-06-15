@@ -23,10 +23,9 @@ public class ControleurMP implements Initializable {
 
     @FXML
     private Label labelTitre;
-    private MediaPlayer mediaPlayerJeu, mediaPlayerAide;
-    private Media mediaJeu, mediaAide;
+    private MediaPlayer mediaPlayerJeu;
+    private Media mediaJeu;
     public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
-    public static final String AUDIO_OST_AIDE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostAide.mp3";
 
 
 

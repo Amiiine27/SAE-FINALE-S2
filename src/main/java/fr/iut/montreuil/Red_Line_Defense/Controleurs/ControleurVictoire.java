@@ -22,6 +22,7 @@ public class ControleurVictoire implements Initializable {
     private Parent root;
     private MediaPlayer mediaPlayerOpening, mediaPlayerJeu;
     private Media mediaOpening, mediaJeu;
+    public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
     public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
 
 
@@ -53,7 +54,7 @@ public class ControleurVictoire implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        mediaOpening = new Media(getClass().getResource(AUDIO_OST_JEU_PATH).toString());
+        mediaOpening = new Media(getClass().getResource(AUDIO_OPENING_PATH).toString());
         mediaPlayerOpening = new MediaPlayer(mediaOpening);
         mediaPlayerOpening.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayerOpening.play();

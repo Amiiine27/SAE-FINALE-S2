@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 public class ControleurAide implements Initializable {
     private Stage stage;
     private Parent root;
-
     @FXML
     private void onJouerButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPRincipal.fxml"));

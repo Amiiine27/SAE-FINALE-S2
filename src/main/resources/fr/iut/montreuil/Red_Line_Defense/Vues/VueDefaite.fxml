@@ -14,10 +14,10 @@
                         <Image url="@../Images/ComposantesMenuPrincipal/defaiteBackground.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="109" fitWidth="109" layoutX="317.0" layoutY="345.0" onMouseClicked="#onJouerButtonClick" styleClass="tour">
+                <ImageView fitHeight="109" fitWidth="109" layoutX="317.0" layoutY="345.0" onMouseClicked="#onRejouerButtonClick" styleClass="tour">
                     <Image url="@../Images/ComposantesMenuPrincipal/luffy.gif" />
                 </ImageView>
-                <ImageView fitHeight="109" fitWidth="109" layoutX="569.0" layoutY="345.0" onMouseClicked="#onMenuPrincipalClick" styleClass="tour">
+                <ImageView fitHeight="109" fitWidth="109" layoutX="569.0" layoutY="345.0" onMouseClicked="#onMenuPrincipalClicked" styleClass="tour">
                     <Image url="@../Images/ComposantesMenuPrincipal/usopp.gif" />
                 </ImageView>
                 <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="294.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
