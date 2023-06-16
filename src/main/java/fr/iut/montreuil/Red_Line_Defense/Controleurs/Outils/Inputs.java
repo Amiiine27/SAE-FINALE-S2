@@ -30,7 +30,7 @@ public class Inputs {
         this.gameLoop = gameLoop;
         this.scene = scene;
 
-
+        System.out.println("HIiiii");
         preparePauseStage();
         ((Pane) scene.getRoot()).getChildren().add(pausePane);
         pausePane.resize(scene.getWidth(), scene.getHeight());
@@ -40,14 +40,17 @@ public class Inputs {
 
     private void pauseDuJeu(){
         scene.setOnKeyPressed(event -> {
+            System.out.println("HI");
             if (event.getCode() == KeyCode.P) {
                 System.out.println("pause");
                 if (gameLoop.getTimeline().getStatus() == Animation.Status.RUNNING) {
                     gameLoop.pauseTimeline();
                     pausePane.setVisible(true);
+                    System.out.println("HA");
                 } else {
                     pausePane.setVisible(false);
                     gameLoop.lancerTimeline();
+                    System.out.println("HO");
                 }
             }
         });
