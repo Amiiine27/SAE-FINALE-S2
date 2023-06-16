@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
-    public static final String AUDIO_WE_ARE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening.mp3";
 
     public Media mediaOpening;
     public MediaPlayer mediaPlayerOpening;
