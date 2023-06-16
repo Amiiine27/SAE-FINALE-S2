@@ -233,8 +233,7 @@ public class Vagues {
 
 
 
-    public void vagueParDefault(){
-        System.out.println("Default");
+    public void vagueParDefault(){premiereVague();
     }
 
     public int getTotalSoldats(){
