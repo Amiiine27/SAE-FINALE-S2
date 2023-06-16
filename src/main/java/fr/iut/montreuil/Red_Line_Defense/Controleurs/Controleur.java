@@ -27,8 +27,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -121,24 +124,7 @@ public class Controleur implements Initializable {
         ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
     }
 
-    public void ajouterDefaite(){
-        URL url = Main.class.getResource("Vues/VueDefaite.fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage;
-        ControleurDefaite controleur = loader.getController(); // Retrieve the controller instance
-        stage = (Stage) ((javafx.scene.Node) centerPane).getScene().getWindow();
-        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Red Line Defense");
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     /*public void ajouterVictoire (){
         FXMLLoader loader = new FXMLLoader();
@@ -158,17 +144,7 @@ public class Controleur implements Initializable {
         stage.show();
     }*/
 
-    public void ajouterEcouteurVagues(Environnement terrain) {
-        terrain.getBasePrincipale().getPointsDeVieProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if(terrain.getBasePrincipale().getPointsDeVieValue()<=0){
-                    ajouterDefaite();
-                }
-                else if (terrain.getVagueValue()==0){
-                    //ajouterVictoire();
-                }
 
-    }});}
 
     private void initializeJoueur(){
         this.joueur = new Joueur("Ayoub");
@@ -266,7 +242,6 @@ public class Controleur implements Initializable {
     }
     @FXML
     public void testPv(ActionEvent event) {
-        ajouterDefaite();
         System.out.println("TEST");
         Random rand = new Random();
         for (Soldat s : this.terrain.getSoldats()) {

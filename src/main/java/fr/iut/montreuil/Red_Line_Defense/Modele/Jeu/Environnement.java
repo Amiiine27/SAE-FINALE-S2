@@ -434,7 +434,9 @@ public class Environnement {
     public void setBasePrincipale(BasePrincipale basePrincipale){
         this.basePrincipale = basePrincipale;
     }
-
+    public BasePrincipale getBasePrincipale(){
+        return this.basePrincipale;
+    }
     public Vagues getVagues(){
         return this.vaguesDeJeu;
     }

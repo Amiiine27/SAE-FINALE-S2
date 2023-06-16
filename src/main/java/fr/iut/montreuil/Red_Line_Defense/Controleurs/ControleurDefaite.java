@@ -46,10 +46,10 @@ public class ControleurDefaite implements Initializable {
         mediaPlayerLose.stop();
         System.out.println("Media arrêté");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
-        root = loader.load();
-        ControleurVictoire controleur = loader.getController(); // Retrieve the controller instance
+        Parent roott = loader.load();
+        ControleurMP controleur = loader.getController(); // Retrieve the controller instance
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        Scene scene = new Scene(roott, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);

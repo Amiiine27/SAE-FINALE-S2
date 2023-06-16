@@ -1,6 +1,9 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Controleur;
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurDefaite;
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurVictoire;
+import fr.iut.montreuil.Red_Line_Defense.Main;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
@@ -15,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class EcouteVictoireEtDefaite {
 
@@ -46,32 +50,50 @@ public class EcouteVictoireEtDefaite {
 
         this.vague.addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() > 5) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueVictoire.fxml"));
-                    Parent root = fxmlLoader.load();
-
-                    Stage currentStage = c.getStage();
-                    currentStage.setScene(new Scene(root));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ajouterVictoire();
             }
         });
     }
+    public void ajouterDefaite(){
+        URL url = Main.class.getResource("Vues/VueDefaite.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ControleurDefaite controleur = loader.getController(); // Retrieve the controller instance
+        Stage stage = c.getStage();
+        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Red Line Defense");
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    public void ajouterVictoire(){
+        URL url = Main.class.getResource("Vues/VueVictoire.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ControleurVictoire controleur = loader.getController(); // Retrieve the controller instance
+        Stage stage = c.getStage();
+        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Red Line Defense");
+        stage.setScene(scene);
+        stage.show();
+    }
     private void ajouterEcouteurDefaite() {
 
         this.vague.addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() < 1) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDefaite.fxml"));
-                    Parent root = fxmlLoader.load();
-
-                    Stage currentStage = c.getStage();
-                    currentStage.setScene(new Scene(root));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ajouterDefaite();
             }
         });
     }
