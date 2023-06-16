@@ -25,5 +25,6 @@ public class Missile extends Projectile {
             setyDirection((s.getY0Value() - getY()) / distance);
         }
     }
+
 }
 

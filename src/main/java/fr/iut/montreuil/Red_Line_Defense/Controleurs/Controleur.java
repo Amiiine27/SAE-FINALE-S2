@@ -120,7 +120,7 @@ public class Controleur implements Initializable {
     }
 
 
-    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
+    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain,centerPane);}
 
 
 
