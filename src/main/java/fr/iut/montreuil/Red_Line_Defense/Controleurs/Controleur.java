@@ -17,10 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.stage.Stage;
 
@@ -36,10 +33,13 @@ public class Controleur implements Initializable {
     private Pane centerPane;
 
     @FXML
+    private BorderPane borderPane;
+
+    @FXML
     private Label ennemisTues, pointVieBase;
 
     @FXML
-    Label solde;
+    Label solde, vague;
 
     @FXML
     ImageView wpp, berry, berryBot200b, berryBot400b, berryBot600b, berryBot800b;
@@ -155,7 +155,8 @@ public class Controleur implements Initializable {
 
     private void initializeVueInterface(){
         vueInterface = new VueInterface(terrain, lancerButton, test, solde, berry, ennemisTues, prix200b, prix800b, prix600b, prix400b,
-                berryBot200b, berryBot400b, berryBot600b, berryBot800b, vboxRight, wpp, stackpane, centerPane);
+                berryBot200b, berryBot400b, berryBot600b, berryBot800b, vboxRight, wpp, stackpane, centerPane.getScene(), borderPane,
+                vague);
         initializeEcouteInterface();
     }
 

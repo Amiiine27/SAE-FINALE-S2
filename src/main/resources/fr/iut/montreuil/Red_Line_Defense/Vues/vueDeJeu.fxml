@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleurs.Controleur">
+<BorderPane fx:id="borderpane" stylesheets="@../Stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.Red_Line_Defense.Controleurs.Controleur">
     <center>
         <TilePane fx:id="tilepane" maxHeight="480.00" maxWidth="840.00" minHeight="480.00" minWidth="840.00" />
         <Pane fx:id="centerPane" onMouseClicked="#positionTour" style="-fx-background-color: transparent;" />
 
     </center>
     <right>
-            <VBox fx:id="vboxRight" prefHeight="480.0" minHeight="480.0" maxHeight="480.0" minWidth="100.0" maxWidth="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                <StackPane fx:id="stackpane" prefHeight="480.0" minHeight="480.0" maxHeight="480.0" minWidth="100.0" maxWidth="100.0" prefWidth="100.0">
+            <VBox fx:id="vboxRight" maxHeight="480.0" maxWidth="100.0" minHeight="480.0" minWidth="100.0" prefHeight="480.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <StackPane fx:id="stackpane" maxHeight="480.0" maxWidth="100.0" minHeight="480.0" minWidth="100.0" prefHeight="480.0" prefWidth="100.0">
                     <ImageView fx:id="wpp" />
+                    <Label fx:id="vague" style="-fx-font-size: 20px; -fx-font-color: white;" textFill="WHITE" translateX="0" translateY="-170">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
                     <Label fx:id="solde" style="-fx-font-size: 20px; -fx-font-color: white;" translateX="12" translateY="18">
                         <font>
                             <Font name="System Bold" size="12" />
@@ -25,15 +37,14 @@
                             <Font name="System Bold" size="12" />
                         </font>
                     </Label>
-                    <!--<Button fx:id="test" onAction="#testPv" text="TEST" translateY="225" translateX="25" />-->
-                    <!--<Button fx:id="lancerButton" onAction="#lancerTours" text="Lancer" translateY="225" translateX="-26"/>-->
+
                 </StackPane>
 
             </VBox>
     </right>
     <bottom>
         <HBox maxHeight="80.00" minHeight="80.00" prefWidth="560.00">
-            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
+            <VBox alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color:  #0099e6;" styleClass="box">
                 <ImageView fx:id="tour200b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                     <image>
                         <Image url="@../Images/ToursMenu/enferMenu.png" />
@@ -44,7 +55,7 @@
                     <ImageView fx:id="berryBot200b" />
                 </HBox>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
+            <VBox alignment="BOTTOM_CENTER" layoutX="317.0" layoutY="8.0" maxHeight="80.00" minHeight="80.00" prefWidth="120.0" style="-fx-background-color:  #0099e6;" styleClass="box">
                 <children>
                     <ImageView fx:id="tour400b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
@@ -57,7 +68,7 @@
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
+            <VBox alignment="BOTTOM_CENTER" layoutX="617.0" layoutY="0.0" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color:  #0099e6;" styleClass="box">
                 <children>
                     <ImageView fx:id="tour600b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                         <image>
@@ -70,7 +81,7 @@
                     </HBox>
                 </children>
             </VBox>
-            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" styleClass="box" style="-fx-background-color:  #0099e6;">
+            <VBox alignment="BOTTOM_CENTER" layoutX="917.0" layoutY="8.0" prefHeight="80.0" prefWidth="120.0" style="-fx-background-color:  #0099e6;" styleClass="box">
                 <children>
                         <ImageView fx:id="tour800b" fitHeight="58.0" fitWidth="48.0" onMouseClicked="#selectionTour" pickOnBounds="true" preserveRatio="true" styleClass="tour">
                             <image>
@@ -83,7 +94,7 @@
                         </HBox>
                 </children>
             </VBox>
-            <ImageView fx:id="gif" preserveRatio="true" fitHeight="80.0" fitWidth="560.0">
+            <ImageView fx:id="gif" fitHeight="80.0" fitWidth="560.0" preserveRatio="true">
                 <image>
                     <Image url="@../Images/AccessoiresInterface/gif-crop.gif" />
                 </image>
