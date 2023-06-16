@@ -160,7 +160,7 @@ public class Controleur implements Initializable {
 
     private void initializeVueInterface(){
         vueInterface = new VueInterface(terrain, lancerButton, test, solde, berry, ennemisTues, prix200b, prix800b, prix600b, prix400b,
-                berryBot200b, berryBot400b, berryBot600b, berryBot800b, vboxRight, wpp, stackpane);
+                berryBot200b, berryBot400b, berryBot600b, berryBot800b, vboxRight, wpp, stackpane, centerPane);
         initializeEcouteInterface();
     }
 

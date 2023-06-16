@@ -53,10 +53,12 @@ public class EcouteInterface {
     }
 
     private void ajouterListenerVague() {
+        int vague = 0;
         this.vague.addListener((observable, oldValue, newValue) -> {
             joueur.crediterSolde(200); // Chaque Vague le Joueur Gagne 200 Berrys
             vagues.majDefenseSoldats();
             vagues.resetTours();
+            vueInterface.boucleImagesVagues(vague);
         });
     }
 

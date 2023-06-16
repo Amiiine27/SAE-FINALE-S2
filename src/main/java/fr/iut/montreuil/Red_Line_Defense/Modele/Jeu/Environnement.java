@@ -152,6 +152,7 @@ public class Environnement {
     public void checkNouvelleVagues(){
         if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTues.getValue())) {
             vague.setValue(vague.getValue() + 1);
+
         }
     }
 

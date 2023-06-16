@@ -6,8 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 public class VueInterface {
 
@@ -26,6 +29,8 @@ public class VueInterface {
     VBox vboxRight;
 
     Label ennemisTues;
+    Pane centerPane;
+    private ArrayList<ImageView> transitionVague;
 
     private Button lancerButton, test;
 
@@ -35,7 +40,7 @@ public class VueInterface {
 
     public VueInterface(Environnement terrain, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues,
                         HBox prix200b, HBox prix400b, HBox prix600b, HBox prix800b, ImageView berryBot200b, ImageView berryBot600b, ImageView berryBot400b, ImageView berryBot800b, VBox vboxRight,
-                        ImageView wpp, StackPane stackpane) {
+                        ImageView wpp, StackPane stackpane, Pane pane) {
 
         solde.setText(String.valueOf(terrain.getJoueur().getSoldeJoueurValue()));
         this.lancerButton = lancerButton;
@@ -53,9 +58,13 @@ public class VueInterface {
         this.berryBot800b = berryBot800b;
         this.vboxRight = vboxRight;
         this.wpp = wpp;
+        this.centerPane = pane;
         this.stackpane = stackpane;
+        this.transitionVague = new ArrayList<ImageView>();
+        ajouterLesImages();
         initializeRightPane();
         initializeImageBerry();
+
 
     }
 
@@ -85,6 +94,23 @@ public class VueInterface {
     }
     private Image getBerryPrixImage() {
         return loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/AccessoiresInterface/berryPrix.png");
+    }
+    public void ajouterLesImages(){
+        String VAGUE2 = "/fr/iut/montreuil/Red_Line_Defense/Images/Vagues/vague2.png";
+        String VAGUE3 = "/fr/iut/montreuil/Red_Line_Defense/Images/Vagues/vague3.png";
+        String VAGUE4 = "/fr/iut/montreuil/Red_Line_Defense/Images/Vagues/vague4.png";
+        String VAGUE5 = "/fr/iut/montreuil/Red_Line_Defense/Images/Vagues/vague5.png";
+
+        ImageView imageView2 = new ImageView(loadImage(VAGUE2));
+        ImageView imageView3 = new ImageView(loadImage(VAGUE3));
+        ImageView imageView4 = new ImageView(loadImage(VAGUE4));
+        ImageView imageView5 = new ImageView(loadImage(VAGUE5));
+
+        transitionVague.add(imageView2);
+        transitionVague.add(imageView3);
+        transitionVague.add(imageView4);
+        transitionVague.add(imageView5);
+
     }
 
 
@@ -142,5 +168,8 @@ public class VueInterface {
 
     public void setHboxMoneyCount(HBox hboxMoneyCount) {
         this.hboxMoneyCount = hboxMoneyCount;
+    }
+    public void boucleImagesVagues(int n){
+        centerPane.getChildren().add(transitionVague.get(n));
     }
 }
