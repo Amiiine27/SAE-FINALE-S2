@@ -110,17 +110,14 @@ public abstract class Tour extends Acteurs {
     }
 
     public Soldat ennemiÀPorter() {
-        System.out.println("entrer fonction");
             for (Soldat s : terrain.getSoldats()) {
-                System.out.println("entrer boucle");
                 if (s.estVivant()) {
-                    System.out.println("vivant");
+
                     double distanceX = Math.abs(s.getX0Value() - getX0Value());
                     double distanceY = Math.abs(s.getY0Value() - getY0Value());
                     double distanceTotale = distanceX + distanceY;
                     System.out.println(distanceTotale);
                     if (distanceTotale <= portee) {
-                        System.out.println("bonne portée");
                         return s;
                     }
                 }

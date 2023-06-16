@@ -83,13 +83,11 @@ public abstract class Projectile {
 
                     Soldat s = ennemiÀPorter();
                     if (s != null) {
-                        System.out.println("FEUUUU");
                         getTerrain().supprimerProjectile(p);
                         s.setPointsDeVieValue(s.getPointsDeVieValue() - getDegats());
                         setTouché(true);
                     }
                     if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {
-                        System.out.println("DEHORS");
                         getTerrain().supprimerProjectile(p);
                         setTouché(true);
                     }
@@ -113,15 +111,12 @@ public abstract class Projectile {
 
     public Soldat ennemiÀPorter() {
         for (Soldat s : terrain.getSoldats()) {
-            System.out.println("entrer for");
             if (s.estVivant()) {
-                System.out.println("vivant");
                 double distanceX = Math.abs(s.getX0Value() - getX());
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
                 if (distanceTotale <= 10) {
-                    System.out.println("bonne portée");
                     return s;
                 }
             }

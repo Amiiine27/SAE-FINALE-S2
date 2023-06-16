@@ -28,6 +28,7 @@ public class Environnement {
 
     private IntegerProperty vague;
     private IntegerProperty ennemisTues;
+    private int ennemisTuesCetteVague;
     private ListProperty<Projectile> listeProjectiles;
     private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
@@ -47,6 +48,8 @@ public class Environnement {
 
         this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
+        this.ennemisTuesCetteVague = 0;
+
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         listeTours = new SimpleListProperty<>(observableListTour);
@@ -147,12 +150,11 @@ public class Environnement {
     }
 
     public void checkNouvelleVagues(){
-        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTues.getValue())) {
+        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTuesCetteVague)) {
             vague.setValue(vague.getValue() + 1);
+            ennemisTuesCetteVague = 0;
         }
     }
-
-
 
     public void deplacementSoldat(){
         if (!listeSoldats.isEmpty()) {
@@ -178,15 +180,14 @@ public class Environnement {
         if(!listeTours.isEmpty()){
             for (Tour t : listeTours){
                 t.agit(n);
-                System.out.println("tour à agit");
-            t.perteVie(10);
+            t.perteVie(1);
             }
         }
     }
 
    public void suppressionTour() {
         if (!listeTours.isEmpty()) {
-            System.out.println("Tour elimination");
+
             listeTours.removeIf(tour -> tour.getPointsDeVieValue() <= 0);
         }
     }
@@ -202,7 +203,7 @@ public class Environnement {
                 iterator.remove(); // Supprimer l'élément de la liste en utilisant l'itérateur
                 joueur.crediterSolde(soldat.getValeurGagnee());
                 ennemisTues.setValue(ennemisTues.getValue() + 1);
-                System.out.println("Ennemi bien tué");
+                ennemisTuesCetteVague++;
             }
         }
     }
