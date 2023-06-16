@@ -1,6 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.Vues;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Blast;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Missile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import javafx.animation.AnimationTimer;
@@ -18,7 +20,7 @@ public class VueProjectile {
 
     public final static String BOULE_DE_FEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/bouleDeFeu.png";
     public final static String BOMBE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/bombe.png";
-    public final static String BLAST_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/blast.png";
+    public final static String BLAST_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/blast.gif";
 
 
     public VueProjectile(Pane centerPane,Projectile p){
@@ -31,12 +33,22 @@ public class VueProjectile {
         circle.centerXProperty().bind(p.xProperty());
         circle.centerYProperty().bind(p.yProperty());
         */
+        ImageView projectile;
         if(p instanceof Boulet) {
             ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
             bouleDeFeu.xProperty().bind(p.xProperty());
             bouleDeFeu.yProperty().bind(p.yProperty());
             bouleDeFeu.setId(p.getId());
             centerPane.getChildren().addAll(bouleDeFeu);
+            projectile=bouleDeFeu;
+        }
+        else if(p instanceof Blast){
+            ImageView blastLaser = new ImageView(loadImage(BLAST_PATH));
+            blastLaser.xProperty().bind(p.xProperty());
+            blastLaser.yProperty().bind(p.yProperty());
+            blastLaser.setId(p.getId());
+            centerPane.getChildren().addAll(blastLaser);
+            projectile=blastLaser;
         }
         else {
         ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
@@ -44,6 +56,7 @@ public class VueProjectile {
         bombe.yProperty().bind(p.yProperty());
         bombe.setId(p.getId());
         centerPane.getChildren().addAll(bombe);
+        projectile=bombe;
         }
         /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
         blast.xProperty().bind(p.xProperty());
@@ -73,6 +86,10 @@ public class VueProjectile {
                         System.out.println("DEHORS");
                         p.getTerrain().supprimerProjectile(p);
                         p.setTouché(true);
+                    }
+                    if(p instanceof Missile) {
+                        double angle = p.calculerAngle(p.getX(), p.getY(), p.getxDirection(), p.getyDirection());
+                        projectile.setRotate(Math.toDegrees(angle));
                     }
                     p.deplacement(elapsedTime);
                 }

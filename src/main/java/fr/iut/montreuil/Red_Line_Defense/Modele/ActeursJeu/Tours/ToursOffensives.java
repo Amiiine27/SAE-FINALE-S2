@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Blast;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Missile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
@@ -74,9 +75,14 @@ public abstract class ToursOffensives extends Tour {
         if (s!=null){
             if(s.estVivant()) {
                 System.out.println("c");
-                if(this instanceof TourMitrailleuse || this instanceof TourSniper) {
+                if(this instanceof TourMitrailleuse){
                     System.out.println("armement...");
                     Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
+                    getTerrain().ajouterProjectile(p);
+                }
+                else if(this instanceof TourSniper){
+                    System.out.println("armement...");
+                    Blast p = new Blast(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
                     getTerrain().ajouterProjectile(p);
                 }
                 else {

@@ -175,4 +175,7 @@ public abstract class Projectile {
     public int getDegats() {
         return degats;
     }
+    public double calculerAngle(double x, double y, double xCible, double yCible) {
+        return Math.atan2(yCible - y, xCible - x);
+    }
 }
