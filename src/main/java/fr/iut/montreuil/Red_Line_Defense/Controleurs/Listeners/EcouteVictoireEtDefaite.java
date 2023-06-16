@@ -63,13 +63,18 @@ public class EcouteVictoireEtDefaite {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ControleurDefaite controleur = loader.getController(); // Retrieve the controller instance
+        ControleurDefaite controleur = loader.getController();
+
         Stage stage = c.getStage();
-        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Red Line Defense");
-        stage.setScene(scene);
-        stage.show();
+
+        if (stage != null) {
+            Scene scene = new Scene(root, 940, 560);
+            stage.setResizable(false);
+            stage.setTitle("Red Line Defense");
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
 
     public void ajouterVictoire(){
