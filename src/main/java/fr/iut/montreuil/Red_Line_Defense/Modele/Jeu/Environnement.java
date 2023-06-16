@@ -48,8 +48,6 @@ public class Environnement {
 
         this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
-        this.ennemisTuesCetteVague = 0;
-
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         listeTours = new SimpleListProperty<>(observableListTour);
@@ -140,7 +138,7 @@ public class Environnement {
     public void unTour(){
 
         vaguesDeJeu.unTour();
-        deplacementSoldat();
+        deplacementSoldat(nbrTours);
         verificationMorts();
         actionTours(nbrTours);
         suppressionTour();
@@ -152,15 +150,17 @@ public class Environnement {
     }
 
     public void checkNouvelleVagues(){
-        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTuesCetteVague)) {
+        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTues.getValue())) {
             vague.setValue(vague.getValue() + 1);
-            ennemisTuesCetteVague = 0;
         }
     }
 
-    public void deplacementSoldat(){
+
+
+    public void deplacementSoldat(int n){
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
+                if(!soldat.isEstPiégé() || n%2==0)
                 deplacerSoldat(soldat);
             }
         }

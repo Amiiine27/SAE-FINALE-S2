@@ -124,13 +124,6 @@ public abstract class Projectile {
         return null;
     }
 
-    	/*double deltaX = xDirection * v * elapsedTime;
-    	double deltaY = yDirection * v * elapsedTime;
-
-    	if (!(x.getValue().equals(xCible.getValue())) || !(y.getValue().equals(yCible.getValue()))) {
-        	x.setValue(getX() + deltaX);
-        	y.setValue(getY() + deltaY);
-    	}*/
 
     public double getxCible() {
         return xCible.get();
