@@ -37,8 +37,7 @@
                             <Font name="System Bold" size="12" />
                         </font>
                     </Label>
-                    <!--<Button fx:id="test" onAction="#testPv" text="TEST" translateY="225" translateX="25" />-->
-                    <Button fx:id="lancerButton" onAction="#lancerTours" text="Lancer" translateX="-26" translateY="225" />
+
                 </StackPane>
 
             </VBox>
