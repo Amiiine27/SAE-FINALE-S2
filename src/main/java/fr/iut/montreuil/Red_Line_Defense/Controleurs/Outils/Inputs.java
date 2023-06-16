@@ -30,7 +30,9 @@ public class Inputs {
         this.gameLoop = gameLoop;
         this.scene = scene;
 
-        System.out.println("HIiiii");
+
+        System.out.println("HAHAHAHA");
+
         preparePauseStage();
         ((Pane) scene.getRoot()).getChildren().add(pausePane);
         pausePane.resize(scene.getWidth(), scene.getHeight());
@@ -38,7 +40,7 @@ public class Inputs {
 
     }
 
-    private void pauseDuJeu(){
+    public void pauseDuJeu(){
         scene.setOnKeyPressed(event -> {
             System.out.println("HI");
             if (event.getCode() == KeyCode.P) {
@@ -65,7 +67,7 @@ public class Inputs {
         // Création d'un layout avec un fond semi-transparent
         pausePane = new StackPane(img);
         pausePane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.8);"); // Fond noir semi-transparent
-        pausePane.setVisible(false); // Initially invisible
+        pausePane.setVisible(false);
 
         pausePane.prefWidthProperty().bind(scene.widthProperty());
         pausePane.prefHeightProperty().bind(scene.heightProperty());
