@@ -35,6 +35,8 @@ public class Environnement {
     private Joueur joueur ;
     private int[][] distances;
     private BasePrincipale basePrincipale;
+
+    private Vagues vaguesDeJeu;
     private int nbreSpawns = 10;
 
 
@@ -43,7 +45,7 @@ public class Environnement {
 
         this.joueur = joueur;
 
-        this.vague = new SimpleIntegerProperty(1);
+        this.vague = new SimpleIntegerProperty(2);
         this.ennemisTues = new SimpleIntegerProperty(0);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
@@ -55,7 +57,7 @@ public class Environnement {
         ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
         listeProjectiles = new SimpleListProperty<>(projectileObservableList);
 
-
+        this.vaguesDeJeu  = new Vagues(this);
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
@@ -133,7 +135,7 @@ public class Environnement {
 
     public void unTour(){
 
-        apparitionSoldat();
+        vaguesDeJeu.unTour();
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
@@ -142,12 +144,7 @@ public class Environnement {
         nbrTours++;
     }
 
-    public void apparitionSoldat(){
-        if (( nbrTours % 10 == 0) && (listeSoldats.get().size() < ( nbreSpawns + 1))) {
-            System.out.println("Un nouveau Soldat Apparait !");
-            nouveauSpawnSoldat(1);
-        }
-    }
+
 
     public void deplacementSoldat(){
         if (!listeSoldats.isEmpty()) {
@@ -204,91 +201,6 @@ public class Environnement {
     //------------------------------------------------------- SPAWN SOLDATS ---------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public Soldat nouveauSpawnSoldat(int typeSoldat) {
-
-        int[] randomSelection = randomSelection();
-        int startX = randomSelection[0] * 8;
-        int startY = randomSelection[1] * 8;
-
-        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
-        return soldat;
-    }
-
-
-
-    public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
-        Soldat s = selectionSoldat(typeSoldat, startX, startY);
-
-        listeSoldats.add(s);
-        System.out.println("Soldat créé et ajouté au terrain : X :" + s.getX0Value()/8 + " Y :" + s.getY0Value()/8);
-
-        return s;
-    }
-
-
-
-    public Soldat selectionSoldat(int typeSoldat, double startX, double startY) {
-
-        Soldat s;
-
-        switch(typeSoldat) {
-            case 1:
-                s = new Rookie((int) startX, (int) startY, 89, 49);
-                break;
-            case 2:
-                s = new SuperNova((int) startX, (int) startY, 89, 49);
-                break;
-            case 3:
-                s = new Shichibukais((int) startX, (int) startY, 89, 49);
-                break;
-            default:
-                s = new Rookie((int) startX, (int) startY, 89, 49);
-        }
-
-        return s;
-    }
-
-
-
-    public int[] randomSelection() {
-        int[] resultat = new int[4];
-
-        int[][] possibleStartPositions = {
-                {14, 57},
-                {15, 57},
-                {16, 57},
-                {0, 42},
-                {0, 41},
-                {0, 43},
-                {0, 19},
-                {0, 18},
-                {9, 1},
-                {8, 1},
-                {44, 59},
-                {45, 58},
-                {44, 57},
-                {82, 0},
-                {83, 0},
-                {81, 1},
-                {82, 2}
-        };
-
-        int[][] possibleDestPositions = {
-                {89, 49}
-        };
-
-        Random random = new Random();
-
-        int[] randomStartPosition = possibleStartPositions[random.nextInt(possibleStartPositions.length)];
-        int[] randomDestPosition = possibleDestPositions[random.nextInt(possibleDestPositions.length)];
-
-        resultat[0] = randomStartPosition[0];
-        resultat[1] = randomStartPosition[1];
-        resultat[2] = randomDestPosition[0];
-        resultat[3] = randomDestPosition[1];
-
-        return resultat;
-    }
 
 
 
@@ -321,6 +233,7 @@ public class Environnement {
 
     public int getEnnemisTuesValue() { return this.ennemisTues.getValue(); }
 
+    public int getNbrTours() { return this.nbrTours; }
 
 
 

@@ -23,6 +23,7 @@ public class VueBasePrincipale {
 
     public VueBasePrincipale(Pane p, BasePrincipale basePrincipale) {
         this.p = p;
+        this.basePrincipale = basePrincipale;
         afficherBase();
     }
 
