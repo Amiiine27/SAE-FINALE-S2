@@ -80,6 +80,7 @@ public class Controleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
+        initializeBasePrincipale();
         initializeJoueur();
         initializeEnvironnement();
         initializeVueTours();
@@ -132,9 +133,10 @@ public class Controleur implements Initializable {
         gameLoop.lancerTimeline();
     }
 
-
-    private void initializeVueBasePrincipale(){
+    private void initializeBasePrincipale() {
         basePrincipale = new BasePrincipale(700, 335);
+    }
+    private void initializeVueBasePrincipale(){
         vueBasePrincipale = new VueBasePrincipale(centerPane, basePrincipale);
         initializeEcouteBasePrincipale();
     }
