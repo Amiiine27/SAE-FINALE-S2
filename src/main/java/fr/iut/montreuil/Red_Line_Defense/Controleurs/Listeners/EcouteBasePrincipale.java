@@ -20,11 +20,11 @@ public class EcouteBasePrincipale {
         this.barreDeVieBasePrincipale = vueBasePrincipale.getBarreDeVieBasePrincipale();
         this.progression = new SimpleDoubleProperty(1.0);
         barreDeVieBasePrincipale.progressProperty().bind(progression);
+        ajouterEcouteurBarreDeVie();
         ajouterEcouteurPointsDeVie();
     }
 
-    public void ajouterEcouteurPointsDeVie() {
-
+    public void ajouterEcouteurBarreDeVie() {
         this.vueBasePrincipale.getBasePrincipale().getPointsDeVieProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -32,5 +32,18 @@ public class EcouteBasePrincipale {
             }
         });
     }
+
+    public void ajouterEcouteurPointsDeVie() {
+        this.vueBasePrincipale.getBasePrincipale().getPointsDeVieProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (newValue.doubleValue() < 0){
+
+                }
+            }
+        });
+    }
+
+
 
 }

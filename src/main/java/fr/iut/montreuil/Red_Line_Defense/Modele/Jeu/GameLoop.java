@@ -51,6 +51,10 @@ public class GameLoop {
             timelineDeplacement.pause();
     }
 
+    public void GameOver(){
+        timelineDeplacement.stop();
+    }
+
     public Timeline getTimeline(){  return timelineDeplacement;}
 
 

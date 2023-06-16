@@ -27,22 +27,14 @@ public class Environnement {
     private int[][] quadrillage;
 
     private IntegerProperty vague;
-
     private IntegerProperty ennemisTues;
-
     private ListProperty<Projectile> listeProjectiles;
     private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
-
-
     private int nbrTours = 0;
-
     private Joueur joueur ;
-
     private int[][] distances;
-
     private BasePrincipale basePrincipale;
-
     private int nbreSpawns = 10;
 
 
@@ -67,8 +59,6 @@ public class Environnement {
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
-
-
     }
 
     public void initQuadrillage() {
@@ -393,8 +383,6 @@ public class Environnement {
         int nextX = startX;
         int nextY = startY;
         int minDistance = Integer.MAX_VALUE;
-
-        int directionIndex = -1;  // Nouveau : index de la direction choisie
 
         for (int i = 0; i < 4; i++) {
             int nx = startX + dx[i];
