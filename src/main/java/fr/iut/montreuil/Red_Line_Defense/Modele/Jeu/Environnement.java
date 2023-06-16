@@ -420,6 +420,9 @@ public class Environnement {
         this.basePrincipale = basePrincipale;
     }
 
+    public BasePrincipale getBasePrincipale(){
+        return this.basePrincipale;
+    }
 
 
     //--------------------------------------------------------------------------------------------------------------------------------

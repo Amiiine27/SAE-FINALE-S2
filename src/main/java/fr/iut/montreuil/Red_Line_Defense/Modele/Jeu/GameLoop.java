@@ -35,6 +35,9 @@ public class GameLoop {
     public void creerAnimation() {
         KeyFrame keyFrame2 = new KeyFrame(Duration.seconds(0.17), event -> {
             terrain.unTour();
+            if (terrain.getBasePrincipale().getPointsDeVieValue()<=0){
+
+            }
         });
 
         timelineDeplacement.getKeyFrames().add(keyFrame2);

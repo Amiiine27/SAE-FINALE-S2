@@ -1,6 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners.*;
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils.Audio;
+import fr.iut.montreuil.Red_Line_Defense.Main;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
@@ -8,9 +10,14 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils.Inputs;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.Vues.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,14 +27,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
     private static final int TAILLE_IMAGE = 8;
+    public static final String OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
+    public static final String DEFAITE = "/fr/iut/montreuil/Red_Line_Defense/Sons/gameOver.mp3";
 
     @FXML
     private Pane centerPane;
@@ -89,6 +101,7 @@ public class Controleur implements Initializable {
         initializeVueInterface();
         initializeVueBasePrincipale();
         initializeVueProjectile();
+        initializeSons();
 
 
 
@@ -97,8 +110,61 @@ public class Controleur implements Initializable {
         //initializeInputs();
     }
 
+    public void ajouterDefaite(){
+        URL url = Main.class.getResource("Vues/VueDefaite.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage;
+        ControleurDefaite controleur = loader.getController(); // Retrieve the controller instance
+        stage = (Stage) ((javafx.scene.Node) centerPane).getScene().getWindow();
+        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Red Line Defense");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /*public void ajouterVictoire (){
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Controleur controleur = loader.getController(); // Retrieve the controller instance
+        stage = (Stage) ((javafx.scene.Node) centerPane).getScene().getWindow();
+        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
+        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
+        stage.setTitle("Red Line Defense");
+        stage.setScene(scene);
+        stage.show();
+    }*/
+
+    public void ajouterEcouteurVagues(Environnement terrain) {
+        terrain.getBasePrincipale().getPointsDeVieProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if(terrain.getBasePrincipale().getPointsDeVieValue()<=0){
+                    ajouterDefaite();
+                }
+                else if (terrain.getVagueValue()==0){
+                    //ajouterVictoire();
+                }
+
+    }});}
+
     private void initializeJoueur(){
         this.joueur = new Joueur("Ayoub");
+    }
+    private void initializeSons(){
+        Media mediaJeu = new Media(getClass().getResource(OST_JEU_PATH).toString());
+        Audio.chargerMedia(mediaJeu);
     }
 
     public void initializeInputs(){
@@ -176,6 +242,7 @@ public class Controleur implements Initializable {
     }
     @FXML
     public void testPv(ActionEvent event) {
+        ajouterDefaite();
         System.out.println("TEST");
         Random rand = new Random();
         for (Soldat s : this.terrain.getSoldats()) {

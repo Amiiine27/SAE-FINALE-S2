@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
 
-    public Media mediaOpening;
-    public MediaPlayer mediaPlayerOpening;
 
 
     public static void main(String[] args) {
@@ -28,9 +26,6 @@ public class Main extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("Red Line Defense");
         primaryStage.setScene(new Scene(root, 940, 560));
-        mediaOpening = new Media(getClass().getResource(AUDIO_OPENING_PATH).toString());
-        mediaPlayerOpening = new MediaPlayer(mediaOpening);
-        mediaPlayerOpening.play();
         primaryStage.show();
 
         ControleurMP controleur = loader.getController();

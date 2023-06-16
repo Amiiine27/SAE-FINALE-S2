@@ -14,7 +14,6 @@ public class EcouteBasePrincipale {
     private VueBasePrincipale vueBasePrincipale;
     private ProgressBar barreDeVieBasePrincipale;
     private DoubleProperty progression;
-
     private GameLoop gameLoop;
 
     public EcouteBasePrincipale(VueBasePrincipale vueBasePrincipale, GameLoop gameLoop) {
@@ -47,6 +46,7 @@ public class EcouteBasePrincipale {
             }
         });
     }
+
 
 
 

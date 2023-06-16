@@ -20,15 +20,16 @@ import java.util.ResourceBundle;
 public class ControleurVictoire implements Initializable {
     private Stage stage;
     private Parent root;
-    private MediaPlayer mediaPlayerOpening, mediaPlayerJeu;
-    private Media mediaOpening, mediaJeu;
-    public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
-    public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
+    private MediaPlayer mediaPlayerWin;
+    private Media mediaWin;
+    public static final String WIN_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/victory.mp3";
 
 
 
     @FXML
     private void onRejouerButtonClick(MouseEvent event) throws IOException {
+        mediaPlayerWin.stop();
+        System.out.println("Media arrêté");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDeJeu.fxml"));
         root = loader.load();
         Controleur controleur = loader.getController(); // Retrieve the controller instance
@@ -37,15 +38,13 @@ public class ControleurVictoire implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        mediaJeu = new Media(getClass().getResource(AUDIO_OST_JEU_PATH).toString());
-        mediaPlayerJeu = new MediaPlayer(mediaJeu);
-        mediaPlayerJeu.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayerJeu.play();
 
         controleur.initializeInputs();
     }
     @FXML
     private void onMenuPrincipalClicked(MouseEvent event) throws IOException {
+        mediaPlayerWin.stop();
+        System.out.println("Media arrêté");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
         root = loader.load();
         Controleur controleur = loader.getController(); // Retrieve the controller instance
@@ -54,16 +53,14 @@ public class ControleurVictoire implements Initializable {
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        mediaOpening = new Media(getClass().getResource(AUDIO_OPENING_PATH).toString());
-        mediaPlayerOpening = new MediaPlayer(mediaOpening);
-        mediaPlayerOpening.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayerOpening.play();
 
         controleur.initializeInputs();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        mediaWin = new Media(getClass().getResource(WIN_PATH).toString());
+        mediaPlayerWin = new MediaPlayer(mediaWin);
+        mediaPlayerWin.play();
 
     }
 }
