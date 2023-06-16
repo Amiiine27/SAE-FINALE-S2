@@ -20,8 +20,7 @@ public class BasePrincipale extends Tour {
          initializeZone();
     }
 
-    @Override
-    public void agit() {
+    public void agit(int n) {
 
         setPointsDeVieValue(this.getPointsDeVieValue()-this.porteeBP().getDegatValue());
         System.out.println("---pv base : " + this.getPointsDeVieValue());

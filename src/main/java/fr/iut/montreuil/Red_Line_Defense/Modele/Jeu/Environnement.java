@@ -139,7 +139,9 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
+        suppressionTour();
         actionBasePrincipale();
+        System.out.println("nbr projectile:"+getProjectiles().size());
 
         nbrTours++;
     }
@@ -169,12 +171,20 @@ public class Environnement {
     public void actionTours(int n){
         if(!listeTours.isEmpty()){
             for (Tour t : listeTours){
-            if(((t instanceof TourSniper) && n%18==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%12==0))) {
-                t.agit();
-            }
+                t.agit(n);
+                System.out.println("tour à agit");
+            t.perteVie(10);
             }
         }
     }
+
+   public void suppressionTour() {
+        if (!listeTours.isEmpty()) {
+            System.out.println("Tour elimination");
+            listeTours.removeIf(tour -> tour.getPointsDeVieValue() <= 0);
+        }
+    }
+
 
 
 
@@ -414,6 +424,8 @@ public class Environnement {
     public void setBasePrincipale(BasePrincipale basePrincipale){
         this.basePrincipale = basePrincipale;
     }
+
+
 
 
 

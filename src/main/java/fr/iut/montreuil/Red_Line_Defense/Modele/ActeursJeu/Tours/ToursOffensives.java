@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Blast;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Missile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
@@ -55,8 +56,8 @@ public abstract class ToursOffensives extends Tour {
     }
 
 
-    public void agit(){
-        tirer();
+    public void agit(int n){
+        tirer(n);
     }
 
     public int getCadence() {
@@ -67,26 +68,20 @@ public abstract class ToursOffensives extends Tour {
         return cadence;
     }
 
-
-    public void tirer(){
-        Soldat s=ennemiÀPorter();
+    public abstract void creationProjectile(Soldat s);
+    public void tirer(int nTemps) {
+        Soldat s = ennemiÀPorter();
         System.out.println("a");
-        if (s!=null){
-            if(s.estVivant()) {
-                System.out.println("c");
-                if(this instanceof TourMitrailleuse || this instanceof TourSniper) {
-                    System.out.println("armement...");
-                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                }
-                else {
-                    System.out.println("armement...");
-                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s,getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                }
-                System.out.println("feu");
-            }
+        if (s != null) {
+            if (s.estVivant()) {
+                if(nTemps%getCadence()==0)
+                creationProjectile(s);
+               }
         }
         System.out.println("fin");
+    }
+
+    public int getVitesseProjectile() {
+        return vitesseProjectile;
     }
 }

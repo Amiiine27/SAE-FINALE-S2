@@ -8,7 +8,7 @@ public class ToursDeffensives extends Tour{
     }
 
     @Override
-    public void agit() {
+    public void agit(int n) {
         setPointsDeVieValue(getPointsDeVieValue()-1);
     }
 }
