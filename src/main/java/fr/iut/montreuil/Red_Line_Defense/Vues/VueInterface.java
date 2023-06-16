@@ -174,10 +174,12 @@ public class VueInterface {
     }
     public void boucleImagesVagues(int n){
         ImageView imageView = transitionVague.get(n);
-        centerPane.getChildren().add(imageView);
+        if (!centerPane.getChildren().contains(imageView)) {
+            centerPane.getChildren().add(imageView);
+        }
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(1.2),
+                Duration.seconds(2),
                 ae -> centerPane.getChildren().remove(imageView)));
         timeline.play();
     }
