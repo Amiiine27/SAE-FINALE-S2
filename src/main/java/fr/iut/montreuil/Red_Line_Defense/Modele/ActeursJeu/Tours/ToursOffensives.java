@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Blast;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Missile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
@@ -23,31 +24,8 @@ public abstract class ToursOffensives extends Tour {
         this.cadence = new SimpleIntegerProperty(cadence);
         this.projectiles = FXCollections.observableArrayList();
         this.vitesseProjectile=vitesse;
-
-        // Ajout des Listeners pour mettre à jour la direction si la position change
-
-
-        // Listener pour la liste de projectiles
-        this.projectiles.addListener((ListChangeListener.Change<? extends Projectile> c) -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    for (Projectile p : c.getAddedSubList()) {
-                        System.out.println("Projectile ajouté : " + p);
-                        // Ici, vous pouvez ajouter le code pour ajouter le projectile à la vue
-                    }
-                } else if (c.wasRemoved()) {
-                    for (Projectile p : c.getRemoved()) {
-                        System.out.println("Projectile supprimé : " + p);
-                        // Ici, vous pouvez ajouter le code pour supprimer le projectile de la vue
-                    }
-                }
-            }
-        });
     }
-    // Tire un projectile et l'ajoute à la liste
 
-
-    // Méthode pour mettre à jour la direction
 
     // Accesseur pour les projectiles
     public ObservableList<Projectile> getProjectiles() {
@@ -55,8 +33,8 @@ public abstract class ToursOffensives extends Tour {
     }
 
 
-    public void agit(){
-        tirer();
+    public void agit(int n){
+        tirer(n);
     }
 
     public int getCadence() {
@@ -67,26 +45,18 @@ public abstract class ToursOffensives extends Tour {
         return cadence;
     }
 
-
-    public void tirer(){
-        Soldat s=ennemiÀPorter();
-        System.out.println("a");
-        if (s!=null){
-            if(s.estVivant()) {
-                System.out.println("c");
-                if(this instanceof TourMitrailleuse || this instanceof TourSniper) {
-                    System.out.println("armement...");
-                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                }
-                else {
-                    System.out.println("armement...");
-                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s,getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                }
-                System.out.println("feu");
-            }
+    public abstract void creationProjectile(Soldat s);
+    public void tirer(int nTemps) {
+        Soldat s = ennemiÀPorter();
+        if (s != null) {
+            if (s.estVivant()) {
+                if(nTemps%getCadence()==0)
+                creationProjectile(s);
+               }
         }
-        System.out.println("fin");
+    }
+
+    public int getVitesseProjectile() {
+        return vitesseProjectile;
     }
 }

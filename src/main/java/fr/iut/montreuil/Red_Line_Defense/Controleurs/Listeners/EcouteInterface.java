@@ -1,6 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.Vues.VueInterface;
 import javafx.beans.property.IntegerProperty;
@@ -14,6 +16,8 @@ public class EcouteInterface {
 
     private VueInterface vueInterface;
 
+    private Vagues vagues;
+
 
     private IntegerProperty vague;
 
@@ -21,6 +25,7 @@ public class EcouteInterface {
         this.terrain = terrain;
         this.joueur = terrain.getJoueur();
         this.vague = terrain.getVagueProperty();
+        this.vagues = terrain.getVagues();
         this.vueInterface = vueInterface;
         ajouterEcouteurSolde();
         ajouterEcouteurEnnemisTues();
@@ -49,10 +54,13 @@ public class EcouteInterface {
 
     private void ajouterListenerVague() {
         this.vague.addListener((observable, oldValue, newValue) -> {
-            System.out.println("Vague numéro " + newValue.intValue());
-            joueur.crediterSolde(50); // Chaque Vague le Joueur Gagne 50 Berrys
+            joueur.crediterSolde(200); // Chaque Vague le Joueur Gagne 200 Berrys
+            vagues.majDefenseSoldats();
+            vagues.resetTours();
         });
     }
+
+
 
 
 }

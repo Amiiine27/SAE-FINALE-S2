@@ -73,7 +73,8 @@ public class VueTours {
                         i = createTourImageView(x, y, MAP_TOUR_ENFER_PATH);
                         ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
                         terrain.ajouterTour(td);
-                        td.afficherPortee(centerPane);
+                        i.setId(td.getId());
+                        hpb.setId(td.getId()+"p");
                         progression.bind(Bindings.divide(td.getPointsDeVieProperty(), (double) td.getPointsDeVieValue()));
                         break;
 
@@ -81,7 +82,8 @@ public class VueTours {
                         i = createTourImageView(x, y, MAP_TOUR_SORCIER_PATH);
                         TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
                         terrain.ajouterTour(tm);
-                        tm.afficherPortee(centerPane);
+                        i.setId(tm.getId());
+                        hpb.setId(tm.getId()+"p");
                         progression.bind(Bindings.divide(tm.getPointsDeVieProperty(), (double) tm.getPointsDeVieValue()));
                         break;
 
@@ -89,14 +91,16 @@ public class VueTours {
                         i = createTourImageView(x, y, MAP_TOUR_SNIPER_PATH);
                         TourSniper ts = new TourSniper((int) x, (int) y,terrain);
                         terrain.ajouterTour(ts);
-                        ts.afficherPortee(centerPane);
+                        i.setId(ts.getId());
+                        hpb.setId((ts.getId()+"p"));
                         progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), (double) ts.getPointsDeVieValue()));
                         break;
                     case "tour800b":
                         i = createTourImageView(x, y, MAP_TOUR_MORTIER_PATH);
                         TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
                         terrain.ajouterTour(tlm);
-                        tlm.afficherPortee(centerPane);
+                        i.setId(tlm.getId());
+                        hpb.setId((tlm.getId()+"p"));
                         progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), (double) tlm.getPointsDeVieValue()));
                         break;
                 }
@@ -209,9 +213,6 @@ public class VueTours {
     public void selectionTour(MouseEvent event) {
         ImageView image = (ImageView) event.getSource();
         this.idTourClicked = image.getId();
-
-
-        //image.setImage(loadImage(HIGHLIGHTED_TOWER_IMAGE_PATH));
     }
 
     private Image loadImage(String path) {
@@ -220,7 +221,7 @@ public class VueTours {
             if (inputStream != null) {
                 return new Image(inputStream);
             } else {
-                System.err.println("Could not load image: " + path);
+                System.err.println("Impossible de charger l'image " + path);
                 return null;
             }
         } catch (Exception e) {

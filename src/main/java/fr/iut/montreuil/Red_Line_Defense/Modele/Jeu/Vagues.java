@@ -4,6 +4,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.SuperNova;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -29,8 +30,9 @@ public class Vagues {
 
     private int nbreSpawnsType1;
     private int nbreSpawnsType2;
-
     private int nbreSpawnsType3;
+
+    private int totalSoldats;
 
 
     public Vagues(Environnement environnement) {
@@ -81,14 +83,30 @@ public class Vagues {
         nbreSpawnsType1 = 0;
         nbreSpawnsType2 = 0;
         nbreSpawnsType3 = 0;
+        totalSoldats = 0;
+    }
+
+    public void majDefenseSoldats() {
+        for (Soldat s : environnement.getSoldats()) {
+            if (s.getPointsDeVieValue() > 5) {
+                s.setPointsDeVieValue(s.getPointsDeVieValue() - 5);
+            }
+        }
+    }
+
+    public void resetTours() {
+        for (Tour t : environnement.getTours()){
+            t.setPointsDeVieValue(0);
+        }
     }
 
 
 
     public void premiereVague(){
-        ennemisAFaireSpawnType1 = 10;
+        ennemisAFaireSpawnType1 = 40;
+        totalSoldats = ennemisAFaireSpawnType1;
 
-        if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
+        if (((environnement.getNbrTours() % 5) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
             System.out.println("Un nouveau Soldat Apparait !");
             nouveauSpawnSoldat(1,9);
             nbreSpawnsType1++;
@@ -97,10 +115,10 @@ public class Vagues {
 
     public void deuxiemeVague(){
 
-        resetNbreSpawns();
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
 
-        int maxSoldiersType1 = 15;
-        int maxSoldiersType2 = 7;
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
         Random random = new Random();
 
@@ -124,8 +142,10 @@ public class Vagues {
 
 
     public void troisiemeVague(){
-        int maxSoldiersType1 = 20;
-        int maxSoldiersType2 = 12;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
+
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
         Random random = new Random();
 
@@ -148,9 +168,11 @@ public class Vagues {
     }
 
     public void quatriemeVague(){
-        int maxSoldiersType1 = 17;
-        int maxSoldiersType2 = 10;
-        int maxSoldiersType3 = 6;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
+        int maxSoldiersType3 = 1;
+
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
         Random random = new Random();
 
@@ -161,11 +183,11 @@ public class Vagues {
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
                     System.out.println("Un nouveau Rookie apparait !");
-                    nouveauSpawnSoldat(1, 9);
+                    nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
                     System.out.println("Un nouveau Super Nova apparait !");
-                    nouveauSpawnSoldat(2, 9);
+                    nouveauSpawnSoldat(2, 10);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
                     System.out.println("Un nouveau Shichibukai apparait !");
@@ -178,9 +200,11 @@ public class Vagues {
 
 
     public void cinquiemeVague(){
-        int maxSoldiersType1 = 18;
-        int maxSoldiersType2 = 10;
-        int maxSoldiersType3 = 8;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
+        int maxSoldiersType3 = 1;
+
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
         Random random = new Random();
 
@@ -191,11 +215,11 @@ public class Vagues {
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
                     System.out.println("Un nouveau Rookie apparait !");
-                    nouveauSpawnSoldat(1, 9);
+                    nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
                     System.out.println("Un nouveau Super Nova apparait !");
-                    nouveauSpawnSoldat(2, 9);
+                    nouveauSpawnSoldat(2, 16);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
                     System.out.println("Un nouveau Shichibukai apparait !");
@@ -213,6 +237,10 @@ public class Vagues {
         System.out.println("Default");
     }
 
+    public int getTotalSoldats(){
+        return totalSoldats;
+    }
+
     public Soldat nouveauSpawnSoldat(int typeSoldat, int spawn) {
 
         int[] randomSelection = randomSelection(spawn);
@@ -228,7 +256,6 @@ public class Vagues {
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
         listeSoldats.add(s);
-        System.out.println("Soldat créé et ajouté au terrain");
 
         return s;
     }

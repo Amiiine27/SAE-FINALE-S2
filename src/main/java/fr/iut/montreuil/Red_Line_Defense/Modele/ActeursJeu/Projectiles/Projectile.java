@@ -2,7 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.Vues.VueProjectile;
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -67,17 +67,56 @@ public abstract class Projectile {
 
     public abstract void deplacement(double elapsedTime);
 
+    public void animationProjectile(){
+        Projectile p = this;
+        AnimationTimer timer = new AnimationTimer() {
+
+            private long lastUpdate = 0;
+
+
+            @Override
+            public void handle(long now) {
+                if (lastUpdate > 0 && !(isTouché())) {
+
+
+                    double elapsedTime = (now - lastUpdate) / 1000000000.0;
+
+                    Soldat s = ennemiÀPorter();
+                    if (s != null) {
+                        getTerrain().supprimerProjectile(p);
+                        s.setPointsDeVieValue((s.getPointsDeVieValue() - getDegats()) * (1 - ( s.getDefenseValue() / 100))); // Degats * le pourcentage de réduction de degats
+                        setTouché(true);
+                    }
+                    if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {
+                        getTerrain().supprimerProjectile(p);
+                        setTouché(true);
+                    }
+                    deplacement(elapsedTime);
+                }
+                else if(p.isTouché()){
+                    stop();
+                }
+
+
+
+
+                lastUpdate = now;
+
+            }
+        };
+
+        timer.start();
+
+    }
+
     public Soldat ennemiÀPorter() {
         for (Soldat s : terrain.getSoldats()) {
-            System.out.println("entrer for");
             if (s.estVivant()) {
-                System.out.println("vivant");
                 double distanceX = Math.abs(s.getX0Value() - getX());
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
-                if (distanceTotale <= 20) {
-                    System.out.println("bonne portée");
+                if (distanceTotale <= 10) {
                     return s;
                 }
             }
@@ -174,5 +213,8 @@ public abstract class Projectile {
     }
     public int getDegats() {
         return degats;
+    }
+    public double calculerAngle(double x, double y, double xCible, double yCible) {
+        return Math.atan2(yCible - y, xCible - x);
     }
 }

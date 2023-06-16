@@ -27,11 +27,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -87,6 +84,9 @@ public class Controleur implements Initializable {
 
     private BasePrincipale basePrincipale;
 
+    private EcouteVictoireEtDefaite ecouteVictoireEtDefaite;
+
+
     private VueBasePrincipale vueBasePrincipale;
 
     @Override
@@ -101,6 +101,8 @@ public class Controleur implements Initializable {
         initializeVueInterface();
         initializeVueBasePrincipale();
         initializeVueProjectile();
+        initializeEcouteVictoireEtDefaite();
+
         initializeSons();
 
 
@@ -108,6 +110,15 @@ public class Controleur implements Initializable {
         terrain.setBasePrincipale(basePrincipale);
 
         //initializeInputs();
+    }
+
+    public Stage getStage() {
+        Stage stage = (Stage) solde.getScene().getWindow();
+        return stage;
+    }
+
+    private void initializeEcouteVictoireEtDefaite() {
+        ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
     }
 
     public void ajouterDefaite(){
@@ -186,7 +197,20 @@ public class Controleur implements Initializable {
     }
 
 
-    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
+    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain,centerPane);}
+
+    public void AfficherDefaite() {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDefaite.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 
 
 

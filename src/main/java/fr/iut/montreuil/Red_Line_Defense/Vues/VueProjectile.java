@@ -1,6 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.Vues;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Blast;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Missile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import javafx.animation.AnimationTimer;
@@ -18,7 +20,7 @@ public class VueProjectile {
 
     public final static String BOULE_DE_FEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/bouleDeFeu.png";
     public final static String BOMBE_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/bombe.png";
-    public final static String BLAST_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/blast.png";
+    public final static String BLAST_PATH = "/fr/iut/montreuil/Red_Line_Defense/Images/Projectiles/blast.gif";
 
 
     public VueProjectile(Pane centerPane,Projectile p){
@@ -26,69 +28,38 @@ public class VueProjectile {
         CreationSprite(p);
     }
     public void CreationSprite(Projectile p){
-        /*Circle circle = new Circle(7);
-        circle.setFill(Color.BLACK);
-        circle.centerXProperty().bind(p.xProperty());
-        circle.centerYProperty().bind(p.yProperty());
-        */
+        ImageView projectile;
         if(p instanceof Boulet) {
             ImageView bouleDeFeu = new ImageView(loadImage(BOULE_DE_FEU_PATH));
-            bouleDeFeu.xProperty().bind(p.xProperty());
-            bouleDeFeu.yProperty().bind(p.yProperty());
-            bouleDeFeu.setId(p.getId());
-            centerPane.getChildren().addAll(bouleDeFeu);
+            orientationImage(p,bouleDeFeu);
+            projectile=bouleDeFeu;
+        }
+        else if(p instanceof Blast){
+            ImageView blastLaser = new ImageView(loadImage(BLAST_PATH));
+            orientationImage(p,blastLaser);
+            projectile=blastLaser;
         }
         else {
         ImageView bombe = new ImageView(loadImage(BOMBE_PATH));
-        bombe.xProperty().bind(p.xProperty());
-        bombe.yProperty().bind(p.yProperty());
-        bombe.setId(p.getId());
-        centerPane.getChildren().addAll(bombe);
+        orientationImage(p,bombe);
+        projectile=bombe;
         }
-        /*ImageView blast = new ImageView(loadImage(BLAST_PATH));
-        blast.xProperty().bind(p.xProperty());
-        blast.yProperty().bind(p.yProperty());*/
 
-        System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
-        AnimationTimer timer = new AnimationTimer() {
-
-            private long lastUpdate = 0;
-
-            @Override
-            public void handle(long now) {
-                if (lastUpdate > 0 && !(p.isTouché())) {
-
-
-                    double elapsedTime = (now - lastUpdate) / 1000000000.0;
-
-                    Soldat s = p.ennemiÀPorter();
-                    if (s != null) {
-                        System.out.println("FEUUUU");
-                        p.getTerrain().supprimerProjectile(p);
-                        s.setPointsDeVieValue(s.getPointsDeVieValue() - p.getDegats());
-                        p.setTouché(true);
-                    }
-                    if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {
-                        System.out.println("DEHORS");
-                        p.getTerrain().supprimerProjectile(p);
-                        p.setTouché(true);
-                    }
-                    p.deplacement(elapsedTime);
-                }
-
-
-
-
-         lastUpdate = now;
-            }
-        };
-
-        timer.start();
-        System.out.println("animation projectile");
+        if(p instanceof Missile) {
+            double angle = p.calculerAngle(p.getX(), p.getY(), p.getxCible(), p.getyCible());
+            projectile.setRotate(Math.toDegrees(angle));}
     }
 
     public Pane getCenterPane() {
         return centerPane;
+    }
+    public void orientationImage(Projectile p, ImageView i){
+        double angle = p.calculerAngle(p.getX(), p.getY(), p.getxCible(), p.getyCible());
+        i.setRotate(Math.toDegrees(angle));
+        i.xProperty().bind(p.xProperty());
+        i.yProperty().bind(p.yProperty());
+        i.setId(p.getId());
+        centerPane.getChildren().addAll(i);
     }
 
     private Image loadImage(String path) {

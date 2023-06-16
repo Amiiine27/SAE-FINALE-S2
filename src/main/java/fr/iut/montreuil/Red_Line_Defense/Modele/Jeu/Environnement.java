@@ -28,6 +28,7 @@ public class Environnement {
 
     private IntegerProperty vague;
     private IntegerProperty ennemisTues;
+    private int ennemisTuesCetteVague;
     private ListProperty<Projectile> listeProjectiles;
     private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
@@ -37,7 +38,7 @@ public class Environnement {
     private BasePrincipale basePrincipale;
 
     private Vagues vaguesDeJeu;
-    private int nbreSpawns = 10;
+
 
 
     public Environnement(Joueur joueur) {
@@ -45,8 +46,10 @@ public class Environnement {
 
         this.joueur = joueur;
 
-        this.vague = new SimpleIntegerProperty(2);
+        this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
+        this.ennemisTuesCetteVague = 0;
+
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         listeTours = new SimpleListProperty<>(observableListTour);
@@ -58,6 +61,7 @@ public class Environnement {
         listeProjectiles = new SimpleListProperty<>(projectileObservableList);
 
         this.vaguesDeJeu  = new Vagues(this);
+
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
@@ -139,12 +143,20 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
+        suppressionTour();
         actionBasePrincipale();
+        checkNouvelleVagues();
+        verificationDefaite();
 
         nbrTours++;
     }
 
-
+    public void checkNouvelleVagues(){
+        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTuesCetteVague)) {
+            vague.setValue(vague.getValue() + 1);
+            ennemisTuesCetteVague = 0;
+        }
+    }
 
     public void deplacementSoldat(){
         if (!listeSoldats.isEmpty()) {
@@ -158,10 +170,15 @@ public class Environnement {
         for (Soldat s: listeSoldats.getValue()) {
             Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
             if (basePrincipale.getZone().contains(positionSoldat)) {
-                    System.out.println("Soldat Arrivé devant le chateau");
                     basePrincipale.infligerDegats(300);
                     s.setPointsDeVieValue(-1);
             }
+        }
+    }
+
+    public void verificationDefaite(){
+        if (basePrincipale.getPointsDeVieValue() < 1){
+            this.vague.setValue(-1);
         }
     }
 
@@ -169,12 +186,19 @@ public class Environnement {
     public void actionTours(int n){
         if(!listeTours.isEmpty()){
             for (Tour t : listeTours){
-            if(((t instanceof TourSniper) && n%18==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%12==0))) {
-                t.agit();
-            }
+                t.agit(n);
+            t.perteVie(1);
             }
         }
     }
+
+   public void suppressionTour() {
+        if (!listeTours.isEmpty()) {
+
+            listeTours.removeIf(tour -> tour.getPointsDeVieValue() <= 0);
+        }
+    }
+
 
 
 
@@ -186,7 +210,7 @@ public class Environnement {
                 iterator.remove(); // Supprimer l'élément de la liste en utilisant l'itérateur
                 joueur.crediterSolde(soldat.getValeurGagnee());
                 ennemisTues.setValue(ennemisTues.getValue() + 1);
-                System.out.println("Ennemi bien tué");
+                ennemisTuesCetteVague++;
             }
         }
     }
@@ -204,11 +228,6 @@ public class Environnement {
 
 
 
-
-
-    public void reloadNbreSpawnsSoldats(){
-        this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
-    }
 
 
 
@@ -253,8 +272,6 @@ public class Environnement {
 
     public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
 
-        System.out.println("Calcul du chemin ");
-
         boolean[][] visited = new boolean[getYmax()][getXmax()];
 
         Queue<Integer> queue = new ArrayDeque<>();
@@ -281,8 +298,6 @@ public class Environnement {
                 }
             }
         }
-
-        System.out.println("Calcul du chemin OK ");
     }
 
 
@@ -420,9 +435,11 @@ public class Environnement {
         this.basePrincipale = basePrincipale;
     }
 
-    public BasePrincipale getBasePrincipale(){
-        return this.basePrincipale;
+    public Vagues getVagues(){
+        return this.vaguesDeJeu;
     }
+
+
 
 
     //--------------------------------------------------------------------------------------------------------------------------------

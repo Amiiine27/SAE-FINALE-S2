@@ -89,6 +89,8 @@ public class VueInterface {
 
 
 
+
+
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));
     }

@@ -25,7 +25,7 @@ public class VueSoldats {
 
 
     public void ajouterSkinSoldat(Soldat s) {
-        ImageView skin  = creerImageSoldat();
+        ImageView skin  = creerImageSoldat(s.getCouleur());
         System.out.println("Skin créé pour le soldat : " + skin);
 
         hashMapSoldatsSkin.put(s, skin);
@@ -40,50 +40,50 @@ public class VueSoldats {
         System.out.println("  Skin ajouté au pane. Total des cercles  ");
     }
 
-    public void mettreAJourSkin(int directionIndex, Soldat soldat) {
-        ImageView skin = hashMapSoldatsSkin.get(soldat);
-        switch (directionIndex) {
-            case 0:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/haut.gif"));
-                skin.setFitWidth(30);
-                skin.setFitHeight(30);
-                skin.setTranslateX(-15); // Ajout de cette ligne
-                skin.setTranslateY(-15);
-                break;
-            case 1:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/down.gif"));
-                skin.setFitWidth(30);
-                skin.setFitHeight(30);
-                skin.setTranslateX(-15); // Ajout de cette ligne
-                skin.setTranslateY(-15);
-                break;
-            case 2:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/left.gif"));
-                skin.setFitWidth(30);
-                skin.setFitHeight(30);
-                skin.setTranslateX(-15); // Ajout de cette ligne
-                skin.setTranslateY(-15);
-                break;
-            case 3:
-                skin.setImage(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/right.gif"));
-                skin.setFitWidth(30);
-                skin.setFitHeight(30);
-                skin.setTranslateX(-15); // Ajout de cette ligne
-                skin.setTranslateY(-15);
-                break;
-        }
+    public void setImageViewProperties(ImageView skin, String color, String direction){
+        String imagePath = String.format("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/%s/%s.gif", color, direction);
+        skin.setImage(loadImage(imagePath));
+        skin.setFitWidth(30);
+        skin.setFitHeight(30);
+        skin.setTranslateX(-15);
+        skin.setTranslateY(-15);
     }
 
-    public ImageView creerImageSoldat() {
-        Image image = loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/Violet/haut.gif");
+    public void mettreAJourSkin(int directionIndex, Soldat soldat) {
+        String direction;
+        switch (directionIndex) {
+            case 0:
+                direction = "haut";
+                break;
+            case 1:
+                direction = "down";
+                break;
+            case 2:
+                direction = "left";
+                break;
+            case 3:
+                direction = "right";
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid direction index: " + directionIndex);
+        }
+        ImageView skin = hashMapSoldatsSkin.get(soldat);
+        setImageViewProperties(skin, soldat.getCouleur(), direction);
+    }
+
+
+    public ImageView creerImageSoldat(String color) {
+        String imagePath = String.format("/fr/iut/montreuil/Red_Line_Defense/Images/Personnage/%s/haut.gif", color);
+        Image image = loadImage(imagePath);
         ImageView img = new ImageView(image);
         img.setFitWidth(30);
         img.setFitHeight(30);
-        img.setTranslateX(-15); // Ajout de cette ligne
+        img.setTranslateX(-15);
         img.setTranslateY(-15);
         img.setPreserveRatio(true);
         return img;
     }
+
 
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));

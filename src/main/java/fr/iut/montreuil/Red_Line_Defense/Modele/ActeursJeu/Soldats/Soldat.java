@@ -12,6 +12,8 @@ import java.util.Set;
 public abstract class Soldat extends Acteurs {
     private double destinationX, destinationY;
 
+    public String couleur;
+
     private List<Point2D> chemin;
     private int pathPosition = 0;
 
@@ -55,6 +57,10 @@ public abstract class Soldat extends Acteurs {
                 zone.add(new Point2D(xZone, yZone));
             }
         }
+    }
+
+    public String getCouleur() {
+        return this.couleur;
     }
 
     public Set<Point2D> getZone(){
