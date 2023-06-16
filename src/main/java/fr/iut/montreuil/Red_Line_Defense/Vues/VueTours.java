@@ -152,8 +152,7 @@ public class VueTours {
                     for (int j = startY; j <= startY + 6; j++) {
                         if (i >= 0 && i < terrain.getXmax() && j >= 0 && j < terrain.getYmax()) {
                             for (Tour tour : terrain.getTours()) {
-                                if (((int) (tour.getX0Value() / 8) == i) && ((int) (tour.getY0Value() / 8) == j)) {
-                                    System.out.println("Tour deja posée sur " + tour.getX0Value() + " (" + ((int) tour.getX0Value() / 8) + ") " + tour.getY0Value() + " (" + ((int) tour.getY0Value() / 8) + ") ");
+                                if ((((int) (tour.getX0Value() / 8) == i) && ((int) (tour.getY0Value() / 8) == j))||terrain.getBasePrincipale().vérificationEstÀPorter(x,y)) {
                                     return false; // Une tour est déjà positionnée sur cette case ou sur une case entourante
                                 }
                             }

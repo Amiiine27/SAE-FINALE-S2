@@ -16,10 +16,8 @@ public class ToursDeffensives extends Tour{
 
     @Override
     public void agit(int n) {
-        System.out.println("Agit td");
         for (Soldat s: terrain.getSoldats()) {
             if (s != null) {
-                System.out.println("Ennemi à porter");
                 s.estPiégés();
                 soldatsPiégés.add(s);
             }
@@ -28,8 +26,7 @@ public class ToursDeffensives extends Tour{
             Iterator<Soldat> iterator = soldatsPiégés.iterator();
             while (iterator.hasNext()) {
                 Soldat sP = iterator.next();
-                if (!vérificationEstÀPorter(sP)) {
-                    System.out.println("Plus à porter");
+                if (!vérificationEstÀPorter(sP.getX0Value(), sP.getY0Value())) {
                     sP.libéré();
                     iterator.remove();
                 }

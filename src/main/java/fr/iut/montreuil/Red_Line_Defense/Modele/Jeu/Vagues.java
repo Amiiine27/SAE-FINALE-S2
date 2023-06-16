@@ -56,23 +56,23 @@ public class Vagues {
         switch (envWave) {
             case 1:
                 premiereVague();
-                System.out.println("Première Vague");
+
                 break;
             case 2:
                 deuxiemeVague();
-                System.out.println("Deuxieme Vague");
+
                 break;
             case 3:
                 troisiemeVague();
-                System.out.println("Troisième Vague");
+
                 break;
             case 4:
                 quatriemeVague();
-                System.out.println("Quatrieme Vague");
+
                 break;
             case 5:
                 cinquiemeVague();
-                System.out.println("Cinquieme et dernière Vague");
+
                 break;
             default:
                 vagueParDefault();
@@ -107,7 +107,7 @@ public class Vagues {
         totalSoldats = ennemisAFaireSpawnType1;
 
         if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
-            System.out.println("Un nouveau Soldat Apparait !");
+
             nouveauSpawnSoldat(1,9);
             nbreSpawnsType1++;
         }
@@ -128,11 +128,11 @@ public class Vagues {
                 int soldierTypeToSpawn = random.nextInt(2) + 1; // Cela générere soit 1 soit 2
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
-                    System.out.println("Un nouveau Rookie apparait !");
+
                     nouveauSpawnSoldat(1, 9);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
-                    System.out.println("Un nouveau Super Nova apparait !");
+
                     nouveauSpawnSoldat(2, 9);
                     nbreSpawnsType2++;
                 }
@@ -155,11 +155,11 @@ public class Vagues {
                 int soldierTypeToSpawn = random.nextInt(2) + 1; // Cela générere soit 1 soit 2
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
-                    System.out.println("Un nouveau Rookie apparait !");
+
                     nouveauSpawnSoldat(1, 12);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
-                    System.out.println("Un nouveau Super Nova apparait !");
+
                     nouveauSpawnSoldat(2, 12);
                     nbreSpawnsType2++;
                 }
@@ -182,15 +182,15 @@ public class Vagues {
                 int soldierTypeToSpawn = random.nextInt(3) + 1; // Cela générera soit 1, soit 2 ou 3
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
-                    System.out.println("Un nouveau Rookie apparait !");
+
                     nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
-                    System.out.println("Un nouveau Super Nova apparait !");
+
                     nouveauSpawnSoldat(2, 10);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
-                    System.out.println("Un nouveau Shichibukai apparait !");
+
                     nouveauSpawnSoldat(3, 9);
                     nbreSpawnsType3++;
                 }
@@ -214,15 +214,13 @@ public class Vagues {
                 int soldierTypeToSpawn = random.nextInt(3) + 1; // Cela générera soit 1, soit 2 ou 3
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
-                    System.out.println("Un nouveau Rookie apparait !");
+
                     nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
-                    System.out.println("Un nouveau Super Nova apparait !");
                     nouveauSpawnSoldat(2, 16);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
-                    System.out.println("Un nouveau Shichibukai apparait !");
                     nouveauSpawnSoldat(3, 9);
                     nbreSpawnsType3++;
                 }

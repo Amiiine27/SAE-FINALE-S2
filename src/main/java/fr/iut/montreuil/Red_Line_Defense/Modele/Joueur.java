@@ -27,7 +27,6 @@ public class Joueur {
         soldeJoueur.addListener((observable, oldValue, newValue) -> {
             if ((newValue.intValue()) <= 0) {
                 soldeJoueur.setValue(0);
-                System.out.println("Vous etes pauvre");
             }
         });
 

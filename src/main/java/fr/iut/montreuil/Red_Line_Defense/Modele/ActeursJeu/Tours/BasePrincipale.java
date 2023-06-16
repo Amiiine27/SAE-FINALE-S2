@@ -15,7 +15,7 @@ public class BasePrincipale extends Tour {
     Set<Point2D> zone;
 
     public BasePrincipale(int x0, int y0) {
-        super(x0, y0, 10000); // 2 tiles de portéé
+        super(x0, y0, 10000,0,0,0,null,100); // 2 tiles de portéé
          zone = new HashSet<>();
          initializeZone();
     }
@@ -23,7 +23,6 @@ public class BasePrincipale extends Tour {
     public void agit(int n) {
 
         setPointsDeVieValue(this.getPointsDeVieValue()-this.porteeBP().getDegatValue());
-        System.out.println("---pv base : " + this.getPointsDeVieValue());
     }
 
     private void initializeZone(){
@@ -52,15 +51,11 @@ public class BasePrincipale extends Tour {
     }*/
 
     public Soldat porteeBP() {
-            System.out.println("entrer fonction");
             for (Soldat s : terrain.getSoldats()) {
-                System.out.println("entrer boucle");
                 if (s.estVivant()) {
-                    System.out.println("vivant");
                     double distanceY = Math.abs(s.getY0Value() - getY0Value());
                     System.out.println(distanceY);
                     if (distanceY <= this.getPortée()) {
-                        System.out.println("bonne portée");
                         return s;
                     }
                 }

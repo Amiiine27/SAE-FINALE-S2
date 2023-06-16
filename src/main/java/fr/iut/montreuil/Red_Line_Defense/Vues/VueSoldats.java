@@ -26,7 +26,7 @@ public class VueSoldats {
 
     public void ajouterSkinSoldat(Soldat s) {
         ImageView skin  = creerImageSoldat(s.getCouleur());
-        System.out.println("Skin créé pour le soldat : " + skin);
+
 
         hashMapSoldatsSkin.put(s, skin);
 
@@ -37,7 +37,6 @@ public class VueSoldats {
         skin.yProperty().bind(s.getY0Property());
 
         centerPane.getChildren().add(skin);
-        System.out.println("  Skin ajouté au pane. Total des cercles  ");
     }
 
     public void setImageViewProperties(ImageView skin, String color, String direction){
