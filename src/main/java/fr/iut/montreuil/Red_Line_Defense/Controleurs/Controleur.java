@@ -85,6 +85,7 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // coucou madame pour lancer le jeu appuyez sur P :)
         centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
         initializeBasePrincipale();
         initializeJoueur();
