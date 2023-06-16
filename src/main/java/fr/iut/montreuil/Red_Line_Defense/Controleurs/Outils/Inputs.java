@@ -66,6 +66,8 @@ public class Inputs {
         pausePane.prefWidthProperty().bind(scene.widthProperty());
         pausePane.prefHeightProperty().bind(scene.heightProperty());
     }
+
+
     private Image loadImage(String path) {
         return new Image(getClass().getResourceAsStream(path));
     }

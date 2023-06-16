@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners.*;
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils.Audio;
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils.FonctionsDeTests;
 import fr.iut.montreuil.Red_Line_Defense.Main;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
@@ -105,12 +106,11 @@ public class Controleur implements Initializable {
         initializeVueBasePrincipale();
         initializeVueProjectile();
         initializeEcouteVictoireEtDefaite();
-
         initializeSons();
 
-
-
         terrain.setBasePrincipale(basePrincipale);
+
+
 
         //initializeInputs();
     }
@@ -118,6 +118,11 @@ public class Controleur implements Initializable {
     public Stage getStage() {
         Stage stage = (Stage) solde.getScene().getWindow();
         return stage;
+    }
+
+    public Scene getScene() {
+        Scene scene = solde.getScene();
+        return scene;
     }
 
     private void initializeEcouteVictoireEtDefaite() {
@@ -175,20 +180,6 @@ public class Controleur implements Initializable {
 
     private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain,centerPane);}
 
-    public void AfficherDefaite() {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDefaite.fxml"));
-                Parent root = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-    }
-
-
 
     private void initializeEnvironnement() {
         terrain = new Environnement(joueur);
@@ -197,6 +188,7 @@ public class Controleur implements Initializable {
     @FXML
     private void lancerTours() {
         gameLoop.lancerTimeline();
+        FonctionsDeTests fonctionsDeTests = new FonctionsDeTests(terrain, getScene());
     }
 
     private void initializeBasePrincipale() {
@@ -240,7 +232,7 @@ public class Controleur implements Initializable {
             }
         }
     }
-    @FXML
+    /*@FXML
     public void testPv(ActionEvent event) {
         System.out.println("TEST");
         Random rand = new Random();
@@ -252,7 +244,7 @@ public class Controleur implements Initializable {
                 System.out.println("MORT");
             }
         }
-    }
+    } */
 
     private ImageView createTerrainImageView(int i, int j) {
         int n = terrain.valeurDeLaCase(i, j);
