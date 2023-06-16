@@ -20,6 +20,7 @@ public abstract class Soldat extends Acteurs {
     private Set<Point2D> zone;
 
     private int pointsDeVie;
+    private boolean estPiégé;
     private int valeur; // valeur du soldat, permet de déterminer combien le joueur gagne en le tuant
 
     public Soldat(double x0, double y0, int pointsDeVie, int degats, int defense, double destinationX, double destinationY) {
@@ -27,6 +28,7 @@ public abstract class Soldat extends Acteurs {
         this.destinationX = destinationX;
         this.destinationY = destinationY;
         this.zone = new HashSet<Point2D>();
+        estPiégé=false;
         créerZone();
     }
 
@@ -36,6 +38,7 @@ public abstract class Soldat extends Acteurs {
         this.destinationX = destinationX;
         this.destinationY = destinationY;
         this.zone = new HashSet<Point2D>();
+        estPiégé=false;
         créerZone();
     }
 
@@ -75,6 +78,14 @@ public abstract class Soldat extends Acteurs {
         return this.destinationY;
     }
 
-
+    public boolean isEstPiégé(){
+        return estPiégé;
+    }
+    public void estPiégés(){
+        estPiégé=true;
+    }
+    public void libéré(){
+        estPiégé=false;
+    }
 
 }
