@@ -1,17 +1,10 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
 
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.BasePrincipale;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.SuperNova;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.TourLanceMissile;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.TourMitrailleuse;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
-import fr.iut.montreuil.Red_Line_Defense.Vues.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;

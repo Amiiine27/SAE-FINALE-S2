@@ -41,6 +41,7 @@ public class Inputs {
     private void pauseDuJeu(){
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.P) {
+                System.out.println("pause");
                 if (gameLoop.getTimeline().getStatus() == Animation.Status.RUNNING) {
                     gameLoop.pauseTimeline();
                     pausePane.setVisible(true);

@@ -1,4 +1,4 @@
-package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu;
+package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
