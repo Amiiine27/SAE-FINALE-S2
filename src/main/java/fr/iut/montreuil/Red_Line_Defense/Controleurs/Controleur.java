@@ -97,7 +97,8 @@ public class Controleur implements Initializable {
         initializeVueInterface();
         initializeVueBasePrincipale();
         initializeVueProjectile();
-        ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
+        initializeEcouteVictoireEtDefaite();
+
 
 
 
@@ -109,6 +110,10 @@ public class Controleur implements Initializable {
     public Stage getStage() {
         Stage stage = (Stage) solde.getScene().getWindow();
         return stage;
+    }
+
+    private void initializeEcouteVictoireEtDefaite() {
+        ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
     }
 
     private void initializeJoueur(){

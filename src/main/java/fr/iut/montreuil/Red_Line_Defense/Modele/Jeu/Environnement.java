@@ -146,6 +146,7 @@ public class Environnement {
         suppressionTour();
         actionBasePrincipale();
         checkNouvelleVagues();
+        verificationDefaite();
 
         nbrTours++;
     }
@@ -172,6 +173,12 @@ public class Environnement {
                     basePrincipale.infligerDegats(300);
                     s.setPointsDeVieValue(-1);
             }
+        }
+    }
+
+    public void verificationDefaite(){
+        if (basePrincipale.getPointsDeVieValue() < 1){
+            this.vague.setValue(-1);
         }
     }
 

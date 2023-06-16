@@ -103,10 +103,10 @@ public class Vagues {
 
 
     public void premiereVague(){
-        ennemisAFaireSpawnType1 = 1;
+        ennemisAFaireSpawnType1 = 40;
         totalSoldats = ennemisAFaireSpawnType1;
 
-        if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
+        if (((environnement.getNbrTours() % 5) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
             System.out.println("Un nouveau Soldat Apparait !");
             nouveauSpawnSoldat(1,9);
             nbreSpawnsType1++;

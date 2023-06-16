@@ -37,6 +37,7 @@ public class EcouteVictoireEtDefaite {
         this.vueInterface = vueInterface;
         this.c = c;
         ajouterEcouteurVictoire();
+        ajouterEcouteurDefaite();
     }
 
 
@@ -46,8 +47,24 @@ public class EcouteVictoireEtDefaite {
         this.vague.addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() > 5) {
                 try {
-                    System.out.println("HA");
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chemin/vers/votre/vueDefaite.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueVictoire.fxml"));
+                    Parent root = fxmlLoader.load();
+
+                    Stage currentStage = c.getStage();
+                    currentStage.setScene(new Scene(root));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void ajouterEcouteurDefaite() {
+
+        this.vague.addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() < 1) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDefaite.fxml"));
                     Parent root = fxmlLoader.load();
 
                     Stage currentStage = c.getStage();
