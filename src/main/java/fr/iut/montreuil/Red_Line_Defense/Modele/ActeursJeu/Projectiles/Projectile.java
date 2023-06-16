@@ -115,7 +115,6 @@ public abstract class Projectile {
                 double distanceX = Math.abs(s.getX0Value() - getX());
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
-                System.out.println(distanceTotale);
                 if (distanceTotale <= 10) {
                     return s;
                 }
