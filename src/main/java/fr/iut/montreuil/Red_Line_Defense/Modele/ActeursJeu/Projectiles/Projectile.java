@@ -120,7 +120,7 @@ public abstract class Projectile {
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
-                if (distanceTotale <= 20) {
+                if (distanceTotale <= 10) {
                     System.out.println("bonne portée");
                     return s;
                 }

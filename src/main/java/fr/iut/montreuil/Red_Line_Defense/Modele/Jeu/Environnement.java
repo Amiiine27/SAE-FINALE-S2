@@ -177,24 +177,20 @@ public class Environnement {
         if(!listeTours.isEmpty()){
             System.out.println("tour action");
             for (Tour t : listeTours){
-            if(((t instanceof TourSniper) && n%18==0)||((t instanceof TourMitrailleuse))||(((t instanceof TourLanceMissile) && n%12==0))) {
-                t.agit();
+                t.agit(n);
                 System.out.println("tour à agit");
-            }
-            t.perteVie(2);
-            }
-        }
-    }
-    public void suppressionTour(){
-        if(!listeTours.isEmpty()){
-            System.out.println("tour elimination");
-            for(Tour t : listeTours){
-                if(t.getPointsDeVieValue()<=0){
-                    supprimerTour(t);
-                }
+            t.perteVie(10);
             }
         }
     }
+
+   public void suppressionTour() {
+        if (!listeTours.isEmpty()) {
+            System.out.println("Tour elimination");
+            listeTours.removeIf(tour -> tour.getPointsDeVieValue() <= 0);
+        }
+    }
+
 
 
 

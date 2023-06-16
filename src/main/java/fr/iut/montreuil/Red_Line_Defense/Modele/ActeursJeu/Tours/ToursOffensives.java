@@ -56,8 +56,8 @@ public abstract class ToursOffensives extends Tour {
     }
 
 
-    public void agit(){
-        tirer();
+    public void agit(int n){
+        tirer(n);
     }
 
     public int getCadence() {
@@ -68,32 +68,20 @@ public abstract class ToursOffensives extends Tour {
         return cadence;
     }
 
-
-    public void tirer() {
+    public abstract void creationProjectile(Soldat s);
+    public void tirer(int nTemps) {
         Soldat s = ennemiÀPorter();
         System.out.println("a");
         if (s != null) {
             if (s.estVivant()) {
-                System.out.println("c");
-                if (this instanceof TourMitrailleuse) {
-                    System.out.println("armement...");
-                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(), getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                    p.animationProjectile();
-                } else if (this instanceof TourSniper) {
-                    System.out.println("armement...");
-                    Blast p = new Blast(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(), getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                    p.animationProjectile();
-                } else {
-                    System.out.println("armement...");
-                    Missile p = new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(), s, getTerrain());
-                    getTerrain().ajouterProjectile(p);
-                    p.animationProjectile();
-                }
-                System.out.println("feu");
-            }
+                if(nTemps%getCadence()==0)
+                creationProjectile(s);
+               }
         }
         System.out.println("fin");
+    }
+
+    public int getVitesseProjectile() {
+        return vitesseProjectile;
     }
 }
