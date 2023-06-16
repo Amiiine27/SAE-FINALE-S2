@@ -57,7 +57,6 @@ public class EcouteInterface {
             joueur.crediterSolde(200); // Chaque Vague le Joueur Gagne 200 Berrys
             vagues.majDefenseSoldats();
             vagues.resetTours();
-
         });
     }
 

@@ -96,7 +96,7 @@ public class Vagues {
 
     public void resetTours() {
         for (Tour t : environnement.getTours()){
-            environnement.getTours().remove(t);
+            t.setPointsDeVieValue(0);
         }
     }
 
