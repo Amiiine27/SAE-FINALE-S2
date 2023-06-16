@@ -103,7 +103,7 @@ public class Vagues {
 
 
     public void premiereVague(){
-        ennemisAFaireSpawnType1 = 10;
+        ennemisAFaireSpawnType1 = 1;
         totalSoldats = ennemisAFaireSpawnType1;
 
         if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
@@ -115,8 +115,8 @@ public class Vagues {
 
     public void deuxiemeVague(){
 
-        int maxSoldiersType1 = 15;
-        int maxSoldiersType2 = 7;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -142,8 +142,8 @@ public class Vagues {
 
 
     public void troisiemeVague(){
-        int maxSoldiersType1 = 20;
-        int maxSoldiersType2 = 12;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -168,9 +168,9 @@ public class Vagues {
     }
 
     public void quatriemeVague(){
-        int maxSoldiersType1 = 17;
-        int maxSoldiersType2 = 10;
-        int maxSoldiersType3 = 6;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
+        int maxSoldiersType3 = 1;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
@@ -200,9 +200,9 @@ public class Vagues {
 
 
     public void cinquiemeVague(){
-        int maxSoldiersType1 = 18;
-        int maxSoldiersType2 = 10;
-        int maxSoldiersType3 = 8;
+        int maxSoldiersType1 = 1;
+        int maxSoldiersType2 = 1;
+        int maxSoldiersType3 = 1;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
@@ -256,7 +256,6 @@ public class Vagues {
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
         listeSoldats.add(s);
-        System.out.println("Soldat créé et ajouté au terrain");
 
         return s;
     }

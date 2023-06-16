@@ -10,7 +10,10 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.Vues.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,7 +24,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -75,6 +80,8 @@ public class Controleur implements Initializable {
 
     private BasePrincipale basePrincipale;
 
+    private EcouteVictoireEtDefaite ecouteVictoireEtDefaite;
+
 
     private VueBasePrincipale vueBasePrincipale;
 
@@ -90,12 +97,18 @@ public class Controleur implements Initializable {
         initializeVueInterface();
         initializeVueBasePrincipale();
         initializeVueProjectile();
+        ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
 
 
 
         terrain.setBasePrincipale(basePrincipale);
 
         //initializeInputs();
+    }
+
+    public Stage getStage() {
+        Stage stage = (Stage) solde.getScene().getWindow();
+        return stage;
     }
 
     private void initializeJoueur(){
@@ -122,6 +135,19 @@ public class Controleur implements Initializable {
 
 
     private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain,centerPane);}
+
+    public void AfficherDefaite() {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDefaite.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+    }
 
 
 
