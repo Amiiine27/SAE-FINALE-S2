@@ -172,7 +172,7 @@ public class Environnement {
             Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
             if (basePrincipale.getZone().contains(positionSoldat)) {
                     basePrincipale.infligerDegats(300);
-                    s.setPointsDeVieValue(-1);
+                    s.setPointsDeVieValue(5);
             }
         }
     }
