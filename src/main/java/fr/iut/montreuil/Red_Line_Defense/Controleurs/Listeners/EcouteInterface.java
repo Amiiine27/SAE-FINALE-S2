@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
+import fr.iut.montreuil.Red_Line_Defense.Vues.VueInterface;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,13 +12,16 @@ public class EcouteInterface {
     private Joueur joueur;
     private Environnement terrain;
 
+    private VueInterface vueInterface;
+
 
     private IntegerProperty vague;
 
-    public EcouteInterface(Environnement terrain) {
+    public EcouteInterface(Environnement terrain, VueInterface vueInterface) {
         this.terrain = terrain;
         this.joueur = terrain.getJoueur();
         this.vague = terrain.getVagueProperty();
+        this.vueInterface = vueInterface;
         ajouterEcouteurSolde();
         ajouterEcouteurEnnemisTues();
         ajouterListenerVague();
@@ -28,7 +32,7 @@ public class EcouteInterface {
         this.joueur.getSoldeJoueurProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                terrain.getVueInterface().getSolde().setText(String.valueOf(newValue));
+                vueInterface.getSolde().setText(String.valueOf(newValue));
             }
         });
     }
@@ -38,7 +42,7 @@ public class EcouteInterface {
         this.terrain.getEnnemisTuesProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                terrain.getVueInterface().getEnnemisTues().setText(String.valueOf(newValue));
+                vueInterface.getEnnemisTues().setText(String.valueOf(newValue));
             }
         });
     }

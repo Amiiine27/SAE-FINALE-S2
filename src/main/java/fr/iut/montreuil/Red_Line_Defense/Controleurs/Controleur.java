@@ -1,6 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs;
 
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners.*;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.GameLoop;
@@ -72,6 +73,8 @@ public class Controleur implements Initializable {
 
     private VueProjectile vueProjectile;
 
+    private BasePrincipale basePrincipale;
+
     private VueBasePrincipale vueBasePrincipale;
 
     @Override
@@ -87,10 +90,8 @@ public class Controleur implements Initializable {
         initializeVueProjectile();
 
 
-        terrain.setVueSoldats(vueSoldats);
-        terrain.setVueInterface(vueInterface);
-        terrain.setVueProjectile((vueProjectile));
-        terrain.setVueBasePrincipale(vueBasePrincipale);
+
+        terrain.setBasePrincipale(basePrincipale);
 
         //initializeInputs();
     }
@@ -110,11 +111,11 @@ public class Controleur implements Initializable {
     }
 
     private void initializeEcouteInterface(){
-        ecouteInterface = new EcouteInterface(terrain);
+        ecouteInterface = new EcouteInterface(terrain, vueInterface);
     }
 
     private void initializeEcouteSoldats(){
-        ecouteSoldats = new EcouteSoldats(terrain);
+        ecouteSoldats = new EcouteSoldats(terrain, vueSoldats);
     }
 
 
@@ -134,7 +135,8 @@ public class Controleur implements Initializable {
 
 
     private void initializeVueBasePrincipale(){
-        vueBasePrincipale = new VueBasePrincipale(centerPane);
+        basePrincipale = new BasePrincipale(700, 335);
+        vueBasePrincipale = new VueBasePrincipale(centerPane, basePrincipale);
         initializeEcouteBasePrincipale();
     }
 

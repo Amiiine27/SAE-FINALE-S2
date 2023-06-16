@@ -21,9 +21,8 @@ public class VueBasePrincipale {
 
     private ProgressBar barreDeVieBasePrincipale;
 
-    public VueBasePrincipale(Pane p) {
+    public VueBasePrincipale(Pane p, BasePrincipale basePrincipale) {
         this.p = p;
-        basePrincipale = new BasePrincipale(700, 335);
         afficherBase();
     }
 
@@ -55,16 +54,7 @@ public class VueBasePrincipale {
         return barreDeVieBasePrincipale;
     }
 
-    public void actionBasePrincipale(ListProperty<Soldat> listeSoldats){
-        for (Soldat s: listeSoldats.getValue()) {
-            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
-            if (basePrincipale.getZone().contains(positionSoldat)) {
-                System.out.println("Soldat Arrivé devant le chateau");
-                basePrincipale.infligerDegats(300);
-                s.setPointsDeVieValue(-1);
-            }
-        }
-    }
+
 
     public ImageView creerImageBP() {
         ImageView img = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ToursPosables/BasePrincipale.png"));

@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
@@ -17,6 +18,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
 
 import java.util.*;
 
@@ -39,11 +41,7 @@ public class Environnement {
 
     private int[][] distances;
 
-    private VueInterface vueInterface;
-    private VueSoldats vueSoldat;
-    private VueProjectile vueProjectile;
-
-    private VueBasePrincipale vueBasePrincipale;
+    private BasePrincipale basePrincipale;
 
     private int nbreSpawns = 10;
 
@@ -170,8 +168,16 @@ public class Environnement {
     }
 
     public void actionBasePrincipale(){
-        vueBasePrincipale.actionBasePrincipale(listeSoldats);
+        for (Soldat s: listeSoldats.getValue()) {
+            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
+            if (basePrincipale.getZone().contains(positionSoldat)) {
+                    System.out.println("Soldat Arrivé devant le chateau");
+                    basePrincipale.infligerDegats(300);
+                    s.setPointsDeVieValue(-1);
+            }
+        }
     }
+
 
     public void actionTours(int n){
         if(!listeTours.isEmpty()){
@@ -190,7 +196,6 @@ public class Environnement {
         while (iterator.hasNext()) {
             Soldat soldat = iterator.next();
             if (soldat.getPointsDeVieValue() <= 0) {
-                vueSoldat.supprSkinSoldats(soldat);
                 iterator.remove(); // Supprimer l'élément de la liste en utilisant l'itérateur
                 joueur.crediterSolde(soldat.getValeurGagnee());
                 ennemisTues.setValue(ennemisTues.getValue() + 1);
@@ -297,23 +302,7 @@ public class Environnement {
 
 
 
-    public VueSoldats getVueSoldats() {
-        return vueSoldat;
-    }
 
-
-
-    public void setVueSoldats(VueSoldats v) {
-        this.vueSoldat = v;
-    }
-
-    public VueProjectile getVueProjectile(){
-        return vueProjectile;
-    }
-
-    public void setVueProjectile(VueProjectile v){
-        this.vueProjectile=v;
-    }
 
     public void reloadNbreSpawnsSoldats(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
@@ -342,9 +331,9 @@ public class Environnement {
 
     public int getEnnemisTuesValue() { return this.ennemisTues.getValue(); }
 
-    public void setVueInterface(VueInterface v) { this.vueInterface = v;}
 
-    public VueInterface getVueInterface() { return this.vueInterface;}
+
+
 
 
 
@@ -415,11 +404,9 @@ public class Environnement {
                 nextX = nx;
                 nextY = ny;
                 minDistance = distances[ny][nx];
-                directionIndex = i;  // Mettre à jour l'index de la direction
             }
         }
 
-        vueSoldat.mettreAJourSkin(directionIndex, soldat);
 
         soldat.setX0(nextX * 8);
         soldat.setY0(nextY * 8);
@@ -528,8 +515,8 @@ public class Environnement {
     //------------------------------------------------------- BASE PRINCIPALE --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void setVueBasePrincipale(VueBasePrincipale vueBasePrincipale){
-        this.vueBasePrincipale = vueBasePrincipale;
+    public void setBasePrincipale(BasePrincipale basePrincipale){
+        this.basePrincipale = basePrincipale;
     }
 
 
