@@ -30,6 +30,7 @@ public class EcouteInterface {
         ajouterEcouteurSolde();
         ajouterEcouteurEnnemisTues();
         ajouterListenerVague();
+        ajouterEcouteurNumVague();
     }
 
     public void ajouterEcouteurSolde() {
@@ -51,6 +52,15 @@ public class EcouteInterface {
             }
         });
     }
+    public void ajouterEcouteurNumVague() {
+
+        this.terrain.getVagueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                vueInterface.getVagueLabel().setText(String.valueOf(newValue));
+            }
+        });
+    }
 
     private void ajouterListenerVague() {
         int nbvague = 0;
@@ -60,6 +70,7 @@ public class EcouteInterface {
             vagues.resetTours();
             vueInterface.boucleImagesVagues(nbvague);
         });
+
     }
 
 

@@ -150,6 +150,7 @@ public class VueInterface {
     public Label getSolde() {
         return solde;
     }
+    public Label getVagueLabel() {return vague;}
 
     public Label getEnnemisTues(){
         return ennemisTues;
