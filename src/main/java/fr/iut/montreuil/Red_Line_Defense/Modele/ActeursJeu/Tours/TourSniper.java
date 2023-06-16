@@ -5,7 +5,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 
 public class TourSniper extends ToursOffensives {
     public TourSniper(int x0, int y0, Environnement terrain) {
-        super(x0, y0, 3000, 300, 5, 600, terrain, 3,1000,600); // 50 tirs par minutes
+        super(x0, y0, 250, 300, 5, 600, terrain, 3,1000,600); // 50 tirs par minutes
     }
 
 }

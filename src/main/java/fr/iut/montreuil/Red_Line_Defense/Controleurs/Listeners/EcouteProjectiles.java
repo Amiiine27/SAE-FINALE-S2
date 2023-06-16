@@ -32,7 +32,7 @@ public class EcouteProjectiles {
                 if (change.wasAdded()) {
                     List<? extends Projectile> addedProjectiles = change.getAddedSubList();
                     for (Projectile projectile : addedProjectiles) {
-                        VueProjectile vue = new VueProjectile(centerPane,projectile);
+                        new VueProjectile(centerPane,projectile);
                     }
                 }
                 if (change.wasRemoved()) {

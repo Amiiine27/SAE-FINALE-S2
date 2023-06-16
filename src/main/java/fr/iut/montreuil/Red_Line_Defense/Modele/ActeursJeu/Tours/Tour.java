@@ -17,6 +17,10 @@ public abstract class Tour extends Acteurs {
 
     private double portee;
 
+    private String id;
+
+    private static int compteur;
+
     public Tour(int x0, int y0, int pointsDeVie) {
         super(x0, y0, pointsDeVie);
     }
@@ -33,6 +37,7 @@ public abstract class Tour extends Acteurs {
         this.terrain = terrain;
 
         this.portee = portee;
+        id=("t"+compteur);
 
 
         // initialiserLongueur();
@@ -127,9 +132,13 @@ public abstract class Tour extends Acteurs {
         System.out.println("portée affichée");
     }
 
+    public void perteVie(int pv){
+        this.setPointsDeVieValue(this.getPointsDeVieValue()-pv);
+    }
 
+    public String getId() {
+        return id;
+    }
 
-
-
-        public abstract void agit();
+    public abstract void agit();
 }

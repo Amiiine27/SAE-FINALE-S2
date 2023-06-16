@@ -2,7 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.Vues.VueProjectile;
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 
 import javafx.beans.property.SimpleDoubleProperty;
@@ -66,6 +66,50 @@ public abstract class Projectile {
     }
 
     public abstract void deplacement(double elapsedTime);
+
+    public void animationProjectile(){
+        Projectile p = this;
+        AnimationTimer timer = new AnimationTimer() {
+
+            private long lastUpdate = 0;
+
+
+            @Override
+            public void handle(long now) {
+                if (lastUpdate > 0 && !(isTouché())) {
+
+
+                    double elapsedTime = (now - lastUpdate) / 1000000000.0;
+
+                    Soldat s = ennemiÀPorter();
+                    if (s != null) {
+                        System.out.println("FEUUUU");
+                        getTerrain().supprimerProjectile(p);
+                        s.setPointsDeVieValue(s.getPointsDeVieValue() - getDegats());
+                        setTouché(true);
+                    }
+                    if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {
+                        System.out.println("DEHORS");
+                        getTerrain().supprimerProjectile(p);
+                        setTouché(true);
+                    }
+                    deplacement(elapsedTime);
+                }
+                else if(p.isTouché()){
+                    stop();
+                }
+
+
+
+
+                lastUpdate = now;
+
+            }
+        };
+
+        timer.start();
+
+    }
 
     public Soldat ennemiÀPorter() {
         for (Soldat s : terrain.getSoldats()) {

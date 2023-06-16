@@ -69,26 +69,27 @@ public abstract class ToursOffensives extends Tour {
     }
 
 
-    public void tirer(){
-        Soldat s=ennemiÀPorter();
+    public void tirer() {
+        Soldat s = ennemiÀPorter();
         System.out.println("a");
-        if (s!=null){
-            if(s.estVivant()) {
+        if (s != null) {
+            if (s.estVivant()) {
                 System.out.println("c");
-                if(this instanceof TourMitrailleuse){
+                if (this instanceof TourMitrailleuse) {
                     System.out.println("armement...");
-                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
+                    Boulet p = new Boulet(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(), getTerrain());
                     getTerrain().ajouterProjectile(p);
-                }
-                else if(this instanceof TourSniper){
+                    p.animationProjectile();
+                } else if (this instanceof TourSniper) {
                     System.out.println("armement...");
-                    Blast p = new Blast(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(),getTerrain());
+                    Blast p = new Blast(getX0Value(), getY0Value(), s.getX0Value(), s.getY0Value(), vitesseProjectile, getDegatValue(), getTerrain());
                     getTerrain().ajouterProjectile(p);
-                }
-                else {
+                    p.animationProjectile();
+                } else {
                     System.out.println("armement...");
-                    Missile p= new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(),s,getTerrain());
+                    Missile p = new Missile(getX0Value(), getY0Value(), vitesseProjectile, getDegatValue(), s, getTerrain());
                     getTerrain().ajouterProjectile(p);
+                    p.animationProjectile();
                 }
                 System.out.println("feu");
             }

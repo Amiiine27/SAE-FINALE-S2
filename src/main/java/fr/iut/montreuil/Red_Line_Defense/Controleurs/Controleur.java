@@ -69,8 +69,6 @@ public class Controleur implements Initializable {
     private VueTours vueTours;
     private VueSoldats vueSoldats;
 
-    private VueProjectile vueProjectile;
-
     private VueBasePrincipale vueBasePrincipale;
 
     @Override
@@ -88,7 +86,7 @@ public class Controleur implements Initializable {
 
         terrain.setVueSoldats(vueSoldats);
         terrain.setVueInterface(vueInterface);
-        terrain.setVueProjectile((vueProjectile));
+        //terrain.setVueProjectile((vueProjectile));
         terrain.setVueBasePrincipale(vueBasePrincipale);
 
         //initializeInputs();
@@ -117,7 +115,7 @@ public class Controleur implements Initializable {
     }
 
 
-    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain);}
+    private void initializeEcouteTours(){ ecouteTours = new EcouteTours(terrain,centerPane);}
 
 
 

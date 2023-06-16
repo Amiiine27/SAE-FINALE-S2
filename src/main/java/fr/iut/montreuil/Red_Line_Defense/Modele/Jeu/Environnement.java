@@ -41,8 +41,6 @@ public class Environnement {
 
     private VueInterface vueInterface;
     private VueSoldats vueSoldat;
-    private VueProjectile vueProjectile;
-
     private VueBasePrincipale vueBasePrincipale;
 
     private int nbreSpawns = 10;
@@ -149,6 +147,7 @@ public class Environnement {
         deplacementSoldat();
         verificationMorts();
         actionTours(nbrTours);
+        suppressionTour();
         actionBasePrincipale();
         System.out.println("nbr projectile:"+getProjectiles().size());
 
@@ -182,6 +181,17 @@ public class Environnement {
                 t.agit();
                 System.out.println("tour à agit");
             }
+            t.perteVie(2);
+            }
+        }
+    }
+    public void suppressionTour(){
+        if(!listeTours.isEmpty()){
+            System.out.println("tour elimination");
+            for(Tour t : listeTours){
+                if(t.getPointsDeVieValue()<=0){
+                    supprimerTour(t);
+                }
             }
         }
     }
@@ -310,13 +320,13 @@ public class Environnement {
         this.vueSoldat = v;
     }
 
-    public VueProjectile getVueProjectile(){
+   /* public VueProjectile getVueProjectile(){
         return vueProjectile;
     }
 
     public void setVueProjectile(VueProjectile v){
         this.vueProjectile=v;
-    }
+    }*/
 
     public void reloadNbreSpawnsSoldats(){
         this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
