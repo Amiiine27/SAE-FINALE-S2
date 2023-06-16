@@ -98,11 +98,10 @@ public class Controleur implements Initializable {
         initializeEcouteVictoireEtDefaite();
         initializeSons();
 
+
         terrain.setBasePrincipale(basePrincipale);
 
 
-
-        //initializeInputs();
     }
 
     public Stage getStage() {
@@ -151,6 +150,7 @@ public class Controleur implements Initializable {
 
     public void initializeInputs(){
         inputs = new Inputs(gameLoop, centerPane.getScene());
+        inputs.pauseDuJeu();
     }
 
     private void initializeVueInterface(){
