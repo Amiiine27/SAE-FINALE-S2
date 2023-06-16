@@ -84,7 +84,7 @@ public abstract class Projectile {
                     Soldat s = ennemiÀPorter();
                     if (s != null) {
                         getTerrain().supprimerProjectile(p);
-                        s.setPointsDeVieValue(s.getPointsDeVieValue() - getDegats());
+                        s.setPointsDeVieValue((s.getPointsDeVieValue() - getDegats()) * (1 - ( s.getDefenseValue() / 100))); // Degats * le pourcentage de réduction de degats
                         setTouché(true);
                     }
                     if (p.getX() > 840 || (p.getX() <= 0 || (p.getY() > 480 || p.getY() <= 0))) {

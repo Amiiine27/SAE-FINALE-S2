@@ -45,7 +45,6 @@ public class VueProjectile {
         projectile=bombe;
         }
 
-        System.out.println("ajout sprite projectile");// apres t'aura juste a mettre une virgule et les autres images si tu veux tout faire ici et ducoup tu dois faire verifier l'id de la tour pour savoir quel projectile utiliser sinon tu fais plusieurs fonctions
         if(p instanceof Missile) {
             double angle = p.calculerAngle(p.getX(), p.getY(), p.getxCible(), p.getyCible());
             projectile.setRotate(Math.toDegrees(angle));}

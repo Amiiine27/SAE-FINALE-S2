@@ -62,6 +62,7 @@ public class Environnement {
 
         this.vaguesDeJeu  = new Vagues(this);
 
+
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         calculerChemin(89, 47);
     }
@@ -168,7 +169,6 @@ public class Environnement {
         for (Soldat s: listeSoldats.getValue()) {
             Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
             if (basePrincipale.getZone().contains(positionSoldat)) {
-                    System.out.println("Soldat Arrivé devant le chateau");
                     basePrincipale.infligerDegats(300);
                     s.setPointsDeVieValue(-1);
             }
@@ -265,8 +265,6 @@ public class Environnement {
 
     public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
 
-        System.out.println("Calcul du chemin ");
-
         boolean[][] visited = new boolean[getYmax()][getXmax()];
 
         Queue<Integer> queue = new ArrayDeque<>();
@@ -293,8 +291,6 @@ public class Environnement {
                 }
             }
         }
-
-        System.out.println("Calcul du chemin OK ");
     }
 
 
@@ -432,6 +428,9 @@ public class Environnement {
         this.basePrincipale = basePrincipale;
     }
 
+    public Vagues getVagues(){
+        return this.vaguesDeJeu;
+    }
 
 
 

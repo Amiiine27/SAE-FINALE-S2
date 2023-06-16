@@ -213,9 +213,6 @@ public class VueTours {
     public void selectionTour(MouseEvent event) {
         ImageView image = (ImageView) event.getSource();
         this.idTourClicked = image.getId();
-
-
-        //image.setImage(loadImage(HIGHLIGHTED_TOWER_IMAGE_PATH));
     }
 
     private Image loadImage(String path) {
@@ -224,7 +221,7 @@ public class VueTours {
             if (inputStream != null) {
                 return new Image(inputStream);
             } else {
-                System.err.println("Could not load image: " + path);
+                System.err.println("Impossible de charger l'image " + path);
                 return null;
             }
         } catch (Exception e) {

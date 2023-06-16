@@ -4,6 +4,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.SuperNova;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -83,6 +84,20 @@ public class Vagues {
         nbreSpawnsType2 = 0;
         nbreSpawnsType3 = 0;
         totalSoldats = 0;
+    }
+
+    public void majDefenseSoldats() {
+        for (Soldat s : environnement.getSoldats()) {
+            if (s.getPointsDeVieValue() > 5) {
+                s.setPointsDeVieValue(s.getPointsDeVieValue() - 5);
+            }
+        }
+    }
+
+    public void resetTours() {
+        for (Tour t : environnement.getTours()){
+            environnement.getTours().remove(t);
+        }
     }
 
 
