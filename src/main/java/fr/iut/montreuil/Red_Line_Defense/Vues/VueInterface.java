@@ -1,8 +1,13 @@
 package fr.iut.montreuil.Red_Line_Defense.Vues;
 
+import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurDefaite;
+import fr.iut.montreuil.Red_Line_Defense.Main;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,8 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class VueInterface {
@@ -183,4 +191,28 @@ public class VueInterface {
                 ae -> centerPane.getChildren().remove(imageView)));
         timeline.play();
     }
+
+    public void ajouterDefaite(Stage s){
+
+        URL url = Main.class.getResource("Vues/VueDefaite.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ControleurDefaite controleur = loader.getController();
+
+        Stage stage = s;
+
+        if (stage != null) {
+            Scene scene = new Scene(root, 940, 560);
+            stage.setResizable(false);
+            stage.setTitle("Red Line Defense");
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
 }

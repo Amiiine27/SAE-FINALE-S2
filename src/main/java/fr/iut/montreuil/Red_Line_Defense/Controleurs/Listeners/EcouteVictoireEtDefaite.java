@@ -54,28 +54,7 @@ public class EcouteVictoireEtDefaite {
             }
         });
     }
-    public void ajouterDefaite(){
-        URL url = Main.class.getResource("Vues/VueDefaite.fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        ControleurDefaite controleur = loader.getController();
 
-        Stage stage = c.getStage();
-
-        if (stage != null) {
-            Scene scene = new Scene(root, 940, 560);
-            stage.setResizable(false);
-            stage.setTitle("Red Line Defense");
-            stage.setScene(scene);
-            stage.show();
-        }
-
-    }
 
     public void ajouterVictoire(){
         URL url = Main.class.getResource("Vues/VueVictoire.fxml");
@@ -94,11 +73,14 @@ public class EcouteVictoireEtDefaite {
         stage.setScene(scene);
         stage.show();
     }
+
     private void ajouterEcouteurDefaite() {
 
         this.vague.addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() < 1) {
-                ajouterDefaite();
+                if (c != null && c.getScene() != null && c.getScene().getWindow() != null) {
+                    vueInterface.ajouterDefaite(c.getStage());
+                }
             }
         });
     }
