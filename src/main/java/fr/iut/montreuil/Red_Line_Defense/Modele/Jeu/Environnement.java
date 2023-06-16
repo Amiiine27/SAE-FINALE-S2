@@ -37,7 +37,7 @@ public class Environnement {
     private BasePrincipale basePrincipale;
 
     private Vagues vaguesDeJeu;
-    private int nbreSpawns = 10;
+
 
 
     public Environnement(Joueur joueur) {
@@ -204,11 +204,6 @@ public class Environnement {
 
 
 
-
-
-    public void reloadNbreSpawnsSoldats(){
-        this.nbreSpawns = (int) (this.nbreSpawns * 1.3);
-    }
 
 
 

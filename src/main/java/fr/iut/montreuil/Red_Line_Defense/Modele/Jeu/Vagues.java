@@ -97,8 +97,6 @@ public class Vagues {
 
     public void deuxiemeVague(){
 
-        resetNbreSpawns();
-
         int maxSoldiersType1 = 15;
         int maxSoldiersType2 = 7;
 
