@@ -29,8 +29,9 @@ public class Vagues {
 
     private int nbreSpawnsType1;
     private int nbreSpawnsType2;
-
     private int nbreSpawnsType3;
+
+    private int totalSoldats;
 
 
     public Vagues(Environnement environnement) {
@@ -81,12 +82,14 @@ public class Vagues {
         nbreSpawnsType1 = 0;
         nbreSpawnsType2 = 0;
         nbreSpawnsType3 = 0;
+        totalSoldats = 0;
     }
 
 
 
     public void premiereVague(){
         ennemisAFaireSpawnType1 = 10;
+        totalSoldats = ennemisAFaireSpawnType1;
 
         if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
             System.out.println("Un nouveau Soldat Apparait !");
@@ -99,6 +102,8 @@ public class Vagues {
 
         int maxSoldiersType1 = 15;
         int maxSoldiersType2 = 7;
+
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
         Random random = new Random();
 
@@ -125,6 +130,8 @@ public class Vagues {
         int maxSoldiersType1 = 20;
         int maxSoldiersType2 = 12;
 
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2;
+
         Random random = new Random();
 
         if ((environnement.getNbrTours() % 12) == 0) {
@@ -149,6 +156,8 @@ public class Vagues {
         int maxSoldiersType1 = 17;
         int maxSoldiersType2 = 10;
         int maxSoldiersType3 = 6;
+
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
         Random random = new Random();
 
@@ -180,6 +189,8 @@ public class Vagues {
         int maxSoldiersType2 = 10;
         int maxSoldiersType3 = 8;
 
+        totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
+
         Random random = new Random();
 
         if ((environnement.getNbrTours() % 9) == 0) {
@@ -209,6 +220,10 @@ public class Vagues {
 
     public void vagueParDefault(){
         System.out.println("Default");
+    }
+
+    public int getTotalSoldats(){
+        return totalSoldats;
     }
 
     public Soldat nouveauSpawnSoldat(int typeSoldat, int spawn) {

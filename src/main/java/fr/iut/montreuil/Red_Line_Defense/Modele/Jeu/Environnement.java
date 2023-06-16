@@ -45,7 +45,7 @@ public class Environnement {
 
         this.joueur = joueur;
 
-        this.vague = new SimpleIntegerProperty(2);
+        this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
@@ -141,9 +141,15 @@ public class Environnement {
         actionTours(nbrTours);
         suppressionTour();
         actionBasePrincipale();
-        System.out.println("nbr projectile:"+getProjectiles().size());
+        checkNouvelleVagues();
 
         nbrTours++;
+    }
+
+    public void checkNouvelleVagues(){
+        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTues.getValue())) {
+            vague.setValue(vague.getValue() + 1);
+        }
     }
 
 
