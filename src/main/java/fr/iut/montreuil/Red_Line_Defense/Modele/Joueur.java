@@ -29,8 +29,6 @@ public class Joueur {
                 soldeJoueur.setValue(0);
                 System.out.println("Vous etes pauvre");
             }
-            System.out.println("Nouveau Solde: " + soldeJoueur.getValue());
-
         });
 
     }
