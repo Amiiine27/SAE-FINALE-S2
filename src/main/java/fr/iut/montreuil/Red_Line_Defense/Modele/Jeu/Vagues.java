@@ -161,11 +161,11 @@ public class Vagues {
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
                     System.out.println("Un nouveau Rookie apparait !");
-                    nouveauSpawnSoldat(1, 9);
+                    nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
                     System.out.println("Un nouveau Super Nova apparait !");
-                    nouveauSpawnSoldat(2, 9);
+                    nouveauSpawnSoldat(2, 10);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
                     System.out.println("Un nouveau Shichibukai apparait !");
@@ -191,11 +191,11 @@ public class Vagues {
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
                     System.out.println("Un nouveau Rookie apparait !");
-                    nouveauSpawnSoldat(1, 9);
+                    nouveauSpawnSoldat(1, 16);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
                     System.out.println("Un nouveau Super Nova apparait !");
-                    nouveauSpawnSoldat(2, 9);
+                    nouveauSpawnSoldat(2, 16);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
                     System.out.println("Un nouveau Shichibukai apparait !");
