@@ -5,6 +5,7 @@ import fr.iut.montreuil.Red_Line_Defense.Main;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,10 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -26,7 +24,8 @@ import java.util.ArrayList;
 public class VueInterface {
 
 
-
+    private Scene scene;
+    private StackPane vaguePane;
     Label solde;
 
     StackPane stackpane;
@@ -36,23 +35,22 @@ public class VueInterface {
 
 
     HBox hboxMoneyCount, prix200b, prix800b, prix600b, prix400b;
-
     VBox vboxRight;
-
     Label ennemisTues;
-    Pane centerPane;
+    Label vague;
     private ArrayList<ImageView> transitionVague;
 
     private Button lancerButton, test;
-
+    private BorderPane borderPane;
 
 
 
 
     public VueInterface(Environnement terrain, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues,
                         HBox prix200b, HBox prix400b, HBox prix600b, HBox prix800b, ImageView berryBot200b, ImageView berryBot600b, ImageView berryBot400b, ImageView berryBot800b, VBox vboxRight,
-                        ImageView wpp, StackPane stackpane, Pane pane) {
+                        ImageView wpp, StackPane stackpane, Scene scene, BorderPane borderpane, Label vague) {
 
+        vague.setText(String.valueOf(terrain.getVagueValue()));
         solde.setText(String.valueOf(terrain.getJoueur().getSoldeJoueurValue()));
         this.lancerButton = lancerButton;
         this.test = test;
@@ -69,14 +67,14 @@ public class VueInterface {
         this.berryBot800b = berryBot800b;
         this.vboxRight = vboxRight;
         this.wpp = wpp;
-        this.centerPane = pane;
         this.stackpane = stackpane;
+        this.scene = scene;
+        this.borderPane = borderpane;
+        this.vague = vague;
         this.transitionVague = new ArrayList<ImageView>();
         ajouterLesImages();
         initializeRightPane();
         initializeImageBerry();
-
-
     }
 
     private void initializeImageBerry() {
@@ -182,13 +180,21 @@ public class VueInterface {
     }
     public void boucleImagesVagues(int n){
         ImageView imageView = transitionVague.get(n);
-        if (!centerPane.getChildren().contains(imageView)) {
-            centerPane.getChildren().add(imageView);
+
+        // Création d'un layout avec un fond semi-transparent
+        vaguePane = new StackPane(imageView);
+        vaguePane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.8);"); // Fond noir semi-transparent
+        vaguePane.setVisible(false); // Initially invisible
+
+        vaguePane.prefWidthProperty().bind(scene.widthProperty());
+        vaguePane.prefHeightProperty().bind(scene.heightProperty());
+        if (!borderPane.getChildren().contains(imageView)) {
+            borderPane.getChildren().add(imageView);
         }
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(2),
-                ae -> centerPane.getChildren().remove(imageView)));
+                Duration.seconds(3.2),
+                ae -> vaguePane.getChildren().remove(imageView)));
         timeline.play();
     }
 
