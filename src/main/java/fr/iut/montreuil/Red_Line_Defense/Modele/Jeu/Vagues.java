@@ -56,23 +56,23 @@ public class Vagues {
         switch (envWave) {
             case 1:
                 premiereVague();
-                System.out.println("Première Vague");
+            
                 break;
             case 2:
                 deuxiemeVague();
-                System.out.println("Deuxieme Vague");
+                
                 break;
             case 3:
                 troisiemeVague();
-                System.out.println("Troisième Vague");
+                
                 break;
             case 4:
                 quatriemeVague();
-                System.out.println("Quatrieme Vague");
+                
                 break;
             case 5:
                 cinquiemeVague();
-                System.out.println("Cinquieme et dernière Vague");
+                
                 break;
             default:
                 vagueParDefault();
