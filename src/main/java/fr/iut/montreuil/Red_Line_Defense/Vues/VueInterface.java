@@ -33,12 +33,11 @@ public class VueInterface {
 
 
 
-    public VueInterface(Environnement terrain, HBox hboxMoneyCount, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues,
+    public VueInterface(Environnement terrain, Button lancerButton, Button test, Label solde, ImageView berry, Label ennemisTues,
                         HBox prix200b, HBox prix400b, HBox prix600b, HBox prix800b, ImageView berryBot200b, ImageView berryBot600b, ImageView berryBot400b, ImageView berryBot800b, VBox vboxRight,
                         ImageView wpp, StackPane stackpane) {
 
         solde.setText(String.valueOf(terrain.getJoueur().getSoldeJoueurValue()));
-        //this.hboxMoneyCount = hboxMoneyCount;
         this.lancerButton = lancerButton;
         this.test = test;
         this.solde = solde;
@@ -62,7 +61,6 @@ public class VueInterface {
 
     private void initializeImageBerry() {
         berry = new ImageView(getBerryImage());
-        //hboxMoneyCount.getChildren().add(berry);
         berryBot200b = new ImageView(getBerryPrixImage());
         prix200b.getChildren().add(berryBot200b);
         berryBot400b = new ImageView(getBerryPrixImage());
@@ -78,21 +76,7 @@ public class VueInterface {
 
     public void initializeRightPane(){
         wpp = new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/AccessoiresInterface/rightPane.gif"));
-
         stackpane.getChildren().add(0, wpp);
-
-        //StackPane.setMargin(ennemisTues, new Insets(0, 12, 44, 0));
-        //stackpane.getChildren().add(solde);
-        //stackpane.getChildren().add(lancerButton);
-        //hboxMoneyCount.setTranslateX(59);
-        //hboxMoneyCount.setTranslateY(259);
-        /*solde.setTranslateX(59);
-        solde.setTranslateY(259);
-        stackpane.getChildren().add(1, solde);
-        ennemisTues.setTranslateX(59);
-        ennemisTues.setTranslateY(194);
-        stackpane.getChildren().add(2,ennemisTues);
-         */
 
     }
 

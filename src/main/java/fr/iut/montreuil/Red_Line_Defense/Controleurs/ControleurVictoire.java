@@ -17,20 +17,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControleurMP implements Initializable {
+public class ControleurVictoire implements Initializable {
     private Stage stage;
     private Parent root;
-
-    @FXML
-    private Label labelTitre;
-    private MediaPlayer mediaPlayerJeu;
-    private Media mediaJeu;
+    private MediaPlayer mediaPlayerOpening, mediaPlayerJeu;
+    private Media mediaOpening, mediaJeu;
+    public static final String AUDIO_OPENING_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/opening-red-line-defense.mp3";
     public static final String AUDIO_OST_JEU_PATH = "/fr/iut/montreuil/Red_Line_Defense/Sons/ostJeu.mp3";
 
 
 
     @FXML
-    private void onJouerButtonClick(MouseEvent event) throws IOException {
+    private void onRejouerButtonClick(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueDeJeu.fxml"));
         root = loader.load();
         Controleur controleur = loader.getController(); // Retrieve the controller instance
@@ -47,16 +45,21 @@ public class ControleurMP implements Initializable {
         controleur.initializeInputs();
     }
     @FXML
-    private void onAideButtonClick(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueAide.fxml"));
+    private void onMenuPrincipalClicked(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/iut/montreuil/Red_Line_Defense/Vues/vueMenuPrincipal.fxml"));
         root = loader.load();
-        ControleurAide controleur = loader.getController(); // Retrieve the controller instance
+        Controleur controleur = loader.getController(); // Retrieve the controller instance
         stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
         stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
         stage.setTitle("Red Line Defense");
         stage.setScene(scene);
-        stage.show();
+        mediaOpening = new Media(getClass().getResource(AUDIO_OPENING_PATH).toString());
+        mediaPlayerOpening = new MediaPlayer(mediaOpening);
+        mediaPlayerOpening.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayerOpening.play();
+
+        controleur.initializeInputs();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
