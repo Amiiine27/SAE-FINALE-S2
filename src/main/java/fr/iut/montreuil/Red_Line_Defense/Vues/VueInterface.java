@@ -1,6 +1,8 @@
 package fr.iut.montreuil.Red_Line_Defense.Vues;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -9,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -170,6 +173,12 @@ public class VueInterface {
         this.hboxMoneyCount = hboxMoneyCount;
     }
     public void boucleImagesVagues(int n){
-        centerPane.getChildren().add(transitionVague.get(n));
+        ImageView imageView = transitionVague.get(n);
+        centerPane.getChildren().add(imageView);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(1.2),
+                ae -> centerPane.getChildren().remove(imageView)));
+        timeline.play();
     }
 }

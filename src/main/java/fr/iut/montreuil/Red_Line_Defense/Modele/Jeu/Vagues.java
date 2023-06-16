@@ -103,10 +103,10 @@ public class Vagues {
 
 
     public void premiereVague(){
-        ennemisAFaireSpawnType1 = 40;
+        ennemisAFaireSpawnType1 = 12;
         totalSoldats = ennemisAFaireSpawnType1;
 
-        if (((environnement.getNbrTours() % 5) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
+        if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
             System.out.println("Un nouveau Soldat Apparait !");
             nouveauSpawnSoldat(1,9);
             nbreSpawnsType1++;
@@ -115,8 +115,8 @@ public class Vagues {
 
     public void deuxiemeVague(){
 
-        int maxSoldiersType1 = 1;
-        int maxSoldiersType2 = 1;
+        int maxSoldiersType1 = 8;
+        int maxSoldiersType2 = 6;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -142,8 +142,8 @@ public class Vagues {
 
 
     public void troisiemeVague(){
-        int maxSoldiersType1 = 1;
-        int maxSoldiersType2 = 1;
+        int maxSoldiersType1 = 10;
+        int maxSoldiersType2 = 8;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -168,9 +168,9 @@ public class Vagues {
     }
 
     public void quatriemeVague(){
-        int maxSoldiersType1 = 1;
-        int maxSoldiersType2 = 1;
-        int maxSoldiersType3 = 1;
+        int maxSoldiersType1 = 9;
+        int maxSoldiersType2 = 7;
+        int maxSoldiersType3 = 3;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
@@ -200,9 +200,9 @@ public class Vagues {
 
 
     public void cinquiemeVague(){
-        int maxSoldiersType1 = 1;
-        int maxSoldiersType2 = 1;
-        int maxSoldiersType3 = 1;
+        int maxSoldiersType1 = 11;
+        int maxSoldiersType2 = 9;
+        int maxSoldiersType3 = 5;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
