@@ -140,7 +140,7 @@ public class Controleur implements Initializable {
         initializeEcouteBasePrincipale();
     }
 
-    private void initializeEcouteBasePrincipale(){ ecouteBasePrincipale = new EcouteBasePrincipale(vueBasePrincipale);}
+    private void initializeEcouteBasePrincipale(){ ecouteBasePrincipale = new EcouteBasePrincipale(vueBasePrincipale, gameLoop);}
 
     private void initializeVueTours() {
         vueTours = new VueTours(terrain, centerPane);

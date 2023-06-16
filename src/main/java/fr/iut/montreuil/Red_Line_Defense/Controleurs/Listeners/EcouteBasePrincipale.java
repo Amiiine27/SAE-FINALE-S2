@@ -1,5 +1,6 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.GameLoop;
 import fr.iut.montreuil.Red_Line_Defense.Vues.VueBasePrincipale;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -14,11 +15,14 @@ public class EcouteBasePrincipale {
     private ProgressBar barreDeVieBasePrincipale;
     private DoubleProperty progression;
 
-    public EcouteBasePrincipale(VueBasePrincipale vueBasePrincipale) {
+    private GameLoop gameLoop;
+
+    public EcouteBasePrincipale(VueBasePrincipale vueBasePrincipale, GameLoop gameLoop) {
         this.vueBasePrincipale = vueBasePrincipale;
         this.pointsDeVieBasePrincipale = vueBasePrincipale.getPointsDeVieBasePrincipale();
         this.barreDeVieBasePrincipale = vueBasePrincipale.getBarreDeVieBasePrincipale();
         this.progression = new SimpleDoubleProperty(1.0);
+        this.gameLoop = gameLoop;
         barreDeVieBasePrincipale.progressProperty().bind(progression);
         ajouterEcouteurBarreDeVie();
         ajouterEcouteurPointsDeVie();
@@ -38,7 +42,7 @@ public class EcouteBasePrincipale {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (newValue.doubleValue() < 0){
-
+                    gameLoop.GameOver();
                 }
             }
         });
