@@ -12,4 +12,9 @@ module com.example.tower_defense {
     opens fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners to javafx.fxml;
     exports fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils;
     opens fr.iut.montreuil.Red_Line_Defense.Controleurs.Outils to javafx.fxml;
+    exports fr.iut.montreuil.Red_Line_Defense.Modele;
+    exports fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
+    exports fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats;
+    exports fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
+    exports fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles;
 }
