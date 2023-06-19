@@ -8,6 +8,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 
 import java.util.Random;
 
@@ -326,4 +327,15 @@ public class Vagues {
         return resultat;
     }
 
+    public Environnement getEnvironnement() {
+        return environnement;
+    }
+
+    public int getListeSoldats() {
+        return listeSoldats.size();
+    }
+
+    public ListProperty<Soldat> listeSoldatsProperty() {
+        return listeSoldats;
+    }
 }
