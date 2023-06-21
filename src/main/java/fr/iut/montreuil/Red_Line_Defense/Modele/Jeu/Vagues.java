@@ -8,6 +8,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 
 import java.util.Random;
 
@@ -56,23 +57,23 @@ public class Vagues {
         switch (envWave) {
             case 1:
                 premiereVague();
-            
+
                 break;
             case 2:
                 deuxiemeVague();
-                
+
                 break;
             case 3:
                 troisiemeVague();
-                
+
                 break;
             case 4:
                 quatriemeVague();
-                
+
                 break;
             case 5:
                 cinquiemeVague();
-                
+
                 break;
             default:
                 vagueParDefault();
@@ -97,14 +98,13 @@ public class Vagues {
     public void resetTours() {
         for (Tour t : environnement.getTours()){
             t.setPointsDeVieValue(0);
-
         }
     }
 
 
 
     public void premiereVague(){
-        ennemisAFaireSpawnType1 = 7;
+        ennemisAFaireSpawnType1 = 12;
         totalSoldats = ennemisAFaireSpawnType1;
 
         if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
@@ -116,8 +116,8 @@ public class Vagues {
 
     public void deuxiemeVague(){
 
-        int maxSoldiersType1 = 5;
-        int maxSoldiersType2 = 3;
+        int maxSoldiersType1 = 8;
+        int maxSoldiersType2 = 6;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -143,8 +143,8 @@ public class Vagues {
 
 
     public void troisiemeVague(){
-        int maxSoldiersType1 = 7;
-        int maxSoldiersType2 = 5;
+        int maxSoldiersType1 = 10;
+        int maxSoldiersType2 = 8;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2;
 
@@ -169,7 +169,7 @@ public class Vagues {
     }
 
     public void quatriemeVague(){
-        int maxSoldiersType1 = 7;
+        int maxSoldiersType1 = 9;
         int maxSoldiersType2 = 7;
         int maxSoldiersType3 = 3;
 
@@ -201,8 +201,8 @@ public class Vagues {
 
 
     public void cinquiemeVague(){
-        int maxSoldiersType1 = 9;
-        int maxSoldiersType2 = 8;
+        int maxSoldiersType1 = 11;
+        int maxSoldiersType2 = 9;
         int maxSoldiersType3 = 5;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
@@ -327,4 +327,15 @@ public class Vagues {
         return resultat;
     }
 
+    public Environnement getEnvironnement() {
+        return environnement;
+    }
+
+    public int getListeSoldats() {
+        return listeSoldats.size();
+    }
+
+    public ListProperty<Soldat> listeSoldatsProperty() {
+        return listeSoldats;
+    }
 }
