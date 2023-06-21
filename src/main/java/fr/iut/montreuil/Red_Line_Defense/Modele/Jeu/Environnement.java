@@ -27,7 +27,7 @@ public class Environnement {
     private ListProperty<Soldat> listeSoldats;
     private int nbrTours = 0;
     private Joueur joueur ;
-    private int[][] distances;
+    public int[][] distances;
     private BasePrincipale basePrincipale;
 
     private Vagues vaguesDeJeu;
@@ -41,6 +41,8 @@ public class Environnement {
 
         this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
+
+        this.ennemisTuesCetteVague = 0;
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         listeTours = new SimpleListProperty<>(observableListTour);
@@ -142,12 +144,14 @@ public class Environnement {
         nbrTours++;
     }
 
-    public void checkNouvelleVagues(){
-        if ((vaguesDeJeu.getTotalSoldats()) == (ennemisTues.getValue())) {
+    public void checkNouvelleVagues() {
+        if (ennemisTuesCetteVague == vaguesDeJeu.getTotalSoldats()) {
             vague.setValue(vague.getValue() + 1);
-
+            // Reset
+            ennemisTuesCetteVague = 0;
         }
     }
+
 
 
 
@@ -165,7 +169,7 @@ public class Environnement {
             Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
             if (basePrincipale.getZone().contains(positionSoldat)) {
                     basePrincipale.infligerDegats(300);
-                    s.setPointsDeVieValue(5);
+                    s.setPointsDeVieValue(-1);
             }
         }
     }
@@ -420,8 +424,7 @@ public class Environnement {
     }
 
 
-
-
+    public IntegerProperty getVague(){return this.vague;}
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- FIN --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------

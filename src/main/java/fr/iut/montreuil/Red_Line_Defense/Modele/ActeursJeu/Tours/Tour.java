@@ -116,6 +116,7 @@ public abstract class Tour extends Acteurs {
                     double distanceX = Math.abs(s.getX0Value() - getX0Value());
                     double distanceY = Math.abs(s.getY0Value() - getY0Value());
                     double distanceTotale = distanceX + distanceY;
+
                     if (distanceTotale <= portee) {
                         return s;
                     }
@@ -123,11 +124,11 @@ public abstract class Tour extends Acteurs {
             }
             return null;
         }
-    public boolean vérificationEstÀPorter(Soldat s){
-            double distanceX = Math.abs(s.getX0Value() - getX0Value());
-            double distanceY = Math.abs(s.getY0Value() - getY0Value());
+    public boolean vérificationEstÀPorter(double x,double y){
+            double distanceX = Math.abs(x - getX0Value());
+            double distanceY = Math.abs(y - getY0Value());
             double distanceTotale = distanceX + distanceY;
-            System.out.println(distanceTotale);
+
             if (distanceTotale <= portee) {
                 return true;
             }

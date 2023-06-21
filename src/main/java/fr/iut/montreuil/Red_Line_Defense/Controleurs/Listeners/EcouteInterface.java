@@ -65,7 +65,7 @@ public class EcouteInterface {
     private void ajouterListenerVague() {
         int nbvague = 0;
         this.vague.addListener((observable, oldValue, newValue) -> {
-            joueur.crediterSolde(200); // Chaque Vague le Joueur Gagne 200 Berrys
+            joueur.crediterSolde(800); // Chaque Vague le Joueur Gagne 800 Berrys
             vagues.majDefenseSoldats();
             vagues.resetTours();
             vueInterface.boucleImagesVagues(nbvague);
