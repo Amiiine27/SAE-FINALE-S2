@@ -32,6 +32,8 @@ public class Environnement {
 
     private Vagues vaguesDeJeu;
 
+    public BFS BFS;
+
 
 
     public Environnement(Joueur joueur) {
@@ -55,9 +57,9 @@ public class Environnement {
 
         this.vaguesDeJeu  = new Vagues(this);
 
-
+        this.BFS=new BFS(this);
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
-        calculerChemin(89, 47);
+        BFS.calculerChemin(89, 47);
     }
 
     public void initQuadrillage() {
@@ -137,7 +139,7 @@ public class Environnement {
         verificationMorts();
         actionTours(nbrTours);
         suppressionTour();
-        actionBasePrincipale();
+        basePrincipale.agit(1);
         checkNouvelleVagues();
         verificationDefaite();
 
@@ -159,20 +161,12 @@ public class Environnement {
         if (!listeSoldats.isEmpty()) {
             for (Soldat soldat : listeSoldats) {
                 if(!soldat.isEstPiégé() || n%2==0)
-                deplacerSoldat(soldat);
+                soldat.agit();
             }
         }
     }
 
-    public void actionBasePrincipale(){
-        for (Soldat s: listeSoldats.getValue()) {
-            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
-            if (basePrincipale.getZone().contains(positionSoldat)) {
-                    basePrincipale.infligerDegats(300);
-                    s.setPointsDeVieValue(-1);
-            }
-        }
-    }
+
 
     public void verificationDefaite(){
         if (basePrincipale.getPointsDeVieValue() < 1){
@@ -252,66 +246,12 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
 
 
-    public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
-
-        boolean[][] visited = new boolean[getYmax()][getXmax()];
-
-        Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(destX);
-        queue.offer(destY);
-        visited[destY][destX] = true;
-
-        int[] dx = {0, 0, -1, 1};
-        int[] dy = {-1, 1, 0, 0};
-
-        while (!queue.isEmpty()) {
-            int x = queue.poll();
-            int y = queue.poll();
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (isValidMove(nx, ny) && !visited[ny][nx]) {
-                    queue.offer(nx);
-                    queue.offer(ny);
-                    visited[ny][nx] = true;
-                    distances[ny][nx] = distances[y][x] + 1;
-                }
-            }
-        }
-    }
 
 
-    public void deplacerSoldat(Soldat soldat) {
-        int startX = (int) (soldat.getX0Value() / 8);
-        int startY = (int) (soldat.getY0Value() / 8);
-
-        int[] dx = {0, 0, -1, 1};
-        int[] dy = {-1, 1, 0, 0};
-
-        int nextX = startX;
-        int nextY = startY;
-        int minDistance = Integer.MAX_VALUE;
-
-        for (int i = 0; i < 4; i++) {
-            int nx = startX + dx[i];
-            int ny = startY + dy[i];
-
-            if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
-                nextX = nx;
-                nextY = ny;
-                minDistance = distances[ny][nx];
-            }
-        }
 
 
-        soldat.setX0(nextX * 8);
-        soldat.setY0(nextY * 8);
 
-    }
-
-    private boolean isValidMove(int x, int y) {
+    public boolean isValidMove(int x, int y) {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 
