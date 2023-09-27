@@ -131,15 +131,18 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
 
     public void unTour(){
-
         vaguesDeJeu.unTour();
-        deplacementSoldat(nbrTours);
         verificationMorts();
         actionTours(nbrTours);
         suppressionTour();
         actionBasePrincipale();
         checkNouvelleVagues();
         verificationDefaite();
+
+        // Faire déplacer tout les soldats
+        for(Soldat soldat : listeSoldats) {
+            soldat.deplacementSoldat();
+        }
 
         nbrTours++;
     }
@@ -149,18 +152,6 @@ public class Environnement {
             vague.setValue(vague.getValue() + 1);
             // Reset
             ennemisTuesCetteVague = 0;
-        }
-    }
-
-
-
-
-    public void deplacementSoldat(int n){
-        if (!listeSoldats.isEmpty()) {
-            for (Soldat soldat : listeSoldats) {
-                if(!soldat.isEstPiégé() || n%2==0)
-                deplacerSoldat(soldat);
-            }
         }
     }
 
@@ -180,7 +171,6 @@ public class Environnement {
         }
     }
 
-
     public void actionTours(int n){
         if(!listeTours.isEmpty()){
             for (Tour t : listeTours){
@@ -196,9 +186,6 @@ public class Environnement {
         }
     }
 
-
-
-
     public void verificationMorts(){
         Iterator<Soldat> iterator = listeSoldats.iterator();
         while (iterator.hasNext()) {
@@ -212,8 +199,17 @@ public class Environnement {
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------- GETTER ------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------
 
+    public ListProperty<Soldat> getListSoldats() {
+        return this.listeSoldats;
+    }
 
+    public int[][] getDistances() {
+        return this.distances;
+    }
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -235,16 +231,6 @@ public class Environnement {
     public int getEnnemisTuesValue() { return this.ennemisTues.getValue(); }
 
     public int getNbrTours() { return this.nbrTours; }
-
-
-
-
-
-
-
-
-
-
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -308,10 +294,9 @@ public class Environnement {
 
         soldat.setX0(nextX * 8);
         soldat.setY0(nextY * 8);
-
     }
 
-    private boolean isValidMove(int x, int y) {
+    public boolean isValidMove(int x, int y) {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 

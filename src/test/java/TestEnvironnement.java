@@ -38,7 +38,7 @@ public class TestEnvironnement {
         environnement.verificationMorts();
         assertEquals(0, environnement.getEnnemisTuesValue());
 
-        Soldat rookie = new Rookie(15, 15, 15, 15);
+        Soldat rookie = new Rookie(15, 15, 15, 15, environnement);
         environnement.ajouterSoldat(rookie);
         rookie.setPointsDeVieValue(-1);
         environnement.verificationMorts();
@@ -64,7 +64,7 @@ public class TestEnvironnement {
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
         Environnement environnement = new Environnement(joueur);
 
-        Soldat rookie = new Rookie(15, 15, 15, 15);
+        Soldat rookie = new Rookie(15, 15, 15, 15, environnement);
         environnement.ajouterSoldat(rookie);
 
         assertTrue(environnement.getSoldats().contains(rookie));
