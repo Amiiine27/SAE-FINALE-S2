@@ -46,6 +46,7 @@ public abstract class ToursOffensives extends Tour {
     }
 
     public abstract void creationProjectile(Soldat s);
+
     public void tirer(int nTemps) {
         Soldat s = ennemiÀPorter();
         if (s != null) {
