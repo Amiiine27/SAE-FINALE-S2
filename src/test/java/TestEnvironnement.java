@@ -50,7 +50,7 @@ public class TestEnvironnement {
         // Teste l'incrémentation du nombre de tours
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
         Environnement environnement = new Environnement(joueur);
-        BasePrincipale basePrincipale = new BasePrincipale(15, 15);
+        BasePrincipale basePrincipale = new BasePrincipale(15, 15, environnement);
         environnement.setBasePrincipale(basePrincipale);
         environnement.unTour();
         assertEquals(1, environnement.getNbrTours());

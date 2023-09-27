@@ -87,9 +87,9 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // coucou madame pour lancer le jeu appuyez sur P :)
         centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
-        initializeBasePrincipale();
         initializeJoueur();
         initializeEnvironnement();
+        initializeBasePrincipale();
         initializeVueTours();
         initializeVueSoldats();
         initializeGameLoop();
@@ -184,7 +184,7 @@ public class Controleur implements Initializable {
     }
 
     private void initializeBasePrincipale() {
-        basePrincipale = new BasePrincipale(700, 335);
+        basePrincipale = new BasePrincipale(700, 335, terrain);
     }
     private void initializeVueBasePrincipale(){
         vueBasePrincipale = new VueBasePrincipale(centerPane, basePrincipale);

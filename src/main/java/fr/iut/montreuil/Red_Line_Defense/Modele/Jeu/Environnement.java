@@ -26,21 +26,21 @@ public class Environnement {
     private ListProperty<Tour> listeTours;
     private ListProperty<Soldat> listeSoldats;
     private int nbrTours = 0;
-    private Joueur joueur ;
-    public int[][] distances;
+    private Joueur joueur;
+    private int[][] distances;
     private BasePrincipale basePrincipale;
+    private BFS bfs;
 
     private Vagues vaguesDeJeu;
-
 
 
     public Environnement(Joueur joueur) {
         initQuadrillage();
 
         this.joueur = joueur;
-
         this.vague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
+        this.bfs = new BFS(this);
 
         this.ennemisTuesCetteVague = 0;
 
@@ -53,11 +53,11 @@ public class Environnement {
         ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
         listeProjectiles = new SimpleListProperty<>(projectileObservableList);
 
-        this.vaguesDeJeu  = new Vagues(this);
+        this.vaguesDeJeu = new Vagues(this);
 
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
-        calculerChemin(89, 47);
+        bfs.calculerChemin(89, 47);
     }
 
     public void initQuadrillage() {
@@ -130,17 +130,19 @@ public class Environnement {
     //------------------------------------------------------- TOUR DE JEU ---------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void unTour(){
+    public void unTour() {
         vaguesDeJeu.unTour();
         verificationMorts();
         actionTours(nbrTours);
         suppressionTour();
-        actionBasePrincipale();
         checkNouvelleVagues();
         verificationDefaite();
 
+        // Enlève les PV aux soldats
+        basePrincipale.actionBasePrincipale();
+
         // Faire déplacer tout les soldats
-        for(Soldat soldat : listeSoldats) {
+        for (Soldat soldat : listeSoldats) {
             soldat.deplacementSoldat();
         }
 
@@ -155,38 +157,28 @@ public class Environnement {
         }
     }
 
-    public void actionBasePrincipale(){
-        for (Soldat s: listeSoldats.getValue()) {
-            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
-            if (basePrincipale.getZone().contains(positionSoldat)) {
-                    basePrincipale.infligerDegats(300);
-                    s.setPointsDeVieValue(-1);
-            }
-        }
-    }
-
-    public void verificationDefaite(){
-        if (basePrincipale.getPointsDeVieValue() < 1){
+    public void verificationDefaite() {
+        if (basePrincipale.getPointsDeVieValue() < 1) {
             this.vague.setValue(-1);
         }
     }
 
-    public void actionTours(int n){
-        if(!listeTours.isEmpty()){
-            for (Tour t : listeTours){
+    public void actionTours(int n) {
+        if (!listeTours.isEmpty()) {
+            for (Tour t : listeTours) {
                 t.agit(n);
-            t.perteVie(1);
+                t.perteVie(1);
             }
         }
     }
 
-   public void suppressionTour() {
+    public void suppressionTour() {
         if (!listeTours.isEmpty()) {
             listeTours.removeIf(tour -> tour.getPointsDeVieValue() <= 0);
         }
     }
 
-    public void verificationMorts(){
+    public void verificationMorts() {
         Iterator<Soldat> iterator = listeSoldats.iterator();
         while (iterator.hasNext()) {
             Soldat soldat = iterator.next();
@@ -200,7 +192,7 @@ public class Environnement {
     }
 
     //--------------------------------------------------------------------------------------------------------------------------------
-    //------------------------------------------------------- GETTER ------------------------------------------------------------------
+    //------------------------------------------------------- GETTER -----------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
     public ListProperty<Soldat> getListSoldats() {
@@ -213,24 +205,36 @@ public class Environnement {
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
-    //------------------------------------------------------- INTERFACE ------------------------------------------------------------------
+    //------------------------------------------------------- INTERFACE --------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void setVague(int i){ this.vague.set(i);}
+    public void setVague(int i) {
+        this.vague.set(i);
+    }
 
-    public IntegerProperty getVagueProperty() { return this.vague; }
+    public IntegerProperty getVagueProperty() {
+        return this.vague;
+    }
 
-    public int getVagueValue() { return this.vague.getValue(); }
+    public int getVagueValue() {
+        return this.vague.getValue();
+    }
 
     public void setEnnemisTues(int ennemisTues) {
         this.ennemisTues.set(ennemisTues);
     }
 
-    public IntegerProperty getEnnemisTuesProperty() { return this.ennemisTues;}
+    public IntegerProperty getEnnemisTuesProperty() {
+        return this.ennemisTues;
+    }
 
-    public int getEnnemisTuesValue() { return this.ennemisTues.getValue(); }
+    public int getEnnemisTuesValue() {
+        return this.ennemisTues.getValue();
+    }
 
-    public int getNbrTours() { return this.nbrTours; }
+    public int getNbrTours() {
+        return this.nbrTours;
+    }
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -238,90 +242,33 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
 
 
-    public void calculerChemin(int destX, int destY) {  // Méthode modifiée pour calculer les distances à la destination
-
-        boolean[][] visited = new boolean[getYmax()][getXmax()];
-
-        Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(destX);
-        queue.offer(destY);
-        visited[destY][destX] = true;
-
-        int[] dx = {0, 0, -1, 1};
-        int[] dy = {-1, 1, 0, 0};
-
-        while (!queue.isEmpty()) {
-            int x = queue.poll();
-            int y = queue.poll();
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (isValidMove(nx, ny) && !visited[ny][nx]) {
-                    queue.offer(nx);
-                    queue.offer(ny);
-                    visited[ny][nx] = true;
-                    distances[ny][nx] = distances[y][x] + 1;
-                }
-            }
-        }
-    }
-
-
-    public void deplacerSoldat(Soldat soldat) {
-        int startX = (int) (soldat.getX0Value() / 8);
-        int startY = (int) (soldat.getY0Value() / 8);
-
-        int[] dx = {0, 0, -1, 1};
-        int[] dy = {-1, 1, 0, 0};
-
-        int nextX = startX;
-        int nextY = startY;
-        int minDistance = Integer.MAX_VALUE;
-
-        for (int i = 0; i < 4; i++) {
-            int nx = startX + dx[i];
-            int ny = startY + dy[i];
-
-            if (isValidMove(nx, ny) && distances[ny][nx] < minDistance) {
-                nextX = nx;
-                nextY = ny;
-                minDistance = distances[ny][nx];
-            }
-        }
-
-
-        soldat.setX0(nextX * 8);
-        soldat.setY0(nextY * 8);
-    }
-
     public boolean isValidMove(int x, int y) {
         return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
-
-
-
-
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- LISTE PROJECTILES ------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void ajouterProjectile(Projectile projectile){ this.listeProjectiles.add(projectile);}
+    public void ajouterProjectile(Projectile projectile) {
+        this.listeProjectiles.add(projectile);
+    }
 
 
-    public void supprimerProjectile(Projectile projectile) { this.listeProjectiles.remove(projectile);}
+    public void supprimerProjectile(Projectile projectile) {
+        this.listeProjectiles.remove(projectile);
+    }
 
 
-    public ListProperty<Projectile> getProjectilesProperty(){ return this.listeProjectiles;}
+    public ListProperty<Projectile> getProjectilesProperty() {
+        return this.listeProjectiles;
+    }
 
 
-    public ObservableList<Projectile> getProjectiles(){return this.listeProjectiles.get();}
-
-
-
+    public ObservableList<Projectile> getProjectiles() {
+        return this.listeProjectiles.get();
+    }
 
 
     //--------------------------------------------------------------------------------------------------------------------------------
@@ -384,32 +331,35 @@ public class Environnement {
     }       // Retourne la property qui contient la liste observable
 
 
-
-
-
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- JOUEUR --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
 
-    public Joueur getJoueur() {return this.joueur;}
+    public Joueur getJoueur() {
+        return this.joueur;
+    }
 
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- BASE PRINCIPALE --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void setBasePrincipale(BasePrincipale basePrincipale){
+    public void setBasePrincipale(BasePrincipale basePrincipale) {
         this.basePrincipale = basePrincipale;
     }
-    public BasePrincipale getBasePrincipale(){
+
+    public BasePrincipale getBasePrincipale() {
         return this.basePrincipale;
     }
-    public Vagues getVagues(){
+
+    public Vagues getVagues() {
         return this.vaguesDeJeu;
     }
 
 
-    public IntegerProperty getVague(){return this.vague;}
+    public IntegerProperty getVague() {
+        return this.vague;
+    }
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- FIN --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------

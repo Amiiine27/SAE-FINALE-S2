@@ -49,30 +49,29 @@ public abstract class Soldat extends Acteurs {
     public void deplacementSoldat(){
         if (!this.env.getListSoldats().isEmpty()) {
             if(!this.isEstPiégé() || this.env.getNbrTours() % 2 == 0) {
-                    int startX = (int) (this.getX0Value() / 8);
-                    int startY = (int) (this.getY0Value() / 8);
+                int startX = (int) (this.getX0Value() / 8);
+                int startY = (int) (this.getY0Value() / 8);
 
-                    int[] dx = {0, 0, -1, 1};
-                    int[] dy = {-1, 1, 0, 0};
+                int[] dx = {0, 0, -1, 1};
+                int[] dy = {-1, 1, 0, 0};
 
-                    int nextX = startX;
-                    int nextY = startY;
-                    int minDistance = Integer.MAX_VALUE;
+                int nextX = startX;
+                int nextY = startY;
+                int minDistance = Integer.MAX_VALUE;
 
-                    for (int i = 0; i < 4; i++) {
-                        int nx = startX + dx[i];
-                        int ny = startY + dy[i];
+                for (int i = 0; i < 4; i++) {
+                    int nx = startX + dx[i];
+                    int ny = startY + dy[i];
 
-                        if (this.env.isValidMove(nx, ny) && this.env.distances[ny][nx] < minDistance) {
-                            nextX = nx;
-                            nextY = ny;
-                            minDistance = this.env.distances[ny][nx];
-                        }
+                    if (this.env.isValidMove(nx, ny) && this.env.getDistances()[ny][nx] < minDistance) {
+                        nextX = nx;
+                        nextY = ny;
+                        minDistance = this.env.getDistances()[ny][nx];
                     }
+                }
 
-
-                    this.setX0(nextX * 8);
-                    this.setY0(nextY * 8);
+                this.setX0(nextX * 8);
+                this.setY0(nextY * 8);
             }
         }
     }

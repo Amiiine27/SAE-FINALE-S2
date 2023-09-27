@@ -2,6 +2,7 @@ package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.geometry.Point2D;
 
 import java.util.HashSet;
@@ -9,19 +10,19 @@ import java.util.Set;
 
 public class BasePrincipale extends Tour {
 
-
     // C'est la base principale, celle qu'il faudra defendre des soldats ennemis et qui sera en bout de course
 
     Set<Point2D> zone;
+    Environnement environnement;
 
-    public BasePrincipale(int x0, int y0) {
+    public BasePrincipale(int x0, int y0, Environnement environnement) {
         super(x0, y0, 10000); // 2 tiles de portéé
-         zone = new HashSet<>();
-         initializeZone();
+        this.environnement = environnement;
+        zone = new HashSet<>();
+        initializeZone();
     }
 
     public void agit(int n) {
-
         setPointsDeVieValue(this.getPointsDeVieValue()-this.porteeBP().getDegatValue());
         System.out.println("---pv base : " + this.getPointsDeVieValue());
     }
@@ -70,5 +71,13 @@ public class BasePrincipale extends Tour {
         // return Math.abs(this.getY0Value() - s.getY0Value()) <= this.getPortée();
     }
 
-
+    public void actionBasePrincipale(){
+        for (Soldat s: this.environnement.getListSoldats().getValue()) {
+            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
+            if (this.getZone().contains(positionSoldat)) {
+                this.infligerDegats(300);
+                s.setPointsDeVieValue(-1);
+            }
+        }
+    }
 }
