@@ -133,7 +133,6 @@ public class Environnement {
     public void unTour() {
         vaguesDeJeu.unTour();
         verificationMorts();
-        actionTours(nbrTours);
         suppressionTour();
         checkNouvelleVagues();
         verificationDefaite();
@@ -144,6 +143,11 @@ public class Environnement {
         // Faire déplacer tout les soldats
         for (Soldat soldat : listeSoldats) {
             soldat.deplacementSoldat();
+        }
+
+        // Actionner les tours
+        for (Tour tour : listeTours) {
+            tour.actionTours(this.nbrTours);
         }
 
         nbrTours++;
@@ -160,15 +164,6 @@ public class Environnement {
     public void verificationDefaite() {
         if (basePrincipale.getPointsDeVieValue() < 1) {
             this.vague.setValue(-1);
-        }
-    }
-
-    public void actionTours(int n) {
-        if (!listeTours.isEmpty()) {
-            for (Tour t : listeTours) {
-                t.agit(n);
-                t.perteVie(1);
-            }
         }
     }
 
@@ -203,6 +198,9 @@ public class Environnement {
         return this.distances;
     }
 
+    public ListProperty<Tour> getListeTours() {
+        return this.listeTours;
+    }
 
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- INTERFACE --------------------------------------------------------------

@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 
 public abstract class Tour extends Acteurs {
     private IntegerProperty prix; // prix d'achat de l'acteur
+
     private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
 
     protected Environnement terrain;
@@ -141,6 +142,13 @@ public abstract class Tour extends Acteurs {
         p.getChildren().add(c);
         System.out.println("portée affichée");
     }*/
+
+    public void actionTours(int n) {
+        if (!this.terrain.getListeTours().isEmpty()) {
+            this.agit(n);
+            this.perteVie(1);
+        }
+    }
 
     public void perteVie(int pv){
         this.setPointsDeVieValue(this.getPointsDeVieValue()-pv);
