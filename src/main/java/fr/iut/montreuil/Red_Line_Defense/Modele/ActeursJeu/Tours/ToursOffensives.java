@@ -45,7 +45,13 @@ public abstract class ToursOffensives extends Tour {
         return cadence;
     }
 
-    public abstract void creationProjectile(Soldat s);
+    public abstract Projectile creerP(Soldat s);
+
+    public void creationProjectile(Soldat s){
+        Projectile p =  creerP(s);
+        getTerrain().ajouterProjectile(p);
+        p.animationProjectile();
+    }
 
     public void tirer(int nTemps) {
         Soldat s = ennemiÀPorter();
