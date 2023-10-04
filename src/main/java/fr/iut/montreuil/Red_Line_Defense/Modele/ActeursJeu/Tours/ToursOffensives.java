@@ -32,17 +32,12 @@ public abstract class ToursOffensives extends Tour {
         return this.projectiles;
     }
 
-
     public void agit(int n){
         tirer(n);
     }
 
     public int getCadence() {
         return cadence.getValue();
-    }
-
-    public IntegerProperty cadenceProperty() {
-        return cadence;
     }
 
     public abstract Projectile creerP(Soldat s);

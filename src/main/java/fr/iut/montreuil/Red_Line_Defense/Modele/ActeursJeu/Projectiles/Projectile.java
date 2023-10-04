@@ -86,10 +86,7 @@ public abstract class Projectile {
             @Override
             public void handle(long now) {
                 if (lastUpdate > 0 && !(isTouché())) {
-
-
                     double elapsedTime = (now - lastUpdate) / 1000000000.0;
-
                     Soldat s = ennemiÀPorter();
                     if (s != null) {
                         getTerrain().supprimerProjectile(p);
@@ -105,12 +102,7 @@ public abstract class Projectile {
                 else if(p.isTouché()){
                     stop();
                 }
-
-
-
-
                 lastUpdate = now;
-
             }
         };
 
@@ -125,11 +117,8 @@ public abstract class Projectile {
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
                 System.out.println(distanceTotale);
-                if (distanceTotale <= 10) {
-                    return s;
-                }
-            }
-        }
+                if (distanceTotale <= 10) {return s;}
+            }}
         return null;
     }
 
