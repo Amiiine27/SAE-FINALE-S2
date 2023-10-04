@@ -97,11 +97,7 @@ public abstract class Projectile {
                     stop();
                 }
 
-
-
-
                 lastUpdate = now;
-
             }
         };
 
