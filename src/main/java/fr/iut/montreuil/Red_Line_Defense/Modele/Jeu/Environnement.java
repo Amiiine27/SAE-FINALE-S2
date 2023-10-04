@@ -179,7 +179,7 @@ public class Environnement {
         if(!listeTours.isEmpty()){
             for (Tour t : listeTours){
                 t.agit(n);
-            t.perteVie(1);
+            t.infligerDegats(2);
             }
         }
     }
