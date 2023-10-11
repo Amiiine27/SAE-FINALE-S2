@@ -87,9 +87,9 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // coucou madame pour lancer le jeu appuyez sur P :)
         centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
-        initializeBasePrincipale();
         initializeJoueur();
         initializeEnvironnement();
+        initializeBasePrincipale();
         initializeVueTours();
         initializeVueSoldats();
         initializeGameLoop();
@@ -119,31 +119,10 @@ public class Controleur implements Initializable {
         ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
     }
 
-
-
-    /*public void ajouterVictoire (){
-        FXMLLoader loader = new FXMLLoader();
-
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Controleur controleur = loader.getController(); // Retrieve the controller instance
-        stage = (Stage) ((javafx.scene.Node) centerPane).getScene().getWindow();
-        Scene scene = new Scene(root, 940, 560);// Largeur 940px : 840px pour la carte, 100px pour le volet droit
-        stage.setResizable(false);                     // Hauteur 560px : 480 pour la carte, 80px pour le volet bas
-        stage.setTitle("Red Line Defense");
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
-
-
     private void initializeJoueur(){
         this.joueur = new Joueur("Ayoub");
     }
+
     private void initializeSons(){
         Media mediaJeu = new Media(getClass().getResource(OST_JEU_PATH).toString());
         Audio.chargerMedia(mediaJeu);
@@ -184,7 +163,7 @@ public class Controleur implements Initializable {
     }
 
     private void initializeBasePrincipale() {
-        basePrincipale = new BasePrincipale(700, 335);
+        basePrincipale = new BasePrincipale(700, 335, terrain);
     }
     private void initializeVueBasePrincipale(){
         vueBasePrincipale = new VueBasePrincipale(centerPane, basePrincipale);
@@ -224,19 +203,6 @@ public class Controleur implements Initializable {
             }
         }
     }
-    /*@FXML
-    public void testPv(ActionEvent event) {
-        System.out.println("TEST");
-        Random rand = new Random();
-        for (Soldat s : this.terrain.getSoldats()) {
-            // Generate a random number between 0 and 3 (inclusive)
-            int chance = rand.nextInt(4);
-            if (chance == 0) {
-                s.setPointsDeVieValue(0);
-                System.out.println("MORT");
-            }
-        }
-    } */
 
     private ImageView createTerrainImageView(int i, int j) {
         int n = terrain.valeurDeLaCase(i, j);

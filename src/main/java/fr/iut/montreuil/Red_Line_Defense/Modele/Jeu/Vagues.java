@@ -201,16 +201,16 @@ public abstract class Vagues {
 
         switch(typeSoldat) {
             case 1:
-                s = new Rookie((int) startX, (int) startY, 89, 49);
+                s = new Rookie((int) startX, (int) startY, 89, 49, environnement);
                 break;
             case 2:
-                s = new SuperNova((int) startX, (int) startY, 89, 49);
+                s = new SuperNova((int) startX, (int) startY, 89, 49, environnement);
                 break;
             case 3:
-                s = new Shichibukais((int) startX, (int) startY, 89, 49);
+                s = new Shichibukais((int) startX, (int) startY, 89, 49, environnement);
                 break;
             default:
-                s = new Rookie((int) startX, (int) startY, 89, 49);
+                s = new Rookie((int) startX, (int) startY, 89, 49, environnement);
         }
 
         return s;
