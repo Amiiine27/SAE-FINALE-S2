@@ -308,6 +308,7 @@ public class Vagues {
                 {83, 0},
                 {81, 1},
                 {82, 2}
+
         };
 
         int[][] possibleDestPositions = {
