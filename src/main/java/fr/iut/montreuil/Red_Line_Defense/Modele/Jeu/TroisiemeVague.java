@@ -8,10 +8,6 @@ public class TroisiemeVague extends Vagues {
         super(environnement);
     }
 
-    @Override
-    public int ennemiFaireSpwan() {
-        return 0;
-    }
 
     @Override
     public int maxSoldType1() {
