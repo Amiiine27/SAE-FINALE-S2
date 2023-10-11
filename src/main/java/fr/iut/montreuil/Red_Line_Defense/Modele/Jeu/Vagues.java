@@ -12,21 +12,7 @@ import java.util.Random;
 
 public abstract class Vagues {
 
-  //  private ListProperty<Soldat> listeSoldats;
-
-    private IntegerProperty nbrTours;
     private Environnement environnement;
-
-    private int currentWave;
-
-    private int numeroDeVague;
-
-    private int ennemisAFaireSpawnType1;
-
-    private int ennemisAFaireSpawnType2;
-
-    private int ennemisAFaireSpawnType3;
-
     private int nbreSpawnsType1;
     private int nbreSpawnsType2;
     private int nbreSpawnsType3;
@@ -35,19 +21,11 @@ public abstract class Vagues {
 
     public Vagues(Environnement environnement) {
         this.environnement = environnement;
-       // this.listeSoldats = environnement.getSoldatsProperty();
-        this.numeroDeVague = environnement.getVagueValue();
         this.nbreSpawnsType1 = 0;
         this.nbreSpawnsType2 = 0;
         this.nbreSpawnsType3 = 0;
     }
 
-    public void resetNbreSpawns() {
-        nbreSpawnsType1 = 0;
-        nbreSpawnsType2 = 0;
-        nbreSpawnsType3 = 0;
-        totalSoldats = 0;
-    }
 
     public void majDefenseSoldats() {
         for (Soldat s : environnement.getSoldats()) {
@@ -210,41 +188,4 @@ public abstract class Vagues {
         this.environnement = environnement;
     }
 
-    public void setEnnemisAFaireSpawnType1(int ennemisAFaireSpawnType1) {
-        this.ennemisAFaireSpawnType1 = ennemisAFaireSpawnType1;
-    }
-
-    public void setNbreSpawnsType1(int nbreSpawnsType1) {
-        this.nbreSpawnsType1 = nbreSpawnsType1;
-    }
-
-    public void setNbreSpawnsType2(int nbreSpawnsType2) {
-        this.nbreSpawnsType2 = nbreSpawnsType2;
-    }
-
-    public void setNbreSpawnsType3(int nbreSpawnsType3) {
-        this.nbreSpawnsType3 = nbreSpawnsType3;
-    }
-
-    public void setTotalSoldats(int totalSoldats) {
-        this.totalSoldats = totalSoldats;
-    }
-
-
-
-    public int getEnnemisAFaireSpawnType1() {
-        return ennemisAFaireSpawnType1;
-    }
-
-    public int getNbreSpawnsType1() {
-        return nbreSpawnsType1;
-    }
-
-    public int getNbreSpawnsType2() {
-        return nbreSpawnsType2;
-    }
-
-    public int getNbreSpawnsType3() {
-        return nbreSpawnsType3;
-    }
 }
