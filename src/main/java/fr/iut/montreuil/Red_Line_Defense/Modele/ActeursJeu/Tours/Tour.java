@@ -142,10 +142,6 @@ public abstract class Tour extends Acteurs {
         System.out.println("portée affichée");
     }*/
 
-    public void perteVie(int pv){
-        this.setPointsDeVieValue(this.getPointsDeVieValue()-pv);
-    }
-
     public String getId() {
         return id;
     }
