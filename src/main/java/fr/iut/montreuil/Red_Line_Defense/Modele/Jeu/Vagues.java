@@ -12,7 +12,7 @@ import java.util.Random;
 
 public abstract class Vagues {
 
-    private ListProperty<Soldat> listeSoldats;
+  //  private ListProperty<Soldat> listeSoldats;
 
     private IntegerProperty nbrTours;
     private Environnement environnement;
@@ -35,7 +35,7 @@ public abstract class Vagues {
 
     public Vagues(Environnement environnement) {
         this.environnement = environnement;
-        this.listeSoldats = environnement.getSoldatsProperty();
+       // this.listeSoldats = environnement.getSoldatsProperty();
         this.numeroDeVague = environnement.getVagueValue();
         this.nbreSpawnsType1 = 0;
         this.nbreSpawnsType2 = 0;
@@ -110,7 +110,7 @@ public abstract class Vagues {
 
 
 
-    public void créerVague(){
+    public void spwanEnnemi(){
         ennemisAFaireSpawnType1 = this.ennemiFaireSpwan();
 
         int maxSoldiersType1 = this.maxSoldType1();
@@ -143,6 +143,10 @@ public abstract class Vagues {
         }
     }
 
+    public int getTotalSoldats() {
+        return totalSoldats;
+    }
+
     public void premiereVague(){
         ennemisAFaireSpawnType1 = 12;
         totalSoldats = ennemisAFaireSpawnType1;
@@ -159,9 +163,7 @@ public abstract class Vagues {
     public void vagueParDefault(){premiereVague();
     }
 */
-    public int getTotalSoldats(){
-        return totalSoldats;
-    }
+
 /*
     public Soldat nouveauSpawnSoldat(int typeSoldat, int spawn) {
 
@@ -188,7 +190,8 @@ public abstract class Vagues {
 
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
-        listeSoldats.add(s);
+        //listeSoldats.add(s);
+        environnement.ajouterSoldat(s);
 
         return s;
     }
@@ -263,10 +266,13 @@ public abstract class Vagues {
     public Environnement getEnvironnement() {
         return environnement;
     }
-
+/*
     public int getListeSoldats() {
-        return listeSoldats.size();
+       // return listeSoldats.size();
+        return environnement.getli
     }
+
+ */
 
     public void setEnvironnement(Environnement environnement) {
         this.environnement = environnement;

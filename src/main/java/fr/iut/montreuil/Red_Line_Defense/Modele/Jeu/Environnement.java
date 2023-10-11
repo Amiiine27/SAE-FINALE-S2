@@ -19,7 +19,7 @@ public class Environnement {
 
     private int[][] quadrillage;
 
-    private IntegerProperty vague;
+    private IntegerProperty numeroVague;
     private IntegerProperty ennemisTues;
     private int ennemisTuesCetteVague;
     private ListProperty<Projectile> listeProjectiles;
@@ -30,7 +30,7 @@ public class Environnement {
     public int[][] distances;
     private BasePrincipale basePrincipale;
 
-    private Vagues vaguesDeJeu;
+    private GestionnaireVague gestionnaireVague;
 
 
 
@@ -39,7 +39,7 @@ public class Environnement {
 
         this.joueur = joueur;
 
-        this.vague = new SimpleIntegerProperty(1);
+        this.numeroVague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
 
         this.ennemisTuesCetteVague = 0;
@@ -53,7 +53,7 @@ public class Environnement {
         ObservableList<Projectile> projectileObservableList = FXCollections.observableArrayList();
         listeProjectiles = new SimpleListProperty<>(projectileObservableList);
 
-        this.vaguesDeJeu  = new Vagues(this);
+        this.gestionnaireVague = new GestionnaireVague(this);
 
 
         this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
@@ -132,7 +132,7 @@ public class Environnement {
 
     public void unTour(){
 
-        vaguesDeJeu.unTour();
+        gestionnaireVague.unTour();
         deplacementSoldat(nbrTours);
         verificationMorts();
         actionTours(nbrTours);
@@ -145,8 +145,8 @@ public class Environnement {
     }
 
     public void checkNouvelleVagues() {
-        if (ennemisTuesCetteVague == vaguesDeJeu.getTotalSoldats()) {
-            vague.setValue(vague.getValue() + 1);
+        if (ennemisTuesCetteVague == gestionnaireVague.getVagueActuelle().getTotalSoldats()) {
+            numeroVague.setValue(numeroVague.getValue() + 1);
             // Reset
             ennemisTuesCetteVague = 0;
         }
@@ -176,7 +176,7 @@ public class Environnement {
 
     public void verificationDefaite(){
         if (basePrincipale.getPointsDeVieValue() < 1){
-            this.vague.setValue(-1);
+            this.numeroVague.setValue(-1);
         }
     }
 
@@ -220,11 +220,11 @@ public class Environnement {
     //------------------------------------------------------- INTERFACE ------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void setVague(int i){ this.vague.set(i);}
+    public void setNumeroVague(int i){ this.numeroVague.set(i);}
 
-    public IntegerProperty getVagueProperty() { return this.vague; }
+    public IntegerProperty getVagueProperty() { return this.numeroVague; }
 
-    public int getVagueValue() { return this.vague.getValue(); }
+    public int getVagueValue() { return this.numeroVague.getValue(); }
 
     public void setEnnemisTues(int ennemisTues) {
         this.ennemisTues.set(ennemisTues);
@@ -420,11 +420,11 @@ public class Environnement {
         return this.basePrincipale;
     }
     public Vagues getVagues(){
-        return this.vaguesDeJeu;
+        return this.gestionnaireVague.getVagueActuelle();
     }
 
 
-    public IntegerProperty getVague(){return this.vague;}
+    public IntegerProperty getNumeroVague(){return this.numeroVague;}
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- FIN --------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
