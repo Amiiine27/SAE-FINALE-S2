@@ -24,7 +24,15 @@ public class BasePrincipale extends Tour {
 
         setPointsDeVieValue(this.getPointsDeVieValue()-this.porteeBP().getDegatValue());
         System.out.println("---pv base : " + this.getPointsDeVieValue());
-    }
+            for (Soldat s: terrain.getSoldatsProperty().getValue()) {
+                Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
+                if (getZone().contains(positionSoldat)) {
+                    infligerDegats(300);
+                    s.setPointsDeVieValue(-1);
+                }
+            }
+        }
+
 
     private void initializeZone(){
         for (int x = 88; x <= 90; x++) {

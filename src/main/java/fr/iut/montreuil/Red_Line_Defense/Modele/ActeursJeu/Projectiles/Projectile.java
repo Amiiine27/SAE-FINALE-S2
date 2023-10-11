@@ -8,8 +8,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class Projectile {
-    private double xDépart;
-    private double yDépart;
     private DoubleProperty x;
     private DoubleProperty y;
     private DoubleProperty xCible;
@@ -20,10 +18,6 @@ public abstract class Projectile {
 
     private Environnement terrain;
     private boolean touché;
-
-    public Environnement getTerrain() {
-        return terrain;
-    }
 
     private int degats;
 
@@ -36,10 +30,6 @@ public abstract class Projectile {
         this.x = new SimpleDoubleProperty(x);
 
         this.y = new SimpleDoubleProperty(y);
-
-        xDépart=x;
-
-        yDépart=y;
 
         this.xCible = new SimpleDoubleProperty(xCible);
 
@@ -208,5 +198,8 @@ public abstract class Projectile {
     }
     public double calculerAngle(double x, double y, double xCible, double yCible) {
         return Math.atan2(yCible - y, xCible - x);
+    }
+    public Environnement getTerrain() {
+        return terrain;
     }
 }
