@@ -62,7 +62,7 @@ public abstract class Vagues {
 
         Random random = new Random();
 
-        if ((environnement.getNbrTours() % this.nbtour()) == 0) {
+        if ((environnement.getNbrTours() % this.nbtour()) == 0) { // Verifier si le tour dans environnement et dans notre classe est le même
 
             if ((nbreSpawnsType1 < maxSoldiersType1) || (nbreSpawnsType2 < maxSoldiersType2) || (nbreSpawnsType3 < maxSoldiersType3)) {
                 int soldierTypeToSpawn = random.nextInt(this.randomTypeSoldier()) + 1; // Cela générera soit 1, soit 2 ou 3
