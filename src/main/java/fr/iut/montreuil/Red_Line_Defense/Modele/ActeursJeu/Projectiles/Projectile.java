@@ -65,7 +65,15 @@ public abstract class Projectile {
         this.touché = touché;
     }
 
-    public abstract void deplacement(double elapsedTime);
+    public void deplacement(double elapsedTime) {
+        double deltaX = this.getxDirection() * this.getV()*elapsedTime;
+        double deltaY = this.getyDirection() * this.getV()*elapsedTime;
+
+        if (!(this.getX()==this.getxCible()) || (this.getY()==this.getyCible())) {
+            setX(getX() + deltaX);
+            setY(getY() + deltaY);
+        }
+    }
 
     public void animationProjectile(){
         Projectile p = this;
