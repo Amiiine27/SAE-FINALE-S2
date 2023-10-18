@@ -8,7 +8,7 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 
 public class TourLanceMissile extends ToursOffensives{
     public TourLanceMissile(int x0, int y0, Environnement terrain) {
-        super(x0, y0, 1000, 300, 5, 100, terrain, 25,100,150);
+        super(x0, y0, 1000, 300, 5, 800, terrain, 25,100,150);
     }
 
     @Override

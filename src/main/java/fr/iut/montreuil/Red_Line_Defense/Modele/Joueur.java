@@ -11,7 +11,7 @@ public class Joueur {
 
     public Joueur(String nomJ) {
         this.nomJoueur = nomJ;
-        this.soldeJoueur = new SimpleIntegerProperty(1000);
+        this.soldeJoueur = new SimpleIntegerProperty(2000);
         ajouterListenerSoldeJoueur();
     }
 
