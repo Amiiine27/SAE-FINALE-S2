@@ -155,6 +155,7 @@ public class Environnement {
 
     public IntegerProperty getVagueProperty() { return this.numeroVague; }
 
+
     public int getVagueValue() { return this.numeroVague.getValue(); }
 
     public void setEnnemisTues(int ennemisTues) {
