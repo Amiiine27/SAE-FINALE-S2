@@ -33,8 +33,4 @@ public class ToursDeffensives extends Tour{
             }
         }
     }
-
-    public void suppSoldatPiégés(Soldat s){
-        soldatsPiégés.remove(s);
-    }
 }

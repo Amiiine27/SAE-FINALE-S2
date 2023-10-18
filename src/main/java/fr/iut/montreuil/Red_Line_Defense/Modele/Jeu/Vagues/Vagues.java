@@ -183,12 +183,7 @@ public abstract class Vagues {
     public Environnement getEnvironnement() {
         return environnement;
     }
-/*
-    public int getListeSoldats() {
-       // return listeSoldats.size();
-        return environnement.getli
-    }
- */
+
     public int getTotalSoldats(){
       return  this.totalSoldats;
     }

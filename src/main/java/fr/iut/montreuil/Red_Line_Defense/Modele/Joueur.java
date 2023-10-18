@@ -15,10 +15,6 @@ public class Joueur {
         ajouterListenerSoldeJoueur();
     }
 
-    public String getNomJoueur() {
-        return nomJoueur;
-    }
-
     public IntegerProperty getSoldeJoueurProperty() {
         return soldeJoueur;
     }

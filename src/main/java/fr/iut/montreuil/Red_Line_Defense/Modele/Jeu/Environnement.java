@@ -99,16 +99,6 @@ public class Environnement {
         }
     }
 
-    public void actionBasePrincipale(){
-        for (Soldat s: listeSoldats.getValue()) {
-            Point2D positionSoldat = new Point2D(s.getX0Value()/8, s.getY0Value()/8);
-            if (basePrincipale.getZone().contains(positionSoldat)) {
-                    basePrincipale.infligerDegats(300);
-                    s.setPointsDeVieValue(-1);
-            }
-        }
-    }
-
     public void verificationDefaite(){
         if (basePrincipale.getPointsDeVieValue() < 1){
             this.numeroVague.setValue(-1);
@@ -138,8 +128,6 @@ public class Environnement {
     //------------------------------------------------------- GETTER -----------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
 
-    public void setNumeroVague(int i){ this.numeroVague.set(i);}
-
     public ListProperty<Soldat> getListSoldats() {
         return this.listeSoldats;
     }
@@ -160,10 +148,6 @@ public class Environnement {
 
 
     public int getVagueValue() { return this.numeroVague.getValue(); }
-
-    public void setEnnemisTues(int ennemisTues) {
-        this.ennemisTues.set(ennemisTues);
-    }
 
     public IntegerProperty getEnnemisTuesProperty() {
         return this.ennemisTues;
@@ -248,10 +232,6 @@ public class Environnement {
     public void ajouterSoldat(Soldat soldat) {
         this.listeSoldats.add(soldat);
     }          // Ajouter un Soldat
-
-    public void supprimerSoldat(Soldat soldat) {
-        this.listeSoldats.remove(soldat);
-    }     // Supprimer un Soldat
 
     public ListProperty<Soldat> getSoldatsProperty() {
         return this.listeSoldats;

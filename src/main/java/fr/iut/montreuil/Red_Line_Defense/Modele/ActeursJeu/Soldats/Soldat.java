@@ -16,12 +16,10 @@ public abstract class Soldat extends Acteurs {
     public String couleur;
     private Environnement env;
 
-    private List<Point2D> chemin;
     private int pathPosition = 0;
 
     private Set<Point2D> zone;
 
-    private int pointsDeVie;
     private boolean estPiégé;
     private int valeur; // valeur du soldat, permet de déterminer combien le joueur gagne en le tuant
 
@@ -94,18 +92,6 @@ public abstract class Soldat extends Acteurs {
 
     public String getCouleur() {
         return this.couleur;
-    }
-
-    public Set<Point2D> getZone(){
-        return this.zone;
-    }
-
-    public double getDestinationX() {
-        return this.destinationX;
-    }
-
-    public double getDestinationY() {
-        return this.destinationY;
     }
 
     public boolean isEstPiégé(){
