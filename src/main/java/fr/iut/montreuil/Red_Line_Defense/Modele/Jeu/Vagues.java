@@ -12,21 +12,7 @@ import java.util.Random;
 
 public abstract class Vagues {
 
-    private ListProperty<Soldat> listeSoldats;
-
-    private IntegerProperty nbrTours;
     private Environnement environnement;
-
-    private int currentWave;
-
-    private int numeroDeVague;
-
-    private int ennemisAFaireSpawnType1;
-
-    private int ennemisAFaireSpawnType2;
-
-    private int ennemisAFaireSpawnType3;
-
     private int nbreSpawnsType1;
     private int nbreSpawnsType2;
     private int nbreSpawnsType3;
@@ -35,54 +21,11 @@ public abstract class Vagues {
 
     public Vagues(Environnement environnement) {
         this.environnement = environnement;
-        this.listeSoldats = environnement.getSoldatsProperty();
-        this.numeroDeVague = environnement.getVagueValue();
         this.nbreSpawnsType1 = 0;
         this.nbreSpawnsType2 = 0;
         this.nbreSpawnsType3 = 0;
     }
 
-    public void unTour(){
-
-        int envWave = environnement.getVagueValue();
-
-        if (envWave != currentWave) {
-            resetNbreSpawns();
-            currentWave = envWave;
-        }
-
-        switch (envWave) {
-            case 1:
-                //premiereVague();
-                break;
-            case 2:
-
-                //deuxiemeVague();
-                break;
-            case 3:
-
-                //troisiemeVague();
-
-                break;
-            case 4:
-
-                //quatriemeVague();
-                break;
-            case 5:
-
-              //  cinquiemeVague();
-
-                break;
-            default:
-        }
-    }
-
-    public void resetNbreSpawns() {
-        nbreSpawnsType1 = 0;
-        nbreSpawnsType2 = 0;
-        nbreSpawnsType3 = 0;
-        totalSoldats = 0;
-    }
 
     public void majDefenseSoldats() {
         for (Soldat s : environnement.getSoldats()) {
@@ -98,7 +41,6 @@ public abstract class Vagues {
         }
     }
 
-    public abstract int ennemiFaireSpwan();
     public abstract int maxSoldType1();
     public abstract int maxSoldType2();
     public abstract int maxsoldType3();
@@ -109,9 +51,8 @@ public abstract class Vagues {
     public abstract int nbrspwan3();
 
 
-
-    public void créerVague(){
-        ennemisAFaireSpawnType1 = this.ennemiFaireSpwan();
+    public void spwanEnnemi(){
+      //  ennemisAFaireSpawnType1 = this.ennemiFaireSpwan();
 
         int maxSoldiersType1 = this.maxSoldType1();
         int maxSoldiersType2 = this.maxSoldType2();
@@ -121,7 +62,7 @@ public abstract class Vagues {
 
         Random random = new Random();
 
-        if ((environnement.getNbrTours() % this.nbtour()) == 0) {
+        if ((environnement.getNbrTours() % this.nbtour()) == 0) { // Verifier si le tour dans environnement et dans notre classe est le même
 
             if ((nbreSpawnsType1 < maxSoldiersType1) || (nbreSpawnsType2 < maxSoldiersType2) || (nbreSpawnsType3 < maxSoldiersType3)) {
                 int soldierTypeToSpawn = random.nextInt(this.randomTypeSoldier()) + 1; // Cela générera soit 1, soit 2 ou 3
@@ -143,37 +84,6 @@ public abstract class Vagues {
         }
     }
 
-    public void premiereVague(){
-        ennemisAFaireSpawnType1 = 12;
-        totalSoldats = ennemisAFaireSpawnType1;
-
-        if (((environnement.getNbrTours() % 20) == 0) && (ennemisAFaireSpawnType1 > nbreSpawnsType1)) {
-            System.out.println("Un nouveau Soldat Apparait !");
-            nouveauSpawnSoldat(1,9);
-            nbreSpawnsType1++;
-        }
-    }
-
-
-/*
-    public void vagueParDefault(){premiereVague();
-    }
-*/
-    public int getTotalSoldats(){
-        return totalSoldats;
-    }
-/*
-    public Soldat nouveauSpawnSoldat(int typeSoldat, int spawn) {
-
-        int[] randomSelection = randomSelection(spawn);
-        int startX = randomSelection[0] * 8;
-        int startY = randomSelection[1] * 8;
-
-        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
-        return soldat;
-    }
-
- */
 
     public void nouveauSpawnSoldat(int typeSoldat, int spawn) {
 
@@ -188,7 +98,8 @@ public abstract class Vagues {
 
     public Soldat afficherSoldat(double startX, double startY, int typeSoldat) {
         Soldat s = selectionSoldat(typeSoldat, startX, startY);
-        listeSoldats.add(s);
+        //listeSoldats.add(s);
+        environnement.ajouterSoldat(s);
 
         return s;
     }
@@ -263,50 +174,18 @@ public abstract class Vagues {
     public Environnement getEnvironnement() {
         return environnement;
     }
-
+/*
     public int getListeSoldats() {
-        return listeSoldats.size();
+       // return listeSoldats.size();
+        return environnement.getli
+    }
+ */
+    public int getTotalSoldats(){
+      return  this.totalSoldats;
     }
 
     public void setEnvironnement(Environnement environnement) {
         this.environnement = environnement;
     }
 
-    public void setEnnemisAFaireSpawnType1(int ennemisAFaireSpawnType1) {
-        this.ennemisAFaireSpawnType1 = ennemisAFaireSpawnType1;
-    }
-
-    public void setNbreSpawnsType1(int nbreSpawnsType1) {
-        this.nbreSpawnsType1 = nbreSpawnsType1;
-    }
-
-    public void setNbreSpawnsType2(int nbreSpawnsType2) {
-        this.nbreSpawnsType2 = nbreSpawnsType2;
-    }
-
-    public void setNbreSpawnsType3(int nbreSpawnsType3) {
-        this.nbreSpawnsType3 = nbreSpawnsType3;
-    }
-
-    public void setTotalSoldats(int totalSoldats) {
-        this.totalSoldats = totalSoldats;
-    }
-
-
-
-    public int getEnnemisAFaireSpawnType1() {
-        return ennemisAFaireSpawnType1;
-    }
-
-    public int getNbreSpawnsType1() {
-        return nbreSpawnsType1;
-    }
-
-    public int getNbreSpawnsType2() {
-        return nbreSpawnsType2;
-    }
-
-    public int getNbreSpawnsType3() {
-        return nbreSpawnsType3;
-    }
 }

@@ -5,14 +5,10 @@ public class PremiereVague extends Vagues {
         super(environnement);
     }
 
-    @Override
-    public int ennemiFaireSpwan() {
-        return 12;
-    }
 
     @Override
     public int maxSoldType1() {
-        return 0;
+        return 12;
     }
 
     @Override
@@ -32,7 +28,7 @@ public class PremiereVague extends Vagues {
 
     @Override
     public int randomTypeSoldier() {
-        return 0;
+        return 1;
     }
 
     @Override

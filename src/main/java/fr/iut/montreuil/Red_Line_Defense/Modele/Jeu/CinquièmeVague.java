@@ -8,11 +8,6 @@ public class CinquièmeVague extends Vagues {
     }
 
     @Override
-    public int ennemiFaireSpwan() {
-        return 0;
-    }
-
-    @Override
     public int maxSoldType1() {
         return 11;
     }
