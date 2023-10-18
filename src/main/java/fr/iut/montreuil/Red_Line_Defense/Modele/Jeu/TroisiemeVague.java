@@ -5,46 +5,6 @@ import java.util.Random;
 public class TroisiemeVague extends Vagues {
 
     public TroisiemeVague(Environnement environnement) {
-        super(environnement);
-    }
-
-    @Override
-    public int maxSoldType1() {
-        return 10;
-    }
-
-    @Override
-    public int maxSoldType2() {
-        return 8;
-    }
-
-    @Override
-    public int maxsoldType3() {
-        return 0;
-    }
-
-    @Override
-    public int nbtour() {
-        return 12;
-    }
-
-    @Override
-    public int randomTypeSoldier() {
-        return 2;
-    }
-
-    @Override
-    public int nbrspwan1() {
-        return 12;
-    }
-
-    @Override
-    public int nbrspwan2() {
-        return 12;
-    }
-
-    @Override
-    public int nbrspwan3() {
-        return 0;
+        super(environnement,10,8,0,12,2,12,12,0);
     }
 }

@@ -68,43 +68,30 @@ public class VueTours {
             showErrorMoneyMessage(x, y);
         } else {
             if (tourPosable(x, y)) {
+                Tour ts =  new TourMitrailleuse((int) x, (int) y,terrain);
+                i = createTourImageView(x, y, MAP_TOUR_SORCIER_PATH);
                 switch (idTourClicked) {
                     case "tour200b":
                         i = createTourImageView(x, y, MAP_TOUR_ENFER_PATH);
-                        ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
-                        terrain.ajouterTour(td);
-                        i.setId(td.getId());
-                        hpb.setId(td.getId()+"p");
-                        progression.bind(Bindings.divide(td.getPointsDeVieProperty(), (double) td.getPointsDeVieValue()));
-                        break;
-
-                    case "tour400b":
-                        i = createTourImageView(x, y, MAP_TOUR_SORCIER_PATH);
-                        TourMitrailleuse tm = new TourMitrailleuse((int) x, (int) y,terrain);
-                        terrain.ajouterTour(tm);
-                        i.setId(tm.getId());
-                        hpb.setId(tm.getId()+"p");
-                        progression.bind(Bindings.divide(tm.getPointsDeVieProperty(), (double) tm.getPointsDeVieValue()));
+                        ts = new ToursDeffensives((int) x,(int) y, terrain);
                         break;
 
                     case "tour600b":
                         i = createTourImageView(x, y, MAP_TOUR_SNIPER_PATH);
-                        TourSniper ts = new TourSniper((int) x, (int) y,terrain);
-                        terrain.ajouterTour(ts);
-                        i.setId(ts.getId());
-                        hpb.setId((ts.getId()+"p"));
-                        progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), (double) ts.getPointsDeVieValue()));
+                        ts = new TourSniper((int) x, (int) y,terrain);
+
                         break;
                     case "tour800b":
                         i = createTourImageView(x, y, MAP_TOUR_MORTIER_PATH);
-                        TourLanceMissile tlm = new TourLanceMissile((int) x, (int) y,terrain);
-                        terrain.ajouterTour(tlm);
-                        i.setId(tlm.getId());
-                        hpb.setId((tlm.getId()+"p"));
-                        progression.bind(Bindings.divide(tlm.getPointsDeVieProperty(), (double) tlm.getPointsDeVieValue()));
+                        ts = new TourLanceMissile((int) x, (int) y,terrain);
                         break;
                 }
                 //afficherBarreDeVie(stackPane, i, hpb);
+
+                terrain.ajouterTour(ts);
+                i.setId(ts.getId());
+                hpb.setId((ts.getId()+"p"));
+                progression.bind(Bindings.divide(ts.getPointsDeVieProperty(), (double) ts.getPointsDeVieValue()));
                 centerPane.getChildren().addAll(i, hpb);
 
                 idTourClicked = "0"; // Réinitialiser la sélection de la tour

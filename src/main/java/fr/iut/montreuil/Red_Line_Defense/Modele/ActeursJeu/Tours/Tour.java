@@ -39,41 +39,14 @@ public abstract class Tour extends Acteurs {
         compteur++;
     }
 
-    public Tour(int x0, int y0, int pointsDeVie, int degats, int defense, Environnement terrain) {
-        super(x0, y0, pointsDeVie, degats, defense);
-        this.terrain = terrain;
-    }
-
     // Getter Prix
     public int getPrixValue() {
         return this.prix.getValue();
     }
 
-    // Setter Prix
-    public void setPrixValue(int val) {
-        this.prix.setValue(val);
-    }
-
-    public IntegerProperty getPrixProperty() {
-        return this.prix;
-    }
 
     public void infligerDegats(int val){
         this.setPointsDeVieValue(this.getPointsDeVieValue() - val);
-    }
-
-    // Getter Longueur
-    public int getLongueurValue() {
-        return this.longueur.getValue();
-    }
-
-    public IntegerProperty getLongueurProperty() {
-        return this.longueur;
-    }
-
-    // Setter Longueur
-    public void setLongueur(int val) {
-        this.longueur.setValue(val);
     }
 
     public Environnement getTerrain() {

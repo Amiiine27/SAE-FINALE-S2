@@ -16,14 +16,30 @@ public abstract class Vagues {
     private int nbreSpawnsType1;
     private int nbreSpawnsType2;
     private int nbreSpawnsType3;
+    private  int maxSoldType1;
+    private  int maxSoldType2;
+    private  int maxsoldType3;
+    private  int nbtour;
+    private  int randomTypeSoldier;
+    private  int nbrspwan1;
+    private  int nbrspwan2;
+    private  int nbrspwan3;
 
     private int totalSoldats;
 
-    public Vagues(Environnement environnement) {
+    public Vagues(Environnement environnement,int maxSoldType1,int maxSoldType2,int maxsoldType3,int nbtour,int randomTypeSoldier,int nbrspwan1,int nbrspwan2,int nbrspwan3) {
         this.environnement = environnement;
         this.nbreSpawnsType1 = 0;
         this.nbreSpawnsType2 = 0;
-        this.nbreSpawnsType3 = 0;
+        this.maxSoldType1 = maxSoldType1;
+        this.maxSoldType2 = maxSoldType2;
+        this.maxsoldType3 = maxsoldType3;
+        this.nbtour = nbtour;
+        this.randomTypeSoldier = randomTypeSoldier;
+        this.nbrspwan1 = nbrspwan1;
+        this.nbrspwan2 = nbrspwan2;
+        this.nbrspwan3 = nbrspwan3;
+
     }
 
 
@@ -41,43 +57,36 @@ public abstract class Vagues {
         }
     }
 
-    public abstract int maxSoldType1();
-    public abstract int maxSoldType2();
-    public abstract int maxsoldType3();
-    public abstract int nbtour();
-    public abstract int randomTypeSoldier();
-    public abstract int nbrspwan1();
-    public abstract int nbrspwan2();
-    public abstract int nbrspwan3();
+
 
 
     public void spwanEnnemi(){
       //  ennemisAFaireSpawnType1 = this.ennemiFaireSpwan();
 
-        int maxSoldiersType1 = this.maxSoldType1();
-        int maxSoldiersType2 = this.maxSoldType2();
-        int maxSoldiersType3 = this.maxsoldType3();
+        int maxSoldiersType1 = this.maxSoldType1;
+        int maxSoldiersType2 = this.maxSoldType2;
+        int maxSoldiersType3 = this.maxsoldType3;
 
         totalSoldats = maxSoldiersType1 + maxSoldiersType2 + maxSoldiersType3;
 
         Random random = new Random();
 
-        if ((environnement.getNbrTours() % this.nbtour()) == 0) { // Verifier si le tour dans environnement et dans notre classe est le même
+        if ((environnement.getNbrTours() % this.nbtour) == 0) { // Verifier si le tour dans environnement et dans notre classe est le même
 
             if ((nbreSpawnsType1 < maxSoldiersType1) || (nbreSpawnsType2 < maxSoldiersType2) || (nbreSpawnsType3 < maxSoldiersType3)) {
-                int soldierTypeToSpawn = random.nextInt(this.randomTypeSoldier()) + 1; // Cela générera soit 1, soit 2 ou 3
+                int soldierTypeToSpawn = random.nextInt(this.randomTypeSoldier) + 1; // Cela générera soit 1, soit 2 ou 3
 
                 if ((soldierTypeToSpawn == 1) && (nbreSpawnsType1 < maxSoldiersType1)) {
                     System.out.println("Un nouveau Rookie apparait !");
-                    nouveauSpawnSoldat(1, this.nbrspwan1());
+                    nouveauSpawnSoldat(1, this.nbrspwan1);
                     nbreSpawnsType1++;
                 } else if ((soldierTypeToSpawn == 2) && (nbreSpawnsType2 < maxSoldiersType2)) {
                     System.out.println("Un nouveau Super Nova apparait !");
-                    nouveauSpawnSoldat(2, this.nbrspwan2());
+                    nouveauSpawnSoldat(2, this.nbrspwan2);
                     nbreSpawnsType2++;
                 } else if ((soldierTypeToSpawn == 3) && (nbreSpawnsType3 < maxSoldiersType3)) {
                     System.out.println("Un nouveau Shichibukai apparait !");
-                    nouveauSpawnSoldat(3, this.nbrspwan3());
+                    nouveauSpawnSoldat(3, this.nbrspwan3);
                     nbreSpawnsType3++;
                 }
             }
@@ -103,7 +112,6 @@ public abstract class Vagues {
 
         return s;
     }
-
 
 
     public Soldat selectionSoldat(int typeSoldat, double startX, double startY) {

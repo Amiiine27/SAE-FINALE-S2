@@ -132,17 +132,10 @@ public abstract class Projectile {
         return xCible.get();
     }
 
-    public DoubleProperty xCibleProperty() {
-        return xCible;
-    }
-
     public double getyCible() {
         return yCible.get();
     }
 
-    public DoubleProperty yCibleProperty() {
-        return yCible;
-    }
 
     public double getxDirection() {
         return xDirection;
@@ -180,24 +173,12 @@ public abstract class Projectile {
         this.y.set(y);
     }
 
-    public void setxCible(double xCible) {
-        this.xCible.set(xCible);
-    }
-
-    public void setyCible(double yCible) {
-        this.yCible.set(yCible);
-    }
-
     public void setxDirection(double xDirection) {
         this.xDirection = xDirection;
     }
 
     public void setyDirection(double yDirection) {
         this.yDirection = yDirection;
-    }
-
-    public void setV(double v) {
-        this.v = v;
     }
 
     public String getId() {
