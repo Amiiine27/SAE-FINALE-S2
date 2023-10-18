@@ -1,6 +1,5 @@
 package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles;
 
-
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 

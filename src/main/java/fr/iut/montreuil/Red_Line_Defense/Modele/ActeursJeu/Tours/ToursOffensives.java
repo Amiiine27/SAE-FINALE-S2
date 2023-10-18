@@ -32,7 +32,6 @@ public abstract class ToursOffensives extends Tour {
         return this.projectiles;
     }
 
-
     public void agit(int n){
         tirer(n);
     }
@@ -41,11 +40,14 @@ public abstract class ToursOffensives extends Tour {
         return cadence.getValue();
     }
 
-    public IntegerProperty cadenceProperty() {
-        return cadence;
+    public abstract Projectile creerP(Soldat s);
+
+    public void creationProjectile(Soldat s){
+        Projectile p =  creerP(s);
+        getTerrain().ajouterProjectile(p);
+        p.animationProjectile();
     }
 
-    public abstract void creationProjectile(Soldat s);
     public void tirer(int nTemps) {
         Soldat s = ennemiÀPorter();
         if (s != null) {
