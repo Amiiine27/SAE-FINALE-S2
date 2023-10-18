@@ -29,7 +29,6 @@ public class Environnement {
     private ListProperty<Soldat> listeSoldats;
     private int nbrTours = 0;
     private Joueur joueur;
-    private int[][] distances;
     private BasePrincipale basePrincipale;
     private BFS bfs;
     private Terrain terrain;
@@ -39,10 +38,10 @@ public class Environnement {
         this.joueur = new Joueur("Salah");
         this.numeroVague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
-        this.bfs = new BFS(this);
         this.ennemisTuesCetteVague = 0;
         this.terrain = new Terrain();
         this.quadrillage = terrain.initQuadrillage();
+        this.bfs = new BFS(this);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
         listeTours = new SimpleListProperty<>(observableListTour);
@@ -55,8 +54,6 @@ public class Environnement {
 
         this.gestionnaireVague = new GestionnaireVague(this);
 
-
-        this.distances = new int[getYmax()][getXmax()];  // Initialisation du tableau de distances
         bfs.calculerChemin(89, 47);
     }
 
@@ -142,12 +139,13 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
 
     public void setNumeroVague(int i){ this.numeroVague.set(i);}
+
     public ListProperty<Soldat> getListSoldats() {
         return this.listeSoldats;
     }
 
-    public int[][] getDistances() {
-        return this.distances;
+    public BFS getBfs() {
+        return this.bfs;
     }
 
     public ListProperty<Tour> getListeTours() {
@@ -176,16 +174,6 @@ public class Environnement {
 
     public int getNbrTours() {
         return this.nbrTours;
-    }
-
-
-    //--------------------------------------------------------------------------------------------------------------------------------
-    //------------------------------------------------------- DEPLACEMENTS ET BFS ----------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------------------------------
-
-
-    public boolean isValidMove(int x, int y) {
-        return x >= 0 && x < distances[0].length && y >= 0 && y < distances.length && valeurDeLaCase(y, x) == 1;
     }
 
 

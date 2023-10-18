@@ -63,10 +63,10 @@ public abstract class Soldat extends Acteurs {
                     int nx = startX + dx[i];
                     int ny = startY + dy[i];
 
-                    if (this.env.isValidMove(nx, ny) && this.env.getDistances()[ny][nx] < minDistance) {
+                    if (this.env.getBfs().isValidMove(nx, ny) && this.env.getBfs().getDistances()[ny][nx] < minDistance) {
                         nextX = nx;
                         nextY = ny;
-                        minDistance = this.env.getDistances()[ny][nx];
+                        minDistance = this.env.getBfs().getDistances()[ny][nx];
                     }
                 }
 

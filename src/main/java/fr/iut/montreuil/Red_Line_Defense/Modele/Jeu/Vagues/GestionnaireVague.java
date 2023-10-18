@@ -18,8 +18,6 @@ public class GestionnaireVague {
         this.vagueActuelle = this.listeVague.get(indiceVagueActuelle);
     }
 
-
-
     public Vagues getVagueActuelle(){
         return this.vagueActuelle;
     }
