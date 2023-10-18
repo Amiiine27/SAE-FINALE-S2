@@ -65,16 +65,7 @@ public abstract class Projectile {
         this.touché = touché;
     }
 
-    //public abstract void deplacement(double elapsedTime);
-    public void deplacement(double elapsedTime) {
-        double deltaX = this.getxDirection() * this.getV()*elapsedTime;
-        double deltaY = this.getyDirection() * this.getV()*elapsedTime;
-
-        if (!(this.getX()==this.getxCible()) || (this.getY()==this.getyCible())) {
-            setX(getX() + deltaX);
-            setY(getY() + deltaY);
-        }
-    }
+    public abstract void deplacement(double elapsedTime);
 
     public void animationProjectile(){
         Projectile p = this;
@@ -86,7 +77,10 @@ public abstract class Projectile {
             @Override
             public void handle(long now) {
                 if (lastUpdate > 0 && !(isTouché())) {
+
+
                     double elapsedTime = (now - lastUpdate) / 1000000000.0;
+
                     Soldat s = ennemiÀPorter();
                     if (s != null) {
                         getTerrain().supprimerProjectile(p);
@@ -102,6 +96,7 @@ public abstract class Projectile {
                 else if(p.isTouché()){
                     stop();
                 }
+
                 lastUpdate = now;
             }
         };
@@ -116,9 +111,11 @@ public abstract class Projectile {
                 double distanceX = Math.abs(s.getX0Value() - getX());
                 double distanceY = Math.abs(s.getY0Value() - getY());
                 double distanceTotale = distanceX + distanceY;
-                System.out.println(distanceTotale);
-                if (distanceTotale <= 10) {return s;}
-            }}
+                if (distanceTotale <= 10) {
+                    return s;
+                }
+            }
+        }
         return null;
     }
 
