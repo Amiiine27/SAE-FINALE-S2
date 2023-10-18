@@ -36,8 +36,6 @@ public class Environnement {
 
 
     public Environnement(Joueur joueur) {
-        initQuadrillage();
-
         this.joueur = joueur;
 
         this.numeroVague = new SimpleIntegerProperty(1);
@@ -69,9 +67,7 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
 
     public void unTour(){
-
         gestionnaireVague.unTour();
-        deplacementSoldat(nbrTours);
         verificationMorts();
         suppressionTour();
         checkNouvelleVagues();
@@ -98,18 +94,6 @@ public class Environnement {
             numeroVague.setValue(numeroVague.getValue() + 1);
             // Reset
             ennemisTuesCetteVague = 0;
-        }
-    }
-
-
-
-
-    public void deplacementSoldat(int n){
-        if (!listeSoldats.isEmpty()) {
-            for (Soldat soldat : listeSoldats) {
-                if(!soldat.isEstPiégé() || n%2==0)
-                deplacerSoldat(soldat);
-            }
         }
     }
 
