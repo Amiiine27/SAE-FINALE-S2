@@ -1,4 +1,6 @@
-package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
+package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
+
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +17,6 @@ public class GestionnaireVague {
         this.env = env;
         this.vagueActuelle = this.listeVague.get(indiceVagueActuelle);
     }
-
-
 
     public Vagues getVagueActuelle(){
         return this.vagueActuelle;

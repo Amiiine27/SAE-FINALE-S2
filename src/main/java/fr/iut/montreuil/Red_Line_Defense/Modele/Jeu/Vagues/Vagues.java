@@ -1,10 +1,11 @@
-package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
+package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.SuperNova;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 

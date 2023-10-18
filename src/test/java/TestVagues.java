@@ -1,15 +1,10 @@
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Boulet;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Rookie;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Shichibukais;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.SuperNova;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.TourLanceMissile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.TourSniper;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues.Vagues;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +20,7 @@ public class TestVagues {
     public void setUp() {
         // Initialisation de l'environnement avant chaque test
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        Environnement environnement = new Environnement(joueur);
+        Environnement environnement = Environnement.getInstance();
       //  vagues = new Vagues(environnement);
     }
 

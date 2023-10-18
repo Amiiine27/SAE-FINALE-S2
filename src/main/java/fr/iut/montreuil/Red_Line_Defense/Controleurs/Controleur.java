@@ -54,8 +54,6 @@ public class Controleur implements Initializable {
 
     @FXML
     private Button lancerButton, test;
-
-    private Joueur joueur;
     private VueInterface vueInterface;
 
     private EcouteSoldats ecouteSoldats;
@@ -87,7 +85,6 @@ public class Controleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // coucou madame pour lancer le jeu appuyez sur P :)
         centerPane.getChildren().add(new ImageView(loadImage("/fr/iut/montreuil/Red_Line_Defense/Images/ElementsCarte/map.png")));
-        initializeJoueur();
         initializeEnvironnement();
         initializeBasePrincipale();
         initializeVueTours();
@@ -117,10 +114,6 @@ public class Controleur implements Initializable {
 
     private void initializeEcouteVictoireEtDefaite() {
         ecouteVictoireEtDefaite = new EcouteVictoireEtDefaite(terrain, vueInterface, this);
-    }
-
-    private void initializeJoueur(){
-        this.joueur = new Joueur("Ayoub");
     }
 
     private void initializeSons(){
@@ -153,7 +146,7 @@ public class Controleur implements Initializable {
 
 
     private void initializeEnvironnement() {
-        terrain = new Environnement(joueur);
+        terrain = Environnement.getInstance();
     }
 
     @FXML

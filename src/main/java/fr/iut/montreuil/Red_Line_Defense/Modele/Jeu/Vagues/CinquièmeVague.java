@@ -1,6 +1,6 @@
-package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
+package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
 
-import java.util.Random;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 
 public class CinquièmeVague extends Vagues {
     public CinquièmeVague(Environnement environnement) {

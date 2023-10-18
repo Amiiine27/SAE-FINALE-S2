@@ -20,7 +20,7 @@ public class TestEnvironnement {
     public void setUp() {
         // Initialisation de l'environnement avant chaque test
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        environnement = new Environnement(joueur);
+        environnement = Environnement.getInstance();
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TestEnvironnement {
     public void testUnTour() {
         // Teste l'incrémentation du nombre de tours
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        Environnement environnement = new Environnement(joueur);
+        Environnement environnement = Environnement.getInstance();
         BasePrincipale basePrincipale = new BasePrincipale(15, 15, environnement);
         environnement.setBasePrincipale(basePrincipale);
         environnement.unTour();
@@ -62,7 +62,7 @@ public class TestEnvironnement {
     public void testAjouterSoldat() {
         // Teste l'ajout d'un soldat à l'environnement
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        Environnement environnement = new Environnement(joueur);
+        Environnement environnement = Environnement.getInstance();
 
         Soldat rookie = new Rookie(15, 15, 15, 15, environnement);
         environnement.ajouterSoldat(rookie);
@@ -75,7 +75,7 @@ public class TestEnvironnement {
     public void testSupprimerTour() {
         // Teste la suppression d'une tour de l'environnement
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        Environnement environnement = new Environnement(joueur);
+        Environnement environnement = Environnement.getInstance();
 
         Tour tour = new TourSniper(15, 15, environnement);
         environnement.ajouterTour(tour);
@@ -91,7 +91,7 @@ public class TestEnvironnement {
     public void testAjouterProjectile() {
         // Teste l'ajout d'un projectile à l'environnement
         Joueur joueur = new Joueur("Mr. Jean Bonne-Note");
-        Environnement environnement = new Environnement(joueur);
+        Environnement environnement = Environnement.getInstance();
 
         Projectile projectile = new Boulet(15, 15, 15, 15, 1, 100, environnement);
         environnement.ajouterProjectile(projectile);
