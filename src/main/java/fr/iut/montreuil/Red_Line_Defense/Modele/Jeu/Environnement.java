@@ -4,6 +4,8 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.BasePrincipale;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Projectiles.Projectile;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Tours.Tour;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues.GestionnaireVague;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues.Vagues;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -16,9 +18,9 @@ import javafx.geometry.Point2D;
 import java.util.*;
 
 public class Environnement {
+    private static Environnement uniqueInstance = null;
 
     private int[][] quadrillage;
-
     private IntegerProperty numeroVague;
     private IntegerProperty ennemisTues;
     private int ennemisTuesCetteVague;
@@ -31,17 +33,13 @@ public class Environnement {
     private BasePrincipale basePrincipale;
     private BFS bfs;
     private Terrain terrain;
-
     private GestionnaireVague gestionnaireVague;
 
-
-    public Environnement(Joueur joueur) {
-        this.joueur = joueur;
-
+    private Environnement() {
+        this.joueur = new Joueur("Salah");
         this.numeroVague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
         this.bfs = new BFS(this);
-
         this.ennemisTuesCetteVague = 0;
         this.terrain = new Terrain();
         this.quadrillage = terrain.initQuadrillage();
@@ -65,6 +63,13 @@ public class Environnement {
     //--------------------------------------------------------------------------------------------------------------------------------
     //------------------------------------------------------- TOUR DE JEU ---------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------
+
+    public static Environnement getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Environnement();
+        }
+        return uniqueInstance;
+    }
 
     public void unTour(){
         gestionnaireVague.unTour();
@@ -125,7 +130,7 @@ public class Environnement {
             Soldat soldat = iterator.next();
             if (soldat.getPointsDeVieValue() <= 0) {
                 iterator.remove(); // Supprimer l'élément de la liste en utilisant l'itérateur
-                joueur.crediterSolde(soldat.getValeurGagnee());
+                this.joueur.crediterSolde(soldat.getValeurGagnee());
                 ennemisTues.setValue(ennemisTues.getValue() + 1);
                 ennemisTuesCetteVague++;
             }

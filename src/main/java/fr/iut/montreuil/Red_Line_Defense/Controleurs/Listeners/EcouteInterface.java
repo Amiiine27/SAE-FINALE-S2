@@ -1,8 +1,7 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues.Vagues;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.Vues.VueInterface;
 import javafx.beans.property.IntegerProperty;

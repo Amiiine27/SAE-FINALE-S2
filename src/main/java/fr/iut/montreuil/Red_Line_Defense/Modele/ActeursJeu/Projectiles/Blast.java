@@ -6,6 +6,4 @@ public class Blast extends Projectile {
     public Blast(double x, double y, double xCible, double yCible, double v, int degats, Environnement terrain) {
         super(x, y, xCible, yCible, v,degats,terrain);
     }
-
-
 }

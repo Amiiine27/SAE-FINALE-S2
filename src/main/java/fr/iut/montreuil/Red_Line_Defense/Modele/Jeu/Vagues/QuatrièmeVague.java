@@ -1,50 +1,51 @@
-package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu;
+package fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
 
-import java.util.Random;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 
-public class TroisiemeVague extends Vagues {
-
-    public TroisiemeVague(Environnement environnement) {
+public class QuatrièmeVague extends Vagues {
+    public QuatrièmeVague(Environnement environnement) {
         super(environnement);
     }
 
+
     @Override
     public int maxSoldType1() {
-        return 10;
+        return 9;
     }
 
     @Override
     public int maxSoldType2() {
-        return 8;
+        return 7;
     }
 
     @Override
     public int maxsoldType3() {
-        return 0;
+        return 3;
     }
 
     @Override
     public int nbtour() {
-        return 12;
+        return 10;
     }
 
     @Override
     public int randomTypeSoldier() {
-        return 2;
+        return 3;
     }
 
     @Override
     public int nbrspwan1() {
-        return 12;
+        return 16;
     }
 
     @Override
     public int nbrspwan2() {
-        return 12;
+        return 10;
     }
 
-    @Override
     public int nbrspwan3() {
-        return 0;
+        return 9;
     }
-}
+
+    }
+

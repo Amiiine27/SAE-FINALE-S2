@@ -1,17 +1,13 @@
 package fr.iut.montreuil.Red_Line_Defense.Controleurs.Listeners;
 
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.Controleur;
-import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurDefaite;
 import fr.iut.montreuil.Red_Line_Defense.Controleurs.ControleurVictoire;
 import fr.iut.montreuil.Red_Line_Defense.Main;
-import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats.Soldat;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
-import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues;
+import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Vagues.Vagues;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Joueur;
 import fr.iut.montreuil.Red_Line_Defense.Vues.VueInterface;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

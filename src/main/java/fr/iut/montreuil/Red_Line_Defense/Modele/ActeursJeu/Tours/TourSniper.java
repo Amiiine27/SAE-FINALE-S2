@@ -17,7 +17,4 @@ public class TourSniper extends ToursOffensives {
         Blast p = new Blast(getX0Value(), getY0Value(), s.getX0Value(),s.getY0Value(), getVitesseProjectile(), getDegatValue(), getTerrain());
         return p;
     }
-
-
-
 }
