@@ -7,14 +7,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ToursDeffensives extends Tour{
+public abstract class ToursDeffensives extends Tour{
     private ArrayList<Soldat> soldatsPiégés;
     public ToursDeffensives(int x0, int y0, Environnement terrain, int pv, int degats, int defense, int prix, int portee) {
         super(x0, y0, pv, degats, defense, prix, terrain, portee);
     }
 
     @Override
-    public void agit(int n) {
-
-    }
+    public void agit(int n) {}
 }

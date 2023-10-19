@@ -93,6 +93,7 @@ public abstract class Vagues {
         int startY = randomSelection[1] * 8;
 
         Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
+        soldat.setSpawnSoldat(new int[]{startX, startY});
     }
 
 
@@ -135,25 +136,7 @@ public abstract class Vagues {
 
         // 0-9 10-16
 
-        int[][] possibleStartPositions = {
-                {14, 57},
-                {15, 57},
-                {16, 57},
-                {0, 42},
-                {0, 41},
-                {0, 43},
-                {0, 19},
-                {0, 18},
-                {9, 1},
-                {8, 1},
-                {44, 59},
-                {45, 58},
-                {44, 57},
-                {82, 0},
-                {83, 0},
-                {81, 1},
-                {82, 2}
-        };
+        int[][] possibleStartPositions = this.getEnvironnement().getTerrain().getSpawnPossible();
 
         int[][] possibleDestPositions = {
                 {89, 49}
