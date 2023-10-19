@@ -71,7 +71,7 @@ public class VueTours {
                 switch (idTourClicked) {
                     case "tour200b":
                         i = createTourImageView(x, y, MAP_TOUR_ENFER_PATH);
-                        ToursDeffensives td = new ToursDeffensives((int) x,(int) y, terrain);
+                        ToursDeffensives td = new TourRalentir((int) x,(int) y, terrain);
                         terrain.ajouterTour(td);
                         i.setId(td.getId());
                         hpb.setId(td.getId()+"p");
