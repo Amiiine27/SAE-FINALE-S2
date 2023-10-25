@@ -12,8 +12,6 @@ import javafx.scene.shape.Circle;
 public abstract class Tour extends Acteurs {
     private IntegerProperty prix; // prix d'achat de l'acteur
 
-    private IntegerProperty longueur; // la longueur entre xo;yo et x1;y1
-
     protected Environnement terrain;
 
     private double portee;

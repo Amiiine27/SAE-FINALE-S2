@@ -28,13 +28,6 @@ public abstract class Acteurs {
 
     }
 
-    public Acteurs(double x0, double y0) {
-
-        // Coordonnées
-        this.X0 = new SimpleDoubleProperty(x0);
-        this.Y0 = new SimpleDoubleProperty(y0);
-    }
-
     public Acteurs(int x0, int y0, int pointsDeVie) {
         this.X0 = new SimpleDoubleProperty(x0);
         this.Y0 = new SimpleDoubleProperty(y0);
@@ -77,12 +70,6 @@ public abstract class Acteurs {
         this.Y0.setValue(val);
     }
 
-    public void setPosition(double posX, double posY) {
-        this.X0.setValue(posX);
-        this.Y0.setValue(posY);
-    }
-
-
     // _________________________________________________________________________________________________________________
 
 
@@ -108,39 +95,11 @@ public abstract class Acteurs {
         return this.degats.getValue();
     }
 
-    public IntegerProperty getDegatsProperty() {
-        return this.degats;
-    }
-
     // Defense
     public int getDefenseValue() {
         return this.defense.getValue();
     }
 
-    // Defense
-    public void setDefenseValue(int val) {
-        this.defense.setValue(val);
-    }
-
-    public IntegerProperty getDefenseProperty() {
-        return this.defense;
-    }
-
-    // Degats
-    public void setDegatsValue(int val) {
-        this.degats.setValue(val);
-    }
-
 
     // _________________________________________________________________________________________________________________
-
-    public void soigner(int val) {
-        // Ajouter les points de soin aux points de vie actuels de l'acteur
-        int nouvelleVie = this.getPointsDeVieValue() + val;
-
-        // Mettre à jour les points de vie de l'acteur
-        this.setPointsDeVieValue(nouvelleVie);
-    }
-
-
 }

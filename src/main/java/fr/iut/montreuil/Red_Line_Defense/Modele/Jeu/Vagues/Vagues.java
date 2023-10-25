@@ -101,7 +101,7 @@ public abstract class Vagues {
         int startX = randomSelection[0] * 8;
         int startY = randomSelection[1] * 8;
 
-        Soldat soldat = afficherSoldat(startX, startY,typeSoldat);
+        afficherSoldat(startX, startY,typeSoldat);
     }
 
 

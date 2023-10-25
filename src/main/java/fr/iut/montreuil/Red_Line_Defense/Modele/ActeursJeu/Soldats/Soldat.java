@@ -7,11 +7,11 @@ import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.geometry.Point2D;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public abstract class Soldat extends Acteurs {
-    private double destinationX, destinationY;
+    private double destinationX;
+    private double destinationY;
 
     public String couleur;
     private Environnement env;
