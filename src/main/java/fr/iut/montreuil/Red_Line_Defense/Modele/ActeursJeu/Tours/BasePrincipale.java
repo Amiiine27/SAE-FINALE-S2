@@ -39,19 +39,6 @@ public class BasePrincipale extends Tour {
         return zone;
     }
 
-    public void testPv() {
-        this.setPointsDeVieValue(this.getPointsDeVieValue()-1000);
-    }
-
-    /*public void afficherPorteeB(Pane p){
-        double rayon = this.getPortée()+30;
-        Circle c = new Circle(this.getX0Value(), this.getY0Value(), rayon);
-        c.setStroke(Color.GREY);
-        c.setFill(Color.TRANSPARENT);
-        p.getChildren().add(c);
-        System.out.println("portée affichée");
-    }*/
-
     public Soldat porteeBP() {
             System.out.println("entrer fonction");
             for (Soldat s : terrain.getSoldats()) {
@@ -67,8 +54,6 @@ public class BasePrincipale extends Tour {
                 }
             }
             return null;
-
-        // return Math.abs(this.getY0Value() - s.getY0Value()) <= this.getPortée();
     }
 
     public void actionBasePrincipale(){
