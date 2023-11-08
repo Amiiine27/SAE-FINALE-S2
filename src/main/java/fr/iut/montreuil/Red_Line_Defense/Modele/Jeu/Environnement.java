@@ -31,7 +31,6 @@ public class Environnement {
     private Joueur joueur;
     private BasePrincipale basePrincipale;
     private BFS bfs;
-    private Terrain terrain;
     private GestionnaireVague gestionnaireVague;
 
     private Environnement() {
@@ -39,8 +38,7 @@ public class Environnement {
         this.numeroVague = new SimpleIntegerProperty(1);
         this.ennemisTues = new SimpleIntegerProperty(0);
         this.ennemisTuesCetteVague = 0;
-        this.terrain = new Terrain();
-        this.quadrillage = terrain.initQuadrillage();
+        this.quadrillage = Terrain.initQuadrillage();
         this.bfs = new BFS(this);
 
         ObservableList<Tour> observableListTour = FXCollections.observableArrayList();
