@@ -3,6 +3,7 @@ package fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Soldats;
 
 
 import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Acteurs;
+import fr.iut.montreuil.Red_Line_Defense.Modele.ActeursJeu.Effets.Effet;
 import fr.iut.montreuil.Red_Line_Defense.Modele.Jeu.Environnement;
 import javafx.geometry.Point2D;
 
@@ -23,7 +24,11 @@ public abstract class Soldat extends Acteurs {
     private boolean estPiégé;
     private int valeur; // valeur du soldat, permet de déterminer combien le joueur gagne en le tuant
 
-    public Soldat(double x0, double y0, int pointsDeVie, int degats, int defense, double destinationX, double destinationY, Environnement env) {
+    private int[] spawnSoldat;
+
+    private Effet effet;
+
+    public Soldat(double x0, double y0, int pointsDeVie, int degats, int defense, double destinationX, double destinationY, Environnement env, int[] spawn) {
         super(x0, y0, pointsDeVie, degats, defense);
         this.destinationX = destinationX;
         this.destinationY = destinationY;
@@ -31,6 +36,7 @@ public abstract class Soldat extends Acteurs {
         this.zone = new HashSet<Point2D>();
         estPiégé=false;
         créerZone();
+        spawnSoldat = spawn;
     }
 
     public Soldat(double x0, double y0, int pointsDeVie, int degats, int defense, int valeur, double destinationX, double destinationY, Environnement env) {
@@ -104,4 +110,19 @@ public abstract class Soldat extends Acteurs {
         estPiégé=false;
     }
 
+    public int[] getSpawnSoldat() {
+        return spawnSoldat;
+    }
+
+    public void setSpawnSoldat(int[] spawnSoldat) {
+        this.spawnSoldat = spawnSoldat;
+    }
+
+    public Effet getEffet() {
+        return effet;
+    }
+
+    public void setEffet(Effet effet) {
+        this.effet = effet;
+    }
 }

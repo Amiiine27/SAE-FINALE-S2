@@ -68,4 +68,27 @@ public class Terrain {
         };
         return quadrillage;
     }
+
+    public int [][] getSpawnPossible() {
+        int[][] possibleStartPositions = {
+                {14, 57},
+                {15, 57},
+                {16, 57},
+                {0, 42},
+                {0, 41},
+                {0, 43},
+                {0, 19},
+                {0, 18},
+                {9, 1},
+                {8, 1},
+                {44, 59},
+                {45, 58},
+                {44, 57},
+                {82, 0},
+                {83, 0},
+                {81, 1},
+                {82, 2}
+        };
+        return possibleStartPositions;
+    }
 }
